@@ -3,6 +3,7 @@ const OpenAI = require('openai');
 const path = require('path');
 const dotenv = require('dotenv');
 const cache = require('memory-cache');
+const { pipeline } = require('@xenova/transformers');
 
 dotenv.config({ path: './info.env' });
 
@@ -17,7 +18,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.post('/api/chat', async (req, res) => {
@@ -63,8 +64,8 @@ app.post('/api/chat', async (req, res) => {
 
 async function generateGPTJResponse(prompt) {
     try {
-        const response = gptj_pipeline(prompt, max_length=100)[0]['generated_text'];
-        return response;
+        const response = await pipeline(prompt, model="EleutherAI/gpt-j-6B", max_length=100);
+        return response[0]['generated_text'];
     } catch (error) {
         console.error("GPT-J Error:", error.message || error);
         throw new Error("Failed to generate response using GPT-J.");
@@ -74,7 +75,7 @@ async function generateGPTJResponse(prompt) {
 async function generateChatGPT3Response(prompt) {
     try {
         const response = await openai.chat.completions.create({
-            model: "gpt-3.5-turbo",  
+            model: "gpt-3.5-turbo",
             messages: [{ role: "user", content: prompt }],
             max_tokens: 150,
             temperature: 0.7,
