@@ -5,56 +5,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VerbiFlow</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Reset */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* Body Styling */
         body {
-            background: linear-gradient(135deg, #34073b, #9e1c9c);
-            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            font-family: 'Poppins', sans-serif;
             color: #ffffff;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            opacity: 0;
             animation: fadeInBody 0.8s ease forwards;
             overflow: hidden;
         }
 
         @keyframes fadeInBody {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
-        /* Chat Container */
         .chat-container {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            width: 100%;
-            max-width: 600px;
-            padding: 30px;
-            background: rgba(0, 0, 0, 0.85);
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(25px);
-            animation: slideIn 0.6s ease forwards;
-            border: 2px solid #9e1c9c;
+            width: 90%;
+            max-width: 700px;
+            padding: 40px;
+            background: rgba(15, 14, 22, 0.75);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(20px);
+            animation: slideIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chat-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 60%);
+            pointer-events: none;
         }
 
         @keyframes slideIn {
             from {
-                transform: translateY(30px);
+                transform: translateY(40px);
                 opacity: 0;
             }
             to {
@@ -63,97 +69,162 @@
             }
         }
 
-        /* Typing Box */
-        .typing-box {
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-pulse {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff6a88, #ff99ac);
+            margin-right: 15px;
+            position: relative;
+            animation: pulse 3s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 106, 136, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 106, 136, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 106, 136, 0); }
+        }
+
+        .logo-text {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ff6a88, #ff99ac);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 1px;
+        }
+
+        .version {
+            font-size: 14px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.6);
+            padding: 5px 12px;
+            border-radius: 14px;
             background: rgba(255, 255, 255, 0.1);
-            padding: 25px;
-            border-radius: 15px;
-            width: 100%;
-            text-align: center;
-            margin-bottom: 20px;
+        }
+
+        .model-select-container {
             position: relative;
+            margin-bottom: 25px;
         }
 
-        .typing-box h1 {
-            font-size: 34px;
-            margin-bottom: 20px;
-            color: #e8e8e8;
-            letter-spacing: 2px;
-            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7);
-        }
-
-        .typing-text, #userInput {
-            font-size: 18px;
-            border: 2px solid #9e1c9c;
-            border-radius: 10px;
-            padding: 15px;
-            outline: none;
-            background: transparent;
-            color: #ffffff;
-            font-weight: bold;
-            letter-spacing: 1.5px;
+        #modelSelect {
             width: 100%;
-            box-sizing: border-box;
+            padding: 16px 20px;
+            font-size: 16px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background-color: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
             transition: all 0.3s ease;
-            margin-top: 15px;
-        }
-
-        .typing-text:focus, #userInput:focus {
-            border-color: #ffffff;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
-        }
-
-        /* Dropdown */
-        .dropdown-box {
-            margin-bottom: 20px;
-            width: 100%;
-            position: relative;
-        }
-
-        select {
-            width: 100%;
-            padding: 15px;
-            font-size: 18px;
-            border-radius: 10px;
-            border: 2px solid #9e1c9c;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: #ffffff;
+            cursor: pointer;
+            appearance: none;
             outline: none;
+        }
+
+        #modelSelect:focus {
+            border-color: #ff6a88;
+            box-shadow: 0 0 0 2px rgba(255, 106, 136, 0.2);
+        }
+
+        .select-arrow {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+
+        .select-arrow svg {
+            fill: rgba(255, 255, 255, 0.7);
+            width: 20px;
+            height: 20px;
+        }
+
+        .input-container {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        #userInput {
+            width: 100%;
+            padding: 18px 25px;
+            font-size: 16px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background-color: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        #userInput:focus {
+            border-color: #ff6a88;
+            box-shadow: 0 0 0 2px rgba(255, 106, 136, 0.2);
+        }
+
+        #userInput::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .send-btn {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #ff6a88, #ff99ac);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
-        select:focus {
-            border-color: #ffffff;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+        .send-btn:hover {
+            transform: translateY(-50%) scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 106, 136, 0.7);
         }
 
-        /* Response Area */
+        .send-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
+
         .response-area {
             width: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            border-radius: 16px;
             display: none;
             animation: fadeInUp 0.5s ease forwards;
-            box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
-        }
-
-        .response-text {
-            border: 2px solid #ffffff;
-            padding: 15px;
-            border-radius: 10px;
-            background-color: rgba(0, 0, 0, 0.3);
-            color: #fff;
-            font-size: 18px;
-            letter-spacing: 1.5px;
-            text-shadow: 2px 2px 7px rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.07);
         }
 
         @keyframes fadeInUp {
             from {
-                transform: translateY(15%);
+                transform: translateY(15px);
                 opacity: 0;
             }
             to {
@@ -162,16 +233,53 @@
             }
         }
 
-        /* Loading Spinner */
-        .loading-spinner {
-            border: 5px solid rgba(255, 255, 255, 0.3);
-            border-top: 5px solid #ffffff;
-            border-radius: 50%;
+        .response-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .ai-avatar {
             width: 35px;
             height: 35px;
-            animation: spin 0.8s linear infinite;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8A2387, #E94057, #F27121);
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ai-avatar svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
+
+        .response-from {
+            font-size: 16px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .response-text {
+            padding: 5px 0;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 16px;
+            line-height: 1.6;
+            font-weight: 400;
+            text-align: left;
+        }
+
+        .loading-spinner {
             display: none;
-            margin: 15px auto;
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 3px solid #ff6a88;
+            margin: 0 auto;
+            animation: spin 1s linear infinite;
         }
 
         @keyframes spin {
@@ -179,81 +287,194 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Version Tag */
-        .version {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            color: #f0f0f0;
-            font-weight: bold;
-            font-size: 15px;
+        .powered-by {
+            margin-top: 20px;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+            text-align: center;
+        }
+
+        .typing-indicator {
+            display: none;
+            text-align: left;
+            margin-top: 5px;
+        }
+
+        .typing-indicator span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            margin-right: 5px;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+            margin-right: 0;
+        }
+
+        @keyframes typing {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        @media (max-width: 600px) {
+            .chat-container {
+                padding: 25px;
+                width: 95%;
+            }
+            
+            .logo-text {
+                font-size: 24px;
+            }
+            
+            .response-area {
+                padding: 20px;
+            }
         }
     </style>
 </head>
 
 <body>
     <div class="chat-container">
-        <div class="typing-box">
-            <h1>VerbiFlow</h1>
-            <div class="dropdown-box">
-                <select id="modelSelect">
-                    <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
-                    <option value="gpt-j">GPT-J</option>
-                    <option value="chatgpt-3">ChatGPT-3</option>
-                </select>
+        <div class="header">
+            <div class="logo">
+                <div class="logo-pulse"></div>
+                <div class="logo-text">VerbiFlow</div>
             </div>
-            <input type="text" id="userInput" placeholder="Ask me anything..." onkeydown="checkEnter(event)">
-            <div class="version">v1.0</div>
+            <div class="version">v2.0</div>
         </div>
+
+        <div class="model-select-container">
+            <select id="modelSelect">
+                <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
+                <option value="gpt-4">GPT-4</option>
+                <option value="claude-3">Claude 3</option>
+                <option value="llama-3">Llama 3</option>
+            </select>
+            <div class="select-arrow">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M7 10l5 5 5-5z"/>
+                </svg>
+            </div>
+        </div>
+
+        <div class="input-container">
+            <input type="text" id="userInput" placeholder="Ask me anything..." autocomplete="off">
+            <button class="send-btn" id="sendBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                </svg>
+            </button>
+        </div>
+
         <div class="response-area" id="responseArea">
-            <div class="response-text" id="responseText">AI Chatbot response will appear here...</div>
+            <div class="response-header">
+                <div class="ai-avatar">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M21 10.12h-6.78l2.74-2.82c-2.73-2.7-7.15-2.8-9.88-.1-2.73 2.71-2.73 7.08 0 9.79s7.15 2.71 9.88 0C18.32 15.65 19 14.08 19 12.1h2c0 1.98-.88 4.55-2.64 6.29-3.51 3.48-9.21 3.48-12.72 0-3.5-3.47-3.53-9.11-.02-12.58s9.14-3.47 12.65 0L21 3v7.12zM12.5 8v4.25l3.5 2.08-.72 1.21L11 13V8h1.5z"/>
+                    </svg>
+                </div>
+                <div class="response-from" id="responseFrom">AI Assistant</div>
+            </div>
+            <div class="response-text" id="responseText"></div>
             <div class="loading-spinner" id="loadingSpinner"></div>
+            <div class="typing-indicator" id="typingIndicator">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
+
+        <div class="powered-by">Powered by AI models</div>
     </div>
 
     <script>
-        async function checkEnter(event) {
-            if (event.key === "Enter") {
-                const userInput = document.getElementById("userInput").value.trim();
-                const modelSelect = document.getElementById("modelSelect").value;
+        const userInput = document.getElementById("userInput");
+        const sendBtn = document.getElementById("sendBtn");
+        const responseArea = document.getElementById("responseArea");
+        const responseText = document.getElementById("responseText");
+        const loadingSpinner = document.getElementById("loadingSpinner");
+        const typingIndicator = document.getElementById("typingIndicator");
+        const modelSelect = document.getElementById("modelSelect");
+        const responseFrom = document.getElementById("responseFrom");
 
-                if (!userInput) {
-                    alert('Please enter a message.');
-                    return;
-                }
+        function showResponse() {
+            responseArea.style.display = "block";
+            loadingSpinner.style.display = "block";
+            typingIndicator.style.display = "block";
+            responseText.textContent = "";
+        }
 
-                const responseArea = document.getElementById("responseArea");
-                const responseText = document.getElementById("responseText");
-                const loadingSpinner = document.getElementById("loadingSpinner");
+        function updateResponseFrom() {
+            const selectedModel = modelSelect.value;
+            responseFrom.textContent = selectedModel.toUpperCase().replace(/-/g, ' ');
+        }
 
-                responseText.textContent = "";
-                loadingSpinner.style.display = "block";
-                responseArea.style.display = "block";
-
-                try {
-                    const response = await fetch('/api/chat', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ message: userInput, model: modelSelect }),
-                    });
-
-                    const data = await response.json();
-
-                    if (data.reply) {
-                        responseText.textContent = data.reply;
-                    } else {
-                        responseText.textContent = "AI Error: Failed to generate response.";
-                    }
-                } catch (error) {
-                    responseText.textContent = "Error communicating with AI.";
-                    console.error('Error:', error);
-                } finally {
-                    loadingSpinner.style.display = "none";
-                }
+        async function generateResponse() {
+            const message = userInput.value.trim();
+            const selectedModel = modelSelect.value;
+            
+            if (!message) return;
+            
+            showResponse();
+            updateResponseFrom();
+            
+            try {
+                const mockResponses = {
+                    "gpt-3.5-turbo": "I'm GPT-3.5 Turbo, here to help! " + message,
+                    "gpt-4": "As GPT-4, I can provide more nuanced answers. " + message,
+                    "claude-3": "Claude 3 here. I'd be happy to help with " + message,
+                    "llama-3": "Llama 3 responding to your query about " + message
+                };
+                
+                await simulateTyping(mockResponses[selectedModel]);
+                
+            } catch (error) {
+                responseText.textContent = "Sorry, I couldn't process your request. Please try again.";
+            } finally {
+                loadingSpinner.style.display = "none";
+                typingIndicator.style.display = "none";
+                userInput.value = "";
             }
         }
+
+        async function simulateTyping(text) {
+            loadingSpinner.style.display = "none";
+            
+            let i = 0;
+            const speed = 30;
+            
+            function typeChar() {
+                if (i < text.length) {
+                    responseText.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(typeChar, speed);
+                }
+            }
+            
+            typeChar();
+        }
+
+        sendBtn.addEventListener("click", generateResponse);
+        
+        userInput.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                generateResponse();
+            }
+        });
+
+        modelSelect.addEventListener("change", function() {
+            if (responseArea.style.display === "block") {
+                updateResponseFrom();
+            }
+        });
     </script>
 </body>
 
