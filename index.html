@@ -6,17 +6,38 @@
     <title>VerbiFlow</title>
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" as="style" onload="this.rel='stylesheet'">
     <style>
-        @keyframes fadeInBody{from{opacity:0}to{opacity:1}}*{margin:0;padding:0;box-sizing:border-box}body{background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);font-family:Poppins,sans-serif;color:#fff;min-height:100vh;display:flex;justify-content:center;align-items:center;opacity:1 !important;animation:fadeInBody .8s ease forwards;overflow:auto;animation:bgShift 30s linear infinite;will-change:background;visibility:visible}@keyframes bgShift{0%{background:linear-gradient(135deg,#0f0c29,#302b63,#24243e)}33%{background:linear-gradient(135deg,#24243e,#0f0c29,#302b63)}66%{background:linear-gradient(135deg,#302b63,#24243e,#0f0c29)}100%{background:linear-gradient(135deg,#0f0c29,#302b63,#24243e)}}.particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;background:radial-gradient(circle,rgba(255,255,255,.05) 0%,transparent 70%);animation:particleFloat 20s linear infinite;will-change:background-position}@keyframes particleFloat{0%{background-position:0 0}100%{background-position:100% 100%}}.wave-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(90deg,rgba(255,255,255,.02),rgba(255,255,255,.05),rgba(255,255,255,.02));animation:wave 10s infinite;pointer-events:none}@keyframes wave{0%{background-position:0 0}100%{background-position:200% 0}}.loading-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);display:flex;justify-content:center;align-items:center;z-index:9999;transition:opacity 0.5s ease}.loading-overlay.hide{opacity:0;pointer-events:none}.loading-text{color:#ff6a88;font-size:24px;animation:pulse 1.5s infinite}@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.1)}100%{transform:scale(1)}}.container{display:flex;width:90%;max-width:1200px;gap:20px;padding:20px;visibility:visible}.chat-container{flex:1;display:flex;flex-direction:column;padding:40px;background:rgba(15,14,22,.85);border-radius:24px;box-shadow:0 25px 50px rgba(0,0,0,.5);backdrop-filter:blur(20px);animation:slideIn .7s cubic-bezier(.16,1,.3,1) forwards;border:1px solid rgba(255,255,255,.15);position:relative;visibility:visible;transition:transform .3s ease;will-change:transform}.chat-container:hover{transform:rotateX(2deg) rotateY(2deg);border:1px solid #ff6a88;box-shadow:0 0 20px rgba(255,106,136,.5)}.chat-container::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(255,255,255,.1) 0%,rgba(255,255,255,0) 60%);pointer-events:none}@keyframes slideIn{from{transform:translateY(40px);opacity:0}to{transform:translateY(0);opacity:1}}.side-panel{width:0;max-width:400px;background:rgba(15,14,22,.9);border-radius:16px;padding:0;overflow:hidden;transition:width .3s ease;box-shadow:0 10px 20px rgba(0,0,0,.3);display:flex;flex-direction:column;resize:horizontal;visibility:visible}.side-panel.open{width:400px;padding:20px}.side-panel-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}.side-panel-title{font-size:18px;font-weight:600}.side-panel-close{background:none;border:none;color:#fff;font-size:20px;cursor:pointer}.side-panel-content{flex:1;overflow-y:auto;font-size:14px;line-height:1.5;color:rgba(255,255,255,.85)}.side-panel-content pre{background:rgba(0,0,0,.3);padding:10px;border-radius:8px;overflow-x:auto;font-family:'Courier New',monospace}.copy-btn{background:linear-gradient(135deg,#ff6a88,#ff99ac);border:none;padding:8px 16px;border-radius:12px;color:#fff;cursor:pointer;font-size:14px;margin-top:10px;transition:all .3s ease;backdrop-filter:blur(5px);pointer-events:auto}.copy-btn:hover{transform:scale(1.05);box-shadow:0 0 15px rgba(255,106,136,.7)}.side-panel-toggle{position:fixed;top:20px;right:20px;background:linear-gradient(135deg,#ff6a88,#ff99ac);border:none;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s ease;backdrop-filter:blur(5px);pointer-events:auto;margin:5px;padding:10px 20px}.side-panel-toggle:hover{transform:translateY(-2px);box-shadow:0 0 15px rgba(255,106,136,.7);background:rgba(255,106,136,0.5);border-color:#ff6a88}.side-panel-toggle svg{width:20px;height:20px;fill:#fff}.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:30px;visibility:visible}.logo{display:flex;align-items:center}.logo-pulse{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#ff6a88,#ff99ac,#8A2387);margin-right:15px;animation:spin3D 4s infinite;will-change:transform}@keyframes spin3D{0%{transform:rotateY(0deg)}50%{transform:rotateY(180deg)}100%{transform:rotateY(360deg)}}.logo-text{font-size:28px;font-weight:700;background:linear-gradient(135deg,#ff6a88,#ff99ac);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:1px}.version{font-size:14px;font-weight:500;color:rgba(255,255,255,.6);padding:5px 12px;border-radius:14px;background:rgba(255,255,255,.1)}.api-key-container{margin-bottom:20px;display:flex;align-items:center;gap:10px}.api-key-input{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,.2);background-color:rgba(255,255,255,.05);color:#fff;font-family:Poppins,sans-serif;font-size:14px;outline:none}.api-key-input.error{border-color:#ff0000;animation:pulseError 1s infinite}@keyframes pulseError{0%{box-shadow:0 0 5px rgba(255,0,0,.5)}50%{box-shadow:0 0 15px rgba(255,0,0,.8)}100%{box-shadow:0 0 5px rgba(255,0,0,.5)}}.api-key-input:focus{border-color:#ff6a88}.api-key-submit,.api-key-test,.api-key-reset{background:linear-gradient(135deg,#ff6a88,#ff99ac);border:none;padding:8px 16px;border-radius:8px;color:#fff;cursor:pointer;font-size:14px;transition:all .3s ease}.api-key-submit:hover,.api-key-test:hover,.api-key-reset:hover{transform:scale(1.05);box-shadow:0 0 15px rgba(255,106,136,.7)}.api-key-help{font-size:12px;color:rgba(255,255,255,.5);margin-left:10px}.api-key-help a{color:#ff6a88;text-decoration:none}.api-key-help a:hover{text-decoration:underline}.api-key-warning{display:none;color:#ff0000;font-size:12px;margin-top:5px}.model-select-container{position:relative;margin-bottom:25px;visibility:visible}.model-select-container::before{content:'';position:absolute;top:-5px;left:-5px;right:-5px;bottom:-5px;border-radius:20px;background:linear-gradient(135deg,#ff6a88,#ff99ac);opacity:0;animation:pulseGlow 2s infinite;pointer-events:none}@keyframes pulseGlow{0%{opacity:0}50%{opacity:.5}100%{opacity:0}}#modelSelect{width:100%;padding:16px 20px;font-size:16px;border-radius:16px;border:1px solid rgba(255,255,255,.2);background-color:rgba(255,255,255,.05);color:#fff;font-family:Poppins,sans-serif;font-weight:500;transition:all .3s ease;cursor:pointer;appearance:none;outline:none;pointer-events:auto;visibility:visible}#modelSelect:focus{border-color:#ff6a88;box-shadow:0 0 10px rgba(255,106,136,.5)}.select-arrow{position:absolute;right:20px;top:50%;transform:translateY(-50%);pointer-events:none}.select-arrow svg{fill:rgba(255,255,255,.7);width:20px;height:20px}.input-container{position:relative;margin-bottom:25px;visibility:visible;border:2px solid #ff6a88;padding:5px;border-radius:20px}#userInput{width:100%;padding:18px 90px 18px 25px;font-size:16px;border-radius:16px;border:1px solid rgba(255,255,255,.2);background-color:rgba(255,255,255,.05);color:#fff;font-family:Poppins,sans-serif;font-weight:400;transition:all .3s ease;outline:none;resize:none;pointer-events:auto;visibility:visible}#userInput:focus{border:1px solid transparent;background:linear-gradient(#0f0e16,#0f0e16) padding-box,linear-gradient(135deg,#ff6a88,#ff99ac) border-box;box-shadow:0 0 10px rgba(255,106,136,.5)}#userInput::placeholder{color:rgba(255,255,255,.4)}.send-btn{position:absolute;right:50px;top:50%;transform:translateY(-50%);background:linear-gradient(135deg,#ff6a88,#ff99ac);border:none;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s ease;backdrop-filter:blur(5px);pointer-events:auto}.send-btn:hover{transform:translateY(-50%) scale(1.05);box-shadow:0 0 15px rgba(255,106,136,.7)}.send-btn svg{width:18px;height:18px;fill:#fff}.voice-btn{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:linear-gradient(135deg,#8A2387,#E94057);border:none;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s ease;backdrop-filter:blur(5px);pointer-events:auto}.voice-btn:hover{transform:translateY(-50%) scale(1.05);box-shadow:0 0 15px rgba(142,35,135,.7)}.voice-btn svg{width:18px;height:18px;fill:#fff}.clear-input-btn{position:absolute;right:86px;top:50%;transform:translateY(-50%);background:linear-gradient(135deg,#ff6a88,#ff99ac);border:none;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s ease;backdrop-filter:blur(5px);pointer-events:auto}.clear-input-btn:hover{transform:translateY(-50%) scale(1.05);box-shadow:0 0 15px rgba(255,106,136,.7)}.clear-input-btn svg{width:18px;height:18px;fill:#fff}.markdown-preview{background:rgba(0,0,0,.2);padding:10px;border-radius:8px;margin-bottom:10px;font-size:14px;color:rgba(255,255,255,.85);display:none;visibility:visible}.typing-status{font-size:12px;color:rgba(255,255,255,.5);margin-bottom:5px;visibility:visible}.chat-history{max-height:400px;overflow-y:auto;margin-bottom:20px;padding:10px;border-radius:16px;background:rgba(0,0,0,.2);position:relative;visibility:visible;border:2px solid #ff6a88}.error-message{background:rgba(255,0,0,0.8);color:#fff;padding:10px;border-radius:8px;margin:10px 0;text-align:center}.chat-message{margin-bottom:15px;opacity:0;animation:bounceIn .5s ease forwards;transition:background .2s ease, transform .3s ease}.chat-message:hover{background:rgba(255,255,255,0.1);transform:scale(1.01)}.chat-message.starred{background:rgba(255,215,0,.1);border-left:3px solid #ffd700}.chat-message .preview-tooltip{position:absolute;background:rgba(0,0,0,.8);color:#fff;padding:5px 10px;border-radius:8px;font-size:12px;display:none;white-space:nowrap}.chat-message:hover .preview-tooltip{display:block}@keyframes bounceIn{0%{opacity:0;transform:scale(.8)}60%{opacity:1;transform:scale(1.05)}100%{transform:scale(1)}}.chat-message.user{text-align:right}.chat-message.ai{text-align:left}.chat-message-content{display:inline-block;padding:10px 15px;border-radius:12px;font-size:16px;line-height:1.6}.chat-message.user .chat-message-content{background:linear-gradient(135deg,#ff6a88,#ff99ac);color:#fff}.chat-message.ai .chat-message-content{background:rgba(255,255,255,.1);color:rgba(255,255,255,.85)}.chat-message-timestamp{font-size:12px;color:rgba(255,255,255,.5);margin:5px 0}.star-btn,.edit-btn,.reaction-btn{background:none;border:none;color:#ffd700;font-size:16px;cursor:pointer;padding:0 10px}.edit-btn{color:#ff6a88}.reaction-btn{font-size:14px}.response-area{width:100%;background:rgba(0,0,0,.2);padding:30px;border-radius:16px;display:none;animation:fadeInUp .5s ease forwards;border:1px solid rgba(255,255,255,.07);visibility:visible}@keyframes fadeInUp{from{transform:translateY(15px);opacity:0}to{transform:translateY(0);opacity:1}}.response-header{display:flex;align-items:center;margin-bottom:20px}.ai-avatar{width:35px;height:35px;border-radius:50%;background:linear-gradient(135deg,#8A2387,#E94057,#F27121);margin-right:15px;display:flex;align-items:center;justify-content:center}.ai-avatar svg{width:20px;height:20px;fill:#fff}.response-from{font-size:16px;font-weight:600;color:rgba(255,255,255,.9)}.response-text{padding:5px 0;color:rgba(255,255,255,.85);font-size:16px;line-height:1.6;font-weight:400;text-align:left;animation:typing .5s ease forwards;max-height:300px;overflow-y:auto}.response-text pre{background:rgba(0,0,0,.3);padding:10px;border-radius:8px;overflow-x:auto;font-family:'Courier New',monospace}.response-text code{font-family:'Courier New',monospace}.read-more-btn{background:linear-gradient(135deg,#ff6a88,#ff99ac);border:none;padding:8px 16px;border-radius:12px;color:#fff;cursor:pointer;font-size:14px;margin-top:10px;transition:all .3s ease;backdrop-filter:blur(5px)}.read-more-btn:hover{transform:scale(1.05);box-shadow:0 0 15px rgba(255,106,136,.7)}.loading-spinner{display:none;width:40px;height:40px;border:3px solid rgba(255,255,255,.3);border-radius:50%;border-top:3px solid #ff6a88;margin:0 auto;animation:spin 1s linear infinite}@keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}.loading-bar{display:none;width:100%;height:4px;background:rgba(255,255,255,.2);border-radius:2px;overflow:hidden;margin-bottom:10px}.loading-bar::after{content:'';display:block;width:50%;height:100%;background:#ff6a88;animation:loading 1.5s infinite}@keyframes loading{0%{transform:translateX(-100%)}50%{transform:translateX(200%)}100%{transform:translateX(-100%)}}.powered-by{margin-top:20px;font-size:13px;color:rgba(255,255,255,.5);text-align:center;visibility:visible}.typing-indicator{display:none;text-align:left;margin-top:5px}.typing-indicator span{display:inline-block;width:8px;height:8px;background-color:rgba(255,255,255,.7);border-radius:50%;margin-right:5px;animation:typing 1.4s infinite}.typing-indicator span:nth-child(2){animation-delay:.2s}.typing-indicator span:nth-child(3){animation-delay:.4s;margin-right:0}@keyframes typing{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}.action-buttons{display:flex;gap:10px;margin-bottom:10px;visibility:visible}.clear-btn,.regenerate-btn,.save-btn,.share-btn,.summary-btn,.export-btn,.retry-btn,.fallback-btn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;padding:10px 20px;border-radius:16px;cursor:pointer;font-size:14px;transition:all .3s ease;backdrop-filter:blur(5px);pointer-events:auto}.clear-btn:hover,.regenerate-btn:hover,.save-btn:hover,.share-btn:hover,.summary-btn:hover,.export-btn:hover,.retry-btn:hover,.fallback-btn:hover{background:rgba(255,106,136,.3);border-color:#ff6a88}.theme-toggle,.quick-reply,.contrast-toggle,.focus-toggle,.chat-theme,.debug-toggle{position:fixed;top:20px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:16px;color:#fff;cursor:pointer;font-size:14px;transition:all .3s ease;backdrop-filter:blur(5px);pointer-events:auto;margin:5px;padding:10px 20px}.theme-toggle:hover,.quick-reply:hover,.contrast-toggle:hover,.focus-toggle:hover,.chat-theme:hover,.debug-toggle:hover{background:rgba(255,106,136,0.5);border-color:#ff6a88;transform:translateY(-2px)}.chat-theme{right:440px}.theme-toggle{right:370px}.debug-toggle{right:300px}.focus-toggle{right:230px}.contrast-toggle{right:160px}.quick-reply{right:90px}.toast{position:fixed;bottom:20px;right:20px;background:rgba(255,106,136,.9);color:#fff;padding:10px 20px;border-radius:8px;font-size:14px;opacity:0;animation:fadeInToast .5s ease forwards,fadeOutToast .5s ease 3s forwards}@keyframes fadeInToast{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}@keyframes fadeOutToast{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(20px)}}.word-counter{font-size:12px;color:rgba(255,255,255,.5);text-align:right;margin:5px 0;visibility:visible}.starred-tab,.history-tab,.search-btn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);padding:8px 16px;border-radius:16px;cursor:pointer;font-size:14px;margin-right:10px;transition:all .3s ease;pointer-events:auto}.starred-tab:hover,.history-tab:hover,.search-btn:hover{background:rgba(255,106,136,.3);border-color:#ff6a88}.tabs{display:flex;margin-bottom:10px;visibility:visible}.search-input{width:200px;padding:8px 16px;border-radius:16px;border:1px solid rgba(255,255,255,.2);background-color:rgba(255,255,255,.05);color:#fff;font-family:Poppins,sans-serif;font-size:14px;outline:none}.search-input:focus{border-color:#ff6a88}.back-to-top{position:absolute;bottom:10px;right:10px;background:linear-gradient(135deg,#ff6a88,#ff99ac);border:none;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s ease;backdrop-filter:blur(5px);pointer-events:auto}.back-to-top:hover{transform:scale(1.05);box-shadow:0 0 15px rgba(255,106,136,.7)}.back-to-top svg{width:18px;height:18px;fill:#fff}.neon-mode body{background:linear-gradient(135deg,#1a1a1a,#ff00ff,#00ffff)}.neon-mode .chat-container{background:rgba(20,20,20,.85);border:1px solid #ff00ff}.neon-mode .side-panel{background:rgba(20,20,20,.9);border:1px solid #00ffff}.neon-mode .chat-history{background:rgba(0,0,0,.4)}.neon-mode .response-area{background:rgba(0,0,0,.4);border:1px solid #ff00ff}.light-mode body{background:linear-gradient(135deg,#f0f0f0,#e0e0e0,#d0d0d0)}.light-mode .chat-container{background:rgba(255,255,255,.9);color:#333}.light-mode .side-panel{background:rgba(255,255,255,.9);color:#333}.light-mode .chat-history{background:rgba(0,0,0,.05)}.light-mode .response-area{background:rgba(0,0,0,.05)}.light-mode .chat-message.ai .chat-message-content{background:rgba(0,0,0,.05);color:#333}.light-mode .response-text{color:#333}.light-mode .powered-by,.light-mode .word-counter,.light-mode .chat-message-timestamp,.light-mode .typing-status{color:rgba(0,0,0,.5)}.high-contrast body{background:#000}.high-contrast .chat-container{background:#fff;color:#000;border:1px solid #000}.high-contrast .side-panel{background:#fff;color:#000}.high-contrast .chat-history{background:#eee}.high-contrast .response-area{background:#eee}.high-contrast .chat-message.ai .chat-message-content{background:#ddd;color:#000}.high-contrast .response-text{color:#000}.high-contrast .powered-by,.high-contrast .word-counter,.high-contrast .chat-message-timestamp,.high-contrast .typing-status{color:#000}.focus-mode .side-panel,.focus-mode .theme-toggle,.focus-mode .quick-reply,.focus-mode .contrast-toggle,.focus-mode .focus-toggle,.focus-mode .chat-theme,.focus-mode .debug-toggle{display:none}.focus-mode .chat-container{box-shadow:0 0 20px rgba(255,106,136,.5)}.ocean-theme .chat-container{background:linear-gradient(135deg,#0a3d62,#1b263b);border:1px solid #3e92cc}.ocean-theme .chat-message.user .chat-message-content{background:linear-gradient(135deg,#3e92cc,#90e0ef)}.ocean-theme .chat-message.ai .chat-message-content{background:#1b263b}.forest-theme .chat-container{background:linear-gradient(135deg,#1b4332,#2d6a4f);border:1px solid #52b788}.forest-theme .chat-message.user .chat-message-content{background:linear-gradient(135deg,#52b788,#95d5b2)}.forest-theme .chat-message.ai .chat-message-content{background:#2d6a4f}@media (max-width:1200px){.chat-theme{right:380px}.theme-toggle{right:320px}.debug-toggle{right:260px}.focus-toggle{right:200px}.contrast-toggle{right:140px}.quick-reply{right:80px}.side-panel-toggle{right:20px}}@media (max-width:900px){.container{flex-direction:column}.side-panel.open{width:100%;max-width:none}.chat-container{padding:25px;width:100%}.logo-text{font-size:24px}.response-area{padding:20px}.search-input{width:100%}.chat-theme,.theme-toggle,.debug-toggle,.focus-toggle,.contrast-toggle,.quick-reply,.side-panel-toggle{top:60px;font-size:12px;padding:6px 12px}.chat-theme{right:320px}.theme-toggle{right:270px}.debug-toggle{right:220px}.focus-toggle{right:170px}.contrast-toggle{right:120px}.quick-reply{right:70px}.side-panel-toggle{right:20px}}
+        *{margin:0;padding:0;box-sizing:border-box}body{background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);font-family:Poppins,sans-serif;color:#fff;min-height:100vh;display:flex;overflow:auto;animation:bgShift 30s linear infinite}body::-webkit-scrollbar{display:none}@keyframes bgShift{0%{background:linear-gradient(135deg,#0f0c29,#302b63,#24243e)}33%{background:linear-gradient(135deg,#24243e,#0f0c29,#302b63)}66%{background:linear-gradient(135deg,#302b63,#24243e,#0f0c29)}100%{background:linear-gradient(135deg,#0f0c29,#302b63,#24243e)}}.container{display:flex;width:100%;height:100vh}.sidebar{width:60px;background:rgba(15,14,22,.9);transition:width .3s ease;padding:20px 10px;display:flex;flex-direction:column;align-items:center;border-right:1px solid rgba(255,255,255,.15)}.sidebar.open{width:250px;align-items:flex-start}.sidebar-toggle{background:linear-gradient(135deg,#ff6a88,#ff99ac);border:none;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;margin-bottom:20px}.sidebar-toggle:hover{transform:scale(1.05);box-shadow:0 0 15px rgba(255,106,136,.7)}.sidebar-toggle svg{width:20px;height:20px;fill:#fff}.sidebar-btn,.sidebar-select{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:12px;color:#fff;padding:10px 15px;margin:5px 0;cursor:pointer;font-size:14px;width:100%;text-align:left;transition:background .3s ease,border .3s ease,box-shadow .3s ease}.sidebar-btn:hover,.sidebar-select:hover{background:rgba(255,106,136,.5);border-color:#ff6a88;box-shadow:0 0 15px rgba(255,106,136,.7)}.sidebar-btn:focus,.sidebar-select:focus{outline:none;border:2px solid #ff99ac;box-shadow:0 0 10px rgba(255,106,136,.8)}.main-area{flex:1;display:flex;flex-direction:column;padding:20px}.header{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;background:rgba(15,14,22,.85);border-radius:16px;margin-bottom:20px}.logo{display:flex;align-items:center}.logo-pulse{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#ff6a88,#ff99ac);margin-right:15px;animation:spin3D 4s infinite}@keyframes spin3D{0%{transform:rotateY(0deg)}50%{transform:rotateY(180deg)}100%{transform:rotateY(360deg)}}.logo-text{font-size:24px;font-weight:700;background:linear-gradient(135deg,#ff6a88,#ff99ac);-webkit-background-clip:text;color:transparent}.version{font-size:14px;color:rgba(255,255,255,.6);padding:5px 12px;border-radius:14px;background:rgba(255,255,255,.1)}.api-keys-container{background:rgba(15,14,22,.85);border-radius:16px;padding:20px;margin-bottom:20px}.api-key-section{display:flex;align-items:center;gap:10px;margin-bottom:10px}.api-key-input{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,.2);background-color:rgba(255,255,255,.05);color:#fff;font-size:14px;outline:none}.api-key-input.error{border-color:#ff0000;animation:pulseError 1s infinite}@keyframes pulseError{0%{box-shadow:0 0 5px rgba(255,0,0,.5)}50%{box-shadow:0 0 15px rgba(255,0,0,.8)}100%{box-shadow:0 0 5px rgba(255,0,0,.5)}}.api-key-input:focus{border-color:#ff6a88;box-shadow:0 0 10px rgba(255,106,136,.5)}.api-key-btn{background:linear-gradient(135deg,#ff6a88,#ff99ac);border:none;padding:8px 16px;border-radius:8px;color:#fff;cursor:pointer;font-size:14px}.api-key-btn:hover{transform:scale(1.05);box-shadow:0 0 15px rgba(255,106,136,.7)}.api-key-btn:focus{outline:none;border:2px solid #ff99ac}.api-key-warning{display:none;color:#ff0000;font-size:12px;margin-top:5px}.file-upload-container{background:rgba(15,14,22,.85);border-radius:16px;padding:20px;margin-bottom:20px}.file-input-label{background:linear-gradient(135deg,#ff6a88,#ff99ac);border:none;padding:10px 20px;border-radius:12px;color:#fff;cursor:pointer;font-size:14px}.file-input-label:hover{transform:scale(1.05);box-shadow:0 0 15px rgba(255,106,136,.7)}.file-input{display:none}.file-preview{background:rgba(0,0,0,.2);padding:10px;border-radius:8px;margin-top:10px;font-size:14px;color:rgba(255,255,255,.9);max-height:100px;overflow-y:auto}.chat-area{flex:1;background:rgba(15,14,22,.85);border-radius:16px;padding:20px;overflow-y:auto;margin-bottom:20px}.chat-history{max-height:100%;overflow-y:auto;padding:10px;border-radius:16px;background:rgba(0,0,0,.2);position:relative}.chat-message{margin-bottom:15px;animation:fadeIn .5s ease forwards}.chat-message:hover{background:rgba(255,255,255,.15);transform:scale(1.02) translateY(-2px);box-shadow:0 2px 10px rgba(0,0,0,.3)}@keyframes fadeIn{0%{opacity:0;transform:scale(.8)}100%{opacity:1;transform:scale(1)}}.chat-message.user{text-align:right}.chat-message.ai{text-align:left}.chat-message-content{display:inline-block;padding:12px 18px;border-radius:12px;font-size:16px;line-height:1.6}.chat-message.user .chat-message-content{background:linear-gradient(135deg,#ff6a88,#ff99ac);color:#fff}.chat-message.ai .chat-message-content{background:rgba(255,255,255,.15);color:rgba(255,255,255,.9)}.chat-message-timestamp{font-size:12px;color:rgba(255,255,255,.5);margin:5px 0}.input-container{display:flex;align-items:center;background:rgba(15,14,22,.85);border-radius:16px;padding:10px;gap:10px}.user-input{flex:1;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,.2);background-color:rgba(255,255,255,.05);color:#fff;font-size:14px;outline:none;resize:none}.user-input:focus{border-color:#ff6a88;box-shadow:0 0 10px rgba(255,106,136,.5)}.send-btn{background:linear-gradient(135deg,#ff6a88,#ff99ac);border:none;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer}.send-btn:hover{transform:scale(1.05);box-shadow:0 0 15px rgba(255,106,136,.7)}.send-btn svg{width:20px;height:20px;fill:#fff}.word-counter{font-size:12px;color:rgba(255,255,255,.5);text-align:right;padding:5px 20px}.neon-mode body{background:linear-gradient(135deg,#1a1a1a,#ff00ff,#00ffff)}.neon-mode .chat-area,.neon-mode .header,.neon-mode .api-keys-container,.neon-mode .file-upload-container{background:rgba(20,20,20,.85);border:1px solid #ff00ff}.light-mode body{background:linear-gradient(135deg,#f0f0f0,#e0e0e0,#d0d0d0)}.light-mode .chat-area,.light-mode .header,.light-mode .api-keys-container,.light-mode .file-upload-container{background:rgba(255,255,255,.95);color:#2a2a2a}.light-mode .chat-message.ai .chat-message-content{background:rgba(0,0,0,.05);color:#2a2a2a}.light-mode .word-counter,.light-mode .chat-message-timestamp{color:rgba(0,0,0,.6)}.high-contrast body{background:#000}.high-contrast .chat-area,.high-contrast .header,.high-contrast .api-keys-container,.high-contrast .file-upload-container{background:#fff;color:#000}.high-contrast .chat-message.ai .chat-message-content{background:#e0e0e0;color:#000}.high-contrast .word-counter,.high-contrast .chat-message-timestamp{color:#000}.focus-mode .sidebar{display:none}.focus-mode .chat-area{box-shadow:0 0 25px rgba(255,106,136,.6)}.ocean-theme .chat-area{background:linear-gradient(135deg,#0a3d62,#1b263b);border:1px solid #3e92cc}.ocean-theme .chat-message.user .chat-message-content{background:linear-gradient(135deg,#3e92cc,#90e0ef)}.forest-theme .chat-area{background:linear-gradient(135deg,#1b4332,#2d6a4f);border:1px solid #52b788}.forest-theme .chat-message.user .chat-message-content{background:linear-gradient(135deg,#52b788,#95d5b2)}@media (max-width:900px){.sidebar.open{width:200px}.main-area{padding:10px}.header,.chat-area,.api-keys-container,.file-upload-container{padding:15px}.logo-text{font-size:20px}}
     </style>
 </head>
 <body>
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="loading-text">Loading VerbiFlow...</div>
-    </div>
-    <div class="particles"></div>
-    <div class="wave-overlay"></div>
     <div class="container">
-        <div class="chat-container">
+        <div class="sidebar" id="sidebar">
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                </svg>
+            </button>
+            <select class="sidebar-select" id="themeToggle">
+                <option value="dark">Dark Mode</option>
+                <option value="light">Light Mode</option>
+                <option value="neon">Neon Mode</option>
+            </select>
+            <select class="sidebar-select" id="chatTheme">
+                <option value="">Default Theme</option>
+                <option value="ocean">Ocean Theme</option>
+                <option value="forest">Forest Theme</option>
+            </select>
+            <button class="sidebar-btn" id="debugToggle">Debug Mode</button>
+            <button class="sidebar-btn" id="focusToggle">Focus Mode</button>
+            <button class="sidebar-btn" id="contrastToggle">High Contrast</button>
+            <select class="sidebar-select" id="quickReply">
+                <option value="">Quick Reply</option>
+                <option value="Explain this in simple terms">Explain this</option>
+                <option value="Summarize this">Summarize</option>
+                <option value="Provide an example">Example</option>
+            </select>
+        </div>
+        <div class="main-area">
             <div class="header">
                 <div class="logo">
                     <div class="logo-pulse"></div>
@@ -24,129 +45,44 @@
                 </div>
                 <div class="version">v2.0</div>
             </div>
-            <div class="api-key-container">
-                <input type="text" class="api-key-input" id="apiKeyInput" placeholder="Enter your OpenAI API Key (required)" aria-label="Enter OpenAI API Key">
-                <button class="api-key-submit" id="apiKeySubmit" aria-label="Submit API Key">Set Key</button>
-                <button class="api-key-test" id="apiKeyTest" aria-label="Test API Key">Test Key</button>
-                <button class="api-key-reset" id="apiKeyReset" aria-label="Reset API Key">Reset Key</button>
-                <div class="api-key-help">
-                    <a href="https://platform.openai.com/api-keys" target="_blank">Need help?</a>
+            <div class="api-keys-container">
+                <div class="api-key-section">
+                    <input type="text" class="api-key-input" id="chatApiKeyInput" placeholder="Chat API Key">
+                    <button class="api-key-btn" id="chatApiKeySubmit">Set</button>
                 </div>
-            </div>
-            <div class="api-key-warning" id="apiKeyWarning">Please set a valid API key to continue.</div>
-            <div class="model-select-container">
-                <select id="modelSelect" aria-label="Select AI model">
-                    <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
-                </select>
-                <div class="select-arrow">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M7 10l5 5 5-5z"/>
-                    </svg>
+                <div class="api-key-warning" id="chatApiKeyWarning">Please set a valid Chat API key.</div>
+                <div class="api-key-section">
+                    <input type="text" class="api-key-input" id="videoApiKeyInput" placeholder="Video API Key">
+                    <button class="api-key-btn" id="videoApiKeySubmit">Set</button>
                 </div>
+                <div class="api-key-warning" id="videoApiKeyWarning">Please set a valid Video API key.</div>
+                <div class="api-key-section">
+                    <input type="text" class="api-key-input" id="robloxApiKeyInput" placeholder="Roblox API Key">
+                    <button class="api-key-btn" id="robloxApiKeySubmit">Set</button>
+                </div>
+                <div class="api-key-warning" id="robloxApiKeyWarning">Please set a valid Roblox API key.</div>
             </div>
-            <div class="tabs">
-                <button class="history-tab" id="historyTab" aria-label="View chat history">History</button>
-                <button class="starred-tab" id="starredTab" aria-label="View starred messages">Starred</button>
-                <button class="search-btn" id="searchBtn" aria-label="Search chat">Search</button>
-                <input type="text" class="search-input" id="searchInput" placeholder="Search messages..." style="display:none">
+            <div class="file-upload-container">
+                <label class="file-input-label" for="fileInput">Upload File</label>
+                <input type="file" class="file-input" id="fileInput">
+                <div class="file-preview" id="filePreview"></div>
             </div>
-            <div class="chat-history" id="chatHistory" aria-live="polite">
-                <div class="loading-message">Loading chat history...</div>
-                <button class="back-to-top" id="backToTop" aria-label="Back to top">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M12 8l-6 6h12z"/>
-                    </svg>
-                </button>
+            <div class="chat-area" id="chatArea">
+                <div class="chat-history" id="chatHistory"></div>
             </div>
-            <div class="action-buttons">
-                <button class="clear-btn" id="clearBtn" aria-label="Clear chat">Clear Chat</button>
-                <button class="regenerate-btn" id="regenerateBtn" aria-label="Regenerate response">Regenerate Response</button>
-                <button class="save-btn" id="saveBtn" aria-label="Save chat">Save Chat</button>
-                <button class="share-btn" id="shareBtn" aria-label="Share chat">Share Chat</button>
-                <button class="summary-btn" id="summaryBtn" aria-label="Summarize chat">Summarize</button>
-                <button class="export-btn" id="exportBtn" aria-label="Export chat as PDF">Export PDF</button>
-                <button class="retry-btn" id="retryBtn" aria-label="Retry rendering chat">Retry Render</button>
-                <button class="fallback-btn" id="fallbackBtn" aria-label="Enable fallback mode">Fallback Mode</button>
-            </div>
-            <div class="typing-status" id="typingStatus"></div>
-            <div class="markdown-preview" id="markdownPreview"></div>
             <div class="input-container">
-                <textarea id="userInput" placeholder="Ask me anything..." autocomplete="off" aria-label="Enter your message"></textarea>
-                <button class="clear-input-btn" id="clearInputBtn" aria-label="Clear input">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-                    </svg>
-                </button>
-                <button class="voice-btn" id="voiceBtn" aria-label="Voice input">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm-1-9c0-.55.45-1 1-1s1 .45 1 1v6c0 .55-.45 1-1 1s-1-.45-1-1V5zm6.1 6c0 3-2.54 5.1-5.1 5.1S6.9 14 6.9 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.49 6-3.31 6-6.72h-1.9z"/>
-                    </svg>
-                </button>
-                <button class="send-btn" id="sendBtn" aria-label="Send message">
+                <textarea class="user-input" id="userInput" placeholder="Ask me anything..." rows="3"></textarea>
+                <button class="send-btn" id="sendBtn">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                         <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
                     </svg>
                 </button>
             </div>
             <div class="word-counter" id="wordCounter">0 words</div>
-            <div class="loading-bar" id="loadingBar"></div>
-            <div class="response-area" id="responseArea" aria-live="polite">
-                <div class="response-header">
-                    <div class="ai-avatar">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path d="M21 10.12h-6.78l2.74-2.82c-2.73-2.7-7.15-2.8-9.88-.1-2.73 2.71-2.73 7.08 0 9.79s7.15 2.71 9.88 0C18.32 15.65 19 14.08 19 12.1h2c0 1.98-.88 4.55-2.64 6.29-3.51 3.48-9.21 3.48-12.72 0-3.5-3.47-3.53-9.11-.02-12.58s9.14-3.47 12.65 0L21 3v7.12zM12.5 8v4.25l3.5 2.08-.72 1.21L11 13V8h1.5z"/>
-                        </svg>
-                    </div>
-                    <div class="response-from" id="responseFrom">AI Assistant</div>
-                </div>
-                <div class="response-text" id="responseText"></div>
-                <button class="read-more-btn" id="readMoreBtn" style="display:none">Read More</button>
-                <div class="loading-spinner" id="loadingSpinner"></div>
-                <div class="typing-indicator" id="typingIndicator">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-            <div class="powered-by">Powered by Smart Script Studios</div>
-        </div>
-        <div class="side-panel" id="sidePanel">
-            <div class="side-panel-header">
-                <div class="side-panel-title">Response / Code / Debug</div>
-                <button class="side-panel-close" id="closePanel" aria-label="Close side panel">×</button>
-            </div>
-            <div class="side-panel-content" id="sidePanelContent"></div>
-            <button class="copy-btn" id="copyBtn" aria-label="Copy to clipboard">Copy to Clipboard</button>
         </div>
     </div>
-    <button class="side-panel-toggle" id="togglePanel" aria-label="Toggle side panel">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
-        </svg>
-    </button>
-    <select class="chat-theme" id="chatTheme" aria-label="Select chat theme">
-        <option value="">Default Theme</option>
-        <option value="ocean">Ocean Theme</option>
-        <option value="forest">Forest Theme</option>
-    </select>
-    <select class="theme-toggle" id="themeToggle" aria-label="Select theme">
-        <option value="dark">Dark Mode</option>
-        <option value="light">Light Mode</option>
-        <option value="neon">Neon Mode</option>
-    </select>
-    <button class="debug-toggle" id="debugToggle" aria-label="Toggle debug mode">Debug Mode</button>
-    <button class="focus-toggle" id="focusToggle" aria-label="Toggle focus mode">Focus Mode</button>
-    <button class="contrast-toggle" id="contrastToggle" aria-label="Toggle high contrast mode">High Contrast</button>
-    <select class="quick-reply" id="quickReply" aria-label="Quick reply prompts">
-        <option value="">Quick Reply</option>
-        <option value="Explain this in simple terms">Explain this</option>
-        <option value="Summarize this">Summarize</option>
-        <option value="Provide an example">Example</option>
-    </select>
     <script>
-        // Fallback if micromark fails to load
         if (typeof micromark === "undefined") {
-            console.warn("Micromark failed to load. Using fallback for markdown rendering.");
             window.micromark = (text) => text.replace(/\n/g, "<br>");
         }
 
@@ -160,11 +96,8 @@
                 document.head.appendChild(script);
                 await new Promise(resolve => script.onload = resolve);
                 micromarkLoaded = true;
-                logDebug("Micromark loaded successfully");
             } catch (error) {
-                console.warn("Micromark failed to load. Using fallback.");
                 window.micromark = (text) => text.replace(/\n/g, "<br>");
-                logDebug("Micromark load failed: " + error.message);
             }
         }
 
@@ -173,252 +106,57 @@
             return typeof micromark !== "undefined" ? micromark(text) : text.replace(/\n/g, "<br>");
         }
 
-        const userInput = document.getElementById("userInput");
-        const sendBtn = document.getElementById("sendBtn");
-        const voiceBtn = document.getElementById("voiceBtn");
-        const clearInputBtn = document.getElementById("clearInputBtn");
-        const responseArea = document.getElementById("responseArea");
-        const responseText = document.getElementById("responseText");
-        const readMoreBtn = document.getElementById("readMoreBtn");
-        const loadingSpinner = document.getElementById("loadingSpinner");
-        const loadingBar = document.getElementById("loadingBar");
-        const typingIndicator = document.getElementById("typingIndicator");
-        const modelSelect = document.getElementById("modelSelect");
-        const responseFrom = document.getElementById("responseFrom");
-        const chatHistory = document.getElementById("chatHistory");
-        const clearBtn = document.getElementById("clearBtn");
-        const regenerateBtn = document.getElementById("regenerateBtn");
-        const saveBtn = document.getElementById("saveBtn");
-        const shareBtn = document.getElementById("shareBtn");
-        const summaryBtn = document.getElementById("summaryBtn");
-        const exportBtn = document.getElementById("exportBtn");
-        const retryBtn = document.getElementById("retryBtn");
-        const fallbackBtn = document.getElementById("fallbackBtn");
-        const sidePanel = document.getElementById("sidePanel");
-        const sidePanelContent = document.getElementById("sidePanelContent");
-        const togglePanel = document.getElementById("togglePanel");
-        const closePanel = document.getElementById("closePanel");
-        const copyBtn = document.getElementById("copyBtn");
+        const sidebar = document.getElementById("sidebar");
+        const sidebarToggle = document.getElementById("sidebarToggle");
         const themeToggle = document.getElementById("themeToggle");
         const chatTheme = document.getElementById("chatTheme");
-        const contrastToggle = document.getElementById("contrastToggle");
-        const focusToggle = document.getElementById("focusToggle");
         const debugToggle = document.getElementById("debugToggle");
+        const focusToggle = document.getElementById("focusToggle");
+        const contrastToggle = document.getElementById("contrastToggle");
         const quickReply = document.getElementById("quickReply");
+        const userInput = document.getElementById("userInput");
+        const sendBtn = document.getElementById("sendBtn");
+        const chatHistory = document.getElementById("chatHistory");
         const wordCounter = document.getElementById("wordCounter");
-        const typingStatus = document.getElementById("typingStatus");
-        const markdownPreview = document.getElementById("markdownPreview");
-        const historyTab = document.getElementById("historyTab");
-        const starredTab = document.getElementById("starredTab");
-        const searchBtn = document.getElementById("searchBtn");
-        const searchInput = document.getElementById("searchInput");
-        const backToTop = document.getElementById("backToTop");
-        const apiKeyInput = document.getElementById("apiKeyInput");
-        const apiKeySubmit = document.getElementById("apiKeySubmit");
-        const apiKeyTest = document.getElementById("apiKeyTest");
-        const apiKeyReset = document.getElementById("apiKeyReset");
-        const apiKeyWarning = document.getElementById("apiKeyWarning");
-        const DEFAULT_API_KEY = "";
-        let userApiKey = safeLocalStorageGet("userApiKey", "");
+        const chatApiKeyInput = document.getElementById("chatApiKeyInput");
+        const chatApiKeySubmit = document.getElementById("chatApiKeySubmit");
+        const chatApiKeyWarning = document.getElementById("chatApiKeyWarning");
+        const videoApiKeyInput = document.getElementById("videoApiKeyInput");
+        const videoApiKeySubmit = document.getElementById("videoApiKeySubmit");
+        const videoApiKeyWarning = document.getElementById("videoApiKeyWarning");
+        const robloxApiKeyInput = document.getElementById("robloxApiKeyInput");
+        const robloxApiKeySubmit = document.getElementById("robloxApiKeySubmit");
+        const robloxApiKeyWarning = document.getElementById("robloxApiKeyWarning");
+        const fileInput = document.getElementById("fileInput");
+        const filePreview = document.getElementById("filePreview");
         let conversation = [];
-        let lastQuery = "";
-        let starredMessages = JSON.parse(safeLocalStorageGet("starredMessages", "[]")) || [];
-        const responseCache = JSON.parse(safeLocalStorageGet("responseCache", "{}")) || {};
-        let currentTab = "history";
-        let fullResponse = "";
-        let requestCount = 0;
-        const MAX_REQUESTS_PER_MINUTE = 60;
-        let debugMode = true;
-        let fallbackMode = false;
-        let apiKeyValid = false;
-        let chatChanged = false;
-
-        function safeLocalStorageGet(key, fallback) {
-            try {
-                return localStorage.getItem(key) || fallback;
-            } catch (error) {
-                logDebug(`LocalStorage get error: ${error.message}`);
-                return fallback;
-            }
-        }
-
-        function safeLocalStorageSet(key, value) {
-            try {
-                localStorage.setItem(key, value);
-            } catch (error) {
-                logDebug(`LocalStorage set error: ${error.message}`);
-            }
-        }
-
-        function logDebug(message) {
-            if (debugMode) {
-                const debugEntry = `[${new Date().toLocaleTimeString()}] ${message}\n`;
-                sidePanelContent.textContent = debugEntry + sidePanelContent.textContent;
-                sidePanel.classList.add("open");
-            }
-        }
-
-        function showResponse() {
-            responseArea.style.display = "block";
-            loadingSpinner.style.display = "block";
-            loadingBar.style.display = "block";
-            typingIndicator.style.display = "block";
-            responseText.innerHTML = "";
-            logDebug("Showing response area");
-        }
-
-        function showError(message) {
-            const errorDiv = document.createElement("div");
-            errorDiv.className = "error-message";
-            errorDiv.textContent = message;
-            chatHistory.insertBefore(errorDiv, chatHistory.firstChild);
-            showToast(message);
-            logDebug(`Error displayed: ${message}`);
-        }
-
-        function updateResponseFrom() {
-            responseFrom.textContent = modelSelect.value.toUpperCase().replace(/-/g, " ");
-        }
+        let chatApiKey = "";
+        let videoApiKey = "";
+        let robloxApiKey = "";
+        let chatApiKeyValid = false;
+        let videoApiKeyValid = false;
+        let robloxApiKeyValid = false;
+        let debugMode = false;
 
         function formatTimestamp() {
             const now = new Date();
             return now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
         }
 
-        function addToHistory(role, content, update = true) {
-            try {
-                conversation.push({ role, content });
-                chatChanged = true;
-                const messageDiv = document.createElement("div");
-                messageDiv.className = `chat-message ${role}`;
-                const contentDiv = document.createElement("div");
-                contentDiv.className = "chat-message-content";
-                contentDiv.textContent = content;
-                const timestampDiv = document.createElement("div");
-                timestampDiv.className = "chat-message-timestamp";
-                timestampDiv.textContent = formatTimestamp();
-                const starBtn = document.createElement("button");
-                starBtn.className = "star-btn";
-                starBtn.innerHTML = "★";
-                starBtn.setAttribute("aria-label", "Star message");
-                starBtn.onclick = () => {
-                    messageDiv.classList.toggle("starred");
-                    if (messageDiv.classList.contains("starred")) {
-                        starredMessages.push({ role, content });
-                        safeLocalStorageSet("starredMessages", JSON.stringify(starredMessages));
-                        if (currentTab === "starred") renderHistory();
-                    } else {
-                        starredMessages = starredMessages.filter(m => m.content !== content);
-                        safeLocalStorageSet("starredMessages", JSON.stringify(starredMessages));
-                        if (currentTab === "starred") renderHistory();
-                    }
-                };
-                const editBtn = document.createElement("button");
-                editBtn.className = "edit-btn";
-                editBtn.innerHTML = "✎";
-                editBtn.setAttribute("aria-label", "Edit message");
-                editBtn.style.display = role === "user" ? "inline" : "none";
-                editBtn.onclick = () => {
-                    const newContent = prompt("Edit your message:", content);
-                    if (newContent && newContent !== content) {
-                        contentDiv.textContent = newContent;
-                        conversation.find(m => m.content === content && m.role === "user").content = newContent;
-                    }
-                };
-                const thumbsUpBtn = document.createElement("button");
-                thumbsUpBtn.className = "reaction-btn";
-                thumbsUpBtn.innerHTML = "👍";
-                thumbsUpBtn.setAttribute("aria-label", "Thumbs up");
-                thumbsUpBtn.onclick = () => {
-                    thumbsUpBtn.innerHTML = thumbsUpBtn.innerHTML === "👍" ? "👍 1" : "👍";
-                    thumbsDownBtn.innerHTML = "👎";
-                };
-                const thumbsDownBtn = document.createElement("button");
-                thumbsDownBtn.className = "reaction-btn";
-                thumbsDownBtn.innerHTML = "👎";
-                thumbsDownBtn.setAttribute("aria-label", "Thumbs down");
-                thumbsDownBtn.onclick = () => {
-                    thumbsDownBtn.innerHTML = thumbsDownBtn.innerHTML === "👎" ? "👎 1" : "👎";
-                    thumbsUpBtn.innerHTML = "👍";
-                };
-                const tooltip = document.createElement("div");
-                tooltip.className = "preview-tooltip";
-                tooltip.textContent = content.length > 50 ? content.substring(0, 50) + "..." : content;
-                messageDiv.appendChild(contentDiv);
-                messageDiv.appendChild(timestampDiv);
-                messageDiv.appendChild(starBtn);
-                messageDiv.appendChild(editBtn);
-                messageDiv.appendChild(thumbsUpBtn);
-                messageDiv.appendChild(thumbsDownBtn);
-                messageDiv.appendChild(tooltip);
-                if (update && currentTab === "history") chatHistory.insertBefore(messageDiv, chatHistory.firstChild);
-                if (starredMessages.some(m => m.content === content)) messageDiv.className = `chat-message ${role} starred`;
-                chatHistory.scrollTop = 0;
-                logDebug(`Added message to history: ${role} - ${content}`);
-            } catch (error) {
-                console.error("Error adding to history:", error);
-                logDebug(`Error adding to history: ${error.message}`);
-                showError("Error rendering message. Please try again.");
-            }
-        }
-
-        function renderHistory() {
-            try {
-                chatHistory.innerHTML = "";
-                chatHistory.appendChild(backToTop);
-                let messages = currentTab === "history" ? conversation.slice().reverse() : starredMessages.slice().reverse();
-                if (searchInput.value) {
-                    const keyword = searchInput.value.toLowerCase();
-                    messages = messages.filter(msg => msg.content.toLowerCase().includes(keyword));
-                }
-                messages.forEach(msg => addToHistory(msg.role, msg.content, false));
-                setTimeout(() => {
-                    const loadingMessage = chatHistory.querySelector(".loading-message");
-                    if (loadingMessage) {
-                        loadingMessage.remove();
-                        logDebug("Forced removal of chat history loading message");
-                    }
-                }, 3000);
-                logDebug("Rendered chat history");
-            } catch (error) {
-                console.error("Error rendering history:", error);
-                logDebug(`Error rendering history: ${error.message}`);
-                showError("Error rendering chat history. Please try again.");
-                const loadingMessage = chatHistory.querySelector(".loading-message");
-                if (loadingMessage) loadingMessage.remove();
-            }
-        }
-
-        function extractCode(response) {
-            const codeMatch = response.match(/```[\s\S]*?```/g);
-            if (codeMatch) {
-                return codeMatch.map(code => code.replace(/```/g, "").trim()).join("\n\n");
-            }
-            return response;
-        }
-
-        function updateSidePanel(response) {
-            sidePanelContent.innerHTML = "";
-            const content = extractCode(response);
-            if (content !== response) {
-                const pre = document.createElement("pre");
-                pre.textContent = content;
-                sidePanelContent.appendChild(pre);
-            } else {
-                sidePanelContent.textContent = content;
-            }
-            sidePanel.classList.add("open");
-            logDebug("Updated side panel with response");
-        }
-
-        function showToast(message) {
-            const toast = document.createElement("div");
-            toast.className = "toast";
-            toast.setAttribute("role", "alert");
-            toast.textContent = message;
-            document.body.appendChild(toast);
-            setTimeout(() => { toast.remove(); }, 4000);
-            logDebug(`Toast shown: ${message}`);
+        function addToHistory(role, content) {
+            conversation.push({ role, content });
+            const messageDiv = document.createElement("div");
+            messageDiv.className = `chat-message ${role}`;
+            const contentDiv = document.createElement("div");
+            contentDiv.className = "chat-message-content";
+            contentDiv.innerHTML = content;
+            const timestampDiv = document.createElement("div");
+            timestampDiv.className = "chat-message-timestamp";
+            timestampDiv.textContent = formatTimestamp();
+            messageDiv.appendChild(contentDiv);
+            messageDiv.appendChild(timestampDiv);
+            chatHistory.insertBefore(messageDiv, chatHistory.firstChild);
+            chatHistory.scrollTop = 0;
         }
 
         function debounce(func, wait) {
@@ -429,118 +167,154 @@
             };
         }
 
-        async function testApiKey(apiKey) {
-            if (!apiKey) {
-                apiKeyValid = false;
-                apiKeyInput.classList.add("error");
-                apiKeyWarning.style.display = "block";
-                showToast("No API key provided. Please set a valid key.");
+        async function validateApiKey(apiKey, type) {
+            if (!apiKey) return false;
+            return true;
+        }
+
+        async function generateChatResponse(message) {
+            if (!chatApiKeyValid) {
+                addToHistory("assistant", "Please set a valid Chat API key.");
                 return;
             }
-            try {
-                const response = await fetch("https://api.openai.com/v1/chat/completions", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${apiKey}`
-                    },
-                    body: JSON.stringify({
-                        model: "gpt-3.5-turbo",
-                        messages: [{ role: "user", content: "ping" }],
-                        max_tokens: 3
-                    })
-                });
-                if (response.status === 401) {
-                    throw new Error("Invalid API key");
-                }
-                if (!response.ok) {
-                    throw new Error(`API error: ${response.statusText}`);
-                }
-                apiKeyValid = true;
-                apiKeyInput.classList.remove("error");
-                apiKeyWarning.style.display = "none";
-                showToast("API key is valid!");
-                logDebug("API key test successful");
-            } catch (error) {
-                apiKeyValid = false;
-                apiKeyInput.classList.add("error");
-                apiKeyWarning.style.display = "block";
-                showToast(`API key test failed: ${error.message}`);
-                logDebug(`API key test failed: ${error.message}`);
+            addToHistory("user", message);
+            const response = `Mock chat response for: ${message}`;
+            addToHistory("assistant", await safeMicromark(response));
+        }
+
+        async function generateVideo(prompt) {
+            if (!videoApiKeyValid) {
+                addToHistory("assistant", "Please set a valid Video API key.");
+                return;
+            }
+            addToHistory("user", `Generate a video: ${prompt}`);
+            const response = `Mock video generated: [Video URL Placeholder for "${prompt}"]`;
+            addToHistory("assistant", await safeMicromark(response));
+        }
+
+        async function generateRobloxScript(prompt) {
+            if (!robloxApiKeyValid) {
+                addToHistory("assistant", "Please set a valid Roblox API key.");
+                return;
+            }
+            addToHistory("user", `Generate a Roblox script: ${prompt}`);
+            const response = `Mock Roblox Lua script:\nlocal part = Instance.new("Part")\npart.Position = Vector3.new(0, 5, 0)\npart.Size = Vector3.new(5, 1, 5)\npart.Anchored = true\npart.Parent = game.Workspace`;
+            addToHistory("assistant", await safeMicromark(response));
+        }
+
+        async function handleFileUpload(file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const content = e.target.result;
+                filePreview.textContent = content.substring(0, 1000);
+                addToHistory("user", `Uploaded file: ${file.name}`);
+                addToHistory("assistant", `File content preview:\n${content.substring(0, 500)}`);
+            };
+            if (file.name.endsWith(".rblx")) {
+                reader.readAsText(file);
+            } else {
+                reader.readAsText(file);
             }
         }
 
-        const debouncedTestApiKey = debounce(testApiKey, 500);
+        sidebarToggle.onclick = () => {
+            sidebar.classList.toggle("open");
+        };
 
-        async function heartbeat() {
-            if (fallbackMode) return;
-            try {
-                const apiKey = userApiKey || DEFAULT_API_KEY;
-                if (!apiKey) return;
-                const response = await fetch("https://api.openai.com/v1/chat/completions", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${apiKey}`
-                    },
-                    body: JSON.stringify({
-                        model: "gpt-3.5-turbo",
-                        messages: [{ role: "user", content: "ping" }],
-                        max_tokens: 3
-                    })
-                });
-                if (response.status === 401) {
-                    apiKeyValid = false;
-                    apiKeyInput.classList.add("error");
-                    apiKeyWarning.style.display = "block";
-                    showToast("API key is invalid. Please update it.");
+        themeToggle.onchange = () => {
+            document.body.className = "";
+            if (themeToggle.value) document.body.classList.add(`${themeToggle.value}-mode`);
+        };
+
+        chatTheme.onchange = () => {
+            document.body.classList.remove("ocean-theme", "forest-theme");
+            if (chatTheme.value) document.body.classList.add(`${chatTheme.value}-theme`);
+        };
+
+        debugToggle.onclick = () => {
+            debugMode = !debugMode;
+            addToHistory("assistant", `Debug mode ${debugMode ? "enabled" : "disabled"}`);
+        };
+
+        focusToggle.onclick = () => {
+            document.body.classList.toggle("focus-mode");
+        };
+
+        contrastToggle.onclick = () => {
+            document.body.classList.toggle("high-contrast");
+        };
+
+        quickReply.onchange = () => {
+            if (quickReply.value) {
+                userInput.value = quickReply.value;
+                quickReply.value = "";
+                generateChatResponse(userInput.value);
+            }
+        };
+
+        const debouncedInputHandler = debounce(() => {
+            const words = userInput.value.trim().split(/\s+/).filter(Boolean).length;
+            wordCounter.textContent = `${words} words`;
+        }, 300);
+
+        userInput.addEventListener("input", debouncedInputHandler);
+
+        userInput.addEventListener("keypress", (e) => {
+            if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                const message = userInput.value.trim();
+                if (message) {
+                    if (message.toLowerCase().startsWith("generate a video")) {
+                        generateVideo(message);
+                    } else if (message.toLowerCase().startsWith("generate a roblox script")) {
+                        generateRobloxScript(message);
+                    } else {
+                        generateChatResponse(message);
+                    }
+                    userInput.value = "";
+                }
+            }
+        });
+
+        sendBtn.onclick = () => {
+            const message = userInput.value.trim();
+            if (message) {
+                if (message.toLowerCase().startsWith("generate a video")) {
+                    generateVideo(message);
+                } else if (message.toLowerCase().startsWith("generate a roblox script")) {
+                    generateRobloxScript(message);
                 } else {
-                    apiKeyValid = true;
-                    apiKeyInput.classList.remove("error");
-                    apiKeyWarning.style.display = "none";
+                    generateChatResponse(message);
                 }
-                logDebug("Heartbeat successful");
-            } catch (error) {
-                apiKeyValid = false;
-                apiKeyInput.classList.add("error");
-                apiKeyWarning.style.display = "block";
-                showToast("API key check failed. Please update it.");
-                logDebug(`Heartbeat failed: ${error.message}`);
-            }
-        }
-
-        const debouncedHeartbeat = debounce(heartbeat, 500);
-        setInterval(debouncedHeartbeat, 30000);
-
-        setInterval(() => { requestCount = 0; }, 60000);
-
-        setInterval(() => {
-            if (chatChanged) {
-                const chatId = new URLSearchParams(window.location.search).get("chat") || Date.now();
-                safeLocalStorageSet(`chat_${chatId}`, JSON.stringify(conversation));
-                chatChanged = false;
-                logDebug("Auto-saved chat");
-            }
-        }, 30000);
-
-        async function generateResponse(message, isRegenerate = false, isSummary = false) {
-            if (!apiKeyValid && !userApiKey && !DEFAULT_API_KEY) {
-                showResponse();
-                responseText.textContent = "No valid API key set. Please provide a valid OpenAI API key to continue.";
-                addToHistory("assistant", responseText.textContent);
-                updateSidePanel(responseText.textContent);
-                loadingSpinner.style.display = "none";
-                loadingBar.style.display = "none";
-                typingIndicator.style.display = "none";
                 userInput.value = "";
-                renderHistory();
-                return;
             }
-            if (fallbackMode) {
-                showResponse();
-                responseText.textContent = "Fallback Mode: This is a mock response since the API key is invalid. Please update your API key to get real responses.";
-                addToHistory("assistant", responseText.textContent);
-                updateSidePanel(responseText.textContent);
-                loadingSpinner.style.display = "none";
-                loadingBar.style.display = "none";
-                typingIndicator.style.display
+        };
+
+        chatApiKeySubmit.onclick = async () => {
+            chatApiKey = chatApiKeyInput.value.trim();
+            chatApiKeyValid = await validateApiKey(chatApiKey, "chat");
+            chatApiKeyWarning.style.display = chatApiKeyValid ? "none" : "block";
+            if (chatApiKeyValid) addToHistory("assistant", "Chat API key set successfully.");
+        };
+
+        videoApiKeySubmit.onclick = async () => {
+            videoApiKey = videoApiKeyInput.value.trim();
+            videoApiKeyValid = await validateApiKey(videoApiKey, "video");
+            videoApiKeyWarning.style.display = videoApiKeyValid ? "none" : "block";
+            if (videoApiKeyValid) addToHistory("assistant", "Video API key set successfully.");
+        };
+
+        robloxApiKeySubmit.onclick = async () => {
+            robloxApiKey = robloxApiKeyInput.value.trim();
+            robloxApiKeyValid = await validateApiKey(robloxApiKey, "roblox");
+            robloxApiKeyWarning.style.display = robloxApiKeyValid ? "none" : "block";
+            if (robloxApiKeyValid) addToHistory("assistant", "Roblox API key set successfully.");
+        };
+
+        fileInput.onchange = (e) => {
+            const file = e.target.files[0];
+            if (file) handleFileUpload(file);
+        };
+    </script>
+</body>
+</html>
