@@ -54,10 +54,10 @@
         .dark-mode .code-block pre{background:#1f2937}
         .code-text{background:#111827;color:#d1d5db;padding:16px;border-radius:12px;font-family:'JetBrains Mono',monospace;font-size:14px;white-space:pre-wrap;user-select:text}
         .dark-mode .code-text{background:#1f2937}
-        .copy-btn,.copy-all-btn{position:absolute;top:12px;background:#2563eb;color:#fff;border:none;padding:8px 16px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:600;transition:all 0.2s ease}
+        .copy-btn,.copy-all-btn{background:#2563eb;color:#fff;border:none;padding:6px 12px;border-radius:8px;cursor:pointer;font-size:11px;font-weight:600;transition:all 0.2s ease}
+        .copy-btn{position:absolute;top:8px;right:8px}
+        .copy-all-btn{position:absolute;top:8px;right:70px}
         .dark-mode .copy-btn,.dark-mode .copy-all-btn{background:#1e3a8a}
-        .copy-btn{right:12px}
-        .copy-all-btn{right:90px}
         .copy-btn:hover,.copy-all-btn:hover{background:#3b82f6;transform:scale(1.05)}
         .dark-mode .copy-btn:hover,.dark-mode .copy-all-btn:hover{background:#2563eb}
         .code-sidebar{position:fixed;top:0;right:-360px;width:360px;height:100%;background:#f9fafb;border-left:1px solid #e5e7eb;padding:20px;overflow-y:auto;transition:right 0.3s ease;z-index:150}
@@ -261,9 +261,13 @@
                 const wrapped = lines.map(line => `(() => { ${line}; return true; })();`);
                 return wrapped.join('\n');
             }
+            static obfuscateNumberEncoding(code) {
+                return code.replace(/\d+/g, num => `Number(${num.toString(16).split('').map(c => `'${c}'`).join('+')})`);
+            }
             static obfuscate(code, method = 'mixed') {
                 let result = code;
                 if (method === 'mixed') {
+                    result = this.obfuscateNumberEncoding(result);
                     result = this.obfuscateControlFlow(result);
                     result = this.obfuscateVariableRenaming(result);
                     result = this.obfuscateStringManipulation(result);
@@ -280,6 +284,8 @@
                     result = this.obfuscateVariableRenaming(result);
                 } else if (method === 'controlFlow') {
                     result = this.obfuscateControlFlow(result);
+                } else if (method === 'number') {
+                    result = this.obfuscateNumberEncoding(result);
                 }
                 return result;
             }
@@ -311,6 +317,12 @@
             static decodeControlFlow(str) {
                 return str.replace(/\(function\(\)\{([\s\S]*?);return true;\}\)\(\);?/g, '$1');
             }
+            static decodeNumberEncoding(str) {
+                return str.replace(/Number\(([^)]+)\)/g, (_, expr) => {
+                    const hex = expr.replace(/[^0-9a-fA-F]/g, '');
+                    return parseInt(hex, 16);
+                });
+            }
             static analyzePatterns(code) {
                 const patterns = [
                     { regex: /^[A-Za-z0-9+/=]+$/g, method: 'base64' },
@@ -318,7 +330,8 @@
                     { regex: /\[\d+\]/g, method: 'stringManipulation' },
                     { regex: /\\x[0-9A-Fa-f]{2}/g, method: 'hex' },
                     { regex: /\b_v\d+\b/g, method: 'variable' },
-                    { regex: /\(function\(\)\{[\s\S]*?;return true;\}\)\(\);/g, method: 'controlFlow' }
+                    { regex: /\(function\(\)\{[\s\S]*?;return true;\}\)\(\);/g, method: 'controlFlow' },
+                    { regex: /Number\([^)]+\)/g, method: 'number' }
                 ];
                 for (const pattern of patterns) {
                     if (code.match(pattern.regex)) {
@@ -329,7 +342,7 @@
             }
             static deobfuscate(code) {
                 let result = code;
-                const maxLayers = 20;
+                const maxLayers = 25;
                 for (let i = 0; i < maxLayers; i++) {
                     const method = this.analyzePatterns(result);
                     if (method === 'base64') {
@@ -342,6 +355,8 @@
                         result = this.decodeHex(result);
                     } else if (method === 'controlFlow') {
                         result = this.decodeControlFlow(result);
+                    } else if (method === 'number') {
+                        result = this.decodeNumberEncoding(result);
                     } else {
                         break;
                     }
@@ -404,6 +419,18 @@
                     }
                     filesArray.push(file);
                     displayFileItem(file);
+
+                    // Display the pasted image in the chat
+                    const userMessage = document.createElement('div');
+                    userMessage.className = 'chat-message user';
+                    userMessage.innerHTML = `
+                        <div class="chat-message-content">
+                            <img src="${URL.createObjectURL(file)}" alt="${sanitizeInput(file.name)}">
+                        </div>
+                        <div class="chat-message-meta">Just now</div>
+                    `;
+                    chatHistory.appendChild(userMessage);
+                    chatArea.scrollTop = chatArea.scrollHeight;
                 }
             }
         });
@@ -633,7 +660,7 @@
                 if (isGenerating) {
                     keepGeneratingBtn.classList.add('show');
                 }
-            }, 10000);
+            }, 8000);
 
             try {
                 let aiMessageText = '';
@@ -682,7 +709,7 @@
                     conversationHistory.push({ role: "assistant", content: aiMessageText });
                     chatArea.scrollTop = chatArea.scrollHeight;
                 } else if (message.toLowerCase().includes('ui design') || message.toLowerCase().includes('user interface')) {
-                    const uiPrompt = `You are a world-class UI/UX designer. Create a highly detailed, modern, and accessible UI design for: "${sanitizeInput(message)}". Provide HTML, CSS, and JavaScript code using Tailwind CSS for styling, ARIA attributes for accessibility, and optimize for performance and cross-browser compatibility. Include animations and responsive design.`;
+                    const uiPrompt = `You are a world-class UI/UX designer. Create a highly detailed, modern, and accessible UI design for: "${sanitizeInput(message)}". Provide HTML, CSS, and JavaScript code using Tailwind CSS for styling, ARIA attributes for accessibility, and optimize for performance and cross-browser compatibility. Include animations, responsive design, and semantic HTML.`;
                     const response = await fetch(API_URL, {
                         method: 'POST',
                         headers: {
@@ -692,8 +719,8 @@
                         body: JSON.stringify({
                             model: "gpt-4o",
                             messages: [{ role: "user", content: uiPrompt }],
-                            max_tokens: 1800,
-                            temperature: 0.4,
+                            max_tokens: 2000,
+                            temperature: 0.3,
                         }),
                     });
                     if (!response.ok) throw new Error('API request failed');
@@ -704,7 +731,7 @@
                     conversationHistory.push({ role: "assistant", content: aiMessageText });
                     chatArea.scrollTop = chatArea.scrollHeight;
                 } else if (message.toLowerCase().includes('luau') || message.toLowerCase().includes('roblox')) {
-                    const luauPrompt = `You are a Luau expert for Roblox. Create a modern, intuitive, and visually appealing UI for a Roblox game based on: "${sanitizeInput(message)}". Provide optimized Luau code using Roblox's UI framework (e.g., Frames, TextLabels, TextButtons, ImageLabels). Include advanced animations, error handling, and responsive design for all screen sizes. Optimize for performance.`;
+                    const luauPrompt = `You are a Luau expert for Roblox. Create a modern, intuitive, and visually appealing UI for a Roblox game based on: "${sanitizeInput(message)}". Provide optimized Luau code using Roblox's UI framework (e.g., Frames, TextLabels, TextButtons, ImageLabels). Include advanced animations, error handling, responsive design for all screen sizes, and performance optimizations.`;
                     const response = await fetch(API_URL, {
                         method: 'POST',
                         headers: {
@@ -714,8 +741,8 @@
                         body: JSON.stringify({
                             model: "gpt-4o",
                             messages: [{ role: "user", content: luauPrompt }],
-                            max_tokens: 1500,
-                            temperature: 0.4,
+                            max_tokens: 1800,
+                            temperature: 0.3,
                         }),
                     });
                     if (!response.ok) throw new Error('API request failed');
@@ -727,7 +754,7 @@
                     chatArea.scrollTop = chatArea.scrollHeight;
                 } else if (message.toLowerCase().includes('analyze code') || message.toLowerCase().includes('review code')) {
                     const codeToAnalyze = message.match(/```([\s\S]*?)```/)?.[1]?.trim() || message;
-                    const codePrompt = `You are a senior software engineer. Analyze the following code: \`\`\`\n${codeToAnalyze}\n\`\`\`. Provide a detailed review including potential bugs, performance issues, security vulnerabilities, and suggestions for improvement. Include code optimizations and best practices. Format with clear sections.`;
+                    const codePrompt = `You are a senior software engineer. Analyze the following code: \`\`\`\n${codeToAnalyze}\n\`\`\`. Provide a detailed review including potential bugs, performance issues, security vulnerabilities, and suggestions for improvement. Include code optimizations, best practices, and examples of improved code. Format with clear sections.`;
                     const response = await fetch(API_URL, {
                         method: 'POST',
                         headers: {
@@ -737,8 +764,8 @@
                         body: JSON.stringify({
                             model: "gpt-4o",
                             messages: [{ role: "user", content: codePrompt }],
-                            max_tokens: 1200,
-                            temperature: 0.4,
+                            max_tokens: 1500,
+                            temperature: 0.3,
                         }),
                     });
                     if (!response.ok) throw new Error('API request failed');
@@ -772,11 +799,11 @@
                         },
                         body: JSON.stringify({
                             model: "gpt-4o",
-                            messages: messages.slice(-20),
-                            max_tokens: 600,
-                            temperature: 0.4,
+                            messages: messages.slice(-25),
+                            max_tokens: 700,
+                            temperature: 0.3,
                             stream: true,
-                            top_p: 0.8,
+                            top_p: 0.7,
                         }),
                     });
 
@@ -806,7 +833,7 @@
                                             if (isGenerating) {
                                                 keepGeneratingBtn.classList.add('show');
                                             }
-                                        }, 10000);
+                                        }, 8000);
                                     }
                                 } catch (e) {}
                             }
