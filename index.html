@@ -4,16 +4,95 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VerbiFlow - AI Chat</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Mono&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
     <style>
-        *{margin:0;padding:0;box-sizing:border-box}body{background:#f5f7fa;font-family:Roboto,sans-serif;color:#333;min-height:100vh;display:flex;justify-content:center;padding:10px}.container{max-width:900px;width:100%;background:#fff;border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,.1);overflow:hidden;display:flex;flex-direction:column}.nav-bar{background:#20c997;padding:12px;text-align:right;display:flex;gap:10px;justify-content:flex-end}.nav-btn{background:#fff;color:#20c997;border:none;padding:8px 16px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:500}.nav-btn:hover{background:#e0e0e0}.header{background:#fff;padding:15px;text-align:center;border-bottom:1px solid #e0e0e0}.logo{font-size:24px;font-weight:700;color:#20c997}.chat-area{flex:1;padding:20px;overflow-y:auto;max-height:70vh;min-height:50vh;background:#fafafa;scroll-behavior:smooth}.chat-history{display:flex;flex-direction:column;gap:15px}.chat-message{display:flex;flex-direction:column;gap:6px;padding:10px;border-radius:12px;max-width:85%;animation:fadeIn .3s ease}.chat-message.user{align-self:flex-end;background:#20c997;color:#fff}.chat-message.ai{align-self:flex-start;background:#d0d0d0;color:#333}.chat-message-content{padding:12px;border-radius:12px;font-size:16px;line-height:1.5}.chat-message-meta{font-size:12px;color:#888;margin-top:5px}.chat-message img{max-width:100%;border-radius:8px;margin-top:10px;cursor:pointer}.code-block{position:relative;margin:10px 0}.code-block pre{background:#2d2d2d;color:#fff;padding:15px;border-radius:8px;overflow-x:auto;font-family:'Roboto Mono',monospace;font-size:14px}.code-text{background:#2d2d2d;color:#fff;padding:15px;border-radius:8px;font-family:'Roboto Mono',monospace;font-size:14px;white-space:pre-wrap;user-select:text}.copy-btn,.copy-all-btn{position:absolute;top:10px;background:#20c997;color:#fff;border:none;padding:6px 12px;border-radius:5px;cursor:pointer;font-size:12px}.copy-btn{right:10px}.copy-all-btn{right:80px}.copy-btn:hover,.copy-all-btn:hover{background:#18a77b}.file-upload-container{padding:15px;border-top:1px solid #e0e0e0;background:#fff}.file-actions{display:flex;gap:10px;align-items:center}.file-input-label{background:#20c997;color:#fff;padding:10px 16px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:500;min-height:40px}.file-input{display:none}.file-clear-btn{background:#ff4d4d;color:#fff;padding:10px 16px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:500;border:none;min-height:40px}.file-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:10px}.file-item{display:flex;align-items:center;gap:10px;background:#f0f0f0;padding:8px;border-radius:8px;cursor:pointer}.file-item:hover{background:#e0e0e0}.file-item-name{flex:1;font-size:14px;color:#333;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.file-item-details{font-size:12px;color:#888}.file-preview-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.8);z-index:100;padding:15px;justify-content:center;align-items:center}.file-preview-modal.open{display:flex}.file-preview-content{background:#fff;border-radius:12px;padding:15px;max-width:90%;max-height:90%;overflow:auto;color:#333;font-size:14px}.file-preview-content img{max-width:80% !important}.file-preview-close{background:#ff4d4d;color:#fff;border:none;border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;cursor:pointer;position:absolute;top:15px;right:15px}.file-preview-close svg{width:18px;height:18px;fill:#fff}.input-container{display:flex;align-items:center;padding:15px;border-top:1px solid #e0e0e0;background:#fff;gap:10px;position:sticky;bottom:0;z-index:10}.user-input{flex:1;padding:12px;border:1px solid #e0e0e0;border-radius:8px;font-size:16px;outline:none;resize:none;min-height:40px;max-height:150px}.user-input:focus{border-color:#20c997}.send-btn{background:#20c997;border:none;border-radius:8px;padding:12px 20px;cursor:pointer;color:#fff;font-size:14px;font-weight:500;min-height:40px}.send-btn:hover{background:#18a77b}.send-btn:disabled{background:#ccc;cursor:not-allowed}.loading-spinner{display:none;margin:10px auto;width:30px;height:30px;border:4px solid #20c997;border-top:4px solid transparent;border-radius:50%;animation:spin 1s linear infinite}.typing-indicator{display:none;font-size:14px;color:#888;margin:10px auto;text-align:center}.typing-indicator span{display:inline-block;animation:dotPulse 1.5s infinite ease-in-out}.typing-indicator span:nth-child(2){animation-delay:.2s}.typing-indicator span:nth-child(3){animation-delay:.4s}@keyframes fadeIn{0%{opacity:0;transform:translateY(10px)}100%{opacity:1;transform:translateY(0)}}@keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}@keyframes dotPulse{0%,80%,100%{transform:scale(1);opacity:.5}40%{transform:scale(1.5);opacity:1}}@media (max-width:600px){.container{max-width:100%;border-radius:0;box-shadow:none}.nav-bar{padding:10px}.nav-btn{font-size:12px;padding:6px 12px}.header{padding:12px}.logo{font-size:20px}.chat-area{padding:15px;min-height:40vh;max-height:65vh}.chat-message-content{font-size:14px}.chat-message img{max-width:80%}.input-container{padding:10px}.user-input{font-size:14px;min-height:36px}.send-btn{padding:10px 16px;min-height:36px}.file-input-label,.file-clear-btn{font-size:12px;padding:8px 14px;min-height:36px}.file-preview-content img{max-width:70% !important}}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{background:linear-gradient(135deg,#f0f4f8,#e2e8f0);font-family:Inter,sans-serif;color:#1a202c;min-height:100vh;display:flex;justify-content:center;padding:16px}
+        .container{max-width:960px;width:100%;background:#fff;border-radius:20px;box-shadow:0 8px 32px rgba(0,0,0,0.1);overflow:hidden;display:flex;flex-direction:column;transition:all 0.3s ease}
+        .nav-bar{background:linear-gradient(90deg,#2b6cb0,#3182ce);padding:12px;display:flex;gap:12px;justify-content:flex-end;align-items:center}
+        .nav-btn{background:#fff;color:#2b6cb0;border:none;padding:10px 20px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;transition:all 0.2s ease;outline:none}
+        .nav-btn:hover{transform:scale(1.05);background:#f7fafc}
+        .nav-btn:active{transform:scale(0.95)}
+        .discord-btn{background:#7289da;color:#fff}
+        .discord-btn:hover{background:#677bc4}
+        .header{background:#fff;padding:20px;text-align:center;border-bottom:1px solid #e2e8f0}
+        .logo{font-size:28px;font-weight:700;color:#2b6cb0;letter-spacing:-0.5px}
+        .chat-area{flex:1;padding:24px;overflow-y:auto;max-height:70vh;min-height:50vh;background:#f7fafc;scroll-behavior:smooth}
+        .chat-history{display:flex;flex-direction:column;gap:16px}
+        .chat-message{display:flex;flex-direction:column;gap:8px;padding:12px;border-radius:16px;max-width:80%;animation:slideIn 0.3s ease}
+        .chat-message.user{align-self:flex-end;background:#2b6cb0;color:#fff}
+        .chat-message.ai{align-self:flex-start;background:#edf2f7;color:#1a202c}
+        .chat-message-content{padding:14px;border-radius:16px;font-size:15px;line-height:1.6;word-break:break-word}
+        .chat-message-meta{font-size:12px;color:#718096;margin-top:4px;opacity:0.7}
+        .chat-message img{max-width:100%;border-radius:12px;margin-top:12px;cursor:pointer;transition:transform 0.2s ease}
+        .chat-message img:hover{transform:scale(1.02)}
+        .code-block{position:relative;margin:12px 0;border-radius:12px;overflow:hidden}
+        .code-block pre{background:#1a202c;color:#e2e8f0;padding:16px;border-radius:12px;overflow-x:auto;font-family:'JetBrains Mono',monospace;font-size:14px;line-height:1.5}
+        .code-text{background:#1a202c;color:#e2e8f0;padding:16px;border-radius:12px;font-family:'JetBrains Mono',monospace;font-size:14px;white-space:pre-wrap;user-select:text}
+        .copy-btn,.copy-all-btn{position:absolute;top:12px;background:#2b6cb0;color:#fff;border:none;padding:8px 16px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:600;transition:all 0.2s ease}
+        .copy-btn{right:12px}
+        .copy-all-btn{right:90px}
+        .copy-btn:hover,.copy-all-btn:hover{background:#3182ce;transform:scale(1.05)}
+        .file-upload-container{padding:16px;border-top:1px solid #e2e8f0;background:#fff}
+        .file-actions{display:flex;gap:12px;align-items:center}
+        .file-input-label{background:#2b6cb0;color:#fff;padding:12px 20px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;min-height:44px;transition:all 0.2s ease}
+        .file-input-label:hover{transform:scale(1.05)}
+        .file-input{display:none}
+        .file-clear-btn{background:#e53e3e;color:#fff;padding:12px 20px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;border:none;min-height:44px;transition:all 0.2s ease}
+        .file-clear-btn:hover{transform:scale(1.05);background:#c53030}
+        .file-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:12px}
+        .file-item{display:flex;align-items:center;gap:12px;background:#edf2f7;padding:10px;border-radius:12px;cursor:pointer;transition:all 0.2s ease}
+        .file-item:hover{background:#e2e8f0;transform:scale(1.02)}
+        .file-item-name{flex:1;font-size:14px;color:#1a202c;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+        .file-item-details{font-size:12px;color:#718096}
+        .file-preview-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:100;padding:16px;justify-content:center;align-items:center}
+        .file-preview-modal.open{display:flex}
+        .file-preview-content{background:#fff;border-radius:16px;padding:20px;max-width:90%;max-height:90%;overflow:auto;color:#1a202c;font-size:14px}
+        .file-preview-content img{max-width:80% !important}
+        .file-preview-close{background:#e53e3e;color:#fff;border:none;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;position:absolute;top:20px;right:20px;transition:all 0.2s ease}
+        .file-preview-close:hover{transform:scale(1.1);background:#c53030}
+        .file-preview-close svg{width:20px;height:20px;fill:#fff}
+        .input-container{display:flex;align-items:flex-end;padding:16px;border-top:1px solid #e2e8f0;background:#fff;gap:12px;position:sticky;bottom:0;z-index:10}
+        .user-input{flex:1;padding:14px;border:1px solid #e2e8f0;border-radius:10px;font-size:15px;outline:none;resize:none;min-height:44px;max-height:160px;background:#fff;color:#1a202c;transition:all 0.2s ease}
+        .user-input:focus{border-color:#2b6cb0;box-shadow:0 0 0 3px rgba(43,108,176,0.1)}
+        .send-btn{background:#2b6cb0;border:none;border-radius:10px;padding:12px 24px;cursor:pointer;color:#fff;font-size:14px;font-weight:600;min-height:44px;transition:all 0.2s ease}
+        .send-btn:hover{transform:scale(1.05);background:#3182ce}
+        .send-btn:disabled{background:#a0aec0;cursor:not-allowed}
+        .loading-spinner{display:none;margin:12px auto;width:32px;height:32px;border:4px solid #2b6cb0;border-top:4px solid transparent;border-radius:50%;animation:spin 0.8s linear infinite}
+        .typing-indicator{display:none;font-size:14px;color:#718096;margin:12px auto;text-align:center}
+        .typing-indicator span{display:inline-block;animation:dotPulse 1.4s infinite ease-in-out}
+        .typing-indicator span:nth-child(2){animation-delay:0.2s}
+        .typing-indicator span:nth-child(3){animation-delay:0.4s}
+        .notification{position:fixed;top:20px;right:20px;background:#2d3748;color:#fff;padding:12px 24px;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,0.2);opacity:0;transform:translateY(-20px);transition:all 0.3s ease;font-size:14px;font-weight:500;z-index:200}
+        .notification.show{opacity:1;transform:translateY(0)}
+        @keyframes slideIn{0%{opacity:0;transform:translateY(20px)}100%{opacity:1;transform:translateY(0)}}
+        @keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+        @keyframes dotPulse{0%,80%,100%{transform:scale(1);opacity:0.5}40%{transform:scale(1.5);opacity:1}}
+        @media (max-width:640px){
+            .container{max-width:100%;border-radius:12px;padding:8px}
+            .nav-bar{padding:10px;gap:8px}
+            .nav-btn{font-size:13px;padding:8px 16px}
+            .header{padding:16px}
+            .logo{font-size:24px}
+            .chat-area{padding:16px;min-height:40vh;max-height:65vh}
+            .chat-message{max-width:90%}
+            .chat-message-content{font-size:14px}
+            .chat-message img{max-width:85%}
+            .input-container{padding:12px;gap:8px}
+            .user-input{font-size:14px;min-height:40px}
+            .send-btn{padding:10px 20px;min-height:40px}
+            .file-input-label,.file-clear-btn{font-size:13px;padding:10px 16px;min-height:40px}
+            .file-preview-content img{max-width:85% !important}
+            .notification{top:16px;right:16px;padding:10px 20px;font-size:13px}
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="nav-bar">
             <button class="nav-btn" id="clearChatBtn">Clear Chat</button>
-            <button class="nav-btn" id="copyCodeBtn" style="display:none;">Copy Code</button>
+            <button class="nav-btn" id="copyCodeBtn">Copy Code</button>
+            <button class="nav-btn discord-btn" id="discordBtn">Discord Server</button>
         </div>
         <div class="header">
             <div class="logo">VerbiFlow</div>
@@ -21,7 +100,7 @@
         <div class="chat-area" id="chatArea">
             <div class="chat-history" id="chatHistory">
                 <div class="chat-message ai">
-                    <div class="chat-message-content">Hello! I'm VerbiFlow, your advanced AI assistant. I can read and generate images, answer questions, and deobfuscate complex code. Try asking for code deobfuscation or pasting an image!</div>
+                    <div class="chat-message-content">Hello! I'm VerbiFlow, your AI assistant. I can read and generate images, answer questions, and deobfuscate complex code. Try asking for code deobfuscation or pasting an image!</div>
                     <div class="chat-message-meta">Just now</div>
                 </div>
             </div>
@@ -50,11 +129,13 @@
             </button>
             <div class="file-preview-content" id="filePreviewContent"></div>
         </div>
+        <div class="notification" id="notification">The Discord invite link has been copied to your clipboard.</div>
     </div>
     <script defer>
         const API_KEY = "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";
         const API_URL = "https://api.openai.com/v1/chat/completions";
         const IMAGE_GEN_API_URL = "https://api.openai.com/v1/images/generations";
+        const DISCORD_INVITE = "https://discord.gg/rCTRQvD4TP";
         const chatHistory = document.getElementById('chatHistory');
         const userInput = document.getElementById('userInput');
         const sendBtn = document.getElementById('sendBtn');
@@ -70,8 +151,10 @@
         const chatArea = document.getElementById('chatArea');
         const clearChatBtn = document.getElementById('clearChatBtn');
         const copyCodeBtn = document.getElementById('copyCodeBtn');
+        const discordBtn = document.getElementById('discordBtn');
+        const notification = document.getElementById('notification');
         let filesArray = [];
-        let conversationHistory = [{ role: "assistant", content: "Hello! I'm VerbiFlow, your advanced AI assistant. I can read and generate images, answer questions, and deobfuscate complex code. Try asking for code deobfuscation or pasting an image!" }];
+        let conversationHistory = [{ role: "assistant", content: "Hello! I'm VerbiFlow, your AI assistant. I can read and generate images, answer questions, and deobfuscate complex code. Try asking for code deobfuscation or pasting an image!" }];
         let latestCodeBlocks = [];
 
         class Deobfuscator {
@@ -82,17 +165,14 @@
                     return str;
                 }
             }
-
             static decodeXOR(str, key = 42) {
                 return String.fromCharCode(...str.split('').map((c, i) => c.charCodeAt(0) ^ (key + i % 10)));
             }
-
             static decodeStringManipulation(str) {
                 let result = str.replace(/\[(\d+)\]/g, (_, num) => String.fromCharCode(parseInt(num)));
                 result = result.split('').reverse().join('');
                 return result;
             }
-
             static analyzePatterns(code) {
                 const patterns = [
                     { regex: /^[A-Za-z0-9+/=]+$/g, method: 'base64' },
@@ -106,7 +186,6 @@
                 }
                 return 'unknown';
             }
-
             static deobfuscate(code) {
                 let result = code;
                 const maxLayers = 5;
@@ -126,9 +205,21 @@
             }
         }
 
+        function showNotification() {
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        discordBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText(DISCORD_INVITE);
+            showNotification();
+        });
+
         userInput.addEventListener('input', () => {
             userInput.style.height = 'auto';
-            userInput.style.height = `${Math.min(userInput.scrollHeight, 150)}px`;
+            userInput.style.height = `${Math.min(userInput.scrollHeight, 160)}px`;
         });
 
         userInput.addEventListener('paste', async (e) => {
@@ -150,7 +241,7 @@
         fileInput.addEventListener('change', handleFileUpload);
         fileUploadContainer.addEventListener('dragover', (e) => {
             e.preventDefault();
-            fileUploadContainer.style.background = '#e0e0e0';
+            fileUploadContainer.style.background = '#e2e8f0';
         });
         fileUploadContainer.addEventListener('dragleave', () => {
             fileUploadContainer.style.background = '#fff';
@@ -222,24 +313,25 @@
         clearChatBtn.addEventListener('click', () => {
             chatHistory.innerHTML = `
                 <div class="chat-message ai">
-                    <div class="chat-message-content">Hello! I'm VerbiFlow, your advanced AI assistant. I can read and generate images, answer questions, and deobfuscate complex code. Try asking for code deobfuscation or pasting an image!</div>
+                    <div class="chat-message-content">Hello! I'm VerbiFlow, your AI assistant. I can read and generate images, answer questions, and deobfuscate complex code. Try asking for code deobfuscation or pasting an image!</div>
                     <div class="chat-message-meta">Just now</div>
                 </div>
             `;
-            conversationHistory = [{ role: "assistant", content: "Hello! I'm VerbiFlow, your advanced AI assistant. I can read and generate images, answer questions, and deobfuscate complex code. Try asking for code deobfuscation or pasting an image!" }];
+            conversationHistory = [{ role: "assistant", content: "Hello! I'm VerbiFlow, your AI assistant. I can read and generate images, answer questions, and deobfuscate complex code. Try asking for code deobfuscation or pasting an image!" }];
             filesArray = [];
             fileList.innerHTML = '';
             fileClearBtn.style.display = 'none';
             userInput.value = '';
             userInput.style.height = 'auto';
             chatArea.scrollTop = 0;
-            copyCodeBtn.style.display = 'none';
+            copyCodeBtn.style.display = 'block';
             latestCodeBlocks = [];
         });
 
         copyCodeBtn.addEventListener('click', () => {
             if (latestCodeBlocks.length > 0) {
                 navigator.clipboard.writeText(latestCodeBlocks.join('\n\n'));
+                showNotification('Code copied to clipboard.');
             }
         });
 
@@ -260,7 +352,7 @@
             `;
             chatHistory.appendChild(errorMessage);
             chatArea.scrollTop = chatArea.scrollHeight;
-            copyCodeBtn.style.display = 'none';
+            copyCodeBtn.style.display = 'block';
             latestCodeBlocks = [];
         }
 
@@ -369,6 +461,26 @@
                     }
                     conversationHistory.push({ role: "assistant", content: aiMessageText });
                     chatArea.scrollTop = chatArea.scrollHeight;
+                } else if (message.toLowerCase().includes('luau') || message.toLowerCase().includes('roblox')) {
+                    const luauPrompt = `You are an expert in Luau, the scripting language used in Roblox. Design a clean, modern, and delightful UI for a Roblox game based on the following user request: "${message}". Provide the Luau code with a focus on creating an intuitive and visually appealing UI using Roblox's UI framework (e.g., Frames, TextLabels, TextButtons, etc.). Include comments for clarity and ensure the code is optimized for performance.`;
+                    const response = await fetch(API_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${API_KEY}`,
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            model: "gpt-4o-mini",
+                            messages: [{ role: "user", content: luauPrompt }],
+                            max_tokens: 300,
+                        }),
+                    });
+                    if (!response.ok) throw new Error('API request failed');
+                    const data = await response.json();
+                    aiMessageText = data.choices[0].message.content;
+                    aiMessage.querySelector('.chat-message-content').innerHTML = formatMessage(aiMessageText, aiMessage);
+                    conversationHistory.push({ role: "assistant", content: aiMessageText });
+                    chatArea.scrollTop = chatArea.scrollHeight;
                 } else {
                     const messages = [...conversationHistory];
                     if (filesArray.some(file => file.type.startsWith('image/'))) {
@@ -418,7 +530,7 @@
                                     if (content) {
                                         aiMessageText += content;
                                         updateCounter++;
-                                        if (updateCounter % 3 === 0) {
+                                        if (updateCounter % 2 === 0) {
                                             aiMessage.querySelector('.chat-message-content').innerHTML = formatMessage(aiMessageText, aiMessage);
                                             chatArea.scrollTop = chatArea.scrollHeight;
                                         }
