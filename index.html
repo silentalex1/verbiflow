@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; connect-src 'self' https://api.openai.com ws://*; frame-src 'none'; media-src 'self' data:;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; connect-src 'self' https://api.openai.com ws://*; frame-src 'none'; media-src 'self' data: blob:;">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta name="robots" content="noindex, nofollow">
@@ -134,6 +134,20 @@
         .notification.show{opacity:1;transform:translateY(0);}
         .notification.success{background:#1e40af;color:#fff;}
         .notification.error{background:#dc2626;color:#fff;}
+        .permission-modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.85);z-index:500;display:none;justify-content:center;align-items:center;}
+        .permission-modal.open{display:flex;}
+        .permission-content{background:#fff;border-radius:24px;padding:32px;max-width:500px;text-align:center;color:#0f172a;}
+        .dark-mode .permission-content{background:#1e293b;color:#e2e8f0;}
+        .permission-content h2{font-size:24px;margin-bottom:16px;}
+        .permission-content p{font-size:16px;margin-bottom:24px;}
+        .permission-btn{background:#1e40af;color:#fff;padding:12px 24px;border-radius:16px;border:none;cursor:pointer;font-size:16px;font-weight:600;margin:0 8px;}
+        .dark-mode .permission-btn{background:#1e3a8a;}
+        .permission-btn:hover{transform:scale(1.06);background:#3b82f6;}
+        .dark-mode .permission-btn:hover{background:#2563eb;}
+        .permission-btn.deny{background:#dc2626;}
+        .dark-mode .permission-btn.deny{background:#b91c1c;}
+        .permission-btn.deny:hover{background:#ef4444;}
+        .dark-mode .permission-btn.deny:hover{background:#dc2626;}
         @keyframes slideIn{0%{opacity:0;transform:translateY(28px);}100%{opacity:1;transform:translateY(0);}}
         @keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
         @keyframes dotPulse{0%,80%,100%{transform:scale(1);opacity:.6;}40%{transform:scale(1.5);opacity:1;}}
@@ -157,6 +171,10 @@
             .file-preview-content img,.file-preview-content video{max-width:90% !important;}
             .notification{top:24px;right:24px;padding:14px 28px;font-size:14px;}
             .code-sidebar{width:100%;right:-100%;}
+            .permission-content{max-width:90%;padding:24px;}
+            .permission-content h2{font-size:20px;}
+            .permission-content p{font-size:14px;}
+            .permission-btn{padding:10px 20px;font-size:14px;}
         }
     </style>
 </head>
@@ -230,6 +248,14 @@
             <pre class="code-sidebar-content" id="codeSidebarContent"></pre>
         </div>
         <div class="notification" id="notification"></div>
+        <div class="permission-modal" id="permissionModal">
+            <div class="permission-content">
+                <h2>Request Permissions</h2>
+                <p>VerbiFlow would like to access additional features to enhance your experience, including full video analysis, improved performance, and more. Do you grant permission?</p>
+                <button class="permission-btn" id="grantPermissionBtn">Grant</button>
+                <button class="permission-btn deny" id="denyPermissionBtn">Deny</button>
+            </div>
+        </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/js-sha256@0.9.0/src/sha256.min.js"></script>
     <script defer>
@@ -267,6 +293,9 @@
         const schoolHelpDropdown=document.getElementById('schoolHelpDropdown');
         const rephraseBtn=document.getElementById('rephraseBtn');
         const stopGeneratingBtn=document.getElementById('stopGeneratingBtn');
+        const permissionModal=document.getElementById('permissionModal');
+        const grantPermissionBtn=document.getElementById('grantPermissionBtn');
+        const denyPermissionBtn=document.getElementById('denyPermissionBtn');
 
         let filesArray=[];
         let conversationHistory=[{role:"assistant",content:"Hey there! I’m VerbiFlow, your AI assistant. I can analyze videos, images, code, create games, design slides, and more—faster than ever. What’s on your mind today?"}];
@@ -284,6 +313,7 @@
         let responseCache=new Map();
         let abortController=null;
         let batchQueue=[];
+        let hasPermission=false;
 
         class CodeAnalyzer{
             static analyzeCode(code){
@@ -459,37 +489,43 @@
         }
 
         class VideoProcessor{
-            static async extractFrames(videoFile,maxFrames=10){
+            static async extractFrames(videoFile,maxFrames=30){
                 return new Promise((resolve,reject)=>{
                     const video=document.createElement('video');
-                    video.src=URL.createObjectURL(videoFile);
+                    const blobUrl=URL.createObjectURL(videoFile);
+                    video.src=blobUrl;
                     video.muted=true;
                     video.preload='metadata';
                     video.onloadedmetadata=async()=>{
                         const canvas=document.createElement('canvas');
                         const ctx=canvas.getContext('2d');
                         const duration=video.duration;
-                        const frameInterval=Math.max(1,Math.floor(duration/maxFrames));
+                        const frameInterval=Math.max(1,duration/maxFrames);
                         const frames=[];
 
-                        for(let time=0;time<duration&&frames.length<maxFrames;time+=frameInterval){
-                            video.currentTime=time;
-                            await new Promise(r=>video.onseeked=r);
-                            canvas.width=video.videoWidth;
-                            canvas.height=video.videoHeight;
-                            ctx.drawImage(video,0,0,canvas.width,canvas.height);
-                            frames.push(canvas.toDataURL('image/jpeg',0.7));
-                        }
-                        URL.revokeObjectURL(video.src);
-                        resolve(frames);
+                        video.onerror=()=>reject(new Error('Failed to load video'));
+                        video.oncanplay=async()=>{
+                            for(let time=0;time<duration&&frames.length<maxFrames;time+=frameInterval){
+                                video.currentTime=time;
+                                await new Promise(r=>video.onseeked=r);
+                                canvas.width=video.videoWidth;
+                                canvas.height=video.videoHeight;
+                                ctx.drawImage(video,0,0,canvas.width,canvas.height);
+                                frames.push(canvas.toDataURL('image/jpeg',0.8));
+                            }
+                            URL.revokeObjectURL(blobUrl);
+                            resolve(frames);
+                        };
+                        video.load();
                     };
-                    video.onerror=()=>reject(new Error('Failed to load video'));
+                    video.onerror=()=>reject(new Error('Failed to load video metadata'));
                 });
             }
             static async extractMetadata(videoFile){
                 return new Promise((resolve,reject)=>{
                     const video=document.createElement('video');
-                    video.src=URL.createObjectURL(videoFile);
+                    const blobUrl=URL.createObjectURL(videoFile);
+                    video.src=blobUrl;
                     video.preload='metadata';
                     video.onloadedmetadata=()=>{
                         const metadata={
@@ -499,10 +535,31 @@
                             size:(videoFile.size/1024/1024).toFixed(2),
                             type:videoFile.type
                         };
-                        URL.revokeObjectURL(video.src);
+                        URL.revokeObjectURL(blobUrl);
                         resolve(metadata);
                     };
                     video.onerror=()=>reject(new Error('Failed to load video metadata'));
+                });
+            }
+            static async extractAudio(videoFile){
+                return new Promise((resolve,reject)=>{
+                    const video=document.createElement('video');
+                    const blobUrl=URL.createObjectURL(videoFile);
+                    video.src=blobUrl;
+                    video.onloadedmetadata=async()=>{
+                        const audioContext=new AudioContext();
+                        const source=audioContext.createMediaElementSource(video);
+                        const analyser=audioContext.createAnalyser();
+                        source.connect(analyser);
+                        analyser.connect(audioContext.destination);
+                        analyser.fftSize=2048;
+                        const bufferLength=analyser.frequencyBinCount;
+                        const dataArray=new Uint8Array(bufferLength);
+                        analyser.getByteTimeDomainData(dataArray);
+                        URL.revokeObjectURL(blobUrl);
+                        resolve(dataArray);
+                    };
+                    video.onerror=()=>reject(new Error('Failed to extract audio'));
                 });
             }
             static async analyzeVideo(videoFile){
@@ -512,6 +569,7 @@
 
                 const frames=await this.extractFrames(videoFile);
                 const metadata=await this.extractMetadata(videoFile);
+                const audioData=await this.extractAudio(videoFile);
                 const response=await fetch(VIDEO_PROCESSING_API,{
                     method:'POST',
                     headers:{
@@ -522,7 +580,8 @@
                         model:"gpt-4o",
                         frames:frames,
                         metadata:metadata,
-                        prompt:"Analyze this video. Describe its content, key scenes, objects, activities, and any text or audio elements. Provide a detailed summary."
+                        audio_data:audioData,
+                        prompt:"Analyze this video in detail. Describe its content, key scenes, objects, activities, text, audio elements, and provide a comprehensive summary."
                     })
                 });
                 if(!response.ok)throw new Error('Video analysis failed');
@@ -536,7 +595,7 @@
         function showNotification(message,type='success'){
             notification.textContent=message;
             notification.className=`notification ${type} show`;
-            setTimeout(()=>{notification.classList.remove('show');},2000);
+            setTimeout(()=>{notification.classList.remove('show');},1500);
         }
 
         function toggleTheme(){
@@ -556,6 +615,27 @@
                 themeBtn.innerHTML='<i class="fas fa-moon"></i> Dark Mode';
             }
         }
+
+        function requestPermissions(){
+            permissionModal.classList.add('open');
+        }
+
+        grantPermissionBtn.addEventListener('click',()=>{
+            hasPermission=true;
+            permissionModal.classList.remove('open');
+            showNotification('Permissions granted! Enhanced features enabled.');
+        });
+
+        denyPermissionBtn.addEventListener('click',()=>{
+            hasPermission=false;
+            permissionModal.classList.remove('open');
+            showNotification('Permissions denied. Some features may be limited.','error');
+        });
+
+        window.addEventListener('beforeunload',e=>{
+            e.preventDefault();
+            e.returnValue='Are you sure you want to leave VerbiFlow?';
+        });
 
         themeBtn.addEventListener('click',toggleTheme);
 
@@ -583,9 +663,10 @@
                     displayFileItem(file);
                     const userMessage=document.createElement('div');
                     userMessage.className='chat-message user';
+                    const blobUrl=URL.createObjectURL(file);
                     userMessage.innerHTML=`
                         <div class="chat-message-content">
-                            ${item.type.startsWith('image/')?`<img src="${URL.createObjectURL(file)}" alt="${sanitizeInput(file.name)}">`:`<video controls src="${URL.createObjectURL(file)}"></video>`}
+                            ${item.type.startsWith('image/')?`<img src="${blobUrl}" alt="${sanitizeInput(file.name)}">`:`<video controls src="${blobUrl}"></video>`}
                         </div>
                         <div class="chat-message-meta">Just now</div>
                     `;
@@ -649,7 +730,8 @@
                 filePreviewContent.appendChild(img);
             }else if(file.type.startsWith('video/')){
                 const video=document.createElement('video');
-                video.src=URL.createObjectURL(file);
+                const blobUrl=URL.createObjectURL(file);
+                video.src=blobUrl;
                 video.controls=true;
                 video.style.maxWidth='100%';
                 filePreviewContent.appendChild(video);
@@ -901,6 +983,10 @@
         }
 
         async function sendMessage(isContinuation=false){
+            if(!hasPermission){
+                requestPermissions();
+                return;
+            }
             let message=isContinuation?lastMessageContent:sanitizeInput(userInput.value.trim());
             if(!message&&filesArray.length===0&&!isContinuation)return;
 
@@ -936,7 +1022,7 @@
 
             generationTimeout=setTimeout(()=>{
                 if(isGenerating)keepGeneratingBtn.classList.add('show');
-            },1000);
+            },800);
 
             try{
                 let aiMessageText='';
@@ -1077,9 +1163,9 @@
                     latestAiResponse=aiMessageText;
                     conversationHistory.push({role:"assistant",content:aiMessageText});
                     chatArea.scrollTop=chatArea.scrollHeight;
-                }else if(selectedSchoolMode==='roblox'||message.toLowerCase().includes('roblox')||message.toLowerCase().includes('luau')){
-                    const robloxPrompt=`Create a Roblox game for: "${sanitizeInput(message)}". Provide optimized Luau code with mechanics, Roblox UI, animations, error handling, multiplayer support, and responsive design. Include detailed explanations.`;
-                    const response=await fetch(Api_URL,{
+                }else if(selectedSchoolMode==='roblox'||message.toLowerCase().includes('roblox')||message.toLowerCase().includes('luau')||message.toLowerCase().includes('recreate this in luau code')){
+                    const robloxPrompt=`Recreate the following in Roblox Luau code: "${sanitizeInput(message)}". Provide optimized Luau code with mechanics, Roblox UI, animations, error handling, multiplayer support, and responsive design. Include detailed explanations.`;
+                    const response=await fetch(API_URL,{
                         method:'POST',
                         headers:{
                             'Authorization':`Bearer ${API_KEY}`,
@@ -1145,83 +1231,59 @@
                         conversationHistory.push({role:"assistant",content:aiMessageText});
                         chatArea.scrollTop=chatArea.scrollHeight;
                     }
-                }else if(message.toLowerCase().includes('analyze code')||message.toLowerCase().includes('review code')||codeBlockMatch){
-                    const codeToAnalyze=codeBlockMatch?codeBlockMatch[1].trim():message;
-                    const codePrompt=`Review this code: \`\`\`\n${codeToAnalyze}\n\`\`\`. Analyze bugs, performance, security, and suggest improvements with optimized code examples.`;
-                    const response=await fetch(API_URL,{
-    method:'POST',
-    headers:{
-        'Authorization':`Bearer ${API_KEY}`,
-        'Content-Type':'application/json'
-    },
-    body:JSON.stringify({
-        model:"gpt-4o",
-        messages:[{role:"user",content:codePrompt}],
-        max_tokens:3000,
-        temperature:0.6
-    }),
-    signal:abortController.signal
-});
-if(!response.ok)throw new Error('API request failed');
-const data=await response.json();
-aiMessageText=data.choices[0].message.content+(codeAnalysisResult?`\n\n${codeAnalysisResult}`:'');
-aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
-responseCache.set(messageHash,aiMessageText);
-latestAiResponse=aiMessageText;
-conversationHistory.push({role:"assistant",content:aiMessageText});
-chatArea.scrollTop=chatArea.scrollHeight;
-            }else{
-                batchQueue.push({role:"user",content:message});
-                if(batchQueue.length>=BATCH_SIZE||isContinuation){
-                    const messagesToProcess=batchQueue.map(msg=>({role:msg.role,content:msg.content}));
-                    batchQueue=[];
-                    const responses=await batchProcessRequests(messagesToProcess);
-                    aiMessageText=responses[0];
-                    aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
-                    responseCache.set(messageHash,aiMessageText);
-                    latestAiResponse=aiMessageText;
-                    conversationHistory.push({role:"assistant",content:aiMessageText});
-                    chatArea.scrollTop=chatArea.scrollHeight;
                 }else{
-                    const response=await fetch(API_URL,{
-                        method:'POST',
-                        headers:{
-                            'Authorization':`Bearer ${API_KEY}`,
-                            'Content-Type':'application/json'
-                        },
-                        body:JSON.stringify({
-                            model:"gpt-4o",
-                            messages:conversationHistory.concat([{role:"user",content:message}]),
-                            max_tokens:5000,
-                            temperature:0.7,
-                            top_p:0.95
-                        }),
-                        signal:abortController.signal
-                    });
-                    if(!response.ok)throw new Error('API request failed');
-                    const data=await response.json();
-                    aiMessageText=data.choices[0].message.content;
-                    aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
-                    responseCache.set(messageHash,aiMessageText);
-                    latestAiResponse=aiMessageText;
-                    conversationHistory.push({role:"assistant",content:aiMessageText});
-                    chatArea.scrollTop=chatArea.scrollHeight;
+                    batchQueue.push({role:"user",content:message});
+                    if(batchQueue.length>=BATCH_SIZE||isContinuation){
+                        const messagesToProcess=batchQueue.map(msg=>({role:msg.role,content:msg.content}));
+                        batchQueue=[];
+                        const responses=await batchProcessRequests(messagesToProcess);
+                        aiMessageText=responses[0];
+                        aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
+                        responseCache.set(messageHash,aiMessageText);
+                        latestAiResponse=aiMessageText;
+                        conversationHistory.push({role:"assistant",content:aiMessageText});
+                        chatArea.scrollTop=chatArea.scrollHeight;
+                    }else{
+                        const response=await fetch(API_URL,{
+                            method:'POST',
+                            headers:{
+                                'Authorization':`Bearer ${API_KEY}`,
+                                'Content-Type':'application/json'
+                            },
+                            body:JSON.stringify({
+                                model:"gpt-4o",
+                                messages:conversationHistory.concat([{role:"user",content:message}]),
+                                max_tokens:5000,
+                                temperature:0.7,
+                                top_p:0.95
+                            }),
+                            signal:abortController.signal
+                        });
+                        if(!response.ok)throw new Error('API request failed');
+                        const data=await response.json();
+                        aiMessageText=data.choices[0].message.content;
+                        aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
+                        responseCache.set(messageHash,aiMessageText);
+                        latestAiResponse=aiMessageText;
+                        conversationHistory.push({role:"assistant",content:aiMessageText});
+                        chatArea.scrollTop=chatArea.scrollHeight;
+                    }
                 }
-            }
 
-            typingIndicator.style.display='none';
-            sendBtn.disabled=false;
-            stopGeneratingBtn.style.display='none';
-            isGenerating=false;
-        }catch(error){
-            if(error.name==='AbortError'){
-                return;
+                typingIndicator.style.display='none';
+                sendBtn.disabled=false;
+                stopGeneratingBtn.style.display='none';
+                isGenerating=false;
+            }catch(error){
+                if(error.name==='AbortError'){
+                    return;
+                }
+                showError(`Error: ${error.message}`);
             }
-            showError(`Error: ${error.message}`);
         }
-    }
 
-    loadTheme();
+        loadTheme();
+        requestPermissions();
     </script>
 </body>
 </html>
