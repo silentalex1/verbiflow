@@ -3,155 +3,879 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; connect-src 'self' https://api.openai.com; frame-src 'none';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://*.googleapis.com https://*.gstatic.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://apis.google.com https://www.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; connect-src 'self' https://api.openai.com https://www.googleapis.com https://slides.googleapis.com https://www.googleapis.com/upload/drive/ ws://*; frame-src 'none';">
+    <meta http-equiv="Permissions-Policy" content="clipboard-write=(self)">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
     <meta name="robots" content="noindex, nofollow">
-    <title>VerbiFlow - AI Chat</title>
+    <title>VerbiFlow - Advanced AI Chat</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" defer>
+    <script src="https://apis.google.com/js/api.js" defer></script>
     <style>
-        *{margin:0;padding:0;box-sizing:border-box}
-        body{background:linear-gradient(135deg,#f9fafb,#ebedf0);font-family:Inter,sans-serif;color:#111827;min-height:100vh;display:flex;justify-content:center;padding:12px;transition:background 0.3s ease}
-        .dark-mode body{background:linear-gradient(135deg,#1f2a3c,#111827);color:#d1d5db}
-        .container{max-width:900px;width:100%;background:#fff;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,0.1);overflow:hidden;display:flex flex-direction:column;transition:all 0.3s ease}
-        .dark-mode .container{background:#1f2937;box-shadow:0 8px 24px rgba(0,0,0,0.3)}
-        .nav-bar{background:linear-gradient(90deg,#2563eb,#3b82f6);padding:12px 16px;display:flex;gap:12px;justify-content:flex-end;align-items:center}
-        .dark-mode .nav-bar{background:linear-gradient(90deg,#1e3a8a,#2563eb)}
-        .nav-btn{background:#fff;color:#2563eb;border:none;padding:10px 20px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;transition:all 0.2s ease;outline:none}
-        .dark-mode .nav-btn{background:#374151;color:#bfdbfe}
-        .nav-btn:hover{transform:scale(1.05);background:#f3f4f6}
-        .dark-mode .nav-btn:hover{background:#4b5563}
-        .nav-btn:active{transform:scale(0.95)}
-        .discord-btn{background:#5865f2;color:#fff}
-        .discord-btn:hover{background:#4752c4}
-        .theme-btn{background:#fff;color:#2563eb;border:2px solid #2563eb;padding:8px 16px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;display:flex;align-items:center;gap:6px;transition:all 0.2s ease}
-        .dark-mode .theme-btn{background:#374151;color:#bfdbfe;border:2px solid #60a5fa}
-        .theme-btn:hover{transform:scale(1.05);background:#f3f4f6}
-        .dark-mode .theme-btn:hover{background:#4b5563}
-        .theme-btn i{font-size:16px}
-        .header{background:#fff;padding:20px;text-align:center;border-bottom:1px solid #e5e7eb}
-        .dark-mode .header{background:#1f2937;border-bottom:1px solid #374151}
-        .logo{font-size:28px;font-weight:700;color:#2563eb;letter-spacing:-0.5px}
-        .dark-mode .logo{color:#60a5fa}
-        .chat-area{flex:1;padding:24px;overflow-y:auto;max-height:60vh;min-height:40vh;background:#f9fafb;scroll-behavior:smooth}
-        .dark-mode .chat-area{background:#111827}
-        .chat-content{flex:1;display:flex flex-direction:column}
-        .chat-history{display:flex flex-direction:column;gap:16px}
-        .chat-message{display:flex flex-direction:column;gap:8px;padding:12px;border-radius:16px;max-width:85%;animation:slideIn 0.4s ease}
-        .chat-message.user{align-self:flex-end;background:#2563eb;color:#fff}
-        .dark-mode .chat-message.user{background:#1e3a8a}
-        .chat-message.ai{align-self:flex-start;background:#e5e7eb;color:#111827}
-        .dark-mode .chat-message.ai{background:#374151;color:#d1d5db}
-        .chat-message-content{padding:12px;border-radius:16px;font-size:15px;line-height:1.6;word-break:break-word}
-        .chat-message-meta{font-size:12px;color:#6b7280;margin-top:4px;opacity:0.7}
-        .dark-mode .chat-message-meta{color:#9ca3af}
-        .chat-message img{max-width:100%;border-radius:12px;margin-top:12px;cursor:pointer;transition:transform 0.2s ease}
-        .chat-message img:hover{transform:scale(1.02)}
-        .code-block{position:relative;margin:12px 0;border-radius:12px;overflow:hidden}
-        .code-block pre{background:#111827;color:#d1d5db;padding:16px;border-radius:12px;overflow-x:auto;font-family:'JetBrains Mono',monospace;font-size:14px;line-height:1.5}
-        .dark-mode .code-block pre{background:#1f2937}
-        .code-text{background:#111827;color:#d1d5db;padding:16px;border-radius:12px;font-family:'JetBrains Mono',monospace;font-size:14px;white-space:pre-wrap;user-select:text}
-        .dark-mode .code-text{background:#1f2937}
-        .copy-btn,.copy-all-btn{background:#2563eb;color:#fff;border:none;padding:6px 12px;border-radius:8px;cursor:pointer;font-size:11px;font-weight:600;transition:all 0.2s ease}
-        .copy-btn{position:absolute;top:8px;right:8px}
-        .copy-all-btn{position:absolute;top:8px;right:70px}
-        .dark-mode .copy-btn,.dark-mode .copy-all-btn{background:#1e3a8a}
-        .copy-btn:hover,.copy-all-btn:hover{background:#3b82f6;transform:scale(1.05)}
-        .dark-mode .copy-btn:hover,.dark-mode .copy-all-btn:hover{background:#2563eb}
-        .code-sidebar{position:fixed;top:0;right:-360px;width:360px;height:100%;background:#f9fafb;border-left:1px solid #e5e7eb;padding:20px;overflow-y:auto;transition:right 0.3s ease;z-index:150}
-        .dark-mode .code-sidebar{background:#1f2937;border-left:1px solid #374151}
-        .code-sidebar.open{right:0}
-        .code-sidebar-close{background:#ef4444;color:#fff;border:none;border-radius:50%;width:36px;height:36px;display:flex align-items:center;justify-content:center;cursor:pointer;font-size:18px;margin-bottom:12px}
-        .code-sidebar-close:hover{background:#dc2626;transform:scale(1.1)}
-        .code-sidebar-content{font-family:'JetBrains Mono',monospace;font-size:14px;color:#111827;white-space:pre-wrap}
-        .dark-mode .code-sidebar-content{color:#d1d5db}
-        .file-upload-container{padding:16px;border-top:1px solid #e5e7eb;background:#fff}
-        .dark-mode .file-upload-container{background:#1f2937;border-top:1px solid #374151}
-        .file-actions{display:flex;gap:12px;align-items:center}
-        .file-input-label{background:#2563eb;color:#fff;padding:12px 20px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;min-height:44px;transition:all 0.2s ease}
-        .dark-mode .file-input-label{background:#1e3a8a}
-        .file-input-label:hover{transform:scale(1.05)}
-        .file-input{display:none}
-        .file-clear-btn{background:#ef4444;color:#fff;padding:12px 20px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;border:none;min-height:44px;transition:all 0.2s ease}
-        .file-clear-btn:hover{transform:scale(1.05);background:#dc2626}
-        .keep-generating-btn{background:#10b981;color:#fff;padding:12px 20px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;border:none;min-height:44px;transition:all 0.5s ease;opacity:0;transform:translateY(20px);display:none}
-        .keep-generating-btn.show{opacity:1;transform:translateY(0);display:block}
-        .dark-mode .keep-generating-btn{background:#059669}
-        .keep-generating-btn:hover{transform:scale(1.05);background:#34d399}
-        .dark-mode .keep-generating-btn:hover{background:#10b981}
-        .school-help-container{display:flex;align-items:center;gap:20px;margin-left:20px}
-        .school-help-dropdown{background:#4b5563;color:#fff;padding:12px 20px;border-radius:10px;border:none;font-size:14px;font-weight:600;min-height:44px;cursor:pointer;transition:all 0.2s ease}
-        .dark-mode .school-help-dropdown{background:#6b7280}
-        .school-help-dropdown:hover{background:#6b7280;transform:scale(1.05)}
-        .dark-mode .school-help-dropdown:hover{background:#9ca3af}
-        .school-help-dropdown:focus{outline:none;border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,0.2)}
-        .dark-mode .school-help-dropdown:focus{border-color:#60a5fa;box-shadow:0 0 0 3px rgba(96,165,250,0.2)}
-        .rephrase-btn{background:#f59e0b;color:#fff;padding:12px 20px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;border:none;min-height:44px;transition:all 0.2s ease}
-        .dark-mode .rephrase-btn{background:#d97706}
-        .rephrase-btn:hover{transform:scale(1.05);background:#fbbf24}
-        .dark-mode .rephrase-btn:hover{background:#f59e0b}
-        .file-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:12px}
-        .file-item{display:flex;align-items:center;gap:12px;background:#e5e7eb;padding:10px;border-radius:12px;cursor:pointer;transition:all 0.2s ease}
-        .dark-mode .file-item{background:#374151}
-        .file-item:hover{background:#d1d5db;transform:scale(1.02)}
-        .dark-mode .file-item:hover{background:#4b5563}
-        .file-item-name{flex:1;font-size:14px;color:#111827;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-        .dark-mode .file-item-name{color:#d1d5db}
-        .file-item-details{font-size:12px;color:#6b7280}
-        .dark-mode .file-item-details{color:#9ca3af}
-        .file-preview-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:200;padding:20px;justify-content:center;align-items:center}
-        .file-preview-modal.open{display:flex}
-        .file-preview-content{background:#fff;border-radius:16px;padding:20px;max-width:90%;max-height:90%;overflow:auto;color:#111827;font-size:14px}
-        .dark-mode .file-preview-content{background:#1f2937;color:#d1d5db}
-        .file-preview-content img{max-width:80% !important}
-        .file-preview-close{background:#ef4444;color:#fff;border:none;border-radius:50%;width:36px;height:36px;display:flex align-items:center;justify-content:center;cursor:pointer;position:absolute;top:20px;right:20px;transition:all 0.2s ease}
-        .file-preview-close:hover{transform:scale(1.1);background:#dc2626}
-        .file-preview-close svg{width:20px;height:20px;fill:#fff}
-        .input-container{display:flex;align-items:flex-end;padding:16px;border-top:1px solid #e5e7eb;background:#fff;gap:12px;position:sticky;bottom:0;z-index:10}
-        .dark-mode .input-container{background:#1f2937;border-top:1px solid #374151}
-        .user-input{flex:1;padding:12px;border:1px solid #e5e7eb;border-radius:10px;font-size:15px;outline:none;resize:none;min-height:44px;max-height:180px;background:#fff;color:#111827;transition:all 0.2s ease}
-        .dark-mode .user-input{background:#374151;border:1px solid #4b5563;color:#d1d5db}
-        .user-input:focus{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,0.2)}
-        .dark-mode .user-input:focus{border-color:#60a5fa;box-shadow:0 0 0 3px rgba(96,165,250,0.2)}
-        .send-btn{background:#2563eb;border:none;border-radius:10px;padding:12px 24px;cursor:pointer;color:#fff;font-size:14px;font-weight:600;min-height:44px;transition:all 0.2s ease}
-        .dark-mode .send-btn{background:#1e3a8a}
-        .send-btn:hover{transform:scale(1.05);background:#3b82f6}
-        .dark-mode .send-btn:hover{background:#2563eb}
-        .send-btn:disabled{background:#9ca3af;cursor:not-allowed}
-        .loading-spinner{display:none;margin:12px auto;width:36px;height:36px;border:4px solid #2563eb;border-top:4px solid transparent;border-radius:50%;animation:spin 0.4s linear infinite}
-        .typing-indicator{display:none;font-size:14px;color:#6b7280;margin:12px auto;text-align:center}
-        .dark-mode .typing-indicator{color:#9ca3af}
-        .typing-indicator span{display:inline-block;animation:dotPulse 0.8s infinite ease-in-out}
-        .typing-indicator span:nth-child(2){animation-delay:0.1s}
-        .typing-indicator span:nth-child(3){animation-delay:0.2s}
-        .notification{position:fixed;top:20px;right:20px;padding:12px 24px;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,0.2);opacity:0;transform:translateY(-20px);transition:all 0.3s ease;font-size:14px;font-weight:500;z-index:300}
-        .notification.show{opacity:1;transform:translateY(0)}
-        .notification.success{background:#2563eb;color:#fff}
-        .notification.error{background:#ef4444;color:#fff}
-        @keyframes slideIn{0%{opacity:0;transform:translateY(20px)}100%{opacity:1;transform:translateY(0)}}
-        @keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
-        @keyframes dotPulse{0%,80%,100%{transform:scale(1);opacity:0.5}40%{transform:scale(1.4);opacity:1}}
-        @media (max-width:768px){
-            .container{max-width:100%;border-radius:12px;padding:8px}
-            .nav-bar{padding:8px;gap:8px}
-            .nav-btn{font-size:13px;padding:8px 16px}
-            .theme-btn{padding:6px 12px;font-size:13px}
-            .header{padding:16px}
-            .logo{font-size:24px}
-            .chat-area{padding:16px;min-height:35vh;max-height:55vh}
-            .chat-message{max-width:90%}
-            .chat-message-content{font-size:14px}
-            .chat-message img{max-width:100%}
-            .input-container{padding:12px;gap:8px}
-            .user-input{font-size:14px;min-height:40px}
-            .send-btn{padding:10px 20px;min-height:40px}
-            .file-input-label,.file-clear-btn,.keep-generating-btn,.school-help-dropdown,.rephrase-btn{font-size:13px;padding:10px 16px;min-height:40px}
-            .school-help-container{gap:12px;margin-left:12px}
-            .file-preview-content img{max-width:85% !important}
-            .notification{top:16px;right:16px;padding:10px 20px;font-size:13px}
-            .code-sidebar{width:100%;right:-100%}
+        body {
+            background: linear-gradient(135deg, #f9fafb, #ebedf0);
+            font-family: Inter, sans-serif;
+            color: #111827;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 12px;
+            transition: background 0.3s ease;
+        }
+        .dark-mode body {
+            background: linear-gradient(135deg, #1f2a3c, #111827);
+            color: #d1d5db;
+        }
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+        }
+        .dark-mode .container {
+            background: #1f2937;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+        .nav-bar {
+            background: linear-gradient(90deg, #2563eb, #3b82f6);
+            padding: 12px 16px;
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        .dark-mode .nav-bar {
+            background: linear-gradient(90deg, #1e3a8a, #2563eb);
+        }
+        .nav-btn {
+            background: #fff;
+            color: #2563eb;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            outline: none;
+        }
+        .dark-mode .nav-btn {
+            background: #374151;
+            color: #bfdbfe;
+        }
+        .nav-btn:hover {
+            transform: scale(1.05);
+            background: #f3f4f6;
+        }
+        .dark-mode .nav-btn:hover {
+            background: #4b5563;
+        }
+        .nav-btn:active {
+            transform: scale(0.95);
+        }
+        .discord-btn {
+            background: #5865f2;
+            color: #fff;
+        }
+        .discord-btn:hover {
+            background: #4752c4;
+        }
+        .theme-btn {
+            background: #fff;
+            color: #2563eb;
+            border: 2px solid #2563eb;
+            padding: 8px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+        .dark-mode .theme-btn {
+            background: #374151;
+            color: #bfdbfe;
+            border: 2px solid #60a5fa;
+        }
+        .theme-btn:hover {
+            transform: scale(1.05);
+            background: #f3f4f6;
+        }
+        .dark-mode .theme-btn:hover {
+            background: #4b5563;
+        }
+        .theme-btn i {
+            font-size: 16px;
+        }
+        .header {
+            background: #fff;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .dark-mode .header {
+            background: #1f2937;
+            border-bottom: 1px solid #374151;
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2563eb;
+            letter-spacing: -0.5px;
+        }
+        .dark-mode .logo {
+            color: #60a5fa;
+        }
+        .chat-area {
+            flex: 1;
+            padding: 24px;
+            overflow-y: auto;
+            max-height: 60vh;
+            min-height: 40vh;
+            background: #f9fafb;
+            scroll-behavior: smooth;
+        }
+        .dark-mode .chat-area {
+            background: #111827;
+        }
+        .chat-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .chat-history {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .chat-message {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding: 12px;
+            border-radius: 16px;
+            max-width: 85%;
+            animation: slideIn 0.4s ease;
+        }
+        .chat-message.user {
+            align-self: flex-end;
+            background: #2563eb;
+            color: #fff;
+        }
+        .dark-mode .chat-message.user {
+            background: #1e3a8a;
+        }
+        .chat-message.ai {
+            align-self: flex-start;
+            background: #e5e7eb;
+            color: #111827;
+        }
+        .dark-mode .chat-message.ai {
+            background: #374151;
+            color: #d1d5db;
+        }
+        .chat-message-content {
+            padding: 12px;
+            border-radius: 16px;
+            font-size: 15px;
+            line-height: 1.6;
+            word-break: break-word;
+        }
+        .chat-message-meta {
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 4px;
+            opacity: 0.7;
+        }
+        .dark-mode .chat-message-meta {
+            color: #9ca3af;
+        }
+        .chat-message img {
+            max-width: 100%;
+            border-radius: 12px;
+            margin-top: 12px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        .chat-message img:hover {
+            transform: scale(1.02);
+        }
+        .code-block {
+            position: relative;
+            margin: 12px 0;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .code-block pre {
+            background: #111827;
+            color: #d1d5db;
+            padding: 16px;
+            border-radius: 12px;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .dark-mode .code-block pre {
+            background: #1f2937;
+        }
+        .code-text {
+            background: #111827;
+            color: #d1d5db;
+            padding: 16px;
+            border-radius: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            white-space: pre-wrap;
+            user-select: text;
+        }
+        .dark-mode .code-text {
+            background: #1f2937;
+        }
+        .copy-btn, .copy-all-btn {
+            background: #2563eb;
+            color: #fff;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+        }
+        .copy-all-btn {
+            position: absolute;
+            top: 8px;
+            right: 70px;
+        }
+        .dark-mode .copy-btn, .dark-mode .copy-all-btn {
+            background: #1e3a8a;
+        }
+        .copy-btn:hover, .copy-all-btn:hover {
+            background: #3b82f6;
+            transform: scale(1.05);
+        }
+        .dark-mode .copy-btn:hover, .dark-mode .copy-all-btn:hover {
+            background: #2563eb;
+        }
+        .code-sidebar {
+            position: fixed;
+            top: 0;
+            right: -360px;
+            width: 360px;
+            height: 100%;
+            background: #f9fafb;
+            border-left: 1px solid #e5e7eb;
+            padding: 20px;
+            overflow-y: auto;
+            transition: right 0.3s ease;
+            z-index: 150;
+        }
+        .dark-mode .code-sidebar {
+            background: #1f2937;
+            border-left: 1px solid #374151;
+        }
+        .code-sidebar.open {
+            right: 0;
+        }
+        .code-sidebar-close {
+            background: #ef4444;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+        .code-sidebar-close:hover {
+            background: #dc2626;
+            transform: scale(1.1);
+        }
+        .code-sidebar-content {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            color: #111827;
+            white-space: pre-wrap;
+        }
+        .dark-mode .code-sidebar-content {
+            color: #d1d5db;
+        }
+        .file-upload-container {
+            padding: 16px;
+            border-top: 1px solid #e5e7eb;
+            background: #fff;
+        }
+        .dark-mode .file-upload-container {
+            background: #1f2937;
+            border-top: 1px solid #374151;
+        }
+        .file-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        .file-input-label {
+            background: #2563eb;
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            min-height: 44px;
+            transition: all 0.2s ease;
+        }
+        .dark-mode .file-input-label {
+            background: #1e3a8a;
+        }
+        .file-input-label:hover {
+            transform: scale(1.05);
+        }
+        .file-input {
+            display: none;
+        }
+        .file-clear-btn {
+            background: #ef4444;
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            border: none;
+            min-height: 44px;
+            transition: all 0.2s ease;
+        }
+        .file-clear-btn:hover {
+            transform: scale(1.05);
+            background: #dc2626;
+        }
+        .keep-generating-btn {
+            background: #10b981;
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            border: none;
+            min-height: 44px;
+            transition: all 0.5s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            display: none;
+        }
+        .keep-generating-btn.show {
+            opacity: 1;
+            transform: translateY(0);
+            display: block;
+        }
+        .dark-mode .keep-generating-btn {
+            background: #059669;
+        }
+        .keep-generating-btn:hover {
+            transform: scale(1.05);
+            background: #34d399;
+        }
+        .dark-mode .keep-generating-btn:hover {
+            background: #10b981;
+        }
+        .school-help-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-left: 20px;
+        }
+        .school-help-dropdown {
+            background: #4b5563;
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 10px;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            min-height: 44px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .dark-mode .school-help-dropdown {
+            background: #6b7280;
+        }
+        .school-help-dropdown:hover {
+            background: #6b7280;
+            transform: scale(1.05);
+        }
+        .dark-mode .school-help-dropdown:hover {
+            background: #9ca3af;
+        }
+        .school-help-dropdown:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+        .dark-mode .school-help-dropdown:focus {
+            border-color: #60a5fa;
+            box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
+        }
+        .rephrase-btn {
+            background: #f59e0b;
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            border: none;
+            min-height: 44px;
+            transition: all 0.2s ease;
+        }
+        .dark-mode .rephrase-btn {
+            background: #d97706;
+        }
+        .rephrase-btn:hover {
+            transform: scale(1.05);
+            background: #fbbf24;
+        }
+        .dark-mode .rephrase-btn:hover {
+            background: #f59e0b;
+        }
+        .download-pdf-btn {
+            background: #10b981;
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            border: none;
+            min-height: 44px;
+            transition: all 0.2s ease;
+        }
+        .dark-mode .download-pdf-btn {
+            background: #059669;
+        }
+        .download-pdf-btn:hover {
+            transform: scale(1.05);
+            background: #34d399;
+        }
+        .dark-mode .download-pdf-btn:hover {
+            background: #10b981;
+        }
+        .file-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 12px;
+            margin-top: 12px;
+        }
+        .file-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #e5e7eb;
+            padding: 10px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .dark-mode .file-item {
+            background: #374151;
+        }
+        .file-item:hover {
+            background: #d1d5db;
+            transform: scale(1.02);
+        }
+        .dark-mode .file-item:hover {
+            background: #4b5563;
+        }
+        .file-item-name {
+            flex: 1;
+            font-size: 14px;
+            color: #111827;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .dark-mode .file-item-name {
+            color: #d1d5db;
+        }
+        .file-item-details {
+            font-size: 12px;
+            color: #6b7280;
+        }
+        .dark-mode .file-item-details {
+            color: #9ca3af;
+        }
+        .file-preview-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 200;
+            padding: 20px;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.3s ease;
+        }
+        .file-preview-modal.open {
+            display: flex;
+            opacity: 1;
+        }
+        .file-preview-content {
+            background: #fff;
+            border-radius: 16px;
+            padding: 20px;
+            max-width: 90%;
+            max-height: 90%;
+            overflow: auto;
+            color: #111827;
+            font-size: 14px;
+        }
+        .dark-mode .file-preview-content {
+            background: #1f2937;
+            color: #d1d5db;
+        }
+        .file-preview-content img {
+            max-width: 80% !important;
+        }
+        .file-preview-close {
+            background: #ef4444;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            transition: all 0.2s ease;
+        }
+        .file-preview-close:hover {
+            transform: scale(1.1);
+            background: #dc2626;
+        }
+        .file-preview-close svg {
+            width: 20px;
+            height: 20px;
+            fill: #fff;
+        }
+        .input-container {
+            display: flex;
+            align-items: flex-end;
+            padding: 16px;
+            border-top: 1px solid #e5e7eb;
+            background: #fff;
+            gap: 12px;
+            position: sticky;
+            bottom: 0;
+            z-index: 10;
+        }
+        .dark-mode .input-container {
+            background: #1f2937;
+            border-top: 1px solid #374151;
+        }
+        .user-input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 15px;
+            outline: none;
+            resize: none;
+            min-height: 44px;
+            max-height: 180px;
+            background: #fff;
+            color: #111827;
+            transition: all 0.2s ease;
+        }
+        .dark-mode .user-input {
+            background: #374151;
+            border: 1px solid #4b5563;
+            color: #d1d5db;
+        }
+        .user-input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+        .dark-mode .user-input:focus {
+            border-color: #60a5fa;
+            box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
+        }
+        .send-btn {
+            background: #2563eb;
+            border: none;
+            border-radius: 10px;
+            padding: 12px 24px;
+            cursor: pointer;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            min-height: 44px;
+            transition: all 0.2s ease;
+        }
+        .dark-mode .send-btn {
+            background: #1e3a8a;
+        }
+        .send-btn:hover {
+            transform: scale(1.05);
+            background: #3b82f6;
+        }
+        .dark-mode .send-btn:hover {
+            background: #2563eb;
+        }
+        .send-btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+        .loading-spinner {
+            display: none;
+            margin: 12px auto;
+            width: 36px;
+            height: 36px;
+            border: 4px solid #2563eb;
+            border-top: 4px solid transparent;
+            border-radius: 50%;
+            animation: spin 0.4s linear infinite;
+        }
+        .typing-indicator {
+            display: none;
+            font-size: 14px;
+            color: #6b7280;
+            margin: 12px auto;
+            text-align: center;
+        }
+        .dark-mode .typing-indicator {
+            color: #9ca3af;
+        }
+        .typing-indicator span {
+            display: inline-block;
+            animation: dotPulse 0.8s infinite ease-in-out;
+        }
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 12px 24px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 500;
+            z-index: 300;
+        }
+        .notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .notification.success {
+            background: #2563eb;
+            color: #fff;
+        }
+        .notification.error {
+            background: #ef4444;
+            color: #fff;
+        }
+        .google-auth-btn {
+            background: #4285f4;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .google-auth-btn:hover {
+            background: #357ae8;
+        }
+        .progress-bar {
+            display: none;
+            width: 100%;
+            height: 6px;
+            background: #e5e7eb;
+            border-radius: 3px;
+            margin: 12px 0;
+        }
+        .progress-bar.active {
+            display: block;
+        }
+        .progress-bar-fill {
+            width: 0;
+            height: 100%;
+            background: #2563eb;
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+        .dark-mode .progress-bar {
+            background: #374151;
+        }
+        .dark-mode .progress-bar-fill {
+            background: #60a5fa;
+        }
+        .collaboration-indicator {
+            display: none;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 12px;
+            height: 12px;
+            background: #10b981;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+        .collaboration-indicator.active {
+            display: block;
+        }
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        @keyframes dotPulse {
+            0%, 80%, 100% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+            40% {
+                transform: scale(1.4);
+                opacity: 1;
+            }
+        }
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.7;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 0.7;
+            }
+        }
+        @media (max-width: 768px) {
+            .container {
+                max-width: 100%;
+                border-radius: 12px;
+                padding: 8px;
+            }
+            .nav-bar {
+                padding: 8px;
+                gap: 8px;
+            }
+            .nav-btn {
+                font-size: 13px;
+                padding: 8px 16px;
+            }
+            .theme-btn {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+            .header {
+                padding: 16px;
+            }
+            .logo {
+                font-size: 24px;
+            }
+            .chat-area {
+                padding: 16px;
+                min-height: 35vh;
+                max-height: 55vh;
+            }
+            .chat-message {
+                max-width: 90%;
+            }
+            .chat-message-content {
+                font-size: 14px;
+            }
+            .chat-message img {
+                max-width: 100%;
+            }
+            .input-container {
+                padding: 12px;
+                gap: 8px;
+            }
+            .user-input {
+                font-size: 14px;
+                min-height: 40px;
+            }
+            .send-btn {
+                padding: 10px 20px;
+                min-height: 40px;
+            }
+            .file-input-label, .file-clear-btn, .keep-generating-btn, .school-help-dropdown, .rephrase-btn, .download-pdf-btn {
+                font-size: 13px;
+                padding: 10px 16px;
+                min-height: 40px;
+            }
+            .school-help-container {
+                gap: 12px;
+                margin-left: 12px;
+            }
+            .file-preview-content img {
+                max-width: 85% !important;
+            }
+            .notification {
+                top: 16px;
+                right: 16px;
+                padding: 10px 20px;
+                font-size: 13px;
+            }
+            .code-sidebar {
+                width: 100%;
+                right: -100%;
+            }
         }
     </style>
 </head>
@@ -163,6 +887,7 @@
             <button class="theme-btn" id="themeBtn"><i class="fas fa-moon"></i> Dark Mode</button>
             <button class="nav-btn" id="copyCodeBtn">Copy Code</button>
             <button class="nav-btn discord-btn" id="discordBtn">Discord</button>
+            <button class="google-auth-btn" id="googleAuthBtn"><i class="fab fa-google"></i> Sign in with Google</button>
         </div>
         <div class="header">
             <div class="logo">VerbiFlow</div>
@@ -171,25 +896,29 @@
             <div class="chat-content">
                 <div class="chat-history" id="chatHistory">
                     <div class="chat-message ai">
-                        <div class="chat-message-content">Welcome to VerbiFlow! I can help with coding, image analysis, and now academic subjects like Algebra and Science. I can also rephrase sentences to sound more natural. Ask me anything!</div>
+                        <div class="chat-message-content">Welcome to VerbiFlow! I'm an advanced AI that can code, generate Roblox games, create Google Slides with PDF downloads, analyze files, and more. Ask me anything!</div>
                         <div class="chat-message-meta">Just now</div>
                     </div>
+                </div>
+                <div class="progress-bar" id="progressBar">
+                    <div class="progress-bar-fill" id="progressBarFill"></div>
                 </div>
                 <div class="loading-spinner" id="loadingSpinner"></div>
                 <div class="typing-indicator" id="typingIndicator">
                     VerbiFlow is typing<span>.</span><span>.</span><span>.</span>
                 </div>
+                <div class="collaboration-indicator" id="collaborationIndicator"></div>
             </div>
         </div>
         <div class="file-upload-container" id="fileUploadContainer">
             <div class="file-actions">
                 <label class="file-input-label" for="fileInput">Upload File</label>
-                <input type="file" class="file-input" id="fileInput" multiple accept="image/*,text/*">
+                <input type="file" class="file-input" id="fileInput" multiple>
                 <button class="file-clear-btn" id="fileClearBtn" style="display:none;">Clear</button>
                 <button class="keep-generating-btn" id="keepGeneratingBtn">Keep Generating</button>
                 <div class="school-help-container">
                     <select class="school-help-dropdown" id="schoolHelpDropdown">
-                        <option value="">School Help</option>
+                        <option value="">Task Mode</option>
                         <option value="algebra">Algebra Help</option>
                         <option value="science">Science Help</option>
                         <option value="geometry">Geometry Help</option>
@@ -198,6 +927,8 @@
                         <option value="physics">Physics Help</option>
                         <option value="chemistry">Chemistry Help</option>
                         <option value="biology">Biology Help</option>
+                        <option value="roblox">Roblox Game</option>
+                        <option value="slides">Google Slides</option>
                     </select>
                     <button class="rephrase-btn" id="rephraseBtn">Rephrase Sentence</button>
                 </div>
@@ -205,7 +936,7 @@
             <div class="file-list" id="fileList"></div>
         </div>
         <div class="input-container">
-            <textarea class="user-input" id="userInput" placeholder="Ask anything, upload an image, or share code..." rows="1"></textarea>
+            <textarea class="user-input" id="userInput" placeholder="Ask anything, upload files, or request Roblox games or Google Slides with PDF downloads..." rows="1"></textarea>
             <button class="send-btn" id="sendBtn">Send</button>
         </div>
         <div class="file-preview-modal" id="filePreviewModal">
@@ -222,12 +953,19 @@
         </div>
         <div class="notification" id="notification"></div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/js-sha256@0.9.0/src/sha256.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-sha256@0.9.0/src/sha256.min.js" defer></script>
     <script defer>
         const API_KEY = "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";
         const API_URL = "https://api.openai.com/v1/chat/completions";
         const IMAGE_GEN_API_URL = "https://api.openai.com/v1/images/generations";
+        const GOOGLE_CLIENT_ID = "YOUR_GOOGLE_CLIENT_ID";
+        const GOOGLE_API_KEY = "YOUR_GOOGLE_API_KEY";
         const DISCORD_INVITE = "https://discord.gg/rCTRQvD4TP";
+        const RATE_LIMIT_REQUESTS = 50;
+        const RATE_LIMIT_WINDOW = 30 * 1000;
+        const CSRF_TOKEN = sha256(Date.now().toString() + Math.random().toString());
+        const JWT_SECRET = sha256('verbiflow-secret-' + Date.now());
+
         const chatHistory = document.getElementById('chatHistory');
         const userInput = document.getElementById('userInput');
         const sendBtn = document.getElementById('sendBtn');
@@ -253,8 +991,13 @@
         const keepGeneratingBtn = document.getElementById('keepGeneratingBtn');
         const schoolHelpDropdown = document.getElementById('schoolHelpDropdown');
         const rephraseBtn = document.getElementById('rephraseBtn');
+        const googleAuthBtn = document.getElementById('googleAuthBtn');
+        const progressBar = document.getElementById('progressBar');
+        const progressBarFill = document.getElementById('progressBarFill');
+        const collaborationIndicator = document.getElementById('collaborationIndicator');
+
         let filesArray = [];
-        let conversationHistory = [{ role: "assistant", content: "Welcome to VerbiFlow! I can help with coding, image analysis, and now academic subjects like Algebra and Science. I can also rephrase sentences to sound more natural. Ask me anything!" }];
+        let conversationHistory = [{ role: "assistant", content: "Welcome to VerbiFlow! I'm an advanced AI that can code, generate Roblox games, create Google Slides with PDF downloads, analyze files, and more. Ask me anything!" }];
         let latestCodeBlocks = [];
         let latestAiResponse = '';
         let isDarkMode = false;
@@ -262,6 +1005,10 @@
         let lastMessageContent = '';
         let generationTimeout = null;
         let selectedSchoolMode = '';
+        let googleAccessToken = null;
+        let requestTimestamps = [];
+        let responseCache = new Map();
+        let collaborationActive = false;
 
         class Obfuscator {
             static obfuscateBase64(code) {
@@ -420,21 +1167,224 @@
             }
         }
 
+        function checkRateLimit() {
+            const now = Date.now();
+            requestTimestamps = requestTimestamps.filter(ts => now - ts < RATE_LIMIT_WINDOW);
+            if (requestTimestamps.length >= RATE_LIMIT_REQUESTS) {
+                showNotification('Too many requests. Please wait.', 'error');
+                return false;
+            }
+            requestTimestamps.push(now);
+            return true;
+        }
+
+        function updateProgressBar(progress) {
+            requestAnimationFrame(() => {
+                progressBarFill.style.width = `${progress}%`;
+                progressBar.classList.toggle('active', progress > 0 && progress < 100);
+            });
+        }
+
+        function copyToClipboard(text, successMessage = 'Text copied.') {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text)
+                    .then(() => showNotification(successMessage))
+                    .catch(() => {
+                        fallbackCopy(text, successMessage);
+                    });
+            } else {
+                fallbackCopy(text, successMessage);
+            }
+        }
+
+        function fallbackCopy(text, successMessage) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                showNotification(successMessage);
+            } catch {
+                showNotification('Failed to copy text.', 'error');
+            }
+            document.body.removeChild(textarea);
+        }
+
+        function generateJwtToken(payload) {
+            const header = btoa(JSON.stringify({ alg: 'HS256', typ: 'JWT' }));
+            const encodedPayload = btoa(JSON.stringify(payload));
+            const signature = sha256(header + '.' + encodedPayload + JWT_SECRET);
+            return `${header}.${encodedPayload}.${signature}`;
+        }
+
+        function verifyJwtToken(token) {
+            const [header, payload, signature] = token.split('.');
+            const expectedSignature = sha256(header + '.' + payload + JWT_SECRET);
+            return signature === expectedSignature;
+        }
+
+        function initGoogleClient() {
+            gapi.load('client:auth2', () => {
+                gapi.client.init({
+                    apiKey: GOOGLE_API_KEY,
+                    clientId: GOOGLE_CLIENT_ID,
+                    discoveryDocs: [
+                        "https://slides.googleapis.com/$discovery/rest?version=v1",
+                        "https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"
+                    ],
+                    scope: 'https://www.googleapis.com/auth/presentations https://www.googleapis.com/auth/drive.file',
+                    cookiePolicy: 'single_host_origin'
+                }).then(() => {
+                    gapi.auth2.getAuthInstance().isSignedIn.listen(updateSignInStatus);
+                    updateSignInStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+                }).catch(error => {
+                    showNotification('Failed to initialize Google API: ' + error.message, 'error');
+                });
+            });
+        }
+
+        function updateSignInStatus(isSignedIn) {
+            if (isSignedIn) {
+                googleAccessToken = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token;
+                googleAuthBtn.textContent = 'Sign out';
+                showNotification('Signed in with Google.');
+            } else {
+                googleAccessToken = null;
+                googleAuthBtn.innerHTML = '<i class="fab fa-google"></i> Sign in with Google';
+                showNotification('Signed out from Google.');
+            }
+        }
+
+        async function createGoogleSlidesPresentation(title, slidesContent) {
+            if (!googleAccessToken) {
+                showNotification('Please sign in with Google to create slides.', 'error');
+                return null;
+            }
+            try {
+                updateProgressBar(10);
+                const response = await gapi.client.slides.presentations.create({
+                    title: title || 'VerbiFlow Presentation'
+                });
+                const presentationId = response.result.presentationId;
+                updateProgressBar(30);
+
+                const requests = slidesContent.map((slide, index) => ({
+                    createSlide: {
+                        slideLayoutReference: {
+                            predefinedLayout: slide.layout || 'TITLE_AND_BODY'
+                        }
+                    }
+                }));
+                await gapi.client.slides.presentations.batchUpdate({
+                    presentationId,
+                    requests
+                });
+                updateProgressBar(50);
+
+                const textRequests = slidesContent.map((slide, index) => {
+                    const slideId = `slide_${index + 1}`;
+                    return [
+                        {
+                            insertText: {
+                                objectId: `${slideId}_title`,
+                                text: slide.title || `Slide ${index + 1}`
+                            }
+                        },
+                        {
+                            insertText: {
+                                objectId: `${slideId}_body`,
+                                text: slide.body || ''
+                            }
+                        },
+                        {
+                            updateTextStyle: {
+                                objectId: `${slideId}_title`,
+                                style: {
+                                    fontSize: { magnitude: 24, unit: 'PT' },
+                                    bold: true
+                                },
+                                fields: 'fontSize,bold'
+                            }
+                        },
+                        {
+                            updateTextStyle: {
+                                objectId: `${slideId}_body`,
+                                style: {
+                                    fontSize: { magnitude: 16, unit: 'PT' }
+                                },
+                                fields: 'fontSize'
+                            }
+                        }
+                    ];
+                }).flat();
+                await gapi.client.slides.presentations.batchUpdate({
+                    presentationId,
+                    requests: textRequests
+                });
+                updateProgressBar(80);
+
+                const presentationUrl = `https://docs.google.com/presentation/d/${presentationId}/edit`;
+                const pdfBlob = await exportPresentationAsPDF(presentationId);
+                updateProgressBar(100);
+                return { presentationUrl, pdfBlob, presentationId };
+            } catch (error) {
+                showNotification('Failed to create Google Slides: ' + error.message, 'error');
+                updateProgressBar(0);
+                return null;
+            }
+        }
+
+        async function exportPresentationAsPDF(presentationId) {
+            try {
+                const response = await gapi.client.drive.files.export({
+                    fileId: presentationId,
+                    mimeType: 'application/pdf'
+                }, { responseType: 'arraybuffer' });
+                return new Uint8Array(response.body);
+            } catch (error) {
+                showNotification('Failed to export PDF: ' + error.message, 'error');
+                return null;
+            }
+        }
+
+        function triggerPDFDownload(pdfBlob, fileName) {
+            if (!pdfBlob) return;
+            const blob = new Blob([pdfBlob], { type: 'application/pdf' });
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = fileName || 'VerbiFlow_Presentation.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
+        }
+
         themeBtn.addEventListener('click', toggleTheme);
 
         discordBtn.addEventListener('click', () => {
-            navigator.clipboard.writeText(DISCORD_INVITE);
-            showNotification('Discord invite link copied.');
+            copyToClipboard(DISCORD_INVITE, 'Discord invite link copied.');
         });
 
         verbiflowUpdatesBtn.addEventListener('click', () => {
             window.open('/updates', '_blank');
         });
 
-        userInput.addEventListener('input', () => {
+        googleAuthBtn.addEventListener('click', () => {
+            if (googleAccessToken) {
+                gapi.auth2.getAuthInstance().signOut();
+            } else {
+                gapi.auth2.getAuthInstance().signIn();
+            }
+        });
+
+        userInput.addEventListener('input', debounce(() => {
             userInput.style.height = 'auto';
             userInput.style.height = `${Math.min(userInput.scrollHeight, 180)}px`;
-        });
+        }, 50));
 
         userInput.addEventListener('paste', async (e) => {
             const items = e.clipboardData.items;
@@ -442,13 +1392,8 @@
                 if (item.type.startsWith('image/')) {
                     e.preventDefault();
                     const file = item.getAsFile();
-                    if (file.size > 2 * 1024 * 1024 * 1024) {
-                        showError(`Image "${file.name}" exceeds 2GB limit.`);
-                        return;
-                    }
                     filesArray.push(file);
                     displayFileItem(file);
-
                     const userMessage = document.createElement('div');
                     userMessage.className = 'chat-message user';
                     userMessage.innerHTML = `
@@ -466,39 +1411,39 @@
         fileInput.addEventListener('change', handleFileUpload);
         fileUploadContainer.addEventListener('dragover', (e) => {
             e.preventDefault();
-            fileUploadContainer.style.background = isDarkMode ? '#4b5563' : '#e5e7eb';
+            fileUploadContainer.classList.add('bg-gray-200', 'dark:bg-gray-600');
         });
         fileUploadContainer.addEventListener('dragleave', () => {
-            fileUploadContainer.style.background = isDarkMode ? '#1f2937' : '#fff';
+            fileUploadContainer.classList.remove('bg-gray-200', 'dark:bg-gray-600');
         });
         fileUploadContainer.addEventListener('drop', (e) => {
             e.preventDefault();
-            fileUploadContainer.style.background = isDarkMode ? '#1f2937' : '#fff';
+            fileUploadContainer.classList.remove('bg-gray-200', 'dark:bg-gray-600');
             fileInput.files = e.dataTransfer.files;
             handleFileUpload();
         });
 
         function handleFileUpload() {
             const files = Array.from(fileInput.files);
+            let uploaded = 0;
             files.forEach(file => {
-                if (file.size > 2 * 1024 * 1024 * 1024) {
-                    showError(`File "${file.name}" exceeds 2GB limit.`);
-                    return;
-                }
                 if (!filesArray.some(f => f.name === file.name && f.size === file.size)) {
                     filesArray.push(file);
                     displayFileItem(file);
+                    uploaded++;
+                    updateProgressBar((uploaded / files.length) * 100);
                 }
             });
             fileClearBtn.style.display = filesArray.length ? 'block' : 'none';
             fileInput.value = '';
+            setTimeout(() => updateProgressBar(0), 1000);
         }
 
         function displayFileItem(file) {
             const fileItem = document.createElement('div');
             fileItem.className = 'file-item';
             fileItem.innerHTML = `
-                <span class="file-item-name">${file.name}</span>
+                <span class="file-item-name">${sanitizeInput(file.name)}</span>
                 <span class="file-item-details">${(file.size / 1024 / 1024).toFixed(2)} MB</span>
             `;
             fileItem.addEventListener('click', () => previewFile(file));
@@ -509,16 +1454,17 @@
             filesArray = [];
             fileList.innerHTML = '';
             fileClearBtn.style.display = 'none';
+            updateProgressBar(0);
         });
 
         function previewFile(file) {
-            filePreviewContent.innerHTML = `<strong>${file.name}</strong><br>Size: ${(file.size / 1024 / 1024).toFixed(2)} MB<br>Type: ${file.type}`;
+            filePreviewContent.innerHTML = `<strong>${sanitizeInput(file.name)}</strong><br>Size: ${(file.size / 1024 / 1024).toFixed(2)} MB<br>Type: ${file.type}`;
             if (file.type.startsWith('image/')) {
                 const img = document.createElement('img');
                 img.src = URL.createObjectURL(file);
                 img.style.maxWidth = '100%';
                 filePreviewContent.appendChild(img);
-            } else if (file.type.startsWith('text/')) {
+            } else if (file.type.startsWith('text/') || file.type.includes('json') || file.type.includes('xml')) {
                 const reader = new FileReader();
                 reader.onload = (e) => {
                     const pre = document.createElement('pre');
@@ -526,6 +1472,8 @@
                     filePreviewContent.appendChild(pre);
                 };
                 reader.readAsText(file);
+            } else {
+                filePreviewContent.innerHTML += '<br>Preview not available for this file type.';
             }
             filePreviewModal.classList.add('open');
         }
@@ -538,11 +1486,11 @@
         clearChatBtn.addEventListener('click', () => {
             chatHistory.innerHTML = `
                 <div class="chat-message ai">
-                    <div class="chat-message-content">Welcome to VerbiFlow! I can help with coding, image analysis, and now academic subjects like Algebra and Science. I can also rephrase sentences to sound more natural. Ask me anything!</div>
+                    <div class="chat-message-content">Welcome to VerbiFlow! I'm an advanced AI that can code, generate Roblox games, create Google Slides with PDF downloads, analyze files, and more. Ask me anything!</div>
                     <div class="chat-message-meta">Just now</div>
                 </div>
             `;
-            conversationHistory = [{ role: "assistant", content: "Welcome to VerbiFlow! I can help with coding, image analysis, and now academic subjects like Algebra and Science. I can also rephrase sentences to sound more natural. Ask me anything!" }];
+            conversationHistory = [{ role: "assistant", content: "Welcome to VerbiFlow! I'm an advanced AI that can code, generate Roblox games, create Google Slides with PDF downloads, analyze files, and more. Ask me anything!" }];
             filesArray = [];
             fileList.innerHTML = '';
             fileClearBtn.style.display = 'none';
@@ -555,17 +1503,17 @@
             codeSidebarContent.textContent = '';
             schoolHelpDropdown.value = '';
             selectedSchoolMode = '';
+            updateProgressBar(0);
+            responseCache.clear();
         });
 
         copyCodeBtn.addEventListener('click', () => {
             if (latestCodeBlocks.length > 0) {
-                navigator.clipboard.writeText(latestCodeBlocks.join('\n\n'));
-                showNotification('Code copied to clipboard.');
+                copyToClipboard(latestCodeBlocks.join('\n\n'), 'Code copied to clipboard.');
                 codeSidebarContent.textContent = latestCodeBlocks.join('\n\n');
                 codeSidebar.classList.add('open');
             } else if (latestAiResponse) {
-                navigator.clipboard.writeText(latestAiResponse);
-                showNotification('AI response copied.');
+                copyToClipboard(latestAiResponse, 'AI response copied.');
             } else {
                 showNotification('Ask AI first.', 'error');
             }
@@ -575,7 +1523,7 @@
             codeSidebar.classList.remove('open');
         });
 
-        sendBtn.addEventListener('click', sendMessage);
+        sendBtn.addEventListener('click', () => sendMessage());
         userInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
@@ -595,7 +1543,7 @@
             if (selectedSchoolMode) {
                 showNotification(`Switched to ${e.target.options[e.target.selectedIndex].text} mode.`);
             } else {
-                showNotification('School Help mode disabled.');
+                showNotification('Task mode disabled.');
             }
         });
 
@@ -614,7 +1562,7 @@
             const errorMessage = document.createElement('div');
             errorMessage.className = 'chat-message ai';
             errorMessage.innerHTML = `
-                <div class="chat-message-content">${message}</div>
+                <div class="chat-message-content">${sanitizeInput(message)}</div>
                 <div class="chat-message-meta">Just now</div>
             `;
             chatHistory.appendChild(errorMessage);
@@ -622,12 +1570,13 @@
             latestCodeBlocks = [];
             latestAiResponse = '';
             keepGeneratingBtn.classList.remove('show');
+            updateProgressBar(0);
         }
 
         function sanitizeInput(input) {
             const div = document.createElement('div');
             div.textContent = input;
-            return div.innerHTML;
+            return div.innerHTML.replace(/[<>]/g, '');
         }
 
         function formatMessage(content, messageElement) {
@@ -635,34 +1584,45 @@
             let codeBlocks = [];
             let html = content.replace(codeBlockRegex, (match, code) => {
                 codeBlocks.push(code.trim());
-                return `<div class="code-block"><pre class="code-text">${sanitizeInput(code.trim())}</pre><button class="copy-btn" onclick="navigator.clipboard.writeText(\`${code.trim().replace(/`/g, '\\`')}\`)">Copy Code</button></div>`;
+                const escapedCode = code.trim().replace(/`/g, '\\`').replace(/"/g, '"');
+                return `<div class="code-block"><pre class="code-text">${sanitizeInput(code.trim())}</pre><button class="copy-btn" onclick="copyToClipboard(\`${escapedCode}\`, 'Code copied.')">Copy Code</button></div>`;
             });
             latestCodeBlocks = codeBlocks;
-            if (codeBlocks.length > 1) {
-                const copyAllBtn = `<button class="copy-all-btn" onclick="navigator.clipboard.writeText(\`${codeBlocks.join('\n\n').replace(/`/g, '\\`')}\`)">Copy All Code</button>`;
+            if (codeBlocks.length > 0) {
+                const escapedAllCode = codeBlocks.join('\n\n').replace(/`/g, '\\`').replace(/"/g, '"');
+                const copyAllBtn = `<button class="copy-all-btn" onclick="copyToClipboard(\`${escapedAllCode}\`, 'All code copied.')">Copy All Code</button>`;
                 messageElement.querySelector('.chat-message-content').insertAdjacentHTML('afterbegin', copyAllBtn);
             }
             return html;
         }
 
         async function generateImage(prompt) {
+            const cacheKey = `image:${prompt}`;
+            if (responseCache.has(cacheKey)) {
+                return responseCache.get(cacheKey);
+            }
             try {
                 const response = await fetch(IMAGE_GEN_API_URL, {
                     method: 'POST',
                     headers: {
                         'Authorization': `Bearer ${API_KEY}`,
                         'Content-Type': 'application/json',
+                        'X-CSRF-Token': CSRF_TOKEN,
+                        'X-JWT-Token': generateJwtToken({ action: 'generateImage' })
                     },
                     body: JSON.stringify({
                         prompt: prompt,
                         n: 1,
-                        size: "1024x1024",
-                    }),
+                        size: "1024x1024"
+                    })
                 });
                 if (!response.ok) throw new Error('Image generation failed');
                 const data = await response.json();
-                return data.data[0].url;
+                const url = data.data[0].url;
+                responseCache.set(cacheKey, url);
+                return url;
             } catch (error) {
+                showNotification('Image generation failed: ' + error.message, 'error');
                 return null;
             }
         }
@@ -675,7 +1635,80 @@
             });
         }
 
+        async function readFileContent(file) {
+            return new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.readAsText(file);
+            });
+        }
+
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        function toggleCollaborationIndicator(active) {
+            collaborationActive = active;
+            collaborationIndicator.classList.toggle('active', active);
+        }
+
+        const worker = new Worker(URL.createObjectURL(new Blob([`
+            self.onmessage = async function(e) {
+                const { prompt, apiKey, apiUrl, csrfToken, jwtToken } = e.data;
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': 'Bearer ' + apiKey,
+                            'Content-Type': 'application/json',
+                            'X-CSRF-Token': csrfToken,
+                            'X-JWT-Token': jwtToken
+                        },
+                        body: JSON.stringify({
+                            model: "gpt-4o",
+                            messages: [{ role: "user", content: prompt }],
+                            max_tokens: 4000,
+                            temperature: 0.3
+                        })
+                    });
+                    if (!response.ok) throw new Error('Worker API request failed');
+                    const data = await response.json();
+                    self.postMessage({ success: true, content: data.choices[0].message.content });
+                } catch (error) {
+                    self.postMessage({ success: false, error: error.message });
+                }
+            };
+        `], { type: 'text/javascript' })));
+
+        worker.onmessage = (e) => {
+            if (e.data.success) {
+                const aiMessage = document.createElement('div');
+                aiMessage.className = 'chat-message ai';
+                aiMessage.innerHTML = `<div class="chat-message-content">${formatMessage(e.data.content, aiMessage)}</div><div class="chat-message-meta">Just now</div>`;
+                chatHistory.appendChild(aiMessage);
+                latestAiResponse = e.data.content;
+                conversationHistory.push({ role: "assistant", content: e.data.content });
+                chatArea.scrollTop = chatArea.scrollHeight;
+                updateProgressBar(100);
+            } else {
+                showError(`Worker failed: ${e.data.error}`);
+            }
+            typingIndicator.style.display = 'none';
+            sendBtn.disabled = false;
+            isGenerating = false;
+            updateProgressBar(0);
+        };
+
         async function sendMessage(isContinuation = false) {
+            if (!checkRateLimit()) return;
             let message = isContinuation ? lastMessageContent : sanitizeInput(userInput.value.trim());
             if (!message && filesArray.length === 0 && !isContinuation) return;
 
@@ -710,7 +1743,7 @@
                 if (isGenerating) {
                     keepGeneratingBtn.classList.add('show');
                 }
-            }, 8000);
+            }, 3000);
 
             try {
                 let aiMessageText = '';
@@ -719,11 +1752,27 @@
                 aiMessage.innerHTML = `<div class="chat-message-content"></div><div class="chat-message-meta">Just now</div>`;
                 chatHistory.appendChild(aiMessage);
 
+                const cacheKey = `response:${message}:${selectedSchoolMode}`;
+                if (responseCache.has(cacheKey) && !isContinuation) {
+                    aiMessageText = responseCache.get(cacheKey);
+                    aiMessage.querySelector('.chat-message-content').innerHTML = formatMessage(aiMessageText, aiMessage);
+                    latestAiResponse = aiMessageText;
+                    conversationHistory.push({ role: "assistant", content: aiMessageText });
+                    chatArea.scrollTop = chatArea.scrollHeight;
+                    typingIndicator.style.display = 'none';
+                    sendBtn.disabled = false;
+                    isGenerating = false;
+                    updateProgressBar(0);
+                    return;
+                }
+
                 if (message.toLowerCase().includes('generate image') || message.toLowerCase().includes('create image')) {
+                    updateProgressBar(20);
                     const imageUrl = await generateImage(message);
+                    updateProgressBar(100);
                     if (imageUrl) {
                         aiMessageText = `Generated image for: "${sanitizeInput(message)}"`;
-                        aiMessage.querySelector('.chat-message-content').innerHTML = `${formatMessage(aiMessageText, aiMessage)}<img src="${imageUrl}" alt="Generated Image">`;
+                        aiMessage.querySelector('.chat-message-content').innerHTML = `${formatMessage(aiMessageText, aiMessage)}<img src="${imageUrl}" alt="Generated Image" loading="lazy">`;
                         conversationHistory.push({ role: "assistant", content: aiMessageText, image_url: imageUrl });
                     } else {
                         aiMessageText = 'Failed to generate image. Try another prompt.';
@@ -731,6 +1780,7 @@
                         conversationHistory.push({ role: "assistant", content: aiMessageText });
                     }
                     latestAiResponse = aiMessageText;
+                    responseCache.set(cacheKey, aiMessageText);
                     chatArea.scrollTop = chatArea.scrollHeight;
                 } else if (message.toLowerCase().includes('obfuscate')) {
                     const codeToObfuscate = message.match(/```([\s\S]*?)```/)?.[1]?.trim() || message;
@@ -743,6 +1793,7 @@
                         aiMessage.querySelector('.chat-message-content').innerHTML = formatMessage(aiMessageText, aiMessage);
                     }
                     latestAiResponse = aiMessageText;
+                    responseCache.set(cacheKey, aiMessageText);
                     conversationHistory.push({ role: "assistant", content: aiMessageText });
                     chatArea.scrollTop = chatArea.scrollHeight;
                 } else if (message.toLowerCase().includes('deobfuscate') || message.toLowerCase().includes('decode')) {
@@ -756,9 +1807,11 @@
                         aiMessage.querySelector('.chat-message-content').innerHTML = formatMessage(aiMessageText, aiMessage);
                     }
                     latestAiResponse = aiMessageText;
+                    responseCache.set(cacheKey, aiMessageText);
                     conversationHistory.push({ role: "assistant", content: aiMessageText });
                     chatArea.scrollTop = chatArea.scrollHeight;
                 } else if (message.toLowerCase().includes('rephrase') && message.toLowerCase().includes('less ai-generated')) {
+                    toggleCollaborationIndicator(true);
                     const textToRephrase = message.match(/rephrase this to sound more natural and less ai-generated: ([\s\S]*)/i)?.[1]?.trim() || latestAiResponse;
                     const rephrasePrompt = `Rephrase the following text to sound more natural, conversational, and less AI-generated while maintaining its meaning: "${textToRephrase}". If it's code, rewrite it in a more idiomatic and human-like style.`;
                     const response = await fetch(API_URL, {
@@ -766,192 +1819,293 @@
                         headers: {
                             'Authorization': `Bearer ${API_KEY}`,
                             'Content-Type': 'application/json',
+                            'X-CSRF-Token': CSRF_TOKEN,
+                            'X-JWT-Token': generateJwtToken({ action: 'rephrase' })
                         },
                         body: JSON.stringify({
                             model: "gpt-4o",
                             messages: [{ role: "user", content: rephrasePrompt }],
-                            max_tokens: 700,
-                            temperature: 0.5,
-                        }),
+                            max_tokens: 1000,
+                            temperature: 0.5
+                        })
                     });
                     if (!response.ok) throw new Error('API request failed');
                     const data = await response.json();
                     aiMessageText = data.choices[0].message.content;
                     aiMessage.querySelector('.chat-message-content').innerHTML = formatMessage(aiMessageText, aiMessage);
                     latestAiResponse = aiMessageText;
+                    responseCache.set(cacheKey, aiMessageText);
                     conversationHistory.push({ role: "assistant", content: aiMessageText });
                     chatArea.scrollTop = chatArea.scrollHeight;
+                    toggleCollaborationIndicator(false);
                 } else if (message.toLowerCase().includes('ui design') || message.toLowerCase().includes('user interface')) {
+                    toggleCollaborationIndicator(true);
                     const uiPrompt = `You are a world-class UI/UX designer. Create a highly detailed, modern, and accessible UI design for: "${sanitizeInput(message)}". Provide HTML, CSS, and JavaScript code using Tailwind CSS for styling, ARIA attributes for accessibility, and optimize for performance and cross-browser compatibility. Include animations, responsive design, and semantic HTML.`;
+                    worker.postMessage({
+                        prompt: uiPrompt,
+                        apiKey: API_KEY,
+                        apiUrl: API_URL,
+                        csrfToken: CSRF_TOKEN,
+                        jwtToken: generateJwtToken({ action: 'uiDesign' })
+                    });
+                    return;
+                } else if (selectedSchoolMode === 'roblox' || message.toLowerCase().includes('roblox') || message.toLowerCase().includes('luau')) {
+                    toggleCollaborationIndicator(true);
+                    const robloxPrompt = `You are a Roblox Studio expert. Create a complete Roblox game based on: "${sanitizeInput(message)}". Provide optimized Luau code for a fully functional game, including:
+                    - Game mechanics with smooth gameplay (e.g., obby, tycoon, or simulator)
+                    - UI using Roblox's UI framework (Frames, TextLabels, TextButtons, ImageLabels)
+                    - Advanced animations and particle effects
+                    - Error handling and performance optimizations
+                    - Multiplayer support with NetworkOwnership and RemoteEvents
+                    - Responsive design for all devices
+                    - Detailed instructions for setup in Roblox Studio
+                    Ensure the code is ready to be copied into Roblox Studio and includes a sample template (e.g., obby or tycoon).`;
+                    worker.postMessage({
+                        prompt: robloxPrompt,
+                        apiKey: API_KEY,
+                        apiUrl: API_URL,
+                        csrfToken: CSRF_TOKEN,
+                        jwtToken: generateJwtToken({ action: 'robloxGame' })
+                    });
+                    return;
+                } else if (selectedSchoolMode === 'slides' || message.toLowerCase().includes('google slides') || message.toLowerCase().includes('presentation')) {
+                    toggleCollaborationIndicator(true);
+                    const slidesPrompt = `You are an expert presentation designer. Create a detailed structure for a Google Slides presentation based on: "${sanitizeInput(message)}". Provide:
+                        - A title for the presentation
+                        - A list of slides with titles, body content (in markdown with bullet points, headings, and rich formatting), and layout suggestions (e.g., TITLE_AND_BODY, SECTION_HEADER, TWO_COLUMN)
+                        - Suggestions for images or charts (describe placement and type, e.g., "Bar chart showing data trends")
+                        - Professional color schemes and typography recommendations
+                    Ensure the content is professional, visually appealing, and ready for Google Slides creation with at least 5 slides.`;
                     const response = await fetch(API_URL, {
                         method: 'POST',
                         headers: {
                             'Authorization': `Bearer ${API_KEY}`,
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            model: "gpt-4o",
-                            messages: [{ role: "user", content: uiPrompt }],
-                            max_tokens: 2000,
-                            temperature: 0.3,
-                        }),
+                            ''Content-Type': 'application/json',
+                        'X-CSRF-Token': CSRF_TOKEN,
+                        'X-JWT-Token': generateJwtToken({ action: 'createSlides' })
+                    },
+                    body: JSON.stringify({
+                        model: "gpt-4o",
+                        messages: [{ role: "user", content: slidesPrompt }],
+                        max_tokens: 2000,
+                        temperature: 0.4
+                    })
+                });
+                if (!response.ok) throw new Error('API request failed');
+                const data = await response.json();
+                aiMessageText = data.choices[0].message.content;
+                const slideRegex = /### Slide \d+: (.*?)\n- Layout: (.*?)\n- Content:\n([\s\S]*?)(?=(### Slide|$))/g;
+                let slidesContent = [];
+                let match;
+                while ((match = slideRegex.exec(aiMessageText)) !== null) {
+                    slidesContent.push({
+                        title: match[1].trim(),
+                        layout: match[2].trim(),
+                        body: match[3].trim()
                     });
-                    if (!response.ok) throw new Error('API request failed');
-                    const data = await response.json();
-                    aiMessageText = data.choices[0].message.content;
-                    aiMessage.querySelector('.chat-message-content').innerHTML = formatMessage(aiMessageText, aiMessage);
-                    latestAiResponse = aiMessageText;
-                    conversationHistory.push({ role: "assistant", content: aiMessageText });
-                    chatArea.scrollTop = chatArea.scrollHeight;
-                } else if (message.toLowerCase().includes('luau') || message.toLowerCase().includes('roblox')) {
-                    const luauPrompt = `You are a Luau expert for Roblox. Create a modern, intuitive, and visually appealing UI for a Roblox game based on: "${sanitizeInput(message)}". Provide optimized Luau code using Roblox's UI framework (e.g., Frames, TextLabels, TextButtons, ImageLabels). Include advanced animations, error handling, responsive design for all screen sizes, and performance optimizations.`;
-                    const response = await fetch(API_URL, {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': `Bearer ${API_KEY}`,
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            model: "gpt-4o",
-                            messages: [{ role: "user", content: luauPrompt }],
-                            max_tokens: 1800,
-                            temperature: 0.3,
-                        }),
-                    });
-                    if (!response.ok) throw new Error('API request failed');
-                    const data = await response.json();
-                    aiMessageText = data.choices[0].message.content;
-                    aiMessage.querySelector('.chat-message-content').innerHTML = formatMessage(aiMessageText, aiMessage);
-                    latestAiResponse = aiMessageText;
-                    conversationHistory.push({ role: "assistant", content: aiMessageText });
-                    chatArea.scrollTop = chatArea.scrollHeight;
-                } else if (message.toLowerCase().includes('analyze code') || message.toLowerCase().includes('review code')) {
-                    const codeToAnalyze = message.match(/```([\s\S]*?)```/)?.[1]?.trim() || message;
-                    const codePrompt = `You are a senior software engineer. Analyze the following code: \`\`\`\n${codeToAnalyze}\n\`\`\`. Provide a detailed review including potential bugs, performance issues, security vulnerabilities, and suggestions for improvement. Include code optimizations, best practices, and examples of improved code. Format with clear sections.`;
-                    const response = await fetch(Api_URL, {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': `Bearer ${API_KEY}`,
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            model: "gpt-4o",
-                            messages: [{ role: "user", content: codePrompt }],
-                            max_tokens: 1500,
-                            temperature: 0.3,
-                        }),
-                    });
-                    if (!response.ok) throw new Error('API request failed');
-                    const data = await response.json();
-                    aiMessageText = data.choices[0].message.content;
+                }
+                if (slidesContent.length === 0) {
+                    slidesContent = [
+                        { title: "Introduction", layout: "TITLE_AND_BODY", body: "Overview of the topic" },
+                        { title: "Key Points", layout: "SECTION_HEADER", body: "- Point 1\n- Point 2\n- Point 3" },
+                        { title: "Details", layout: "TWO_COLUMN", body: "- Left: Detail 1\n- Right: Detail 2" },
+                        { title: "Conclusion", layout: "TITLE_AND_BODY", body: "Summary and next steps" },
+                        { title: "Q&A", layout: "BLANK", body: "Questions and Answers" }
+                    ];
+                }
+                const slideResult = await createGoogleSlidesPresentation("VerbiFlow Presentation", slidesContent);
+                if (slideResult) {
+                    const { presentationUrl, pdfBlob } = slideResult;
+                    aiMessageText += `\n\n[Google Slides Presentation](${presentationUrl})\n\n<button class="download-pdf-btn" onclick="triggerPDFDownload(new Uint8Array([${pdfBlob}]), 'VerbiFlow_Presentation.pdf')">Download PDF</button>`;
                     aiMessage.querySelector('.chat-message-content').innerHTML = formatMessage(aiMessageText, aiMessage);
                     latestAiResponse = aiMessageText;
                     conversationHistory.push({ role: "assistant", content: aiMessageText });
                     chatArea.scrollTop = chatArea.scrollHeight;
                 } else {
-                    const messages = [...conversationHistory];
-                    if (filesArray.some(file => file.type.startsWith('image/')) && !isContinuation) {
-                        const imageMessages = await Promise.all(filesArray.filter(file => file.type.startsWith('image/')).map(async file => ({
-                            role: "user",
-                            content: [
-                                { type: "text", text: `Analyze image: ${sanitizeInput(file.name)}` },
-                                { type: "image_url", image_url: { url: await readImage(file) } },
-                            ],
-                        })));
-                        messages.push(...imageMessages);
-                    }
+                    aiMessageText += '\n\nFailed to create Google Slides presentation.';
+                    aiMessage.querySelector('.chat-message-content').innerHTML = formatMessage(aiMessageText, aiMessage);
+                    latestAiResponse = aiMessageText;
+                    conversationHistory.push({ role: "assistant", content: aiMessageText });
+                    chatArea.scrollTop = chatArea.scrollHeight;
+                }
+                responseCache.set(cacheKey, aiMessageText);
+                toggleCollaborationIndicator(false);
+            } else if (message.toLowerCase().includes('analyze code') || message.toLowerCase().includes('review code')) {
+                const codeToAnalyze = message.match(/```([\s\S]*?)```/)?.[1]?.trim() || message;
+                const codePrompt = `You are a senior software engineer. Analyze the following code: \`\`\`\n${codeToAnalyze}\n\`\`\`. Provide a detailed review including potential bugs, performance issues, security vulnerabilities, and suggestions for improvement. Include code optimizations, best practices, and examples of improved code. Format with clear sections.`;
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${API_KEY}`,
+                        'Content-Type': 'application/json',
+                        'X-CSRF-Token': CSRF_TOKEN,
+                        'X-JWT-Token': generateJwtToken({ action: 'analyzeCode' })
+                    },
+                    body: JSON.stringify({
+                        model: "gpt-4o",
+                        messages: [{ role: "user", content: codePrompt }],
+                        max_tokens: 2000,
+                        temperature: 0.3
+                    })
+                });
+                if (!response.ok) throw new Error('API request failed');
+                const data = await response.json();
+                aiMessageText = data.choices[0].message.content;
+                aiMessage.querySelector('.chat-message-content').innerHTML = formatMessage(aiMessageText, aiMessage);
+                latestAiResponse = aiMessageText;
+                responseCache.set(cacheKey, aiMessageText);
+                conversationHistory.push({ role: "assistant", content: aiMessageText });
+                chatArea.scrollTop = chatArea.scrollHeight;
+            } else {
+                const messages = [...conversationHistory];
+                if (filesArray.length > 0 && !isContinuation) {
+                    const fileMessages = await Promise.all(filesArray.map(async file => {
+                        if (file.type.startsWith('image/')) {
+                            return {
+                                role: "user",
+                                content: [
+                                    { type: "text", text: `Analyze image: ${sanitizeInput(file.name)}` },
+                                    { type: "image_url", image_url: { url: await readImage(file) } }
+                                ]
+                            };
+                        } else if (file.type.startsWith('text/') || file.type.includes('json') || file.type.includes('xml')) {
+                            const content = await readFileContent(file);
+                            return {
+                                role: "user",
+                                content: `Analyze file "${sanitizeInput(file.name)}":\n\`\`\`\n${content}\n\`\`\``
+                            };
+                        } else {
+                            return {
+                                role: "user",
+                                content: `Describe file "${sanitizeInput(file.name)}" (type: ${file.type}, size: ${(file.size / 1024 / 1024).toFixed(2)} MB).`
+                            };
+                        }
+                    }));
+                    messages.push(...fileMessages);
+                }
 
-                    let enhancedPrompt = message;
-                    if (selectedSchoolMode) {
-                        const modePrompts = {
-                            algebra: `You are an expert algebra tutor. Provide accurate, step-by-step solutions for algebra problems, including equations, inequalities, and polynomials. Use clear explanations suitable for a student.`,
-                            science: `You are an expert science tutor. Provide accurate, detailed explanations for science topics, including experiments, concepts, and theories across biology, chemistry, and physics.`,
-                            geometry: `You are an expert geometry tutor. Provide accurate, step-by-step solutions for geometry problems, including proofs, shapes, and measurements. Use clear explanations suitable for a student.`,
-                            history: `You are an expert history tutor. Provide accurate, detailed explanations of historical events, timelines, and figures. Use clear, engaging narratives suitable for a student.`,
-                            literature: `You are an expert literature tutor. Provide accurate, insightful analysis of literary works, themes, and characters. Use clear explanations suitable for a student.`,
-                            physics: `You are an expert physics tutor. Provide accurate, step-by-step solutions for physics problems, including mechanics, electricity, and thermodynamics. Use clear explanations suitable for a student.`,
-                            chemistry: `You are an expert chemistry tutor. Provide accurate, detailed explanations for chemistry topics, including reactions, stoichiometry, and organic chemistry. Use clear explanations suitable for a student.`,
-                            biology: `You are an expert biology tutor. Provide accurate, detailed explanations for biology topics, including genetics, ecology, and physiology. Use clear explanations suitable for a student.`,
-                        };
-                        enhancedPrompt = `${modePrompts[selectedSchoolMode]} Answer the following: "${message}"`;
-                    }
+                let enhancedPrompt = message;
+                if (selectedSchoolMode && selectedSchoolMode !== 'roblox' && selectedSchoolMode !== 'slides') {
+                    const modePrompts = {
+                        algebra: `You are an expert algebra tutor. Provide accurate, step-by-step solutions for algebra problems, including equations, inequalities, and polynomials. Use clear explanations suitable for a student.`,
+                        science: `You are an expert science tutor. Provide accurate, detailed explanations for science topics, including experiments, concepts, and theories across biology, chemistry, and physics.`,
+                        geometry: `You are an expert geometry tutor. Provide accurate, step-by-step solutions for geometry problems, including proofs, shapes, and measurements. Use clear explanations suitable for a student.`,
+                        history: `You are an expert history tutor. Provide accurate, detailed explanations of historical events, timelines, and figures. Use clear, engaging narratives suitable for a student.`,
+                        literature: `You are an expert literature tutor. Provide accurate, insightful analysis of literary works, themes, and characters. Use clear explanations suitable for a student.`,
+                        physics: `You are an expert physics tutor. Provide accurate, step-by-step solutions for physics problems, including mechanics, electricity, and thermodynamics. Use clear explanations suitable for a student.`,
+                        chemistry: `You are an expert chemistry tutor. Provide accurate, detailed explanations for chemistry topics, including reactions, stoichiometry, and organic chemistry. Use clear explanations suitable for a student.`,
+                        biology: `You are an expert biology tutor. Provide accurate, detailed explanations for biology topics, including genetics, ecology, and physiology. Use clear explanations suitable for a student.`
+                    };
+                    enhancedPrompt = `${modePrompts[selectedSchoolMode]} Answer the following: "${message}"`;
+                } else {
+                    enhancedPrompt = `You are an advanced AI capable of handling any task with high accuracy and creativity. Provide a detailed, well-structured response to: "${message}". Include code, explanations, or visuals as needed.`;
+                }
 
-                    if (message) {
-                        messages.push({ role: "user", content: isContinuation ? `Continue generating response for: ${message}` : enhancedPrompt });
-                    }
+                if (message) {
+                    messages.push({ role: "user", content: isContinuation ? `Continue generating response for: ${message}` : enhancedPrompt });
+                }
 
-                    const response = await fetch(API_URL, {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': `Bearer ${API_KEY}`,
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            model: "gpt-4o",
-                            messages: messages.slice(-25),
-                            max_tokens: 700,
-                            temperature: 0.3,
-                            stream: true,
-                            top_p: 0.7,
-                        }),
-                    });
+                updateProgressBar(10);
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${API_KEY}`,
+                        'Content-Type': 'application/json',
+                        'X-CSRF-Token': CSRF_TOKEN,
+                        'X-JWT-Token': generateJwtToken({ action: 'generalQuery' })
+                    },
+                    body: JSON.stringify({
+                        model: "gpt-4o",
+                        messages: messages.slice(-25),
+                        max_tokens: 4000,
+                        temperature: 0.3,
+                        stream: true,
+                        top_p: 0.7
+                    })
+                });
 
-                    if (!response.ok) throw new Error('API request failed');
+                if (!response.ok) throw new Error('API request failed');
 
-                    const reader = response.body.getReader();
-                    let buffer = '';
-                    while (true) {
-                        const { done, value } = await reader.read();
-                        if (done) break;
-                        buffer += new TextDecoder().decode(value);
-                        const lines = buffer.split('\n');
-                        buffer = lines.pop();
-                        for (const line of lines) {
-                            if (line.startsWith('data: ')) {
-                                const data = line.slice(6);
-                                if (data === '[DONE]') continue;
-                                try {
-                                    const parsed = JSON.parse(data);
-                                    const content = parsed.choices[0].delta.content;
-                                    if (content) {
-                                        aiMessageText += content;
-                                        aiMessage.querySelector('.chat-message-content').innerHTML = formatMessage(aiMessageText, aiMessage);
-                                        chatArea.scrollTop = chatArea.scrollHeight;
-                                        clearTimeout(generationTimeout);
-                                        generationTimeout = setTimeout(() => {
-                                            if (isGenerating) {
-                                                keepGeneratingBtn.classList.add('show');
-                                            }
-                                        }, 8000);
-                                    }
-                                } catch (e) {}
+                const reader = response.body.getReader();
+                let buffer = '';
+                let progress = 10;
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+                    buffer += new TextDecoder().decode(value);
+                    const lines = buffer.split('\n');
+                    buffer = lines.pop();
+                    for (const line of lines) {
+                        if (line.startsWith('data: ')) {
+                            const data = line.slice(6);
+                            if (data === '[DONE]') continue;
+                            try {
+                                const parsed = JSON.parse(data);
+                                const content = parsed.choices[0].delta.content;
+                                if (content) {
+                                    aiMessageText += content;
+                                    aiMessage.querySelector('.chat-message-content').innerHTML = formatMessage(aiMessageText, aiMessage);
+                                    chatArea.scrollTop = chatArea.scrollHeight;
+                                    progress = Math.min(progress + 5, 90);
+                                    updateProgressBar(progress);
+                                    clearTimeout(generationTimeout);
+                                    generationTimeout = setTimeout(() => {
+                                        if (isGenerating) {
+                                            keepGeneratingBtn.classList.add('show');
+                                        }
+                                    }, 4000);
+                                }
+                            } catch (e) {
+                                console.warn('Stream parse error:', e);
                             }
                         }
                     }
-                    aiMessage.querySelector('.chat-message-content').innerHTML = formatMessage(aiMessageText, aiMessage);
-                    latestAiResponse = aiMessageText;
-                    chatArea.scrollTop = chatArea.scrollHeight;
-                    conversationHistory.push({ role: "assistant", content: aiMessageText });
                 }
+                aiMessage.querySelector('.chat-message-content').innerHTML = formatMessage(aiMessageText, aiMessage);
+                latestAiResponse = aiMessageText;
+                responseCache.set(cacheKey, aiMessageText);
+                conversationHistory.push({ role: "assistant", content: aiMessageText });
+                chatArea.scrollTop = chatArea.scrollHeight;
+            }
 
-                if (!isContinuation) {
-                    filesArray = [];
-                    fileList.innerHTML = '';
-                    fileClearBtn.style.display = 'none';
-                }
-            } catch (error) {
-                showError('Something broke. Check your connection or try again.');
-            } finally {
-                typingIndicator.style.display = 'none';
-                sendBtn.disabled = false;
-                isGenerating = false;
-                if (!keepGeneratingBtn.classList.contains('show')) {
-                    clearTimeout(generationTimeout);
-                }
+            if (!isContinuation) {
+                filesArray = [];
+                fileList.innerHTML = '';
+                fileClearBtn.style.display = 'none';
+            }
+        } catch (error) {
+            showError(`Something went wrong: ${error.message}. Please try again.`);
+        } finally {
+            typingIndicator.style.display = 'none';
+            sendBtn.disabled = false;
+            isGenerating = false;
+            updateProgressBar(0);
+            toggleCollaborationIndicator(false);
+            if (!keepGeneratingBtn.classList.contains('show')) {
+                clearTimeout(generationTimeout);
             }
         }
+    }
 
-        loadTheme();
-    </script>
+    loadTheme();
+    initGoogleClient();
+
+    window.triggerPDFDownload = function(pdfBlob, fileName) {
+        try {
+            const blob = new Blob([pdfBlob], { type: 'application/pdf' });
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = fileName || 'VerbiFlow_Presentation.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
+            showNotification('PDF downloaded successfully.');
+        } catch (error) {
+            showNotification('Failed to download PDF: ' + error.message, 'error');
+        }
+    };
+</script>
 </body>
 </html>
