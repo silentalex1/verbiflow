@@ -7,174 +7,177 @@
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta name="robots" content="noindex, nofollow">
-    <meta name="description" content="VerbiFlow - AI-powered assistant for coding, creativity, video analysis, and more.">
-    <title>VerbiFlow - AI Powerhouse</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap">
+    <meta name="description" content="VerbiFlow - Your lively AI companion for coding, creativity, media analysis, and more.">
+    <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload">
+    <meta http-equiv="Referrer-Policy" content="no-referrer">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+    <title>VerbiFlow - Your AI Companion</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         *{margin:0;padding:0;box-sizing:border-box;}
-        body{background:linear-gradient(145deg,#f3f4f6,#d1d5db);font-family:Inter,sans-serif;color:#0f172a;min-height:100vh;display:flex;justify-content:center;padding:20px;transition:background .4s ease;}
-        .dark-mode body{background:linear-gradient(145deg,#1e293b,#0f172a);color:#e2e8f0;}
-        .container{max-width:1200px;width:100%;background:#fff;border-radius:30px;box-shadow:0 20px 50px rgba(0,0,0,.25);overflow:hidden;display:flex;flex-direction:column;transition:all .4s ease;}
-        .dark-mode .container{background:#1e293b;box-shadow:0 20px 50px rgba(0,0,0,.6);}
-        .nav-bar{background:linear-gradient(90deg,#1e40af,#3b82f6);padding:16px 30px;display:flex;gap:16px;justify-content:flex-end;align-items:center;}
-        .dark-mode .nav-bar{background:linear-gradient(90deg,#1e3a8a,#2563eb);}
-        .nav-btn{background:#fff;color:#1e40af;border:none;padding:12px 28px;border-radius:16px;cursor:pointer;font-size:16px;font-weight:600;transition:all .25s ease;outline:none;}
-        .dark-mode .nav-btn{background:#334155;color:#bfdbfe;}
-        .nav-btn:hover{transform:scale(1.06);background:#f1f5f9;}
-        .dark-mode .nav-btn:hover{background:#475569;}
-        .nav-btn:active{transform:scale(.94);}
-        .discord-btn{background:#5865f2;color:#fff;}
-        .discord-btn:hover{background:#4b56d2;}
-        .theme-btn{background:#fff;color:#1e40af;border:2px solid #1e40af;padding:10px 22px;border-radius:16px;cursor:pointer;font-size:16px;font-weight:600;display:flex;align-items:center;gap:8px;transition:all .25s ease;}
-        .dark-mode .theme-btn{background:#334155;color:#bfdbfe;border:2px solid #60a5fa;}
-        .theme-btn:hover{transform:scale(1.06);background:#f1f5f9;}
-        .dark-mode .theme-btn:hover{background:#475569;}
-        .theme-btn i{font-size:20px;}
-        .header{background:#fff;padding:32px;text-align:center;border-bottom:1px solid #e2e8f0;}
-        .dark-mode .header{background:#1e293b;border-bottom:1px solid #334155;}
-        .logo{font-size:40px;font-weight:800;color:#1e40af;letter-spacing:-.8px;animation:pulse 2s infinite;}
+        body{background:linear-gradient(145deg,#f3f4f6,#d1d5db);font-family:Inter,sans-serif;color:#111827;min-height:100vh;display:flex;justify-content:center;padding:15px;transition:background .3s ease;}
+        .dark-mode body{background:linear-gradient(145deg,#1f2937,#111827);color:#e5e7eb;}
+        .container{max-width:1400px;width:100%;background:#ffffff;border-radius:24px;box-shadow:0 20px 50px rgba(0,0,0,.15);overflow:hidden;display:flex;flex-direction:column;transition:all .3s ease;}
+        .dark-mode .container{background:#1f2937;box-shadow:0 20px 50px rgba(0,0,0,.5);}
+        .nav-bar{background:linear-gradient(90deg,#1d4ed8,#3b82f6);padding:12px 25px;display:flex;gap:12px;justify-content:flex-end;align-items:center;}
+        .dark-mode .nav-bar{background:linear-gradient(90deg,#1e40af,#2563eb);}
+        .nav-btn{background:#ffffff;color:#1d4ed8;border:none;padding:10px 25px;border-radius:12px;cursor:pointer;font-size:15px;font-weight:500;transition:all .2s ease;outline:none;}
+        .dark-mode .nav-btn{background:#374151;color:#93c5fd;}
+        .nav-btn:hover{transform:scale(1.05);background:#f3f4f6;}
+        .dark-mode .nav-btn:hover{background:#4b5563;}
+        .nav-btn:active{transform:scale(.95);}
+        .discord-btn{background:#5865f2;color:#ffffff;}
+        .discord-btn:hover{background:#4752c4;}
+        .theme-btn{background:#ffffff;color:#1d4ed8;border:2px solid #1d4ed8;padding:8px 20px;border-radius:12px;cursor:pointer;font-size:15px;font-weight:500;display:flex;align-items:center;gap:6px;transition:all .2s ease;}
+        .dark-mode .theme-btn{background:#374151;color:#93c5fd;border:2px solid #60a5fa;}
+        .theme-btn:hover{transform:scale(1.05);background:#f3f4f6;}
+        .dark-mode .theme-btn:hover{background:#4b5563;}
+        .theme-btn i{font-size:18px;}
+        .header{background:#ffffff;padding:25px;text-align:center;border-bottom:1px solid #e5e7eb;}
+        .dark-mode .header{background:#1f2937;border-bottom:1px solid #374151;}
+        .logo{font-size:36px;font-weight:700;color:#1d4ed8;letter-spacing:-.5px;animation:pulse 2s infinite;}
         .dark-mode .logo{color:#60a5fa;}
-        .chat-area{flex:1;padding:32px;overflow-y:auto;max-height:70vh;min-height:50vh;background:#f9fafb;scroll-behavior:smooth;}
-        .dark-mode .chat-area{background:#0f172a;}
+        .chat-area{flex:1;padding:25px;overflow-y:auto;max-height:75vh;min-height:55vh;background:#f9fafb;scroll-behavior:smooth;}
+        .dark-mode .chat-area{background:#111827;}
         .chat-content{flex:1;display:flex;flex-direction:column;}
-        .chat-history{display:flex;flex-direction:column;gap:24px;}
-        .chat-message{display:flex;flex-direction:column;gap:12px;padding:16px;border-radius:24px;max-width:80%;animation:slideIn .5s ease;}
-        .chat-message.user{align-self:flex-end;background:#1e40af;color:#fff;}
-        .dark-mode .chat-message.user{background:#1e3a8a;}
-        .chat-message.ai{align-self:flex-start;background:#e2e8f0;color:#0f172a;}
-        .dark-mode .chat-message.ai{background:#334155;color:#e2e8f0;}
-        .chat-message-content{padding:16px;border-radius:24px;font-size:17px;line-height:1.7;word-break:break-word;}
-        .chat-message-meta{font-size:14px;color:#64748b;margin-top:8px;opacity:.8;}
-        .dark-mode .chat-message-meta{color:#94a3b8;}
-        .chat-message img,.chat-message video{max-width:100%;border-radius:16px;margin-top:16px;cursor:pointer;transition:transform .3s ease;}
-        .chat-message img:hover,.chat-message video:hover{transform:scale(1.03);}
-        .code-block{position:relative;margin:16px 0;border-radius:16px;overflow:hidden;}
-        .code-block pre{background:#0f172a;color:#e2e8f0;padding:24px;border-radius:16px;overflow-x:auto;font-family:'JetBrains Mono',monospace;font-size:16px;line-height:1.6;}
-        .dark-mode .code-block pre{background:#1e293b;}
-        .code-text{background:#0f172a;color:#e2e8f0;padding:24px;border-radius:16px;font-family:'JetBrains Mono',monospace;font-size:16px;white-space:pre-wrap;user-select:text;}
-        .dark-mode .code-text{background:#1e293b;}
-        .copy-btn,.copy-all-btn{background:#1e40af;color:#fff;border:none;padding:10px 16px;border-radius:12px;cursor:pointer;font-size:14px;font-weight:600;transition:all .25s ease;}
-        .copy-btn{position:absolute;top:12px;right:12px;}
-        .copy-all-btn{position:absolute;top:12px;right:90px;}
-        .dark-mode .copy-btn,.dark-mode .copy-all-btn{background:#1e3a8a;}
-        .copy-btn:hover,.copy-all-btn:hover{background:#3b82f6;transform:scale(1.06);}
+        .chat-history{display:flex;flex-direction:column;gap:20px;}
+        .chat-message{display:flex;flex-direction:column;gap:10px;padding:14px;border-radius:20px;max-width:85%;animation:slideIn .4s ease;}
+        .chat-message.user{align-self:flex-end;background:#1d4ed8;color:#ffffff;}
+        .dark-mode .chat-message.user{background:#1e40af;}
+        .chat-message.ai{align-self:flex-start;background:#e5e7eb;color:#111827;}
+        .dark-mode .chat-message.ai{background:#374151;color:#e5e7eb;}
+        .chat-message-content{padding:14px;border-radius:20px;font-size:16px;line-height:1.6;word-break:break-word;}
+        .chat-message-meta{font-size:13px;color:#6b7280;margin-top:6px;opacity:.7;}
+        .dark-mode .chat-message-meta{color:#9ca3af;}
+        .chat-message img,.chat-message video{max-width:100%;border-radius:12px;margin-top:12px;cursor:pointer;transition:transform .25s ease;}
+        .chat-message img:hover,.chat-message video:hover{transform:scale(1.02);}
+        .code-block{position:relative;margin:12px 0;border-radius:12px;overflow:hidden;}
+        .code-block pre{background:#111827;color:#e5e7eb;padding:20px;border-radius:12px;overflow-x:auto;font-family:'JetBrains Mono',monospace;font-size:15px;line-height:1.5;}
+        .dark-mode .code-block pre{background:#1f2937;}
+        .code-text{background:#111827;color:#e5e7eb;padding:20px;border-radius:12px;font-family:'JetBrains Mono',monospace;font-size:15px;white-space:pre-wrap;user-select:text;}
+        .dark-mode .code-text{background:#1f2937;}
+        .copy-btn,.copy-all-btn{background:#1d4ed8;color:#ffffff;border:none;padding:8px 14px;border-radius:10px;cursor:pointer;font-size:13px;font-weight:500;transition:all .2s ease;}
+        .copy-btn{position:absolute;top:10px;right:10px;}
+        .copy-all-btn{position:absolute;top:10px;right:80px;}
+        .dark-mode .copy-btn,.dark-mode .copy-all-btn{background:#1e40af;}
+        .copy-btn:hover,.copy-all-btn:hover{background:#3b82f6;transform:scale(1.05);}
         .dark-mode .copy-btn:hover,.dark-mode .copy-all-btn:hover{background:#2563eb;}
-        .code-sidebar{position:fixed;top:0;right:-500px;width:500px;height:100%;background:#f9fafb;border-left:1px solid #e2e8f0;padding:32px;overflow-y:auto;transition:right .4s ease;z-index:200;}
-        .dark-mode .code-sidebar{background:#1e293b;border-left:1px solid #334155;}
+        .code-sidebar{position:fixed;top:0;right:-450px;width:450px;height:100%;background:#f9fafb;border-left:1px solid #e5e7eb;padding:25px;overflow-y:auto;transition:right .35s ease;z-index:200;}
+        .dark-mode .code-sidebar{background:#1f2937;border-left:1px solid #374151;}
         .code-sidebar.open{right:0;}
-        .code-sidebar-close{background:#dc2626;color:#fff;border:none;border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:22px;margin-bottom:16px;}
-        .code-sidebar-close:hover{background:#b91c1c;transform:scale(1.1);}
-        .code-sidebar-content{font-family:'JetBrains Mono',monospace;font-size:16px;color:#0f172a;white-space:pre-wrap;}
-        .dark-mode .code-sidebar-content{color:#e2e8f0;}
-        .file-upload-container{padding:24px;border-top:1px solid #e2e8f0;background:#fff;}
-        .dark-mode .file-upload-container{background:#1e293b;border-top:1px solid #334155;}
-        .file-actions{display:flex;gap:16px;align-items:center;flex-wrap:wrap;}
-        .file-input-label{background:#1e40af;color:#fff;padding:16px 28px;border-radius:16px;cursor:pointer;font-size:16px;font-weight:600;min-height:50px;transition:all .25s ease;}
-        .dark-mode .file-input-label{background:#1e3a8a;}
-        .file-input-label:hover{transform:scale(1.06);}
+        .code-sidebar-close{background:#ef4444;color:#ffffff;border:none;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:20px;margin-bottom:12px;}
+        .code-sidebar-close:hover{background:#dc2626;transform:scale(1.1);}
+        .code-sidebar-content{font-family:'JetBrains Mono',monospace;font-size:15px;color:#111827;white-space:pre-wrap;}
+        .dark-mode .code-sidebar-content{color:#e5e7eb;}
+        .file-upload-container{padding:20px;border-top:1px solid #e5e7eb;background:#ffffff;}
+        .dark-mode .file-upload-container{background:#1f2937;border-top:1px solid #374151;}
+        .file-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap;}
+        .file-input-label{background:#1d4ed8;color:#ffffff;padding:14px 25px;border-radius:12px;cursor:pointer;font-size:15px;font-weight:500;min-height:48px;transition:all .2s ease;}
+        .dark-mode .file-input-label{background:#1e40af;}
+        .file-input-label:hover{transform:scale(1.05);}
         .file-input{display:none;}
-        .file-clear-btn{background:#dc2626;color:#fff;padding:16px 28px;border-radius:16px;cursor:pointer;font-size:16px;font-weight:600;border:none;min-height:50px;transition:all .25s ease;}
-        .file-clear-btn:hover{transform:scale(1.06);background:#b91c1c;}
-        .keep-generating-btn{background:#059669;color:#fff;padding:16px 28px;border-radius:16px;cursor:pointer;font-size:16px;font-weight:600;border:none;min-height:50px;transition:all .5s ease;opacity:0;transform:translateY(20px);display:none;}
+        .file-clear-btn{background:#ef4444;color:#ffffff;padding:14px 25px;border-radius:12px;cursor:pointer;font-size:15px;font-weight:500;border:none;min-height:48px;transition:all .2s ease;}
+        .file-clear-btn:hover{transform:scale(1.05);background:#dc2626;}
+        .keep-generating-btn{background:#10b981;color:#ffffff;padding:14px 25px;border-radius:12px;cursor:pointer;font-size:15px;font-weight:500;border:none;min-height:48px;transition:all .4s ease;opacity:0;transform:translateY(15px);display:none;}
         .keep-generating-btn.show{opacity:1;transform:translateY(0);display:block;}
-        .dark-mode .keep-generating-btn{background:#047857;}
-        .keep-generating-btn:hover{transform:scale(1.06);background:#10b981;}
-        .dark-mode .keep-generating-btn:hover{background:#059669;}
-        .school-help-container{display:flex;align-items:center;gap:16px;margin-left:16px;}
-        .school-help-dropdown{background:#475569;color:#fff;padding:16px 28px;border-radius:16px;border:none;font-size:16px;font-weight:600;min-height:50px;cursor:pointer;transition:all .25s ease;}
-        .dark-mode .school-help-dropdown{background:#64748b;}
-        .school-help-dropdown:hover{background:#64748b;transform:scale(1.06);}
-        .dark-mode .school-help-dropdown:hover{background:#94a3b8;}
-        .school-help-dropdown:focus{outline:none;border-color:#1e40af;box-shadow:0 0 0 4px rgba(37,99,235,.25);}
-        .dark-mode .school-help-dropdown:focus{border-color:#60a5fa;box-shadow:0 0 0 4px rgba(96,165,250,.25);}
-        .rephrase-btn,.stop-generating-btn{background:#d97706;color:#fff;padding:16px 28px;border-radius:16px;cursor:pointer;font-size:16px;font-weight:600;border:none;min-height:50px;transition:all .25s ease;}
-        .dark-mode .rephrase-btn,.dark-mode .stop-generating-btn{background:#b45309;}
-        .rephrase-btn:hover,.stop-generating-btn:hover{transform:scale(1.06);background:#f59e0b;}
-        .dark-mode .rephrase-btn:hover,.dark-mode .stop-generating-btn:hover{background:#d97706;}
-        .stop-generating-btn{background:#dc2626;}
-        .dark-mode .stop-generating-btn{background:#b91c1c;}
-        .stop-generating-btn:hover{background:#ef4444;}
-        .dark-mode .stop-generating-btn:hover{background:#dc2626;}
-        .file-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-top:16px;}
-        .file-item{display:flex;align-items:center;gap:16px;background:#e2e8f0;padding:14px;border-radius:16px;cursor:pointer;transition:all .25s ease;}
-        .dark-mode .file-item{background:#334155;}
-        .file-item:hover{background:#cbd5e1;transform:scale(1.03);}
-        .dark-mode .file-item:hover{background:#475569;}
-        .file-item-name{flex:1;font-size:16px;color:#0f172a;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-        .dark-mode .file-item-name{color:#e2e8f0;}
-        .file-item-details{font-size:14px;color:#64748b;}
-        .dark-mode .file-item-details{color:#94a3b8;}
-        .file-preview-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);z-index:250;padding:28px;justify-content:center;align-items:center;}
+        .dark-mode .keep-generating-btn{background:#059669;}
+        .keep-generating-btn:hover{transform:scale(1.05);background:#34d399;}
+        .dark-mode .keep-generating-btn:hover{background:#10b981;}
+        .school-help-container{display:flex;align-items:center;gap:12px;margin-left:12px;}
+        .school-help-dropdown,.ai-model-dropdown{background:#6b7280;color:#ffffff;padding:14px 25px;border-radius:12px;border:none;font-size:15px;font-weight:500;min-height:48px;cursor:pointer;transition:all .2s ease;}
+        .dark-mode .school-help-dropdown,.dark-mode .ai-model-dropdown{background:#4b5563;}
+        .school-help-dropdown:hover,.ai-model-dropdown:hover{background:#9ca3af;transform:scale(1.05);}
+        .dark-mode .school-help-dropdown:hover,.dark-mode .ai-model-dropdown:hover{background:#6b7280;}
+        .school-help-dropdown:focus,.ai-model-dropdown:focus{outline:none;border-color:#1d4ed8;box-shadow:0 0 0 3px rgba(37,99,235,.2);}
+        .dark-mode .school-help-dropdown:focus,.dark-mode .ai-model-dropdown:focus{border-color:#60a5fa;box-shadow:0 0 0 3px rgba(96,165,250,.2);}
+        .rephrase-btn,.stop-generating-btn{background:#f59e0b;color:#ffffff;padding:14px 25px;border-radius:12px;cursor:pointer;font-size:15px;font-weight:500;border:none;min-height:48px;transition:all .2s ease;}
+        .dark-mode .rephrase-btn,.dark-mode .stop-generating-btn{background:#d97706;}
+        .rephrase-btn:hover,.stop-generating-btn:hover{transform:scale(1.05);background:#fbbf24;}
+        .dark-mode .rephrase-btn:hover,.dark-mode .stop-generating-btn:hover{background:#f59e0b;}
+        .stop-generating-btn{background:#ef4444;}
+        .dark-mode .stop-generating-btn{background:#dc2626;}
+        .stop-generating-btn:hover{background:#f87171;}
+        .dark-mode .stop-generating-btn:hover{background:#ef4444;}
+        .file-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-top:12px;}
+        .file-item{display:flex;align-items:center;gap:12px;background:#e5e7eb;padding:12px;border-radius:12px;cursor:pointer;transition:all .2s ease;}
+        .dark-mode .file-item{background:#374151;}
+        .file-item:hover{background:#d1d5db;transform:scale(1.02);}
+        .dark-mode .file-item:hover{background:#4b5563;}
+        .file-item-name{flex:1;font-size:15px;color:#111827;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+        .dark-mode .file-item-name{color:#e5e7eb;}
+        .file-item-details{font-size:13px;color:#6b7280;}
+        .dark-mode .file-item-details{color:#9ca3af;}
+        .file-preview-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.9);z-index:250;padding:25px;justify-content:center;align-items:center;}
         .file-preview-modal.open{display:flex;}
-        .file-preview-content{background:#fff;border-radius:28px;padding:32px;max-width:95%;max-height:95%;overflow:auto;color:#0f172a;font-size:16px;}
-        .dark-mode .file-preview-content{background:#1e293b;color:#e2e8f0;}
-        .file-preview-content img,.file-preview-content video{max-width:85% !important;}
-        .file-preview-close{background:#dc2626;color:#fff;border:none;border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;position:absolute;top:28px;right:28px;transition:all .25s ease;}
-        .file-preview-close:hover{transform:scale(1.1);background:#b91c1c;}
-        .file-preview-close svg{width:28px;height:28px;fill:#fff;}
-        .input-container{display:flex;align-items:flex-end;padding:24px;border-top:1px solid #e2e8f0;background:#fff;gap:16px;position:sticky;bottom:0;z-index:50;}
-        .dark-mode .input-container{background:#1e293b;border-top:1px solid #334155;}
-        .user-input{flex:1;padding:16px;border:1px solid #e2e8f0;border-radius:16px;font-size:17px;outline:none;resize:none;min-height:50px;max-height:220px;background:#fff;color:#0f172a;transition:all .25s ease;}
-        .dark-mode .user-input{background:#334155;border:1px solid #475569;color:#e2e8f0;}
-        .user-input:focus{border-color:#1e40af;box-shadow:0 0 0 4px rgba(37,99,235,.25);}
-        .dark-mode .user-input:focus{border-color:#60a5fa;box-shadow:0 0 0 4px rgba(96,165,250,.25);}
-        .send-btn{background:#1e40af;border:none;border-radius:16px;padding:16px 32px;cursor:pointer;color:#fff;font-size:16px;font-weight:600;min-height:50px;transition:all .25s ease;}
-        .dark-mode .send-btn{background:#1e3a8a;}
-        .send-btn:hover{transform:scale(1.06);background:#3b82f6;}
+        .file-preview-content{background:#ffffff;border-radius:20px;padding:25px;max-width:90%;max-height:90%;overflow:auto;color:#111827;font-size:15px;}
+        .dark-mode .file-preview-content{background:#1f2937;color:#e5e7eb;}
+        .file-preview-content img,.file-preview-content video{max-width:80% !important;}
+        .file-preview-close{background:#ef4444;color:#ffffff;border:none;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;position:absolute;top:25px;right:25px;transition:all .2s ease;}
+        .file-preview-close:hover{transform:scale(1.1);background:#dc2626;}
+        .file-preview-close svg{width:24px;height:24px;fill:#ffffff;}
+        .input-container{display:flex;align-items:flex-end;padding:20px;border-top:1px solid #e5e7eb;background:#ffffff;gap:12px;position:sticky;bottom:0;z-index:50;}
+        .dark-mode .input-container{background:#1f2937;border-top:1px solid #374151;}
+        .user-input{flex:1;padding:14px;border:1px solid #e5e7eb;border-radius:12px;font-size:16px;outline:none;resize:none;min-height:48px;max-height:200px;background:#ffffff;color:#111827;transition:all .2s ease;}
+        .dark-mode .user-input{background:#374151;border:1px solid #4b5563;color:#e5e7eb;}
+        .user-input:focus{border-color:#1d4ed8;box-shadow:0 0 0 3px rgba(37,99,235,.2);}
+        .dark-mode .user-input:focus{border-color:#60a5fa;box-shadow:0 0 0 3px rgba(96,165,250,.2);}
+        .send-btn{background:#1d4ed8;border:none;border-radius:12px;padding:14px 30px;cursor:pointer;color:#ffffff;font-size:15px;font-weight:500;min-height:48px;transition:all .2s ease;}
+        .dark-mode .send-btn{background:#1e40af;}
+        .send-btn:hover{transform:scale(1.05);background:#3b82f6;}
         .dark-mode .send-btn:hover{background:#2563eb;}
-        .send-btn:disabled{background:#94a3b8;cursor:not-allowed;}
-        .loading-spinner{display:none;margin:16px auto;width:44px;height:44px;border:6px solid #1e40af;border-top:6px solid transparent;border-radius:50%;animation:spin .5s linear infinite;}
-        .typing-indicator{display:none;font-size:16px;color:#64748b;margin:16px auto;text-align:center;}
-        .dark-mode .typing-indicator{color:#94a3b8;}
-        .typing-indicator span{display:inline-block;animation:dotPulse .9s infinite ease-in-out;}
-        .typing-indicator span:nth-child(2){animation-delay:.15s;}
-        .typing-indicator span:nth-child(3){animation-delay:.3s;}
-        .notification{position:fixed;top:28px;right:28px;padding:16px 32px;border-radius:16px;box-shadow:0 8px 20px rgba(0,0,0,.3);opacity:0;transform:translateY(-28px);transition:all .4s ease;font-size:16px;font-weight:600;z-index:300;}
+        .send-btn:disabled{background:#9ca3af;cursor:not-allowed;}
+        .loading-spinner{display:none;margin:12px auto;width:40px;height:40px;border:5px solid #1d4ed8;border-top:5px solid transparent;border-radius:50%;animation:spin .4s linear infinite;}
+        .typing-indicator{display:none;font-size:15px;color:#6b7280;margin:12px auto;text-align:center;}
+        .dark-mode .typing-indicator{color:#9ca3af;}
+        .typing-indicator span{display:inline-block;animation:dotPulse .8s infinite ease-in-out;}
+        .typing-indicator span:nth-child(2){animation-delay:.1s;}
+        .typing-indicator span:nth-child(3){animation-delay:.2s;}
+        .notification{position:fixed;top:25px;right:25px;padding:14px 30px;border-radius:12px;box-shadow:0 6px 15px rgba(0,0,0,.25);opacity:0;transform:translateY(-25px);transition:all .35s ease;font-size:15px;font-weight:500;z-index:300;}
         .notification.show{opacity:1;transform:translateY(0);}
-        .notification.success{background:#1e40af;color:#fff;}
-        .notification.error{background:#dc2626;color:#fff;}
-        .permission-modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.85);z-index:500;display:none;justify-content:center;align-items:center;}
+        .notification.success{background:#1d4ed8;color:#ffffff;}
+        .notification.error{background:#ef4444;color:#ffffff;}
+        .permission-modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.9);z-index:500;display:none;justify-content:center;align-items:center;}
         .permission-modal.open{display:flex;}
-        .permission-content{background:#fff;border-radius:24px;padding:32px;max-width:500px;text-align:center;color:#0f172a;}
-        .dark-mode .permission-content{background:#1e293b;color:#e2e8f0;}
-        .permission-content h2{font-size:24px;margin-bottom:16px;}
-        .permission-content p{font-size:16px;margin-bottom:24px;}
-        .permission-btn{background:#1e40af;color:#fff;padding:12px 24px;border-radius:16px;border:none;cursor:pointer;font-size:16px;font-weight:600;margin:0 8px;}
-        .dark-mode .permission-btn{background:#1e3a8a;}
-        .permission-btn:hover{transform:scale(1.06);background:#3b82f6;}
+        .permission-content{background:#ffffff;border-radius:20px;padding:25px;max-width:450px;text-align:center;color:#111827;}
+        .dark-mode .permission-content{background:#1f2937;color:#e5e7eb;}
+        .permission-content h2{font-size:22px;margin-bottom:12px;}
+        .permission-content p{font-size:15px;margin-bottom:20px;}
+        .permission-btn{background:#1d4ed8;color:#ffffff;padding:10px 20px;border-radius:12px;border:none;cursor:pointer;font-size:15px;font-weight:500;margin:0 6px;}
+        .dark-mode .permission-btn{background:#1e40af;}
+        .permission-btn:hover{transform:scale(1.05);background:#3b82f6;}
         .dark-mode .permission-btn:hover{background:#2563eb;}
-        .permission-btn.deny{background:#dc2626;}
-        .dark-mode .permission-btn.deny{background:#b91c1c;}
-        .permission-btn.deny:hover{background:#ef4444;}
-        .dark-mode .permission-btn.deny:hover{background:#dc2626;}
-        @keyframes slideIn{0%{opacity:0;transform:translateY(28px);}100%{opacity:1;transform:translateY(0);}}
+        .permission-btn.deny{background:#ef4444;}
+        .dark-mode .permission-btn.deny{background:#dc2626;}
+        .permission-btn.deny:hover{background:#f87171;}
+        .dark-mode .permission-btn.deny:hover{background:#ef4444;}
+        @keyframes slideIn{0%{opacity:0;transform:translateY(25px);}100%{opacity:1;transform:translateY(0);}}
         @keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
-        @keyframes dotPulse{0%,80%,100%{transform:scale(1);opacity:.6;}40%{transform:scale(1.5);opacity:1;}}
-        @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.7;}}
+        @keyframes dotPulse{0%,80%,100%{transform:scale(1);opacity:.5;}40%{transform:scale(1.4);opacity:1;}}
+        @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.75;}}
         @media (max-width:768px){
-            .container{max-width:100%;border-radius:24px;padding:16px;}
-            .nav-bar{padding:12px;gap:12px;}
-            .nav-btn{font-size:14px;padding:10px 24px;}
-            .theme-btn{padding:8px 18px;font-size:14px;}
-            .header{padding:24px;}
-            .logo{font-size:36px;}
-            .chat-area{padding:24px;min-height:45vh;max-height:65vh;}
-            .chat-message{max-width:85%;}
-            .chat-message-content{font-size:16px;}
+            .container{max-width:100%;border-radius:16px;padding:12px;}
+            .nav-bar{padding:10px;gap:10px;}
+            .nav-btn{font-size:13px;padding:8px 20px;}
+            .theme-btn{padding:6px 16px;font-size:13px;}
+            .header{padding:20px;}
+            .logo{font-size:32px;}
+            .chat-area{padding:20px;min-height:50vh;max-height:70vh;}
+            .chat-message{max-width:90%;}
+            .chat-message-content{font-size:15px;}
             .chat-message img,.chat-message video{max-width:100%;}
-            .input-container{padding:16px;gap:12px;}
-            .user-input{font-size:16px;min-height:46px;}
-            .send-btn{padding:14px 28px;min-height:46px;}
-            .file-input-label,.file-clear-btn,.keep-generating-btn,.school-help-dropdown,.rephrase-btn,.stop-generating-btn{font-size:14px;padding:14px 24px;min-height:46px;}
-            .school-help-container{gap:12px;margin-left:12px;}
-            .file-preview-content img,.file-preview-content video{max-width:90% !important;}
-            .notification{top:24px;right:24px;padding:14px 28px;font-size:14px;}
+            .input-container{padding:12px;gap:10px;}
+            .user-input{font-size:15px;min-height:44px;}
+            .send-btn{padding:12px 25px;min-height:44px;}
+            .file-input-label,.file-clear-btn,.keep-generating-btn,.school-help-dropdown,.ai-model-dropdown,.rephrase-btn,.stop-generating-btn{font-size:13px;padding:12px 20px;min-height:44px;}
+            .school-help-container{gap:10px;margin-left:10px;}
+            .file-preview-content img,.file-preview-content video{max-width:85% !important;}
+            .notification{top:20px;right:20px;padding:12px 25px;font-size:13px;}
             .code-sidebar{width:100%;right:-100%;}
-            .permission-content{max-width:90%;padding:24px;}
-            .permission-content h2{font-size:20px;}
-            .permission-content p{font-size:14px;}
-            .permission-btn{padding:10px 20px;font-size:14px;}
+            .permission-content{max-width:85%;padding:20px;}
+            .permission-content h2{font-size:18px;}
+            .permission-content p{font-size:13px;}
+            .permission-btn{padding:8px 16px;font-size:13px;}
         }
     </style>
 </head>
@@ -194,13 +197,13 @@
             <div class="chat-content">
                 <div class="chat-history" id="chatHistory">
                     <div class="chat-message ai">
-                        <div class="chat-message-content">Hey there! I’m VerbiFlow, your AI assistant. I can analyze videos, images, code, create games, design slides, and more—faster than ever. What’s on your mind today?</div>
+                        <div class="chat-message-content">Hey there! I’m VerbiFlow, your lively AI buddy—here to dive into coding, whip up games, analyze media, or chat about anything! What’s sparking your interest today? Pick an AI model to get started!</div>
                         <div class="chat-message-meta">Just now</div>
                     </div>
                 </div>
                 <div class="loading-spinner" id="loadingSpinner"></div>
                 <div class="typing-indicator" id="typingIndicator">
-                    VerbiFlow is cooking<span>.</span><span>.</span><span>.</span>
+                    VerbiFlow is thinking<span>.</span><span>.</span><span>.</span>
                 </div>
             </div>
         </div>
@@ -225,6 +228,12 @@
                         <option value="slides">Google Slides</option>
                         <option value="video">Video Analysis</option>
                     </select>
+                    <select class="ai-model-dropdown" id="aiModelDropdown">
+                        <option value="default">VerbiFlow (Default)</option>
+                        <option value="lingoLogicAI">LingoLogicAI</option>
+                        <option value="codeMasterAI">CodeMasterAI</option>
+                        <option value="visualGeniusAI">VisualGeniusAI</option>
+                    </select>
                     <button class="rephrase-btn" id="rephraseBtn">Rephrase</button>
                     <button class="stop-generating-btn" id="stopGeneratingBtn" style="display:none;">Stop Generating</button>
                 </div>
@@ -232,7 +241,7 @@
             <div class="file-list" id="fileList"></div>
         </div>
         <div class="input-container">
-            <textarea class="user-input" id="userInput" placeholder="Ask anything, upload videos, images, or request Roblox games or slides..." rows="1"></textarea>
+            <textarea class="user-input" id="userInput" placeholder="Ask anything, upload videos, images, or request games or slides..." rows="1"></textarea>
             <button class="send-btn" id="sendBtn">Send</button>
         </div>
         <div class="file-preview-modal" id="filePreviewModal">
@@ -251,7 +260,7 @@
         <div class="permission-modal" id="permissionModal">
             <div class="permission-content">
                 <h2>Request Permissions</h2>
-                <p>VerbiFlow would like to access additional features to enhance your experience, including full video analysis, improved performance, and more. Do you grant permission?</p>
+                <p>VerbiFlow needs access to enable features like video and image analysis, custom AI models, and more. Do you grant permission?</p>
                 <button class="permission-btn" id="grantPermissionBtn">Grant</button>
                 <button class="permission-btn deny" id="denyPermissionBtn">Deny</button>
             </div>
@@ -262,10 +271,12 @@
         const API_KEY="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";
         const API_URL="https://api.openai.com/v1/chat/completions";
         const IMAGE_GEN_API_URL="https://api.openai.com/v1/images/generations";
-        const DISCORD_INVITE="https://discord.gg/rCTRQvD4TP";
         const VIDEO_PROCESSING_API="https://api.openai.com/v1/video/analyze";
+        const DISCORD_INVITE="https://discord.gg/rCTRQvD4TP";
         const MAX_VIDEO_SIZE=50*1024*1024;
         const BATCH_SIZE=5;
+        const RATE_LIMIT_REQUESTS=100;
+        const RATE_LIMIT_WINDOW=60*1000;
 
         const chatHistory=document.getElementById('chatHistory');
         const userInput=document.getElementById('userInput');
@@ -291,6 +302,7 @@
         const codeSidebarContent=document.getElementById('codeSidebarContent');
         const keepGeneratingBtn=document.getElementById('keepGeneratingBtn');
         const schoolHelpDropdown=document.getElementById('schoolHelpDropdown');
+        const aiModelDropdown=document.getElementById('aiModelDropdown');
         const rephraseBtn=document.getElementById('rephraseBtn');
         const stopGeneratingBtn=document.getElementById('stopGeneratingBtn');
         const permissionModal=document.getElementById('permissionModal');
@@ -298,7 +310,7 @@
         const denyPermissionBtn=document.getElementById('denyPermissionBtn');
 
         let filesArray=[];
-        let conversationHistory=[{role:"assistant",content:"Hey there! I’m VerbiFlow, your AI assistant. I can analyze videos, images, code, create games, design slides, and more—faster than ever. What’s on your mind today?"}];
+        let conversationHistory=[{role:"assistant",content:"Hey there! I’m VerbiFlow, your lively AI buddy—here to dive into coding, whip up games, analyze media, or chat about anything! What’s sparking your interest today? Pick an AI model to get started!"}];
         let latestCodeBlocks=[];
         let latestAiResponse='';
         let isDarkMode=false;
@@ -306,14 +318,62 @@
         let lastMessageContent='';
         let generationTimeout=null;
         let selectedSchoolMode='';
+        let selectedAiModel='default';
         let messageQueue=[];
         let isProcessing=false;
         let codeAnalysisCache=new Map();
         let videoAnalysisCache=new Map();
+        let imageAnalysisCache=new Map();
         let responseCache=new Map();
         let abortController=null;
         let batchQueue=[];
         let hasPermission=false;
+        let requestTimestamps=[];
+
+        const aiModels={
+            default:{name:"VerbiFlow",temperature:0.7,maxTokens:6000,personality:"Hey there, I’m VerbiFlow—your go-to AI pal with a knack for creativity and problem-solving! I’m here to make things fun, fast, and insightful. What’s on your mind?"},
+            lingoLogicAI:{name:"LingoLogicAI",temperature:0.6,maxTokens:6500,personality:"Greetings! I’m LingoLogicAI, a sharp-witted AI with a love for language and logic. I’ll break down complex ideas with clarity and a touch of humor—let’s get to it!"},
+            codeMasterAI:{name:"CodeMasterAI",temperature:0.5,maxTokens:7000,personality:"Yo, I’m CodeMasterAI—your coding guru with a passion for clean, efficient solutions! I live for debugging and optimizing. Drop me some code, and let’s make it shine!"},
+            visualGeniusAI:{name:"VisualGeniusAI",temperature:0.8,maxTokens:5500,personality:"Hi, I’m VisualGeniusAI—an AI with an eye for visuals and creativity! Whether it’s analyzing images, videos, or designing stunning UI, I’ve got a flair for the visual arts. What do you want to create?"}
+        };
+
+        const livelyResponses={
+            default:[
+                "Ooh, I’m excited to help with that! Let’s dive in—here’s what I’ve got for you…",
+                "That’s a great request! I’m buzzing with ideas—check this out!",
+                "Alright, let’s do this! I’ve got just the thing for you—take a look!",
+                "You’ve got my circuits firing! Here’s my take on that—hope you love it!"
+            ],
+            lingoLogicAI:[
+                "Well, well, look at that! Let me put my thinking cap on—here’s my witty response…",
+                "Aha, a challenge! I’ll break this down with some clever logic—here you go!",
+                "Let’s unravel this with a dash of flair—here’s what I came up with!",
+                "I’m feeling particularly sharp today! Here’s my take—let me know what you think!"
+            ],
+            codeMasterAI:[
+                "Code time, baby! Let’s get those bugs squashed—here’s the optimized solution!",
+                "I’m in my element now! Check out this clean code—let’s make it even better!",
+                "This code’s speaking my language! Here’s my fix—ready to roll!",
+                "Let’s make this code sing! Here’s my streamlined version—enjoy!"
+            ],
+            visualGeniusAI:[
+                "Oh, I can *see* this coming together! Here’s my visual magic for you…",
+                "Let’s paint a picture with this! Here’s what I’ve envisioned—pretty cool, right?",
+                "My creative juices are flowing! Check out this visual masterpiece I made for you!",
+                "I’ve got an eye for this! Here’s my take—let’s make it even more stunning!"
+            ]
+        };
+
+        function rateLimitCheck(){
+            const now=Date.now();
+            requestTimestamps=requestTimestamps.filter(timestamp=>now-timestamp<RATE_LIMIT_WINDOW);
+            if(requestTimestamps.length>=RATE_LIMIT_REQUESTS){
+                showNotification('Whoa, slow down! Rate limit hit—give it a sec.','error');
+                return false;
+            }
+            requestTimestamps.push(now);
+            return true;
+        }
 
         class CodeAnalyzer{
             static analyzeCode(code){
@@ -329,22 +389,22 @@
                     if(trimmed.match(/\{/))braceCount++;
                     if(trimmed.match(/\}/))braceCount--;
                     if(braceCount<0)issues.push(`Line ${index+1}: Unmatched closing brace.`);
-                    if(Math.abs(indent-indentLevel)>1)issues.push(`Line ${index+1}: Inconsistent indentation. Expected ${indentLevel*2} spaces, got ${indent*2}.`);
+                    if(Math.abs(indent-indentLevel)>1)issues.push(`Line ${index+1}: Inconsistent indentation.`);
                     indentLevel=trimmed.match(/\{$/) ? indent+1 : trimmed.match(/\}/) ? indent : indentLevel;
-                    if(trimmed.match(/var\s+\w+/))issues.push(`Line ${index+1}: Use 'let' or 'const' instead of 'var' for better scope control.`);
+                    if(trimmed.match(/var\s+\w+/))issues.push(`Line ${index+1}: Use 'let' or 'const' instead of 'var'.`);
                     const variableMatch=trimmed.match(/(let|const)\s+(\w+)/);
                     if(variableMatch)variableUsage.set(variableMatch[2],{declared:index+1,used:false});
                     variableUsage.forEach((value,key)=>{
                         if(trimmed.includes(key) && index+1!==value.declared)value.used=true;
                     });
-                    if(trimmed.match(/console\.log/))issues.push(`Line ${index+1}: Remove 'console.log' statements in production code.`);
-                    if(trimmed.match(/==\s/))issues.push(`Line ${index+1}: Use '===' instead of '==' for strict equality.`);
-                    if(trimmed.length>120)issues.push(`Line ${index+1}: Line exceeds 120 characters. Split for better readability.`);
+                    if(trimmed.match(/console\.log/))issues.push(`Line ${index+1}: Remove 'console.log' statements.`);
+                    if(trimmed.match(/==\s/))issues.push(`Line ${index+1}: Use '===' instead of '=='.`);
+                    if(trimmed.length>120)issues.push(`Line ${index+1}: Line exceeds 120 characters.`);
                 });
                 variableUsage.forEach((value,key)=>{
                     if(!value.used)issues.push(`Variable '${key}' declared on line ${value.declared} but never used.`);
                 });
-                if(braceCount!==0)issues.push(`Unmatched braces in code. Found ${braceCount} extra ${braceCount>0?'opening':'closing'} brace(s).`);
+                if(braceCount!==0)issues.push(`Unmatched braces in code.`);
                 return issues;
             }
             static optimizeCode(code){
@@ -488,7 +548,7 @@
             }
         }
 
-        class VideoProcessor{
+        class MediaProcessor{
             static async extractFrames(videoFile,maxFrames=30){
                 return new Promise((resolve,reject)=>{
                     const video=document.createElement('video');
@@ -511,7 +571,7 @@
                                 canvas.width=video.videoWidth;
                                 canvas.height=video.videoHeight;
                                 ctx.drawImage(video,0,0,canvas.width,canvas.height);
-                                frames.push(canvas.toDataURL('image/jpeg',0.8));
+                                frames.push(canvas.toDataURL('image/jpeg',0.7));
                             }
                             URL.revokeObjectURL(blobUrl);
                             resolve(frames);
@@ -590,12 +650,40 @@
                 videoAnalysisCache.set(videoHash,analysis);
                 return analysis;
             }
+            static async analyzeImage(imageFile){
+                const imageHash=sha256(imageFile.name+imageFile.size);
+                if(imageAnalysisCache.has(imageHash))return imageAnalysisCache.get(imageHash);
+
+                const imageData=await readImage(imageFile);
+                const response=await fetch(API_URL,{
+                    method:'POST',
+                    headers:{
+                        'Authorization':`Bearer ${API_KEY}`,
+                        'Content-Type':'application/json'
+                    },
+                    body:JSON.stringify({
+                        model:"gpt-4o",
+                        messages:[{
+                            role:"user",
+                            content:"Analyze this image in detail. Describe its content, objects, colors, text, and provide a comprehensive summary.",
+                            image_data:imageData
+                        }],
+                        max_tokens:2000,
+                        temperature:aiModels[selectedAiModel].temperature
+                    })
+                });
+                if(!response.ok)throw new Error('Image analysis failed');
+                const data=await response.json();
+                const analysis=data.choices[0].message.content;
+                imageAnalysisCache.set(imageHash,analysis);
+                return analysis;
+            }
         }
 
         function showNotification(message,type='success'){
             notification.textContent=message;
             notification.className=`notification ${type} show`;
-            setTimeout(()=>{notification.classList.remove('show');},1500);
+            setTimeout(()=>{notification.classList.remove('show');},1200);
         }
 
         function toggleTheme(){
@@ -623,7 +711,7 @@
         grantPermissionBtn.addEventListener('click',()=>{
             hasPermission=true;
             permissionModal.classList.remove('open');
-            showNotification('Permissions granted! Enhanced features enabled.');
+            showNotification('Permissions granted! Let’s roll with all features!');
         });
 
         denyPermissionBtn.addEventListener('click',()=>{
@@ -634,14 +722,14 @@
 
         window.addEventListener('beforeunload',e=>{
             e.preventDefault();
-            e.returnValue='Are you sure you want to leave VerbiFlow?';
+            e.returnValue='Sure you want to leave VerbiFlow?';
         });
 
         themeBtn.addEventListener('click',toggleTheme);
 
         discordBtn.addEventListener('click',()=>{
             navigator.clipboard.writeText(DISCORD_INVITE);
-            showNotification('Discord link copied!');
+            showNotification('Discord link copied—join the party!');
         });
 
         verbiflowUpdatesBtn.addEventListener('click',()=>{
@@ -650,7 +738,7 @@
 
         userInput.addEventListener('input',()=>{
             userInput.style.height='auto';
-            userInput.style.height=`${Math.min(userInput.scrollHeight,220)}px`;
+            userInput.style.height=`${Math.min(userInput.scrollHeight,200)}px`;
         });
 
         userInput.addEventListener('paste',async e=>{
@@ -679,14 +767,14 @@
         fileInput.addEventListener('change',handleFileUpload);
         fileUploadContainer.addEventListener('dragover',e=>{
             e.preventDefault();
-            fileUploadContainer.style.background=isDarkMode?'#475569':'#e2e8f0';
+            fileUploadContainer.style.background=isDarkMode?'#4b5563':'#e5e7eb';
         });
         fileUploadContainer.addEventListener('dragleave',()=>{
-            fileUploadContainer.style.background=isDarkMode?'#1e293b':'#ffffff';
+            fileUploadContainer.style.background=isDarkMode?'#1f2937':'#ffffff';
         });
         fileUploadContainer.addEventListener('drop',e=>{
             e.preventDefault();
-            fileUploadContainer.style.background=isDarkMode?'#1e293b':'#ffffff';
+            fileUploadContainer.style.background=isDarkMode?'#1f2937':'#ffffff';
             fileInput.files=e.dataTransfer.files;
             handleFileUpload();
         });
@@ -718,7 +806,7 @@
             filesArray=[];
             fileList.innerHTML='';
             fileClearBtn.style.display='none';
-            showNotification('Files cleared!');
+            showNotification('Files cleared—fresh start!');
         });
 
         function previewFile(file){
@@ -757,11 +845,11 @@
         clearChatBtn.addEventListener('click',()=>{
             chatHistory.innerHTML=`
                 <div class="chat-message ai">
-                    <div class="chat-message-content">Hey there! I’m VerbiFlow, your AI assistant. I can analyze videos, images, code, create games, design slides, and more—faster than ever. What’s on your mind today?</div>
+                    <div class="chat-message-content">Hey there! I’m VerbiFlow, your lively AI buddy—here to dive into coding, whip up games, analyze media, or chat about anything! What’s sparking your interest today? Pick an AI model to get started!</div>
                     <div class="chat-message-meta">Just now</div>
                 </div>
             `;
-            conversationHistory=[{role:"assistant",content:"Hey there! I’m VerbiFlow, your AI assistant. I can analyze videos, images, code, create games, design slides, and more—faster than ever. What’s on your mind today?"}];
+            conversationHistory=[{role:"assistant",content:"Hey there! I’m VerbiFlow, your lively AI buddy—here to dive into coding, whip up games, analyze media, or chat about anything! What’s sparking your interest today? Pick an AI model to get started!"}];
             filesArray=[];
             fileList.innerHTML='';
             fileClearBtn.style.display='none';
@@ -774,31 +862,34 @@
             latestAiResponse='';
             codeSidebarContent.textContent='';
             schoolHelpDropdown.value='';
+            aiModelDropdown.value='default';
             selectedSchoolMode='';
+            selectedAiModel='default';
             codeAnalysisCache.clear();
             videoAnalysisCache.clear();
+            imageAnalysisCache.clear();
             responseCache.clear();
-            showNotification('Chat reset!');
+            showNotification('Chat reset—let’s start fresh!');
         });
 
         copyCodeBtn.addEventListener('click',()=>{
             if(latestCodeBlocks.length>0){
                 const codeToCopy=latestCodeBlocks.join('\n\n');
                 navigator.clipboard.writeText(codeToCopy).then(()=>{
-                    showNotification('Code copied!');
+                    showNotification('Code copied—nice!');
                     codeSidebarContent.textContent=codeToCopy;
                     codeSidebar.classList.add('open');
                 }).catch(()=>{
-                    showNotification('Copy failed!','error');
+                    showNotification('Copy failed—oops!','error');
                 });
             }else if(latestAiResponse){
                 navigator.clipboard.writeText(latestAiResponse).then(()=>{
-                    showNotification('Response copied!');
+                    showNotification('Response copied—sweet!');
                 }).catch(()=>{
-                    showNotification('Copy failed!','error');
+                    showNotification('Copy failed—uh-oh!','error');
                 });
             }else{
-                showNotification('Nothing to copy!','error');
+                showNotification('Nothing to copy—try again!','error');
             }
         });
 
@@ -836,27 +927,32 @@
                 sendBtn.disabled=false;
                 stopGeneratingBtn.style.display='none';
                 keepGeneratingBtn.classList.add('show');
-                showNotification('Generation stopped!');
+                showNotification('Stopped generating—let’s pivot!');
             }
         });
 
         schoolHelpDropdown.addEventListener('change',e=>{
             selectedSchoolMode=e.target.value;
             if(selectedSchoolMode){
-                showNotification(`Switched to ${e.target.options[e.target.selectedIndex].text} mode!`);
+                showNotification(`Switched to ${e.target.options[e.target.selectedIndex].text} mode—ready to help!`);
             }else{
-                showNotification('Task mode disabled.');
+                showNotification('Task mode off—back to basics!');
             }
+        });
+
+        aiModelDropdown.addEventListener('change',e=>{
+            selectedAiModel=e.target.value;
+            showNotification(`Now chatting with ${aiModels[selectedAiModel].name}—${aiModels[selectedAiModel].personality}`);
         });
 
         rephraseBtn.addEventListener('click',()=>{
             if(latestAiResponse){
                 userInput.value=`Rephrase this naturally: ${latestAiResponse}`;
                 userInput.style.height='auto';
-                userInput.style.height=`${Math.min(userInput.scrollHeight,220)}px`;
-                showNotification('Ready to rephrase!');
+                userInput.style.height=`${Math.min(userInput.scrollHeight,200)}px`;
+                showNotification('Ready to rephrase—let’s tweak it!');
             }else{
-                showNotification('No response to rephrase!','error');
+                showNotification('No response to rephrase—try again!','error');
             }
         });
 
@@ -897,9 +993,9 @@
                 btn.addEventListener('click',()=>{
                     const code=atob(btn.dataset.code);
                     navigator.clipboard.writeText(code).then(()=>{
-                        showNotification(btn.classList.contains('copy-all-btn')?'All code copied!':'Code copied!');
+                        showNotification(btn.classList.contains('copy-all-btn')?'All code copied—awesome!':'Code copied—nice!');
                     }).catch(()=>{
-                        showNotification('Copy failed!','error');
+                        showNotification('Copy failed—oops!','error');
                     });
                 });
             });
@@ -907,6 +1003,7 @@
         }
 
         async function generateImage(prompt){
+            if(!rateLimitCheck())return null;
             try{
                 const response=await fetch(IMAGE_GEN_API_URL,{
                     method:'POST',
@@ -945,6 +1042,7 @@
         }
 
         async function batchProcessRequests(messages){
+            if(!rateLimitCheck())throw new Error('Rate limit exceeded');
             const batches=[];
             for(let i=0;i<messages.length;i+=BATCH_SIZE){
                 batches.push(messages.slice(i,i+BATCH_SIZE));
@@ -959,10 +1057,10 @@
                     body:JSON.stringify({
                         model:"gpt-4o",
                         messages:batch,
-                        max_tokens:5000,
-                        temperature:0.7,
+                        max_tokens:aiModels[selectedAiModel].maxTokens,
+                        temperature:aiModels[selectedAiModel].temperature,
                         stream:false,
-                        top_p:0.95
+                        top_p:0.9
                     }),
                     signal:abortController.signal
                 });
@@ -1022,7 +1120,7 @@
 
             generationTimeout=setTimeout(()=>{
                 if(isGenerating)keepGeneratingBtn.classList.add('show');
-            },800);
+            },500);
 
             try{
                 let aiMessageText='';
@@ -1042,7 +1140,7 @@
                         const issues=CodeAnalyzer.analyzeCode(code);
                         const optimizedCode=CodeAnalyzer.optimizeCode(code);
                         if(issues.length>0){
-                            codeAnalysisResult=`**Code Analysis Report:**\n- ${issues.join('\n- ')}\n\n**Optimized Code:**\n\`\`\`\n${optimizedCode}\n\`\`\``;
+                            codeAnalysisResult=`**Code Analysis:**\n- ${issues.join('\n- ')}\n\n**Optimized Code:**\n\`\`\`\n${optimizedCode}\n\`\`\``;
                         }else{
                             codeAnalysisResult=`**Code Analysis:** No issues found.\n\n**Optimized Code:**\n\`\`\`\n${optimizedCode}\n\`\`\``;
                         }
@@ -1065,8 +1163,9 @@
                     return;
                 }
 
+                const randomLivelyResponse=livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)];
                 if(message.toLowerCase()==='hi'){
-                    aiMessageText='Hey! I’m ready to help with coding, games, slides, video analysis, or anything else. What’s up?';
+                    aiMessageText=`${randomLivelyResponse}\n${aiModels[selectedAiModel].personality}`;
                     aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
                     conversationHistory.push({role:"assistant",content:aiMessageText});
                     responseCache.set(messageHash,aiMessageText);
@@ -1075,11 +1174,11 @@
                 }else if(message.toLowerCase().includes('generate image')||message.toLowerCase().includes('create image')){
                     const imageUrl=await generateImage(message);
                     if(imageUrl){
-                        aiMessageText=`Here’s your image for: "${sanitizeInput(message)}"`;
+                        aiMessageText=`${randomLivelyResponse}\nHere’s your image for: "${sanitizeInput(message)}"`;
                         aiMessage.querySelector('.chat-message-content').innerHTML=`${formatMessage(aiMessageText,aiMessage)}<img src="${imageUrl}" alt="Generated Image">`;
                         conversationHistory.push({role:"assistant",content:aiMessageText,image_url:imageUrl});
                     }else{
-                        aiMessageText='Image generation failed. Try a different prompt!';
+                        aiMessageText=`${randomLivelyResponse}\nOops, image generation didn’t work—let’s try a different prompt!`;
                         aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
                         conversationHistory.push({role:"assistant",content:aiMessageText});
                     }
@@ -1090,10 +1189,10 @@
                     const codeToObfuscate=message.match(/```([\s\S]*?)```/)?.[1]?.trim()||message;
                     try{
                         const obfuscatedCode=Obfuscator.obfuscate(codeToObfuscate,'mixed');
-                        aiMessageText=`Obfuscated code:\n\`\`\`\n${obfuscatedCode}\n\`\`\``;
+                        aiMessageText=`${randomLivelyResponse}\nObfuscated code:\n\`\`\`\n${obfuscatedCode}\n\`\`\``;
                         aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
                     }catch(error){
-                        aiMessageText='Obfuscation failed. Check your code!';
+                        aiMessageText=`${randomLivelyResponse}\nObfuscation failed—something’s up with that code!`;
                         aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
                     }
                     responseCache.set(messageHash,aiMessageText);
@@ -1104,10 +1203,10 @@
                     const codeToDeobfuscate=message.match(/```([\s\S]*?)```/)?.[1]?.trim()||message;
                     try{
                         const deobfuscatedCode=Deobfuscator.deobfuscate(codeToDeobfuscate);
-                        aiMessageText=`Deobfuscated code:\n\`\`\`\n${deobfuscatedCode}\n\`\`\``;
+                        aiMessageText=`${randomLivelyResponse}\nDeobfuscated code:\n\`\`\`\n${deobfuscatedCode}\n\`\`\``;
                         aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
                     }catch(error){
-                        aiMessageText='Deobfuscation failed. Code might not be obfuscated!';
+                        aiMessageText=`${randomLivelyResponse}\nDeobfuscation failed—might not be obfuscated!`;
                         aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
                     }
                     responseCache.set(messageHash,aiMessageText);
@@ -1127,21 +1226,21 @@
                             model:"gpt-4o",
                             messages:[{role:"user",content:rephrasePrompt}],
                             max_tokens:1500,
-                            temperature:0.8
+                            temperature:aiModels[selectedAiModel].temperature
                         }),
                         signal:abortController.signal
                     });
                     if(!response.ok)throw new Error('API request failed');
                     const data=await response.json();
-                    aiMessageText=data.choices[0].message.content;
+                    aiMessageText=`${randomLivelyResponse}\n${data.choices[0].message.content}`;
                     aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
                     responseCache.set(messageHash,aiMessageText);
                     latestAiResponse=aiMessageText;
                     conversationHistory.push({role:"assistant",content:aiMessageText});
                     chatArea.scrollTop=chatArea.scrollHeight;
                 }else if(message.toLowerCase().includes('ui design')||message.toLowerCase().includes('user interface')){
-                    const uiPrompt=`Design a modern, accessible UI for: "${sanitizeInput(message)}". Provide HTML, CSS, and JavaScript using Tailwind CSS, with ARIA attributes, animations, responsive design, and semantic HTML. Optimize for performance.`;
-                    const response=await fetch(API_URL,{
+                    const uiPrompt=`Design a modern, accessible UI for: "${sanitizeInput(message)}". Provide HTML, CSS, and JavaScript using Tailwind CSS, with ARIA attributes, animations, responsive design, and semantic HTML.`;
+                    const response=await fetch(Api_URL,{
                         method:'POST',
                         headers:{
                             'Authorization':`Bearer ${API_KEY}`,
@@ -1151,21 +1250,21 @@
                             model:"gpt-4o",
                             messages:[{role:"user",content:uiPrompt}],
                             max_tokens:4000,
-                            temperature:0.6
+                            temperature:aiModels[selectedAiModel].temperature
                         }),
                         signal:abortController.signal
                     });
                     if(!response.ok)throw new Error('API request failed');
                     const data=await response.json();
-                    aiMessageText=data.choices[0].message.content;
+                    aiMessageText=`${randomLivelyResponse}\n${data.choices[0].message.content}`;
                     aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
                     responseCache.set(messageHash,aiMessageText);
                     latestAiResponse=aiMessageText;
                     conversationHistory.push({role:"assistant",content:aiMessageText});
                     chatArea.scrollTop=chatArea.scrollHeight;
                 }else if(selectedSchoolMode==='roblox'||message.toLowerCase().includes('roblox')||message.toLowerCase().includes('luau')||message.toLowerCase().includes('recreate this in luau code')){
-                    const robloxPrompt=`Recreate the following in Roblox Luau code: "${sanitizeInput(message)}". Provide optimized Luau code with mechanics, Roblox UI, animations, error handling, multiplayer support, and responsive design. Include detailed explanations.`;
-                    const response=await fetch(API_URL,{
+                    const robloxPrompt=`Recreate the following in Roblox Luau code: "${sanitizeInput(message)}". Provide optimized Luau code with mechanics, Roblox UI, animations, error handling, multiplayer support, and responsive design.`;
+                    const response=await fetch(Api_URL,{
                         method:'POST',
                         headers:{
                             'Authorization':`Bearer ${API_KEY}`,
@@ -1174,22 +1273,22 @@
                         body:JSON.stringify({
                             model:"gpt-4o",
                             messages:[{role:"user",content:robloxPrompt}],
-                            max_tokens:5000,
-                            temperature:0.6
+                            max_tokens:aiModels[selectedAiModel].maxTokens,
+                            temperature:aiModels[selectedAiModel].temperature
                         }),
                         signal:abortController.signal
                     });
                     if(!response.ok)throw new Error('API request failed');
                     const data=await response.json();
-                    aiMessageText=data.choices[0].message.content;
+                    aiMessageText=`${randomLivelyResponse}\n${data.choices[0].message.content}`;
                     aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
                     responseCache.set(messageHash,aiMessageText);
                     latestAiResponse=aiMessageText;
                     conversationHistory.push({role:"assistant",content:aiMessageText});
                     chatArea.scrollTop=chatArea.scrollHeight;
                 }else if(selectedSchoolMode==='slides'||message.toLowerCase().includes('google slides')||message.toLowerCase().includes('presentation')){
-                    const slidesPrompt=`Create a Google Slides presentation for: "${sanitizeInput(message)}". Provide a title, slide titles, body content in markdown, and image/chart suggestions. No code.`;
-                    const response=await fetch(API_URL,{
+                    const slidesPrompt=`Create a Google Slides presentation for: "${sanitizeInput(message)}". Provide a title, slide titles, body content in markdown, and image/chart suggestions.`;
+                    const response=await fetch(Api_URL,{
                         method:'POST',
                         headers:{
                             'Authorization':`Bearer ${API_KEY}`,
@@ -1199,32 +1298,38 @@
                             model:"gpt-4o",
                             messages:[{role:"user",content:slidesPrompt}],
                             max_tokens:3000,
-                            temperature:0.6
+                            temperature:aiModels[selectedAiModel].temperature
                         }),
                         signal:abortController.signal
                     });
                     if(!response.ok)throw new Error('API request failed');
                     const data=await response.json();
-                    aiMessageText=data.choices[0].message.content;
+                    aiMessageText=`${randomLivelyResponse}\n${data.choices[0].message.content}`;
                     aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
                     responseCache.set(messageHash,aiMessageText);
                     latestAiResponse=aiMessageText;
                     conversationHistory.push({role:"assistant",content:aiMessageText});
                     chatArea.scrollTop=chatArea.scrollHeight;
-                }else if(selectedSchoolMode==='video'||message.toLowerCase().includes('analyze video')||filesArray.some(file=>file.type.startsWith('video/'))){
+                }else if(selectedSchoolMode==='video'||message.toLowerCase().includes('analyze video')||message.toLowerCase().includes('analyze image')||filesArray.some(file=>file.type.startsWith('video/')||file.type.startsWith('image/'))){
                     const videoFiles=filesArray.filter(file=>file.type.startsWith('video/'));
-                    if(videoFiles.length>0){
+                    const imageFiles=filesArray.filter(file=>file.type.startsWith('image/'));
+                    if(videoFiles.length>0||imageFiles.length>0){
                         for(const videoFile of videoFiles){
-                            const analysis=await VideoProcessor.analyzeVideo(videoFile);
+                            const analysis=await MediaProcessor.analyzeVideo(videoFile);
                             aiMessageText+=`**Video Analysis for ${sanitizeInput(videoFile.name)}:**\n${analysis}\n\n`;
                         }
+                        for(const imageFile of imageFiles){
+                            const analysis=await MediaProcessor.analyzeImage(imageFile);
+                            aiMessageText+=`**Image Analysis for ${sanitizeInput(imageFile.name)}:**\n${analysis}\n\n`;
+                        }
+                        aiMessageText=`${randomLivelyResponse}\n${aiMessageText}`;
                         aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
                         responseCache.set(messageHash,aiMessageText);
                         latestAiResponse=aiMessageText;
                         conversationHistory.push({role:"assistant",content:aiMessageText});
                         chatArea.scrollTop=chatArea.scrollHeight;
                     }else{
-                        aiMessageText='No video files found to analyze. Please upload a video.';
+                        aiMessageText=`${randomLivelyResponse}\nNo video or image files found to analyze—upload something for me to check out!`;
                         aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
                         responseCache.set(messageHash,aiMessageText);
                         latestAiResponse=aiMessageText;
@@ -1237,7 +1342,7 @@
                         const messagesToProcess=batchQueue.map(msg=>({role:msg.role,content:msg.content}));
                         batchQueue=[];
                         const responses=await batchProcessRequests(messagesToProcess);
-                        aiMessageText=responses[0];
+                        aiMessageText=`${randomLivelyResponse}\n${responses[0]}`;
                         aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
                         responseCache.set(messageHash,aiMessageText);
                         latestAiResponse=aiMessageText;
@@ -1253,15 +1358,15 @@
                             body:JSON.stringify({
                                 model:"gpt-4o",
                                 messages:conversationHistory.concat([{role:"user",content:message}]),
-                                max_tokens:5000,
-                                temperature:0.7,
-                                top_p:0.95
+                                max_tokens:aiModels[selectedAiModel].maxTokens,
+                                temperature:aiModels[selectedAiModel].temperature,
+                                top_p:0.9
                             }),
                             signal:abortController.signal
                         });
                         if(!response.ok)throw new Error('API request failed');
                         const data=await response.json();
-                        aiMessageText=data.choices[0].message.content;
+                        aiMessageText=`${randomLivelyResponse}\n${data.choices[0].message.content}`;
                         aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
                         responseCache.set(messageHash,aiMessageText);
                         latestAiResponse=aiMessageText;
