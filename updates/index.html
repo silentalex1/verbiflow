@@ -1,1 +1,55 @@
-test
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <title>VerbiFlow Updates</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:Inter,sans-serif;color:#111827;background:#f9fafb;min-height:100vh;display:flex;justify-content:center;padding:12px}
+        .container{max-width:700px;width:100%;background:#fff;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.1);padding:20px}
+        .header{text-align:center;padding:12px;border-bottom:1px solid #e5e7eb}
+        .header h1{font-size:24px;font-weight:600;color:#2563eb}
+        .changelog{padding:20px}
+        .changelog h2{font-size:20px;font-weight:600;margin-bottom:12px;color:#2563eb}
+        .changelog ul{list-style:none}
+        .changelog li{font-size:15px;line-height:1.5;margin-bottom:10px;padding-left:20px;position:relative}
+        .changelog li:before{content:'•';color:#2563eb;font-size:18px;position:absolute;left:0}
+        @media (max-width:768px){
+            .container{max-width:100%;padding:12px;border-radius:10px}
+            .header h1{font-size:22px}
+            .changelog h2{font-size:18px}
+            .changelog li{font-size:14px}
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>VerbiFlow Updates</h1>
+        </div>
+        <div class="changelog">
+            <h2>What's New</h2>
+            <ul>
+                <li>Added image analysis so the AI can look at and understand pictures you upload.</li>
+                <li>Made the AI respond faster for quicker answers.</li>
+                <li>Improved code obfuscation and deobfuscation to handle tougher code.</li>
+                <li>Added UI design skills to create better website and app layouts.</li>
+                <li>Updated the website to be more secure and look nicer.</li>
+                <li>Made the AI less strict so it can talk about more topics.</li>
+                <li>Shrunk the main website size to fit better on screens.</li>
+                <li>Created this updates page to show what's changed.</li>
+                <li>Cleaned up the website for easier use, especially on phones.</li>
+                <li>Added code review to find bugs and improve code.</li>
+                <li>Added "Keep Generating" button to continue AI responses if it stops.</li>
+                <li>Boosted AI speed and added more advanced code handling.</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
