@@ -29,11 +29,11 @@
             color: #e2e8f0;
         }
         .container {
-            max-width: 1000px;
+            max-width: 1100px;
             width: 100%;
             background: #ffffff;
-            border-radius: 24px;
-            box-shadow: 0 16px 40px rgba(0,0,0,0.2);
+            border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
             overflow: hidden;
             display: flex;
             flex-direction: column;
@@ -41,13 +41,13 @@
         }
         .dark-mode .container {
             background: #1e293b;
-            box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
         }
         .nav-bar {
             background: linear-gradient(90deg, #1e40af, #3b82f6);
-            padding: 14px 24px;
+            padding: 16px 30px;
             display: flex;
-            gap: 14px;
+            gap: 16px;
             justify-content: flex-end;
             align-items: center;
         }
@@ -58,10 +58,10 @@
             background: #ffffff;
             color: #1e40af;
             border: none;
-            padding: 12px 24px;
-            border-radius: 14px;
+            padding: 12px 28px;
+            border-radius: 16px;
             cursor: pointer;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 600;
             transition: all 0.25s ease;
             outline: none;
@@ -91,10 +91,10 @@
             background: #ffffff;
             color: #1e40af;
             border: 2px solid #1e40af;
-            padding: 10px 20px;
-            border-radius: 14px;
+            padding: 10px 22px;
+            border-radius: 16px;
             cursor: pointer;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 600;
             display: flex;
             align-items: center;
@@ -114,11 +114,11 @@
             background: #475569;
         }
         .theme-btn i {
-            font-size: 18px;
+            font-size: 20px;
         }
         .header {
             background: #ffffff;
-            padding: 28px;
+            padding: 32px;
             text-align: center;
             border-bottom: 1px solid #e2e8f0;
         }
@@ -127,7 +127,7 @@
             border-bottom: 1px solid #334155;
         }
         .logo {
-            font-size: 36px;
+            font-size: 40px;
             font-weight: 800;
             color: #1e40af;
             letter-spacing: -0.8px;
@@ -138,10 +138,10 @@
         }
         .chat-area {
             flex: 1;
-            padding: 28px;
+            padding: 32px;
             overflow-y: auto;
-            max-height: 65vh;
-            min-height: 45vh;
+            max-height: 70vh;
+            min-height: 50vh;
             background: #f9fafb;
             scroll-behavior: smooth;
         }
@@ -156,14 +156,14 @@
         .chat-history {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 24px;
         }
         .chat-message {
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            padding: 14px;
-            border-radius: 20px;
+            gap: 12px;
+            padding: 16px;
+            border-radius: 24px;
             max-width: 80%;
             animation: slideIn 0.5s ease;
         }
@@ -185,16 +185,16 @@
             color: #e2e8f0;
         }
         .chat-message-content {
-            padding: 14px;
-            border-radius: 20px;
-            font-size: 16px;
+            padding: 16px;
+            border-radius: 24px;
+            font-size: 17px;
             line-height: 1.7;
             word-break: break-word;
         }
         .chat-message-meta {
-            font-size: 13px;
+            font-size: 14px;
             color: #64748b;
-            margin-top: 6px;
+            margin-top: 8px;
             opacity: 0.8;
         }
         .dark-mode .chat-message-meta {
@@ -202,8 +202,8 @@
         }
         .chat-message img {
             max-width: 100%;
-            border-radius: 14px;
-            margin-top: 14px;
+            border-radius: 16px;
+            margin-top: 16px;
             cursor: pointer;
             transition: transform 0.3s ease;
         }
@@ -212,18 +212,18 @@
         }
         .code-block {
             position: relative;
-            margin: 14px 0;
-            border-radius: 14px;
+            margin: 16px 0;
+            border-radius: 16px;
             overflow: hidden;
         }
         .code-block pre {
             background: #0f172a;
             color: #e2e8f0;
-            padding: 20px;
-            border-radius: 14px;
+            padding: 24px;
+            border-radius: 16px;
             overflow-x: auto;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 15px;
+            font-size: 16px;
             line-height: 1.6;
         }
         .dark-mode .code-block pre {
@@ -232,10 +232,10 @@
         .code-text {
             background: #0f172a;
             color: #e2e8f0;
-            padding: 20px;
-            border-radius: 14px;
+            padding: 24px;
+            border-radius: 16px;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 15px;
+            font-size: 16px;
             white-space: pre-wrap;
             user-select: text;
         }
@@ -246,22 +246,22 @@
             background: #1e40af;
             color: #ffffff;
             border: none;
-            padding: 8px 14px;
-            border-radius: 10px;
+            padding: 10px 16px;
+            border-radius: 12px;
             cursor: pointer;
-            font-size: 12px;
+            font-size: 14px;
             font-weight: 600;
             transition: all 0.25s ease;
         }
         .copy-btn {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 12px;
+            right: 12px;
         }
         .copy-all-btn {
             position: absolute;
-            top: 10px;
-            right: 80px;
+            top: 12px;
+            right: 90px;
         }
         .dark-mode .copy-btn, .dark-mode .copy-all-btn {
             background: #1e3a8a;
@@ -276,12 +276,12 @@
         .code-sidebar {
             position: fixed;
             top: 0;
-            right: -450px;
-            width: 450px;
+            right: -500px;
+            width: 500px;
             height: 100%;
             background: #f9fafb;
             border-left: 1px solid #e2e8f0;
-            padding: 28px;
+            padding: 32px;
             overflow-y: auto;
             transition: right 0.4s ease;
             z-index: 200;
@@ -298,14 +298,14 @@
             color: #ffffff;
             border: none;
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 20px;
-            margin-bottom: 14px;
+            font-size: 22px;
+            margin-bottom: 16px;
         }
         .code-sidebar-close:hover {
             background: #b91c1c;
@@ -313,7 +313,7 @@
         }
         .code-sidebar-content {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 15px;
+            font-size: 16px;
             color: #0f172a;
             white-space: pre-wrap;
         }
@@ -321,7 +321,7 @@
             color: #e2e8f0;
         }
         .file-upload-container {
-            padding: 20px;
+            padding: 24px;
             border-top: 1px solid #e2e8f0;
             background: #ffffff;
         }
@@ -331,19 +331,19 @@
         }
         .file-actions {
             display: flex;
-            gap: 14px;
+            gap: 16px;
             align-items: center;
             flex-wrap: wrap;
         }
         .file-input-label {
             background: #1e40af;
             color: #ffffff;
-            padding: 14px 24px;
-            border-radius: 14px;
+            padding: 16px 28px;
+            border-radius: 16px;
             cursor: pointer;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 600;
-            min-height: 48px;
+            min-height: 50px;
             transition: all 0.25s ease;
         }
         .dark-mode .file-input-label {
@@ -358,13 +358,13 @@
         .file-clear-btn {
             background: #dc2626;
             color: #ffffff;
-            padding: 14px 24px;
-            border-radius: 14px;
+            padding: 16px 28px;
+            border-radius: 16px;
             cursor: pointer;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 600;
             border: none;
-            min-height: 48px;
+            min-height: 50px;
             transition: all 0.25s ease;
         }
         .file-clear-btn:hover {
@@ -374,13 +374,13 @@
         .keep-generating-btn {
             background: #059669;
             color: #ffffff;
-            padding: 14px 24px;
-            border-radius: 14px;
+            padding: 16px 28px;
+            border-radius: 16px;
             cursor: pointer;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 600;
             border: none;
-            min-height: 48px;
+            min-height: 50px;
             transition: all 0.5s ease;
             opacity: 0;
             transform: translateY(20px);
@@ -404,18 +404,18 @@
         .school-help-container {
             display: flex;
             align-items: center;
-            gap: 14px;
-            margin-left: 14px;
+            gap: 16px;
+            margin-left: 16px;
         }
         .school-help-dropdown {
             background: #475569;
             color: #ffffff;
-            padding: 14px 24px;
-            border-radius: 14px;
+            padding: 16px 28px;
+            border-radius: 16px;
             border: none;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 600;
-            min-height: 48px;
+            min-height: 50px;
             cursor: pointer;
             transition: all 0.25s ease;
         }
@@ -441,13 +441,13 @@
         .rephrase-btn {
             background: #d97706;
             color: #ffffff;
-            padding: 14px 24px;
-            border-radius: 14px;
+            padding: 16px 28px;
+            border-radius: 16px;
             cursor: pointer;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 600;
             border: none;
-            min-height: 48px;
+            min-height: 50px;
             transition: all 0.25s ease;
         }
         .dark-mode .rephrase-btn {
@@ -462,17 +462,17 @@
         }
         .file-list {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 14px;
-            margin-top: 14px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
         }
         .file-item {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 16px;
             background: #e2e8f0;
-            padding: 12px;
-            border-radius: 14px;
+            padding: 14px;
+            border-radius: 16px;
             cursor: pointer;
             transition: all 0.25s ease;
         }
@@ -488,7 +488,7 @@
         }
         .file-item-name {
             flex: 1;
-            font-size: 15px;
+            font-size: 16px;
             color: #0f172a;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -498,7 +498,7 @@
             color: #e2e8f0;
         }
         .file-item-details {
-            font-size: 13px;
+            font-size: 14px;
             color: #64748b;
         }
         .dark-mode .file-item-details {
@@ -513,7 +513,7 @@
             height: 100%;
             background: rgba(0,0,0,0.95);
             z-index: 250;
-            padding: 24px;
+            padding: 28px;
             justify-content: center;
             align-items: center;
         }
@@ -522,13 +522,13 @@
         }
         .file-preview-content {
             background: #ffffff;
-            border-radius: 24px;
-            padding: 28px;
+            border-radius: 28px;
+            padding: 32px;
             max-width: 95%;
             max-height: 95%;
             overflow: auto;
             color: #0f172a;
-            font-size: 15px;
+            font-size: 16px;
         }
         .dark-mode .file-preview-content {
             background: #1e293b;
@@ -542,15 +542,15 @@
             color: #ffffff;
             border: none;
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             position: absolute;
-            top: 24px;
-            right: 24px;
+            top: 28px;
+            right: 28px;
             transition: all 0.25s ease;
         }
         .file-preview-close:hover {
@@ -558,17 +558,17 @@
             background: #b91c1c;
         }
         .file-preview-close svg {
-            width: 24px;
-            height: 24px;
+            width: 28px;
+            height: 28px;
             fill: #ffffff;
         }
         .input-container {
             display: flex;
             align-items: flex-end;
-            padding: 20px;
+            padding: 24px;
             border-top: 1px solid #e2e8f0;
             background: #ffffff;
-            gap: 14px;
+            gap: 16px;
             position: sticky;
             bottom: 0;
             z-index: 50;
@@ -579,14 +579,14 @@
         }
         .user-input {
             flex: 1;
-            padding: 14px;
+            padding: 16px;
             border: 1px solid #e2e8f0;
-            border-radius: 14px;
-            font-size: 16px;
+            border-radius: 16px;
+            font-size: 17px;
             outline: none;
             resize: none;
-            min-height: 48px;
-            max-height: 200px;
+            min-height: 50px;
+            max-height: 220px;
             background: #ffffff;
             color: #0f172a;
             transition: all 0.25s ease;
@@ -607,13 +607,13 @@
         .send-btn {
             background: #1e40af;
             border: none;
-            border-radius: 14px;
-            padding: 14px 28px;
+            border-radius: 16px;
+            padding: 16px 32px;
             cursor: pointer;
             color: #ffffff;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 600;
-            min-height: 48px;
+            min-height: 50px;
             transition: all 0.25s ease;
         }
         .dark-mode .send-btn {
@@ -632,19 +632,19 @@
         }
         .loading-spinner {
             display: none;
-            margin: 14px auto;
-            width: 40px;
-            height: 40px;
-            border: 5px solid #1e40af;
-            border-top: 5px solid transparent;
+            margin: 16px auto;
+            width: 44px;
+            height: 44px;
+            border: 6px solid #1e40af;
+            border-top: 6px solid transparent;
             border-radius: 50%;
             animation: spin 0.5s linear infinite;
         }
         .typing-indicator {
             display: none;
-            font-size: 15px;
+            font-size: 16px;
             color: #64748b;
-            margin: 14px auto;
+            margin: 16px auto;
             text-align: center;
         }
         .dark-mode .typing-indicator {
@@ -662,15 +662,15 @@
         }
         .notification {
             position: fixed;
-            top: 24px;
-            right: 24px;
-            padding: 14px 28px;
-            border-radius: 14px;
-            box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+            top: 28px;
+            right: 28px;
+            padding: 16px 32px;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
             opacity: 0;
-            transform: translateY(-24px);
+            transform: translateY(-28px);
             transition: all 0.4s ease;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 600;
             z-index: 300;
         }
@@ -686,23 +686,8 @@
             background: #dc2626;
             color: #ffffff;
         }
-        .tooltip {
-            position: absolute;
-            background: #1e293b;
-            color: #e2e8f0;
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-size: 13px;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: 100;
-        }
-        .tooltip.show {
-            opacity: 1;
-        }
         @keyframes slideIn {
-            0% { opacity: 0; transform: translateY(24px); }
+            0% { opacity: 0; transform: translateY(28px); }
             100% { opacity: 1; transform: translateY(0); }
         }
         @keyframes spin {
@@ -720,69 +705,69 @@
         @media (max-width: 768px) {
             .container {
                 max-width: 100%;
-                border-radius: 20px;
-                padding: 14px;
+                border-radius: 24px;
+                padding: 16px;
             }
             .nav-bar {
-                padding: 10px;
-                gap: 10px;
+                padding: 12px;
+                gap: 12px;
             }
             .nav-btn {
                 font-size: 14px;
-                padding: 10px 20px;
+                padding: 10px 24px;
             }
             .theme-btn {
-                padding: 8px 16px;
+                padding: 8px 18px;
                 font-size: 14px;
             }
             .header {
-                padding: 20px;
+                padding: 24px;
             }
             .logo {
-                font-size: 32px;
+                font-size: 36px;
             }
             .chat-area {
-                padding: 20px;
-                min-height: 40vh;
-                max-height: 60vh;
+                padding: 24px;
+                min-height: 45vh;
+                max-height: 65vh;
             }
             .chat-message {
                 max-width: 85%;
             }
             .chat-message-content {
-                font-size: 15px;
+                font-size: 16px;
             }
             .chat-message img {
                 max-width: 100%;
             }
             .input-container {
-                padding: 14px;
-                gap: 10px;
+                padding: 16px;
+                gap: 12px;
             }
             .user-input {
-                font-size: 15px;
-                min-height: 44px;
+                font-size: 16px;
+                min-height: 46px;
             }
             .send-btn {
-                padding: 12px 24px;
-                min-height: 44px;
+                padding: 14px 28px;
+                min-height: 46px;
             }
             .file-input-label, .file-clear-btn, .keep-generating-btn, .school-help-dropdown, .rephrase-btn {
                 font-size: 14px;
-                padding: 12px 20px;
-                min-height: 44px;
+                padding: 14px 24px;
+                min-height: 46px;
             }
             .school-help-container {
-                gap: 10px;
-                margin-left: 10px;
+                gap: 12px;
+                margin-left: 12px;
             }
             .file-preview-content img {
                 max-width: 90% !important;
             }
             .notification {
-                top: 20px;
-                right: 20px;
-                padding: 12px 24px;
+                top: 24px;
+                right: 24px;
+                padding: 14px 28px;
                 font-size: 14px;
             }
             .code-sidebar {
@@ -795,11 +780,11 @@
 <body>
     <div class="container">
         <div class="nav-bar">
-            <button class="nav-btn" id="clearChatBtn" data-tooltip="Clear conversation">Clear Chat</button>
-            <button class="nav-btn" id="verbiflowUpdatesBtn" data-tooltip="View updates">Updates</button>
-            <button class="theme-btn" id="themeBtn" data-tooltip="Toggle theme"><i class="fas fa-moon"></i> Dark Mode</button>
-            <button class="nav-btn" id="copyCodeBtn" data-tooltip="Copy latest code">Copy Code</button>
-            <button class="nav-btn discord-btn" id="discordBtn" data-tooltip="Join our Discord">Discord</button>
+            <button class="nav-btn" id="clearChatBtn">Clear Chat</button>
+            <button class="nav-btn" id="verbiflowUpdatesBtn">Updates</button>
+            <button class="theme-btn" id="themeBtn"><i class="fas fa-moon"></i> Dark Mode</button>
+            <button class="nav-btn" id="copyCodeBtn">Copy Code</button>
+            <button class="nav-btn discord-btn" id="discordBtn">Discord</button>
         </div>
         <div class="header">
             <div class="logo">VerbiFlow</div>
@@ -808,7 +793,7 @@
             <div class="chat-content">
                 <div class="chat-history" id="chatHistory">
                     <div class="chat-message ai">
-                        <div class="chat-message-content">Yo! Welcome to VerbiFlow, your ultimate AI sidekick. I can code, create Roblox games, design slides, analyze files, or tackle any wild idea you have. What's the vibe today?</div>
+                        <div class="chat-message-content">Hey there! I’m VerbiFlow, your advanced AI assistant. I can code, analyze and optimize your code, create games, design slides, and more—faster than ever. What’s on your mind today?</div>
                         <div class="chat-message-meta">Just now</div>
                     </div>
                 </div>
@@ -820,12 +805,12 @@
         </div>
         <div class="file-upload-container" id="fileUploadContainer">
             <div class="file-actions">
-                <label class="file-input-label" for="fileInput" data-tooltip="Upload files">Upload File</label>
+                <label class="file-input-label" for="fileInput">Upload File</label>
                 <input type="file" class="file-input" id="fileInput" multiple>
-                <button class="file-clear-btn" id="fileClearBtn" style="display:none;" data-tooltip="Clear uploaded files">Clear</button>
-                <button class="keep-generating-btn" id="keepGeneratingBtn" data-tooltip="Continue AI response">Continue Generating</button>
+                <button class="file-clear-btn" id="fileClearBtn" style="display:none;">Clear</button>
+                <button class="keep-generating-btn" id="keepGeneratingBtn">Continue Generating</button>
                 <div class="school-help-container">
-                    <select class="school-help-dropdown" id="schoolHelpDropdown" data-tooltip="Select task mode">
+                    <select class="school-help-dropdown" id="schoolHelpDropdown">
                         <option value="">Select Task</option>
                         <option value="algebra">Algebra Help</option>
                         <option value="science">Science Help</option>
@@ -838,17 +823,17 @@
                         <option value="roblox">Roblox Game</option>
                         <option value="slides">Google Slides</option>
                     </select>
-                    <button class="rephrase-btn" id="rephraseBtn" data-tooltip="Rephrase AI response">Rephrase</button>
+                    <button class="rephrase-btn" id="rephraseBtn">Rephrase</button>
                 </div>
             </div>
             <div class="file-list" id="fileList"></div>
         </div>
         <div class="input-container">
-            <textarea class="user-input" id="userInput" placeholder="Ask anything, upload files, or request Roblox games or slides..." rows="1" data-tooltip="Type your query here"></textarea>
-            <button class="send-btn" id="sendBtn" data-tooltip="Send message">Send</button>
+            <textarea class="user-input" id="userInput" placeholder="Ask anything, upload files, or request Roblox games or slides..." rows="1"></textarea>
+            <button class="send-btn" id="sendBtn">Send</button>
         </div>
         <div class="file-preview-modal" id="filePreviewModal">
-            <button class="file-preview-close" id="filePreviewClose" data-tooltip="Close preview">
+            <button class="file-preview-close" id="filePreviewClose">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
                 </svg>
@@ -856,7 +841,7 @@
             <div class="file-preview-content" id="filePreviewContent"></div>
         </div>
         <div class="code-sidebar" id="codeSidebar">
-            <button class="code-sidebar-close" id="codeSidebarClose" data-tooltip="Close sidebar">×</button>
+            <button class="code-sidebar-close" id="codeSidebarClose">×</button>
             <pre class="code-sidebar-content" id="codeSidebarContent"></pre>
         </div>
         <div class="notification" id="notification"></div>
@@ -867,7 +852,7 @@
         const API_URL = "https://api.openai.com/v1/chat/completions";
         const IMAGE_GEN_API_URL = "https://api.openai.com/v1/images/generations";
         const DISCORD_INVITE = "https://discord.gg/rCTRQvD4TP";
-        const RATE_LIMIT_REQUESTS = 300;
+        const RATE_LIMIT_REQUESTS = 500;
         const RATE_LIMIT_WINDOW = 60 * 1000;
 
         const chatHistory = document.getElementById('chatHistory');
@@ -897,7 +882,7 @@
         const rephraseBtn = document.getElementById('rephraseBtn');
 
         let filesArray = [];
-        let conversationHistory = [{ role: "assistant", content: "Yo! Welcome to VerbiFlow, your ultimate AI sidekick. I can code, create Roblox games, design slides, analyze files, or tackle any wild idea you have. What's the vibe today?" }];
+        let conversationHistory = [{ role: "assistant", content: "Hey there! I’m VerbiFlow, your advanced AI assistant. I can code, analyze and optimize your code, create games, design slides, and more—faster than ever. What’s on your mind today?" }];
         let latestCodeBlocks = [];
         let latestAiResponse = '';
         let isDarkMode = false;
@@ -908,6 +893,93 @@
         let requestTimestamps = [];
         let messageQueue = [];
         let isProcessing = false;
+        let codeAnalysisCache = new Map();
+
+        class CodeAnalyzer {
+            static analyzeCode(code) {
+                const issues = [];
+                const lines = code.split('\n');
+                const variableUsage = new Map();
+                let indentLevel = 0;
+                let braceCount = 0;
+
+                lines.forEach((line, index) => {
+                    const trimmed = line.trim();
+                    if (!trimmed) return;
+
+                    const indent = line.match(/^\s*/)[0].length / 2;
+                    if (trimmed.match(/\{/)) braceCount++;
+                    if (trimmed.match(/\}/)) braceCount--;
+                    if (braceCount < 0) {
+                        issues.push(`Line ${index + 1}: Unmatched closing brace.`);
+                    }
+                    if (Math.abs(indent - indentLevel) > 1) {
+                        issues.push(`Line ${index + 1}: Inconsistent indentation. Expected ${indentLevel * 2} spaces, got ${indent * 2}.`);
+                    }
+                    indentLevel = trimmed.match(/\{$/) ? indent + 1 : trimmed.match(/\}/) ? indent : indentLevel;
+
+                    if (trimmed.match(/var\s+\w+/)) {
+                        issues.push(`Line ${index + 1}: Use 'let' or 'const' instead of 'var' for better scope control.`);
+                    }
+
+                    const variableMatch = trimmed.match(/(let|const)\s+(\w+)/);
+                    if (variableMatch) {
+                        variableUsage.set(variableMatch[2], { declared: index + 1, used: false });
+                    }
+
+                    variableUsage.forEach((value, key) => {
+                        if (trimmed.includes(key) && index + 1 !== value.declared) {
+                            value.used = true;
+                        }
+                    });
+
+                    if (trimmed.match(/console\.log/)) {
+                        issues.push(`Line ${index + 1}: Remove 'console.log' statements in production code.`);
+                    }
+
+                    if (trimmed.match(/==\s/)) {
+                        issues.push(`Line ${index + 1}: Use '===' instead of '==' for strict equality.`);
+                    }
+
+                    if (trimmed.length > 120) {
+                        issues.push(`Line ${index + 1}: Line exceeds 120 characters. Split for better readability.`);
+                    }
+                });
+
+                variableUsage.forEach((value, key) => {
+                    if (!value.used) {
+                        issues.push(`Variable '${key}' declared on line ${value.declared} but never used.`);
+                    }
+                });
+
+                if (braceCount !== 0) {
+                    issues.push(`Unmatched braces in code. Found ${braceCount} extra ${braceCount > 0 ? 'opening' : 'closing'} brace(s).`);
+                }
+
+                return issues;
+            }
+
+            static optimizeCode(code) {
+                let optimized = code;
+                optimized = optimized.replace(/\bvar\b/g, 'const');
+                optimized = optimized.replace(/\b==\b/g, '===');
+                optimized = optimized.replace(/console\.log\([^)]+\);?\n?/g, '');
+                optimized = optimized.replace(/\n\s*\n/g, '\n');
+
+                const lines = optimized.split('\n');
+                let indentLevel = 0;
+                optimized = lines.map(line => {
+                    const trimmed = line.trim();
+                    if (!trimmed) return '';
+                    if (trimmed.match(/\}/)) indentLevel--;
+                    const indent = ' '.repeat(indentLevel * 2);
+                    if (trimmed.match(/\{$/)) indentLevel++;
+                    return indent + trimmed;
+                }).filter(line => line).join('\n');
+
+                return optimized;
+            }
+        }
 
         class Obfuscator {
             static obfuscateBase64(code) {
@@ -1070,30 +1142,12 @@
             const now = Date.now();
             requestTimestamps = requestTimestamps.filter(ts => now - ts < RATE_LIMIT_WINDOW);
             if (requestTimestamps.length >= RATE_LIMIT_REQUESTS) {
-                showNotification('Chill! Too many requests. Wait a moment.', 'error');
+                showNotification('Too many requests! Wait a moment.', 'error');
                 return false;
             }
             requestTimestamps.push(now);
             return true;
         }
-
-        function showTooltip(element, message) {
-            const tooltip = document.createElement('div');
-            tooltip.className = 'tooltip';
-            tooltip.textContent = message;
-            document.body.appendChild(tooltip);
-            const rect = element.getBoundingClientRect();
-            tooltip.style.top = `${rect.bottom + 5}px`;
-            tooltip.style.left = `${rect.left + rect.width / 2}px`;
-            tooltip.classList.add('show');
-            setTimeout(() => {
-                tooltip.remove();
-            }, 2000);
-        }
-
-        document.querySelectorAll('[data-tooltip]').forEach(element => {
-            element.addEventListener('mouseenter', () => showTooltip(element, element.dataset.tooltip));
-        });
 
         themeBtn.addEventListener('click', toggleTheme);
 
@@ -1108,7 +1162,7 @@
 
         userInput.addEventListener('input', () => {
             userInput.style.height = 'auto';
-            userInput.style.height = `${Math.min(userInput.scrollHeight, 200)}px`;
+            userInput.style.height = `${Math.min(userInput.scrollHeight, 220)}px`;
         });
 
         userInput.addEventListener('paste', async (e) => {
@@ -1207,11 +1261,11 @@
         clearChatBtn.addEventListener('click', () => {
             chatHistory.innerHTML = `
                 <div class="chat-message ai">
-                    <div class="chat-message-content">Yo! Welcome to VerbiFlow, your ultimate AI sidekick. I can code, create Roblox games, design slides, analyze files, or tackle any wild idea you have. What's the vibe today?</div>
+                    <div class="chat-message-content">Hey there! I’m VerbiFlow, your advanced AI assistant. I can code, analyze and optimize your code, create games, design slides, and more—faster than ever. What’s on your mind today?</div>
                     <div class="chat-message-meta">Just now</div>
                 </div>
             `;
-            conversationHistory = [{ role: "assistant", content: "Yo! Welcome to VerbiFlow, your ultimate AI sidekick. I can code, create Roblox games, design slides, analyze files, or tackle any wild idea you have. What's the vibe today?" }];
+            conversationHistory = [{ role: "assistant", content: "Hey there! I’m VerbiFlow, your advanced AI assistant. I can code, analyze and optimize your code, create games, design slides, and more—faster than ever. What’s on your mind today?" }];
             filesArray = [];
             fileList.innerHTML = '';
             fileClearBtn.style.display = 'none';
@@ -1224,14 +1278,16 @@
             codeSidebarContent.textContent = '';
             schoolHelpDropdown.value = '';
             selectedSchoolMode = '';
+            codeAnalysisCache.clear();
             showNotification('Chat reset!');
         });
 
         copyCodeBtn.addEventListener('click', () => {
             if (latestCodeBlocks.length > 0) {
-                navigator.clipboard.writeText(latestCodeBlocks.join('\n\n')).then(() => {
+                const codeToCopy = latestCodeBlocks.join('\n\n');
+                navigator.clipboard.writeText(codeToCopy).then(() => {
                     showNotification('Code copied!');
-                    codeSidebarContent.textContent = latestCodeBlocks.join('\n\n');
+                    codeSidebarContent.textContent = codeToCopy;
                     codeSidebar.classList.add('open');
                 }).catch(() => {
                     showNotification('Copy failed!', 'error');
@@ -1285,7 +1341,7 @@
             if (latestAiResponse) {
                 userInput.value = `Rephrase this naturally: ${latestAiResponse}`;
                 userInput.style.height = 'auto';
-                userInput.style.height = `${Math.min(userInput.scrollHeight, 200)}px`;
+                userInput.style.height = `${Math.min(userInput.scrollHeight, 220)}px`;
                 showNotification('Ready to rephrase!');
             } else {
                 showNotification('No response to rephrase!', 'error');
@@ -1317,15 +1373,25 @@
             let codeBlocks = [];
             let html = content.replace(codeBlockRegex, (match, code) => {
                 codeBlocks.push(code.trim());
-                const escapedCode = code.trim().replace(/`/g, '\\`').replace(/"/g, '"');
-                return `<div class="code-block"><pre class="code-text">${sanitizeInput(code.trim())}</pre><button class="copy-btn" onclick="navigator.clipboard.writeText(\`${escapedCode}\`).then(() => showNotification('Code copied!'))">Copy Code</button></div>`;
+                return `<div class="code-block"><pre class="code-text">${sanitizeInput(code.trim())}</pre><button class="copy-btn" data-code="${btoa(code.trim())}">Copy Code</button></div>`;
             });
             latestCodeBlocks = codeBlocks;
-            if (codeBlocks.length > 0) {
-                const escapedAllCode = codeBlocks.join('\n\n').replace(/`/g, '\\`').replace(/"/g, '"');
-                const copyAllBtn = `<button class="copy-all-btn" onclick="navigator.clipboard.writeText(\`${escapedAllCode}\`).then(() => showNotification('All code copied!'))">Copy All Code</button>`;
+            if (codeBlocks.length > 1) {
+                const copyAllBtn = `<button class="copy-all-btn" data-code="${btoa(codeBlocks.join('\n\n'))}">Copy All Code</button>`;
                 messageElement.querySelector('.chat-message-content').insertAdjacentHTML('afterbegin', copyAllBtn);
             }
+
+            messageElement.querySelectorAll('.copy-btn, .copy-all-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const code = atob(btn.dataset.code);
+                    navigator.clipboard.writeText(code).then(() => {
+                        showNotification(btn.classList.contains('copy-all-btn') ? 'All code copied!' : 'Code copied!');
+                    }).catch(() => {
+                        showNotification('Copy failed!', 'error');
+                    });
+                });
+            });
+
             return html;
         }
 
@@ -1414,7 +1480,7 @@
                 if (isGenerating) {
                     keepGeneratingBtn.classList.add('show');
                 }
-            }, 2000);
+            }, 1500);
 
             try {
                 let aiMessageText = '';
@@ -1423,8 +1489,28 @@
                 aiMessage.innerHTML = `<div class="chat-message-content"></div><div class="chat-message-meta">Just now</div>`;
                 chatHistory.appendChild(aiMessage);
 
+                let codeAnalysisResult = '';
+                const codeBlockMatch = message.match(/```([\s\S]*?)```/);
+                if (codeBlockMatch) {
+                    const code = codeBlockMatch[1].trim();
+                    const codeHash = sha256(code);
+                    if (codeAnalysisCache.has(codeHash)) {
+                        codeAnalysisResult = codeAnalysisCache.get(codeHash);
+                    } else {
+                        const issues = CodeAnalyzer.analyzeCode(code);
+                        const optimizedCode = CodeAnalyzer.optimizeCode(code);
+                        if (issues.length > 0) {
+                            codeAnalysisResult = `**Code Analysis Report:**\n- ${issues.join('\n- ')}\n\n**Optimized Code:**\n\`\`\`\n${optimizedCode}\n\`\`\``;
+                        } else {
+                            codeAnalysisResult = `**Code Analysis:** No issues found.\n\n**Optimized Code:**\n\`\`\`\n${optimizedCode}\n\`\`\``;
+                        }
+                        codeAnalysisCache.set(codeHash, codeAnalysisResult);
+                    }
+                    message += `\n\n${codeAnalysisResult}`;
+                }
+
                 if (message.toLowerCase() === 'hi') {
-                    aiMessageText = 'Hey, what’s up? Ready to crush it with some coding, games, or whatever you’re feeling?';
+                    aiMessageText = 'Hey! I’m ready to help with coding, games, slides, or anything else. What’s up?';
                     aiMessage.querySelector('.chat-message-content').innerHTML = formatMessage(aiMessageText, aiMessage);
                     conversationHistory.push({ role: "assistant", content: aiMessageText });
                     latestAiResponse = aiMessageText;
@@ -1436,7 +1522,7 @@
                         aiMessage.querySelector('.chat-message-content').innerHTML = `${formatMessage(aiMessageText, aiMessage)}<img src="${imageUrl}" alt="Generated Image">`;
                         conversationHistory.push({ role: "assistant", content: aiMessageText, image_url: imageUrl });
                     } else {
-                        aiMessageText = 'Image generation flopped. Try another prompt!';
+                        aiMessageText = 'Image generation failed. Try a different prompt!';
                         aiMessage.querySelector('.chat-message-content').innerHTML = formatMessage(aiMessageText, aiMessage);
                         conversationHistory.push({ role: "assistant", content: aiMessageText });
                     }
@@ -1480,7 +1566,7 @@
                         body: JSON.stringify({
                             model: "gpt-4o",
                             messages: [{ role: "user", content: rephrasePrompt }],
-                            max_tokens: 1200,
+                            max_tokens: 1500,
                             temperature: 0.8,
                         }),
                     });
@@ -1502,7 +1588,7 @@
                         body: JSON.stringify({
                             model: "gpt-4o",
                             messages: [{ role: "user", content: uiPrompt }],
-                            max_tokens: 3500,
+                            max_tokens: 4000,
                             temperature: 0.6,
                         }),
                     });
@@ -1524,7 +1610,7 @@
                         body: JSON.stringify({
                             model: "gpt-4o",
                             messages: [{ role: "user", content: robloxPrompt }],
-                            max_tokens: 4500,
+                            max_tokens: 5000,
                             temperature: 0.6,
                         }),
                     });
@@ -1546,7 +1632,7 @@
                         body: JSON.stringify({
                             model: "gpt-4o",
                             messages: [{ role: "user", content: slidesPrompt }],
-                            max_tokens: 2500,
+                            max_tokens: 3000,
                             temperature: 0.6,
                         }),
                     });
@@ -1557,8 +1643,8 @@
                     latestAiResponse = aiMessageText;
                     conversationHistory.push({ role: "assistant", content: aiMessageText });
                     chatArea.scrollTop = chatArea.scrollHeight;
-                } else if (message.toLowerCase().includes('analyze code') || message.toLowerCase().includes('review code')) {
-                    const codeToAnalyze = message.match(/```([\s\S]*?)```/)?.[1]?.trim() || message;
+                } else if (message.toLowerCase().includes('analyze code') || message.toLowerCase().includes('review code') || codeBlockMatch) {
+                    const codeToAnalyze = codeBlockMatch ? codeBlockMatch[1].trim() : message;
                     const codePrompt = `Review this code: \`\`\`\n${codeToAnalyze}\n\`\`\`. Analyze bugs, performance, security, and suggest improvements with optimized code examples.`;
                     const response = await fetch(API_URL, {
                         method: 'POST',
@@ -1569,13 +1655,13 @@
                         body: JSON.stringify({
                             model: "gpt-4o",
                             messages: [{ role: "user", content: codePrompt }],
-                            max_tokens: 2500,
+                            max_tokens: 3000,
                             temperature: 0.6,
                         }),
                     });
                     if (!response.ok) throw new Error('API request failed');
                     const data = await response.json();
-                    aiMessageText = data.choices[0].message.content;
+                    aiMessageText = data.choices[0].message.content + (codeAnalysisResult ? `\n\n${codeAnalysisResult}` : '');
                     aiMessage.querySelector('.chat-message-content').innerHTML = formatMessage(aiMessageText, aiMessage);
                     latestAiResponse = aiMessageText;
                     conversationHistory.push({ role: "assistant", content: aiMessageText });
@@ -1622,7 +1708,7 @@
                         };
                         enhancedPrompt = modePrompts[selectedSchoolMode];
                     } else {
-                        enhancedPrompt = `Handle this request with max creativity and precision: "${message}". Include code, visuals, or explanations as needed.`;
+                        enhancedPrompt = `Handle this request with maximum creativity and precision: "${message}". Include code, visuals, or explanations as needed.`;
                     }
 
                     if (message) {
@@ -1637,11 +1723,11 @@
                         },
                         body: JSON.stringify({
                             model: "gpt-4o",
-                            messages: messages.slice(-30),
-                            max_tokens: 4500,
-                            temperature: 0.8,
+                            messages: messages.slice(-20),
+                            max_tokens: 5000,
+                            temperature: 0.7,
                             stream: true,
-                            top_p: 0.9,
+                            top_p: 0.95,
                         }),
                     });
 
@@ -1671,7 +1757,7 @@
                                             if (isGenerating) {
                                                 keepGeneratingBtn.classList.add('show');
                                             }
-                                        }, 2000);
+                                        }, 1500);
                                     }
                                 } catch (e) {}
                             }
