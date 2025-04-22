@@ -3,58 +3,281 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com;">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
     <title>VerbiFlow Updates</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
     <style>
-        *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:Inter,sans-serif;color:#111827;background:#f9fafb;min-height:100vh;display:flex;justify-content:center;padding:12px}
-        .container{max-width:700px;width:100%;background:#fff;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.1);padding:20px}
-        .header{text-align:center;padding:12px;border-bottom:1px solid #e5e7eb}
-        .header h1{font-size:24px;font-weight:600;color:#2563eb}
-        .changelog{padding:20px}
-        .changelog h2{font-size:20px;font-weight:600;margin-bottom:12px;color:#2563eb}
-        .changelog ul{list-style:none}
-        .changelog li{font-size:15px;line-height:1.5;margin-bottom:10px;padding-left:20px;position:relative}
-        .changelog li:before{content:'•';color:#2563eb;font-size:18px;position:absolute;left:0}
-        @media (max-width:768px){
-            .container{max-width:100%;padding:12px;border-radius:10px}
-            .header h1{font-size:22px}
-            .changelog h2{font-size:18px}
-            .changelog li{font-size:14px}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #1a202c;
+            background: linear-gradient(135deg, #f6f8fd 0%, #eef2ff 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 32px 20px;
+            background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+            color: white;
+            position: relative;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            letter-spacing: -0.02em;
+        }
+        
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .decoration {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+        
+        .circle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+        
+        .circle-1 {
+            width: 180px;
+            height: 180px;
+            top: -90px;
+            left: -60px;
+        }
+        
+        .circle-2 {
+            width: 140px;
+            height: 140px;
+            bottom: -50px;
+            right: 30px;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .updates-container {
+            padding: 32px;
+        }
+        
+        .update-item {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            position: relative;
+            overflow: hidden;
+            border-left: 4px solid #4f46e5;
+            display: flex;
+            align-items: center;
+        }
+        
+        .update-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
+        }
+        
+        .update-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .update-icon {
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            background: rgba(79, 70, 229, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+        }
+        
+        .update-icon svg {
+            width: 24px;
+            height: 24px;
+            color: #4f46e5;
+        }
+        
+        .update-content {
+            flex-grow: 1;
+        }
+        
+        .update-title {
+            font-weight: 600;
+            font-size: 17px;
+            margin-bottom: 6px;
+            color: #1a202c;
+        }
+        
+        .update-desc {
+            font-size: 15px;
+            color: #4b5563;
+            line-height: 1.5;
+        }
+        
+        .footer {
+            padding: 20px 32px;
+            background: #f8fafc;
+            text-align: center;
+            font-size: 14px;
+            color: #6b7280;
+            border-top: 1px solid #f1f5f9;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: #e0e7ff;
+            color: #4f46e5;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 2px 10px;
+            border-radius: 20px;
+            margin-top: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                border-radius: 12px;
+            }
+            
+            .header {
+                padding: 24px 16px;
+            }
+            
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .updates-container {
+                padding: 24px 16px;
+            }
+            
+            .update-item {
+                padding: 16px;
+            }
+            
+            .update-icon {
+                width: 40px;
+                height: 40px;
+                margin-right: 16px;
+            }
+            
+            .update-title {
+                font-size: 16px;
+            }
+            
+            .update-desc {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>VerbiFlow Updates</h1>
+            <div class="decoration">
+                <div class="circle circle-1"></div>
+                <div class="circle circle-2"></div>
+            </div>
+            <div class="header-content">
+                <h1>VerbiFlow Updates</h1>
+                <p>Exciting new features and improvements</p>
+            </div>
         </div>
-        <div class="changelog">
-            <h2>What's New</h2>
-            <ul>
-                <li>Added image analysis so the AI can look at and understand pictures you upload.</li>
-                <li>Made the AI respond faster for quicker answers.</li>
-                <li>Improved code obfuscation and deobfuscation to handle tougher code with new techniques.</li>
-                <li>Added UI design skills to create better website and app layouts.</li>
-                <li>Updated the website to be more secure and look nicer.</li>
-                <li>Made the AI less strict so it can talk about more topics.</li>
-                <li>Shrunk the main website size to fit better on screens.</li>
-                <li>Created this updates page to show what's changed.</li>
-                <li>Cleaned up the website for easier use, especially on phones.</li>
-                <li>Added code review to find bugs and improve code.</li>
-                <li>Added "Keep Generating" button to continue AI responses if it stops.</li>
-                <li>Boosted AI speed and added more advanced code handling.</li>
-                <li>Reduced the size of the copy button in AI responses.</li>
-                <li>Added image preview in chat when pasting images.</li>
-                <li>Optimized AI response time further with lower temperature and top_p values.</li>
-                <li>Improved overall performance with better token management.</li>
-                <li>Added a "School Help" dropdown with modes like Algebra, Science, Geometry, History, Literature, Physics, Chemistry, and Biology for accurate academic assistance.</li>
-                <li>Introduced a "Rephrase Sentence" button to rephrase AI responses or code to sound more natural and less AI-generated.</li>
-            </ul>
+        
+        <div class="updates-container">
+            <div class="update-item">
+                <div class="update-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                    </svg>
+                </div>
+                <div class="update-content">
+                    <div class="update-title">Custom AI Models</div>
+                    <div class="update-desc">We've added advanced custom AI models tailored for specific tasks, giving you more powerful and specialized assistance.</div>
+                    <span class="badge">New Feature</span>
+                </div>
+            </div>
+            
+            <div class="update-item">
+                <div class="update-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                </div>
+                <div class="update-content">
+                    <div class="update-title">Enhanced Security</div>
+                    <div class="update-desc">We've significantly improved our website protection with advanced DDoS mitigation and robust security protocols to keep your data safe.</div>
+                    <span class="badge">Security</span>
+                </div>
+            </div>
+            
+            <div class="update-item">
+                <div class="update-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                </div>
+                <div class="update-content">
+                    <div class="update-title">Lightning-Fast Responses</div>
+                    <div class="update-desc">We've optimized our systems to deliver AI responses with remarkable speed, reducing wait times and improving your workflow.</div>
+                    <span class="badge">Performance</span>
+                </div>
+            </div>
+            
+            <div class="update-item">
+                <div class="update-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                </div>
+                <div class="update-content">
+                    <div class="update-title">Multimedia Intelligence</div>
+                    <div class="update-desc">Our AI can now analyze images and videos, understanding visual content to provide comprehensive insights and assistance.</div>
+                    <span class="badge">New Feature</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            VerbiFlow • April 2025 Update
         </div>
     </div>
 </body>
