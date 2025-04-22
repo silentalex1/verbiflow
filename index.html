@@ -76,6 +76,11 @@
         .file-input{display:none}
         .file-clear-btn{background:#ef4444;color:#fff;padding:12px 20px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;border:none;min-height:44px;transition:all 0.2s ease}
         .file-clear-btn:hover{transform:scale(1.05);background:#dc2626}
+        .keep-generating-btn{background:#10b981;color:#fff;padding:12px 20px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;border:none;min-height:44px;transition:all 0.5s ease;opacity:0;transform:translateY(20px);display:none}
+        .keep-generating-btn.show{opacity:1;transform:translateY(0);display:block}
+        .dark-mode .keep-generating-btn{background:#059669}
+        .keep-generating-btn:hover{transform:scale(1.05);background:#34d399}
+        .dark-mode .keep-generating-btn:hover{background:#10b981}
         .file-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:12px}
         .file-item{display:flex;align-items:center;gap:12px;background:#e5e7eb;padding:10px;border-radius:12px;cursor:pointer;transition:all 0.2s ease}
         .dark-mode .file-item{background:#374151}
@@ -131,7 +136,7 @@
             .input-container{padding:12px;gap:8px}
             .user-input{font-size:14px;min-height:40px}
             .send-btn{padding:10px 20px;min-height:40px}
-            .file-input-label,.file-clear-btn{font-size:13px;padding:10px 16px;min-height:40px}
+            .file-input-label,.file-clear-btn,.keep-generating-btn{font-size:13px;padding:10px 16px;min-height:40px}
             .file-preview-content img{max-width:85% !important}
             .notification{top:16px;right:16px;padding:10px 20px;font-size:13px}
             .code-sidebar{width:100%;right:-100%}
@@ -169,6 +174,7 @@
                 <label class="file-input-label" for="fileInput">Upload File</label>
                 <input type="file" class="file-input" id="fileInput" multiple accept="image/*,text/*">
                 <button class="file-clear-btn" id="fileClearBtn" style="display:none;">Clear</button>
+                <button class="keep-generating-btn" id="keepGeneratingBtn">Keep Generating</button>
             </div>
             <div class="file-list" id="fileList"></div>
         </div>
@@ -218,11 +224,15 @@
         const codeSidebar = document.getElementById('codeSidebar');
         const codeSidebarClose = document.getElementById('codeSidebarClose');
         const codeSidebarContent = document.getElementById('codeSidebarContent');
+        const keepGeneratingBtn = document.getElementById('keepGeneratingBtn');
         let filesArray = [];
         let conversationHistory = [{ role: "assistant", content: "Welcome to verbiflow, I am a brand NEW ai ready to serve or to create ANYTHING you are willing to ask me! I am able to obfsucate codes, deobfsucate codes, read images and analyze images all just for free." }];
         let latestCodeBlocks = [];
         let latestAiResponse = '';
         let isDarkMode = false;
+        let isGenerating = false;
+        let lastMessageContent = '';
+        let generationTimeout = null;
 
         class Obfuscator {
             static obfuscateBase64(code) {
@@ -246,9 +256,15 @@
                     return varMap.get(match);
                 });
             }
+            static obfuscateControlFlow(code) {
+                const lines = code.split('\n');
+                const wrapped = lines.map(line => `(() => { ${line}; return true; })();`);
+                return wrapped.join('\n');
+            }
             static obfuscate(code, method = 'mixed') {
                 let result = code;
                 if (method === 'mixed') {
+                    result = this.obfuscateControlFlow(result);
                     result = this.obfuscateVariableRenaming(result);
                     result = this.obfuscateStringManipulation(result);
                     result = this.obfuscateXOR(result);
@@ -262,6 +278,8 @@
                     result = this.obfuscateHex(result);
                 } else if (method === 'variable') {
                     result = this.obfuscateVariableRenaming(result);
+                } else if (method === 'controlFlow') {
+                    result = this.obfuscateControlFlow(result);
                 }
                 return result;
             }
@@ -290,13 +308,17 @@
                     return str;
                 }
             }
+            static decodeControlFlow(str) {
+                return str.replace(/\(function\(\)\{([\s\S]*?);return true;\}\)\(\);?/g, '$1');
+            }
             static analyzePatterns(code) {
                 const patterns = [
                     { regex: /^[A-Za-z0-9+/=]+$/g, method: 'base64' },
                     { regex: /[\x00-\x1F\x7F-\xFF]+/g, method: 'xor' },
                     { regex: /\[\d+\]/g, method: 'stringManipulation' },
                     { regex: /\\x[0-9A-Fa-f]{2}/g, method: 'hex' },
-                    { regex: /\b_v\d+\b/g, method: 'variable' }
+                    { regex: /\b_v\d+\b/g, method: 'variable' },
+                    { regex: /\(function\(\)\{[\s\S]*?;return true;\}\)\(\);/g, method: 'controlFlow' }
                 ];
                 for (const pattern of patterns) {
                     if (code.match(pattern.regex)) {
@@ -307,7 +329,7 @@
             }
             static deobfuscate(code) {
                 let result = code;
-                const maxLayers = 15;
+                const maxLayers = 20;
                 for (let i = 0; i < maxLayers; i++) {
                     const method = this.analyzePatterns(result);
                     if (method === 'base64') {
@@ -318,6 +340,8 @@
                         result = this.decodeStringManipulation(result);
                     } else if (method === 'hex') {
                         result = this.decodeHex(result);
+                    } else if (method === 'controlFlow') {
+                        result = this.decodeControlFlow(result);
                     } else {
                         break;
                     }
@@ -467,6 +491,7 @@
             filesArray = [];
             fileList.innerHTML = '';
             fileClearBtn.style.display = 'none';
+            keepGeneratingBtn.classList.remove('show');
             userInput.value = '';
             userInput.style.height = 'auto';
             chatArea.scrollTop = 0;
@@ -501,6 +526,13 @@
             }
         });
 
+        keepGeneratingBtn.addEventListener('click', () => {
+            if (lastMessageContent) {
+                keepGeneratingBtn.classList.remove('show');
+                sendMessage(true);
+            }
+        });
+
         function showError(message) {
             const errorMessage = document.createElement('div');
             errorMessage.className = 'chat-message ai';
@@ -512,6 +544,7 @@
             chatArea.scrollTop = chatArea.scrollHeight;
             latestCodeBlocks = [];
             latestAiResponse = '';
+            keepGeneratingBtn.classList.remove('show');
         }
 
         function sanitizeInput(input) {
@@ -565,31 +598,42 @@
             });
         }
 
-        async function sendMessage() {
-            const message = sanitizeInput(userInput.value.trim());
-            if (!message && filesArray.length === 0) return;
+        async function sendMessage(isContinuation = false) {
+            const message = isContinuation ? lastMessageContent : sanitizeInput(userInput.value.trim());
+            if (!message && filesArray.length === 0 && !isContinuation) return;
 
-            const userMessage = document.createElement('div');
-            userMessage.className = 'chat-message user';
-            let messageContent = message;
-            let messageHTML = `<div class="chat-message-content">${message}</div>`;
+            if (!isContinuation) {
+                lastMessageContent = message;
+                const userMessage = document.createElement('div');
+                userMessage.className = 'chat-message user';
+                let messageContent = message;
+                let messageHTML = `<div class="chat-message-content">${message}</div>`;
 
-            if (filesArray.length > 0) {
-                const fileDescriptions = filesArray.map(file => `File: ${sanitizeInput(file.name)} (${(file.size / 1024 / 1024).toFixed(2)} MB)`).join(', ');
-                messageContent += `\nAttached files: ${fileDescriptions}`;
-                messageHTML += filesArray.map(file => file.type.startsWith('image/') ? `<img src="${URL.createObjectURL(file)}" alt="${sanitizeInput(file.name)}">` : '').join('');
+                if (filesArray.length > 0) {
+                    const fileDescriptions = filesArray.map(file => `File: ${sanitizeInput(file.name)} (${(file.size / 1024 / 1024).toFixed(2)} MB)`).join(', ');
+                    messageContent += `\nAttached files: ${fileDescriptions}`;
+                    messageHTML += filesArray.map(file => file.type.startsWith('image/') ? `<img src="${URL.createObjectURL(file)}" alt="${sanitizeInput(file.name)}">` : '').join('');
+                }
+
+                userMessage.innerHTML = `${messageHTML}<div class="chat-message-meta">Just now</div>`;
+                chatHistory.appendChild(userMessage);
+                userInput.value = '';
+                userInput.style.height = 'auto';
+                chatArea.scrollTop = chatArea.scrollHeight;
+
+                conversationHistory.push({ role: "user", content: messageContent });
             }
-
-            userMessage.innerHTML = `${messageHTML}<div class="chat-message-meta">Just now</div>`;
-            chatHistory.appendChild(userMessage);
-            userInput.value = '';
-            userInput.style.height = 'auto';
-            chatArea.scrollTop = chatArea.scrollHeight;
-
-            conversationHistory.push({ role: "user", content: messageContent });
 
             typingIndicator.style.display = 'block';
             sendBtn.disabled = true;
+            isGenerating = true;
+            clearTimeout(generationTimeout);
+
+            generationTimeout = setTimeout(() => {
+                if (isGenerating) {
+                    keepGeneratingBtn.classList.add('show');
+                }
+            }, 10000);
 
             try {
                 let aiMessageText = '';
@@ -638,7 +682,7 @@
                     conversationHistory.push({ role: "assistant", content: aiMessageText });
                     chatArea.scrollTop = chatArea.scrollHeight;
                 } else if (message.toLowerCase().includes('ui design') || message.toLowerCase().includes('user interface')) {
-                    const uiPrompt = `You are a world-class UI/UX designer. Create a highly detailed, modern, and accessible UI design for: "${sanitizeInput(message)}". Provide HTML, CSS, and JavaScript code for a responsive, interactive interface. Include Tailwind CSS for styling, ARIA attributes for accessibility, and optimize for performance and cross-browser compatibility.`;
+                    const uiPrompt = `You are a world-class UI/UX designer. Create a highly detailed, modern, and accessible UI design for: "${sanitizeInput(message)}". Provide HTML, CSS, and JavaScript code using Tailwind CSS for styling, ARIA attributes for accessibility, and optimize for performance and cross-browser compatibility. Include animations and responsive design.`;
                     const response = await fetch(API_URL, {
                         method: 'POST',
                         headers: {
@@ -648,8 +692,8 @@
                         body: JSON.stringify({
                             model: "gpt-4o",
                             messages: [{ role: "user", content: uiPrompt }],
-                            max_tokens: 1500,
-                            temperature: 0.5,
+                            max_tokens: 1800,
+                            temperature: 0.4,
                         }),
                     });
                     if (!response.ok) throw new Error('API request failed');
@@ -660,7 +704,7 @@
                     conversationHistory.push({ role: "assistant", content: aiMessageText });
                     chatArea.scrollTop = chatArea.scrollHeight;
                 } else if (message.toLowerCase().includes('luau') || message.toLowerCase().includes('roblox')) {
-                    const luauPrompt = `You are a Luau expert for Roblox. Create a modern, intuitive, and visually appealing UI for a Roblox game based on: "${sanitizeInput(message)}". Provide optimized Luau code using Roblox's UI framework (e.g., Frames, TextLabels, TextButtons, ImageLabels). Include advanced animations, error handling, and responsive design for all screen sizes.`;
+                    const luauPrompt = `You are a Luau expert for Roblox. Create a modern, intuitive, and visually appealing UI for a Roblox game based on: "${sanitizeInput(message)}". Provide optimized Luau code using Roblox's UI framework (e.g., Frames, TextLabels, TextButtons, ImageLabels). Include advanced animations, error handling, and responsive design for all screen sizes. Optimize for performance.`;
                     const response = await fetch(API_URL, {
                         method: 'POST',
                         headers: {
@@ -670,8 +714,8 @@
                         body: JSON.stringify({
                             model: "gpt-4o",
                             messages: [{ role: "user", content: luauPrompt }],
-                            max_tokens: 1200,
-                            temperature: 0.5,
+                            max_tokens: 1500,
+                            temperature: 0.4,
                         }),
                     });
                     if (!response.ok) throw new Error('API request failed');
@@ -683,7 +727,7 @@
                     chatArea.scrollTop = chatArea.scrollHeight;
                 } else if (message.toLowerCase().includes('analyze code') || message.toLowerCase().includes('review code')) {
                     const codeToAnalyze = message.match(/```([\s\S]*?)```/)?.[1]?.trim() || message;
-                    const codePrompt = `You are a senior software engineer. Analyze the following code: \`\`\`\n${codeToAnalyze}\n\`\`\`. Provide a detailed review including potential bugs, performance issues, security vulnerabilities, and suggestions for improvement. Format the response with clear sections for each aspect.`;
+                    const codePrompt = `You are a senior software engineer. Analyze the following code: \`\`\`\n${codeToAnalyze}\n\`\`\`. Provide a detailed review including potential bugs, performance issues, security vulnerabilities, and suggestions for improvement. Include code optimizations and best practices. Format with clear sections.`;
                     const response = await fetch(API_URL, {
                         method: 'POST',
                         headers: {
@@ -693,8 +737,8 @@
                         body: JSON.stringify({
                             model: "gpt-4o",
                             messages: [{ role: "user", content: codePrompt }],
-                            max_tokens: 1000,
-                            temperature: 0.5,
+                            max_tokens: 1200,
+                            temperature: 0.4,
                         }),
                     });
                     if (!response.ok) throw new Error('API request failed');
@@ -706,7 +750,7 @@
                     chatArea.scrollTop = chatArea.scrollHeight;
                 } else {
                     const messages = [...conversationHistory];
-                    if (filesArray.some(file => file.type.startsWith('image/'))) {
+                    if (filesArray.some(file => file.type.startsWith('image/')) && !isContinuation) {
                         const imageMessages = await Promise.all(filesArray.filter(file => file.type.startsWith('image/')).map(async file => ({
                             role: "user",
                             content: [
@@ -717,7 +761,7 @@
                         messages.push(...imageMessages);
                     }
                     if (message) {
-                        messages.push({ role: "user", content: messageContent });
+                        messages.push({ role: "user", content: isContinuation ? `Continue generating response for: ${message}` : message });
                     }
 
                     const response = await fetch(API_URL, {
@@ -728,11 +772,11 @@
                         },
                         body: JSON.stringify({
                             model: "gpt-4o",
-                            messages: messages.slice(-15),
-                            max_tokens: 500,
-                            temperature: 0.5,
+                            messages: messages.slice(-20),
+                            max_tokens: 600,
+                            temperature: 0.4,
                             stream: true,
-                            top_p: 0.85,
+                            top_p: 0.8,
                         }),
                     });
 
@@ -757,6 +801,12 @@
                                         aiMessageText += content;
                                         aiMessage.querySelector('.chat-message-content').innerHTML = formatMessage(aiMessageText, aiMessage);
                                         chatArea.scrollTop = chatArea.scrollHeight;
+                                        clearTimeout(generationTimeout);
+                                        generationTimeout = setTimeout(() => {
+                                            if (isGenerating) {
+                                                keepGeneratingBtn.classList.add('show');
+                                            }
+                                        }, 10000);
                                     }
                                 } catch (e) {}
                             }
@@ -768,14 +818,20 @@
                     conversationHistory.push({ role: "assistant", content: aiMessageText });
                 }
 
-                filesArray = [];
-                fileList.innerHTML = '';
-                fileClearBtn.style.display = 'none';
+                if (!isContinuation) {
+                    filesArray = [];
+                    fileList.innerHTML = '';
+                    fileClearBtn.style.display = 'none';
+                }
             } catch (error) {
                 showError('Something broke. Check your connection or try again.');
             } finally {
                 typingIndicator.style.display = 'none';
                 sendBtn.disabled = false;
+                isGenerating = false;
+                if (!keepGeneratingBtn.classList.contains('show')) {
+                    clearTimeout(generationTimeout);
+                }
             }
         }
 
