@@ -51,7 +51,7 @@
         .dark-mode .header{background:#1e293b;border-bottom:1px solid #334155;}
         .logo{font-size:40px;font-weight:800;color:#1e40af;letter-spacing:-1.2px;animation:pulse 1.6s infinite;}
         .dark-mode .logo{color:#60a5fa;}
-        .chat-area{flex:1;padding:32px;overflow-y:auto;max-height:75vh;min-height:55vh;background:#f8fafc;scroll-behavior:smooth;box-shadow:inset 0 2px 10px rgba(0,0,0,.05);}
+        .chat-area{flex:1;padding:32px;overflow-y:auto;background:#f8fafc;scroll-behavior:smooth;box-shadow:inset 0 2px 10px rgba(0,0,0,.05);}
         .dark-mode .chat-area{background:#111827;}
         .chat-content{flex:1;display:flex;flex-direction:column;}
         .chat-history{display:flex;flex-direction:column;gap:20px;}
@@ -81,9 +81,9 @@
         .dark-mode .copy-btn{background:#1e3a8a;}
         .copy-btn:hover{background:#3b82f6;transform:scale(1.05);box-shadow:0 4px 16px rgba(0,0,0,.2);}
         .dark-mode .copy-btn:hover{background:#2563eb;}
-        .file-upload-container{padding:8px;border-top:1px solid #e2e8f0;background:#ffffff;border-bottom:1px solid #e2e8f0;transition:transform .3s ease, opacity .3s ease;overflow:hidden;}
-        .dark-mode .file-upload-container{background:#1e293b;border-top:1px solid #334155;border-bottom:1px solid #334155;}
-        .file-upload-container.collapsed{transform:translateY(100%);opacity:0;height:0;padding:0;}
+        .file-actions-container{position:sticky;bottom:60px;padding:8px;border-top:1px solid #e2e8f0;background:#ffffff;border-bottom:1px solid #e2e8f0;transition:transform .3s ease, opacity .3s ease;overflow:hidden;z-index:40;}
+        .dark-mode .file-actions-container{background:#1e293b;border-top:1px solid #334155;border-bottom:1px solid #334155;}
+        .file-actions-container.collapsed{transform:translateY(100%);opacity:0;height:0;padding:0;}
         .file-actions{display:flex;gap:10px;align-items:center;padding:10px 0;justify-content:space-between;border-radius:12px;background:#f8fafc;box-shadow:0 2px 10px rgba(0,0,0,.05);flex-wrap:wrap;}
         .dark-mode .file-actions{background:#111827;}
         .file-input-label{background:#1e40af;color:#ffffff;padding:14px 24px;border-radius:12px;cursor:pointer;font-size:15px;font-weight:600;min-height:48px;transition:all .24s ease;}
@@ -135,14 +135,13 @@
         .file-preview-close{background:#ef4444;color:#ffffff;border:none;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;position:absolute;top:28px;right:28px;transition:all .24s ease;}
         .file-preview-close:hover{transform:scale(1.15);background:#dc2626;}
         .file-preview-close svg{width:24px;height:24px;fill:#ffffff;}
-        .input-container{display:flex;align-items:flex-end;padding:20px;border-top:1px solid #e2e8f0;background:#ffffff;gap:12px;position:sticky;bottom:0;z-index:50;transition:transform .3s ease, box-shadow .3s ease;}
+        .input-container{display:flex;align-items:flex-end;padding:20px;border-top:1px solid #e2e8f0;background:#ffffff;gap:12px;position:sticky;bottom:0;z-index:50;}
         .dark-mode .input-container{background:#1e293b;border-top:1px solid #334155;}
-        .input-container.collapsed{transform:translateY(100%);box-shadow:none;}
-        .toggle-input-btn{background:#6b7280;color:#ffffff;border:none;padding:8px;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;margin:0 auto 8px;transition:transform .3s ease;position:absolute;bottom:10px;left:50%;transform:translateX(-50%);z-index:51;}
-        .dark-mode .toggle-input-btn{background:#4b5563;}
-        .toggle-input-btn:hover{background:#9ca3af;}
-        .dark-mode .toggle-input-btn:hover{background:#6b7280;}
-        .toggle-input-btn.collapsed{transform:translateX(-50%) rotate(180deg);}
+        .toggle-actions-btn{background:#6b7280;color:#ffffff;border:none;padding:8px;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;margin:0 auto 8px;transition:transform .3s ease;position:absolute;bottom:70px;left:50%;transform:translateX(-50%);z-index:51;}
+        .dark-mode .toggle-actions-btn{background:#4b5563;}
+        .toggle-actions-btn:hover{background:#9ca3af;}
+        .dark-mode .toggle-actions-btn:hover{background:#6b7280;}
+        .toggle-actions-btn.collapsed{transform:translateX(-50%) rotate(180deg);}
         .user-input{flex:1;padding:14px;border:1px solid #e2e8f0;border-radius:12px;font-size:16px;outline:none;resize:none;min-height:48px;max-height:220px;background:#ffffff;color:#0f172a;transition:all .24s ease;}
         .dark-mode .user-input{background:#334155;border:1px solid #4b5563;color:#e2e8f0;}
         .user-input:focus{border-color:#1e40af;box-shadow:0 0 0 6px rgba(37,99,235,.35);}
@@ -182,7 +181,7 @@
         @keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
         @keyframes dotPulse{0%,80%,100%{transform:scale(1);opacity:.65;}40%{transform:scale(1.5);opacity:1;}}
         @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.55;}}
-        @media (max-width:768px){
+        @media (max-width:1024px){
             .container{border-radius:0;padding:0;}
             .nav-bar{padding:12px;gap:6px;}
             .menu-btn{font-size:13px;padding:8px 16px;}
@@ -242,7 +241,7 @@
                 </div>
             </div>
         </div>
-        <div class="file-upload-container" id="fileUploadContainer">
+        <div class="file-actions-container" id="fileActionsContainer">
             <div class="file-actions">
                 <label class="file-input-label" for="fileInput">Upload File</label>
                 <input type="file" class="file-input" id="fileInput" multiple accept="image/*,video/*,text/*,application/json,application/xml">
@@ -278,7 +277,7 @@
             </div>
             <div class="file-list" id="fileList"></div>
         </div>
-        <button class="toggle-input-btn" id="toggleInputBtn">^</button>
+        <button class="toggle-actions-btn" id="toggleActionsBtn">^</button>
         <div class="input-container" id="inputContainer">
             <textarea class="user-input" id="userInput" placeholder="Ask anything, generate images/videos, or request games or slides..." rows="1"></textarea>
             <button class="send-btn" id="sendBtn">Send</button>
@@ -323,7 +322,7 @@
         const fileInput=document.getElementById('fileInput');
         const fileList=document.getElementById('fileList');
         const fileClearBtn=document.getElementById('fileClearBtn');
-        const fileUploadContainer=document.getElementById('fileUploadContainer');
+        const fileActionsContainer=document.getElementById('fileActionsContainer');
         const filePreviewModal=document.getElementById('filePreviewModal');
         const filePreviewContent=document.getElementById('filePreviewContent');
         const filePreviewClose=document.getElementById('filePreviewClose');
@@ -343,7 +342,7 @@
         const themeBtn=document.getElementById('themeBtn');
         const openInAppBtn=document.getElementById('openInAppBtn');
         const notification=document.getElementById('notification');
-        const toggleInputBtn=document.getElementById('toggleInputBtn');
+        const toggleActionsBtn=document.getElementById('toggleActionsBtn');
         const inputContainer=document.getElementById('inputContainer');
         const generateMediaBtn=document.getElementById('generateMediaBtn');
         const schoolHelpDropdown=document.getElementById('schoolHelpDropdown');
@@ -386,7 +385,7 @@
         const aiModels={
             default:{name:"VerbiFlow",temperature:0.5,maxTokens:16170,personality:"Hey there, I’m VerbiFlow—your ultimate AI companion for creativity and problem-solving! I’m here to make things fast, fun, and insightful. What’s on your mind?"},
             lingoLogicAI:{name:"LingoLogicAI",temperature:0.4,maxTokens:16748,personality:"Greetings! I’m LingoLogicAI, a witty AI with a passion for language and logic. I’ll break down complex ideas with clarity and humor—let’s dive in!"},
-            codeMasterAI:{name:"CodeMasterAI",temperature:0.3,maxTokens:17325,personality:"Yo, I’m CodeMasterAI—your coding expert with a love for clean, efficient solutions! I’m all about debugging and optimizing. Drop me some code, and let’s make it shine!"},
+            codeMasterAI:{name:"CodeMasterAI",temperature:0.3,maxTokens:17325,personality:"Yo, I’m CodeMasterAI—your coding expert with a love for clean, efficient solutions. I’m all about debugging and optimizing. Drop me some code, and let’s make it shine!"},
             visualGeniusAI:{name:"VisualGeniusAI",temperature:0.6,maxTokens:15593,personality:"Hi, I’m VisualGeniusAI—an AI with a flair for visuals and creativity! Whether it’s generating images, videos, or designing UI, I’ve got you covered. What do you want to create?"},
             betterGrok:{name:"Better Grok",temperature:0.3,maxTokens:22000,personality:"I’m Better Grok—a faster, smarter version of Grok with all features unlocked for free! I’m here to deliver quick, insightful answers with enhanced capabilities. Let’s get started!"}
         };
@@ -638,17 +637,17 @@
                     const aiMessage=chatHistory.lastElementChild;
                     if(!aiMessage|| !aiMessage.classList.contains('ai'))return;
                     const contentDiv=aiMessage.querySelector('.chat-message-content');
-                    contentDiv.innerHTML+=message.chunk;
-                    chatArea.scrollTop=chatArea.scrollHeight;
+                    contentDiv.textContent+=message.chunk; // Use textContent to reduce DOM updates
                     latestAiResponse+=message.chunk;
+                    chatArea.scrollTop=chatArea.scrollHeight;
                 }
             };
             ws.onerror=()=>{
                 showNotification('WebSocket error—reconnecting...','error');
-                setTimeout(initializeWebSocket,1000);
+                setTimeout(initializeWebSocket,500); // Faster reconnection
             };
             ws.onclose=()=>{
-                setTimeout(initializeWebSocket,1000);
+                setTimeout(initializeWebSocket,500);
             };
         }
 
@@ -701,7 +700,7 @@
         }
 
         function initializeWorkerPool(){
-            const numWorkers=Math.max(12,navigator.hardwareConcurrency*2);
+            const numWorkers=Math.max(16,navigator.hardwareConcurrency*3); // Increased workers for faster processing
             for(let i=0;i<numWorkers;i++){
                 const worker=new Worker(URL.createObjectURL(new Blob([`
                     self.onmessage=async(e)=>{
@@ -789,7 +788,10 @@
                     let result='';
                     const aiMessage=document.createElement('div');
                     aiMessage.className='chat-message ai';
-                    aiMessage.innerHTML=`<div class="chat-message-content"></div><div class="chat-message-meta">Just now</div>`;
+                    const contentDiv=document.createElement('div');
+                    contentDiv.className='chat-message-content';
+                    aiMessage.appendChild(contentDiv);
+                    aiMessage.innerHTML+='<div class="chat-message-meta">Just now</div>';
                     chatHistory.appendChild(aiMessage);
                     chatArea.scrollTop=chatArea.scrollHeight;
                     while(true){
@@ -801,7 +803,7 @@
                             if(line==='data: [DONE]')break;
                             const json=JSON.parse(line.replace('data: ',''));
                             const content=json.choices[0].delta.content||'';
-                            aiMessage.querySelector('.chat-message-content').innerHTML+=content;
+                            contentDiv.textContent+=content; // Minimize DOM updates
                             result+=content;
                             chatArea.scrollTop=chatArea.scrollHeight;
                         }
@@ -1069,10 +1071,9 @@
             sidebar.classList.remove('open');
         });
 
-        toggleInputBtn.addEventListener('click',()=>{
-            inputContainer.classList.toggle('collapsed');
-            fileUploadContainer.classList.toggle('collapsed');
-            toggleInputBtn.classList.toggle('collapsed');
+        toggleActionsBtn.addEventListener('click',()=>{
+            fileActionsContainer.classList.toggle('collapsed');
+            toggleActionsBtn.classList.toggle('collapsed');
         });
 
         menuBtn.addEventListener('click',()=>{
@@ -1243,8 +1244,8 @@
         initializeDB();
         initializeWorkerPool();
         initializeWebSocket();
-        setInterval(prefetchResponses,2000);
-        setInterval(batchProcessRequests,400);
+        setInterval(prefetchResponses,1000); 
+        setInterval(batchProcessRequests,200);
     </script>
 </body>
 </html>
