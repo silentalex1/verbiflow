@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob: https://*.pixabay.com https://*.openai.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.cloudflare.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; connect-src 'self' https://api.openai.com wss://api.openai.com; frame-src 'none'; media-src 'self' data: blob: https://*.pixabay.com https://*.openai.com;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob: https://*.pixabay.com https://*.openai.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.cloudflare.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; connect-src 'self' https://api.openai.com wss://api.openai.com https://api.searchengine.com; frame-src 'none'; media-src 'self' data: blob: https://*.pixabay.com https://*.openai.com;">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta name="robots" content="noindex, nofollow">
@@ -57,6 +57,12 @@
         .dark-mode .code-block pre{background:#1f2937;}
         .code-text{background:#111827;color:#e5e7eb;padding:16px;border-radius:14px;font-family:'JetBrains Mono',monospace;font-size:15px;white-space:pre-wrap;user-select:text;}
         .dark-mode .code-text{background:#1f2937;}
+        .hello-code-block{position:relative;margin:12px 0;border-radius:14px;overflow:hidden;background:linear-gradient(135deg,#1d4ed8,#3b82f6);box-shadow:0 8px 20px rgba(0,0,0,.3);padding:4px;}
+        .dark-mode .hello-code-block{background:linear-gradient(135deg,#1e40af,#2563eb);}
+        .hello-code-block pre{background:#ffffff;color:#1d4ed8;padding:16px;border-radius:10px;overflow-x:auto;font-family:'JetBrains Mono',monospace;font-size:15px;line-height:1.6;border:1px solid #e5e7eb;}
+        .dark-mode .hello-code-block pre{background:#111827;color:#93c5fd;border:1px solid #374151;}
+        .hello-code-block pre::before{content:"✨ Hello Code ✨";display:block;color:#ffffff;font-size:13px;font-weight:600;margin-bottom:8px;padding:4px 8px;border-radius:8px;background:#1d4ed8;}
+        .dark-mode .hello-code-block pre::before{background:#2563eb;}
         .copy-btn,.copy-all-btn{background:#1d4ed8;color:#ffffff;border:none;padding:8px 14px;border-radius:12px;cursor:pointer;font-size:13px;font-weight:600;transition:all .3s ease;}
         .copy-btn{position:absolute;top:10px;right:10px;}
         .copy-all-btn{position:absolute;top:10px;right:80px;}
@@ -112,7 +118,7 @@
         .dark-mode .file-item-name{color:#e5e7eb;}
         .file-item-details{font-size:13px;color:#6b7280;}
         .dark-mode .file-item-details{color:#9ca3af;}
-        .file-preview-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);z-index:250;padding:24px;justify-content:center;align-items:center;}
+        .file-preview-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);z-index:250;padding:24px;justify-content:center;align-items:center;animation:fadeIn .3s ease;}
         .file-preview-modal.open{display:flex;}
         .file-preview-content{background:#ffffff;border-radius:20px;padding:24px;max-width:92%;max-height:92%;overflow:auto;color:#111827;font-size:15px;}
         .dark-mode .file-preview-content{background:#1f2937;color:#e5e7eb;}
@@ -141,13 +147,13 @@
         .notification.show{opacity:1;transform:translateY(0);}
         .notification.success{background:#1d4ed8;color:#ffffff;}
         .notification.error{background:#ef4444;color:#ffffff;}
-        .permission-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);z-index:500;justify-content:center;align-items:center;}
+        .permission-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);z-index:500;justify-content:center;align-items:center;animation:fadeIn .3s ease;}
         .permission-modal.open{display:flex;}
-        .permission-content{background:#ffffff;border-radius:20px;padding:28px;max-width:550px;text-align:center;color:#111827;}
+        .permission-content{background:#ffffff;border-radius:20px;padding:28px;max-width:550px;text-align:center;color:#111827;animation:zoomIn .3s ease;}
         .dark-mode .permission-content{background:#1f2937;color:#e5e7eb;}
         .permission-content h2{font-size:24px;margin-bottom:14px;}
         .permission-content p{font-size:16px;margin-bottom:18px;}
-        .permission-btn{background:#1d4ed8;color:#ffffff;padding:12px 28px;border-radius:14px;border:none;cursor:pointer;font-size:16px;font-weight:600;margin:0 10px;}
+        .permission-btn{background:#1d4ed8;color:#ffffff;padding:12px 28px;border-radius:14px;border:none;cursor:pointer;font-size:16px;font-weight:600;margin:0 10px;transition:transform .3s ease,background .3s ease;}
         .dark-mode .permission-btn{background:#1e40af;}
         .permission-btn:hover{transform:scale(1.1);background:#3b82f6;}
         .dark-mode .permission-btn:hover{background:#2563eb;}
@@ -156,6 +162,8 @@
         .permission-btn.deny:hover{background:#f87171;}
         .dark-mode .permission-btn.deny:hover{background:#ef4444;}
         @keyframes slideIn{0%{opacity:0;transform:translateY(24px);}100%{opacity:1;transform:translateY(0);}}
+        @keyframes fadeIn{0%{opacity:0;}100%{opacity:1;}}
+        @keyframes zoomIn{0%{opacity:0;transform:scale(.8);}100%{opacity:1;transform:scale(1);}}
         @keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
         @keyframes dotPulse{0%,80%,100%{transform:scale(1);opacity:.7;}40%{transform:scale(1.6);opacity:1;}}
         @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.6;}}
@@ -280,11 +288,13 @@
         const DALLE_API_URL="https://api.openai.com/v1/images/generations";
         const SORA_API_URL="https://api.openai.com/v1/video/generations";
         const VIDEO_PROCESSING_API="https://api.openai.com/v1/video/analyze";
+        const SEARCH_API_URL="https://api.searchengine.com/v1/search";
         const DISCORD_INVITE="https://discord.gg/rCTRQvD4TP";
         const MAX_VIDEO_SIZE=50*1024*1024;
-        const BATCH_SIZE=300;
+        const BATCH_SIZE=200;
         const RATE_LIMIT_REQUESTS=1500;
-        const RATE_LIMIT_WINDOW=45*1000;
+        const RATE_LIMIT_WINDOW=30*1000;
+        const MAX_CACHE_SIZE=10*1024*1024;
 
         const chatHistory=document.getElementById('chatHistory');
         const userInput=document.getElementById('userInput');
@@ -334,6 +344,7 @@
         let videoAnalysisCache=new Map();
         let imageAnalysisCache=new Map();
         let responseCache=new Map();
+        let searchCache=new Map();
         let abortController=null;
         let batchQueue=[];
         let hasPermission=false;
@@ -345,12 +356,13 @@
         let prefetchQueue=new Map();
         let ws=null;
         let db=null;
+        let cacheSize=0;
 
         const aiModels={
-            default:{name:"VerbiFlow",temperature:0.5,maxTokens:14000,personality:"Hey there, I’m VerbiFlow—your ultimate AI companion for creativity and problem-solving! I’m here to make things fast, fun, and insightful. What’s on your mind?"},
-            lingoLogicAI:{name:"LingoLogicAI",temperature:0.4,maxTokens:14500,personality:"Greetings! I’m LingoLogicAI, a witty AI with a passion for language and logic. I’ll break down complex ideas with clarity and humor—let’s dive in!"},
-            codeMasterAI:{name:"CodeMasterAI",temperature:0.3,maxTokens:15000,personality:"Yo, I’m CodeMasterAI—your coding expert with a love for clean, efficient solutions! I’m all about debugging and optimizing. Drop me some code, and let’s make it shine!"},
-            visualGeniusAI:{name:"VisualGeniusAI",temperature:0.6,maxTokens:13500,personality:"Hi, I’m VisualGeniusAI—an AI with a flair for visuals and creativity! Whether it’s generating images, videos, or designing UI, I’ve got you covered. What do you want to create?"}
+            default:{name:"VerbiFlow",temperature:0.5,maxTokens:15400,personality:"Hey there, I’m VerbiFlow—your ultimate AI companion for creativity and problem-solving! I’m here to make things fast, fun, and insightful. What’s on your mind?"},
+            lingoLogicAI:{name:"LingoLogicAI",temperature:0.4,maxTokens:15950,personality:"Greetings! I’m LingoLogicAI, a witty AI with a passion for language and logic. I’ll break down complex ideas with clarity and humor—let’s dive in!"},
+            codeMasterAI:{name:"CodeMasterAI",temperature:0.3,maxTokens:16500,personality:"Yo, I’m CodeMasterAI—your coding expert with a love for clean, efficient solutions! I’m all about debugging and optimizing. Drop me some code, and let’s make it shine!"},
+            visualGeniusAI:{name:"VisualGeniusAI",temperature:0.6,maxTokens:14850,personality:"Hi, I’m VisualGeniusAI—an AI with a flair for visuals and creativity! Whether it’s generating images, videos, or designing UI, I’ve got you covered. What do you want to create?"}
         };
 
         const livelyResponses={
@@ -358,25 +370,29 @@
                 "Let’s dive into this with flair—here’s a detailed breakdown for you!",
                 "That’s a brilliant query! I’ve got a comprehensive answer ready—check it out!",
                 "I’m buzzing with excitement! Here’s a deep dive into your request…",
-                "Your question sparks my creativity! Let’s explore this with a rich response…"
+                "Your question sparks my creativity! Let’s explore this with a rich response…",
+                "Fresh insights incoming! I’ve searched the web to enhance my answer—here you go!"
             ],
             lingoLogicAI:[
                 "A fascinating challenge! Let me unravel it with precision and wit—here we go!",
                 "I’m ready to tackle this with linguistic finesse—brace for an insightful reply!",
                 "Let’s dissect this with clarity and humor—here’s my detailed take!",
-                "Your query ignites my logic circuits! Here’s a nuanced response for you!"
+                "Your query ignites my logic circuits! Here’s a nuanced response for you!",
+                "I’ve tapped into the latest web data for a sharper response—check this out!"
             ],
             codeMasterAI:[
                 "Code mode activated! Let’s optimize and debug with a thorough solution—here it is!",
                 "I’m in my element! Here’s a meticulously crafted code solution for you!",
                 "Let’s polish this code to perfection—check out this detailed implementation!",
-                "This is my domain! Here’s an advanced, optimized code response—ready to roll!"
+                "This is my domain! Here’s an advanced, optimized code response—ready to roll!",
+                "I’ve pulled the latest coding trends from the web—here’s an enhanced solution!"
             ],
             visualGeniusAI:[
                 "I’m envisioning something spectacular! Here’s a creative and detailed output…",
                 "Let’s craft a visual masterpiece with depth—check out this rich result!",
                 "My creative gears are turning! Here’s a stunning, layered visual response!",
-                "I’m channeling my artistic side! Here’s a vibrant and detailed creation for you!"
+                "I’m channeling my artistic side! Here’s a vibrant and detailed creation for you!",
+                "I’ve searched the web for inspiration—here’s a visually stunning result!"
             ]
         };
 
@@ -492,6 +508,24 @@
                 return false;
             }
             return true;
+        }
+
+        class WebSearch{
+            static async search(query){
+                const searchHash=sha256(query);
+                if(searchCache.has(searchHash))return searchCache.get(searchHash);
+                const response=await fetch(`${SEARCH_API_URL}?q=${encodeURIComponent(query)}`,{
+                    method:'GET',
+                    headers:{
+                        'Content-Type':'application/json'
+                    }
+                });
+                if(!response.ok)return '';
+                const data=await response.json();
+                const snippets=data.results.slice(0,3).map(r=>`${r.title}: ${r.snippet}`).join('\n');
+                searchCache.set(searchHash,snippets);
+                return snippets;
+            }
         }
 
         class CodeAnalyzer{
@@ -710,112 +744,8 @@
         }
 
         class MediaProcessor{
-            static async extractFrames(videoFile,maxFrames=100){
-                return new Promise((resolve,reject)=>{
-                    const video=document.createElement('video');
-                    const blobUrl=URL.createObjectURL(videoFile);
-                    video.src=blobUrl;
-                    video.muted=true;
-                    video.preload='metadata';
-                    video.onloadedmetadata=async()=>{
-                        const canvas=document.createElement('canvas');
-                        const ctx=canvas.getContext('2d');
-                        const duration=video.duration;
-                        const frameInterval=Math.max(0.3,duration/maxFrames);
-                        const frames=[];
-                        video.onerror=()=>reject(new Error('Failed to load video'));
-                        video.oncanplay=async()=>{
-                            for(let time=0;time<duration&&frames.length<maxFrames;time+=frameInterval){
-                                video.currentTime=time;
-                                await new Promise(r=>video.onseeked=r);
-                                canvas.width=video.videoWidth;
-                                canvas.height=video.videoHeight;
-                                ctx.drawImage(video,0,0,canvas.width,canvas.height);
-                                frames.push(canvas.toDataURL('image/jpeg',0.9));
-                            }
-                            URL.revokeObjectURL(blobUrl);
-                            resolve(frames);
-                        };
-                        video.load();
-                    };
-                    video.onerror=()=>reject(new Error('Failed to load video metadata'));
-                });
-            }
-            static async extractMetadata(videoFile){
-                return new Promise((resolve,reject)=>{
-                    const video=document.createElement('video');
-                    const blobUrl=URL.createObjectURL(videoFile);
-                    video.src=blobUrl;
-                    video.preload='metadata';
-                    video.onloadedmetadata=()=>{
-                        const metadata={
-                            duration:video.duration,
-                            width:video.videoWidth,
-                            height:video.videoHeight,
-                            size:(videoFile.size/1024/1024).toFixed(2),
-                            type:videoFile.type,
-                            frameRate:video.duration>0?(video.webkitDecodedFrameCount||30)/video.duration:0
-                        };
-                        URL.revokeObjectURL(blobUrl);
-                        resolve(metadata);
-                    };
-                    video.onerror=()=>reject(new Error('Failed to load video metadata'));
-                });
-            }
-            static async extractAudio(videoFile){
-                return new Promise((resolve,reject)=>{
-                    const video=document.createElement('video');
-                    const blobUrl=URL.createObjectURL(videoFile);
-                    video.src=blobUrl;
-                    video.onloadedmetadata=async()=>{
-                        const audioContext=new AudioContext();
-                        const source=audioContext.createMediaElementSource(video);
-                        const analyser=audioContext.createAnalyser();
-                        source.connect(analyser);
-                        analyser.connect(audioContext.destination);
-                        analyser.fftSize=8192;
-                        const bufferLength=analyser.frequencyBinCount;
-                        const dataArray=new Uint8Array(bufferLength);
-                        analyser.getByteTimeDomainData(dataArray);
-                        const frequencyData=new Uint8Array(bufferLength);
-                        analyser.getByteFrequencyData(frequencyData);
-                        URL.revokeObjectURL(blobUrl);
-                        resolve({timeDomain:dataArray,frequency:frequencyData});
-                    };
-                    video.onerror=()=>reject(new Error('Failed to extract audio'));
-                });
-            }
-            static async analyzeVideo(videoFile){
-                if(videoFile.size>MAX_VIDEO_SIZE)return 'Video exceeds size limit (50MB).';
-                const videoHash=sha256(videoFile.name+videoFile.size);
-                if(videoAnalysisCache.has(videoHash))return videoAnalysisCache.get(videoHash);
-                const frames=await this.extractFrames(videoFile);
-                const metadata=await this.extractMetadata(videoFile);
-                const audioData=await this.extractAudio(videoFile);
-                const response=await fetch(VIDEO_PROCESSING_API,{
-                    method:'POST',
-                    headers:{
-                        'Authorization':`Bearer ${API_KEY}`,
-                        'Content-Type':'application/json'
-                    },
-                    body:JSON.stringify({
-                        model:"gpt-4o",
-                        frames:frames,
-                        metadata:metadata,
-                        audio_data:audioData,
-                        prompt:"Provide a detailed analysis of this video. Include: 1) Scene-by-scene breakdown with timestamps, 2) Identified objects, people, and actions, 3) Text detection (OCR) in frames, 4) Audio analysis (speech, music, sound effects), 5) Color palette and lighting, 6) Motion and camera movement, 7) Emotional tone, 8) Comprehensive summary."
-                    })
-                });
-                if(!response.ok)throw new Error('Video analysis failed');
-                const data=await response.json();
-                const analysis=data.choices[0].message.content;
-                videoAnalysisCache.set(videoHash,analysis);
-                return analysis;
-            }
             static async analyzeImage(imageFile){
-                const imageHash=sha256(imageFile.name+imageFile.size);
-                if(imageAnalysisCache.has(imageHash))return imageAnalysisCache.get(imageHash);
-                const imageData=await readImage(imageFile);
+                const imageUrl=await readImage(imageFile);
                 const response=await fetch(API_URL,{
                     method:'POST',
                     headers:{
@@ -824,20 +754,27 @@
                     },
                     body:JSON.stringify({
                         model:"gpt-4o",
-                        messages:[{
-                            role:"user",
-                            content:"Provide a detailed analysis of this image. Include: 1) Object detection with positions, 2) Text detection (OCR), 3) Color palette analysis, 4) Scene composition and depth, 5) Lighting and shadows, 6) Emotional tone, 7) Style and artistic elements, 8) Comprehensive summary.",
-                            image_data:imageData
-                        }],
-                        max_tokens:5000,
+                        messages:[{role:"user",content:`Analyze this image:\n![Image](${imageUrl})`}],
+                        max_tokens:aiModels[selectedAiModel].maxTokens,
                         temperature:aiModels[selectedAiModel].temperature
                     })
                 });
-                if(!response.ok)throw new Error('Image analysis failed');
+                if(!response.ok)return "Unable to analyze image.";
                 const data=await response.json();
-                const analysis=data.choices[0].message.content;
-                imageAnalysisCache.set(imageHash,analysis);
-                return analysis;
+                return data.choices[0].message.content;
+            }
+            static async analyzeVideo(videoFile){
+                if(videoFile.size>MAX_VIDEO_SIZE)return `Video size exceeds ${MAX_VIDEO_SIZE/1024/1024}MB limit.`;
+                const formData=new FormData();
+                formData.append('file',videoFile);
+                const response=await fetch(VIDEO_PROCESSING_API,{
+                    method:'POST',
+                    headers:{'Authorization':`Bearer ${API_KEY}`},
+                    body:formData
+                });
+                if(!response.ok)return "Unable to analyze video.";
+                const data=await response.json();
+                return data.analysis||'No analysis available.';
             }
             static async generateImage(prompt){
                 const response=await fetch(DALLE_API_URL,{
@@ -849,8 +786,7 @@
                     body:JSON.stringify({
                         prompt:prompt,
                         n:1,
-                        size:"1024x1024",
-                        response_format:"url"
+                        size:"1024x1024"
                     })
                 });
                 if(!response.ok)return null;
@@ -866,9 +802,8 @@
                     },
                     body:JSON.stringify({
                         prompt:prompt,
-                        duration:5,
-                        resolution:"1280x720",
-                        response_format:"url"
+                        duration:10,
+                        resolution:"1280x720"
                     })
                 });
                 if(!response.ok)return null;
@@ -879,25 +814,20 @@
 
         class DDoSProtection{
             static init(){
-                sessionStorage.setItem('requestCount',0);
-                sessionStorage.setItem('lastRequestTime',Date.now());
-                sessionStorage.setItem('csrfToken',btoa([...Array(32)].map(()=>Math.random().toString(36)[2]).join('')));
+                sessionStorage.setItem('csrfToken',btoa(Math.random().toString(36).slice(2)));
+                setInterval(this.cleanupOldRequests,5000);
+            }
+            static cleanupOldRequests(){
+                const now=Date.now();
+                requestTimestamps=requestTimestamps.filter(t=>now-t<RATE_LIMIT_WINDOW);
             }
             static analyzeRequest(){
                 const now=Date.now();
-                let requestCount=parseInt(sessionStorage.getItem('requestCount')||0);
-                let lastRequestTime=parseInt(sessionStorage.getItem('lastRequestTime')||now);
-                if(now-lastRequestTime>60000){
-                    requestCount=0;
-                    lastRequestTime=now;
-                }
-                requestCount++;
-                sessionStorage.setItem('requestCount',requestCount);
-                sessionStorage.setItem('lastRequestTime',lastRequestTime);
-                return requestCount<=RATE_LIMIT_REQUESTS;
+                const recentRequests=requestTimestamps.filter(t=>now-t<5000).length;
+                return recentRequests<100;
             }
             static validateCsrfToken(token){
-                return token===sessionStorage.getItem('csrfToken');
+                return token&&token===sessionStorage.getItem('csrfToken');
             }
         }
 
@@ -920,7 +850,7 @@
         }
 
         function setupWorkerPool(){
-            const numWorkers=navigator.hardwareConcurrency||4;
+            const numWorkers=Math.ceil((navigator.hardwareConcurrency||4)*1.25);
             for(let i=0;i<numWorkers;i++){
                 const worker=new Worker(URL.createObjectURL(new Blob([`
                     self.onmessage=async(e)=>{
@@ -956,11 +886,11 @@
                 const aiMessage=document.querySelector(`[data-message-id="${data.messageId}"]`);
                 if(!aiMessage)return;
                 const content=aiMessage.querySelector('.chat-message-content');
-                const chunkSize=500;
+                const chunkSize=300;
                 for(let i=0;i<data.delta.length;i+=chunkSize){
                     content.innerHTML+=data.delta.slice(i,i+chunkSize);
                     chatArea.scrollTop=chatArea.scrollHeight;
-                    await new Promise(r=>setTimeout(r,10));
+                    await new Promise(r=>setTimeout(r,8));
                 }
                 if(data.done){
                     const finalContent=content.innerHTML;
@@ -1000,9 +930,25 @@
 
         async function cacheResponse(hash,response){
             const encrypted=encryptData(response);
+            const dataSize=new Blob([encrypted]).size;
+            if(cacheSize+dataSize>MAX_CACHE_SIZE){
+                await evictOldestCacheEntry();
+            }
             const tx=db.transaction('responses','readwrite');
             const store=tx.objectStore('responses');
-            await store.put({hash,response:encrypted});
+            await store.put({hash,response:encrypted,timestamp:Date.now()});
+            cacheSize+=dataSize;
+        }
+
+        async function evictOldestCacheEntry(){
+            const tx=db.transaction('responses','readwrite');
+            const store=tx.objectStore('responses');
+            const request=await new Promise(r=>store.openCursor().onsuccess=e=>r(e.target.result));
+            if(request){
+                const dataSize=new Blob([request.value.response]).size;
+                await store.delete(request.key);
+                cacheSize-=dataSize;
+            }
         }
 
         async function getCachedResponse(hash){
@@ -1030,14 +976,16 @@
 
         function formatMessage(message,aiMessage){
             let formatted=message.replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\*(.*?)\*/g,'<em>$1</em>').replace(/`(.*?)`/g,'<code>$1</code>');
-            const codeBlockRegex=/```([\s\S]*?)```/g;
+            const codeBlockRegex=/```(hello)?([\s\S]*?)```/g;
             let match;
             latestCodeBlocks=[];
             while((match=codeBlockRegex.exec(message))!==null){
-                const code=match[1].trim();
+                const type=match[1];
+                const code=match[2].trim();
                 const codeId=sha256(code+Date.now());
                 latestCodeBlocks.push(code);
-                formatted=formatted.replace(match[0],`<div class="code-block"><pre><code class="code-text" id="code-${codeId}">${code}</code></pre><button class="copy-btn" data-code-id="code-${codeId}">Copy</button>${latestCodeBlocks.length>1?'<button class="copy-all-btn">Copy All</button>':''}</div>`);
+                const blockClass=type==='hello'?'hello-code-block':'code-block';
+                formatted=formatted.replace(match[0],`<div class="${blockClass}"><pre><code class="code-text" id="code-${codeId}">${code}</code></pre><button class="copy-btn" data-code-id="code-${codeId}">Copy</button>${latestCodeBlocks.length>1?'<button class="copy-all-btn">Copy All</button>':''}</div>`);
             }
             return formatted;
         }
@@ -1077,11 +1025,12 @@
             const keywords=recentMessages.flatMap(msg=>msg.toLowerCase().split(/\W+/).filter(w=>w.length>3));
             const keywordCounts=new Map();
             keywords.forEach(k=>keywordCounts.set(k,(keywordCounts.get(k)||0)+1));
-            const topKeywords=[...keywordCounts.entries()].sort((a,b)=>b[1]-a[1]).slice(0,3).map(e=>e[0]);
+            const topKeywords=[...keywordCounts.entries()].sort((a,b)=>b[1]-a[1]).slice(0,5).map(e=>e[0]);
             for(const keyword of topKeywords){
                 const messageHash=sha256(keyword+Date.now());
                 if(responseCache.has(messageHash)||prefetchQueue.has(messageHash))continue;
                 prefetchQueue.set(messageHash,true);
+                const webResults=await WebSearch.search(keyword);
                 const response=await fetch(API_URL,{
                     method:'POST',
                     headers:{
@@ -1090,7 +1039,7 @@
                     },
                     body:JSON.stringify({
                         model:"gpt-4o",
-                        messages:[{role:"user",content:`Provide detailed information about ${keyword}`}],
+                        messages:[{role:"user",content:`Provide detailed information about ${keyword}\nWeb search results:\n${webResults}`}],
                         max_tokens:aiModels[selectedAiModel].maxTokens,
                         temperature:aiModels[selectedAiModel].temperature,
                         top_p:0.95
@@ -1105,6 +1054,7 @@
         }
 
         function sanitizeInput(input){
+            if(typeof input!=='string')return '';
             const div=document.createElement('div');
             div.textContent=input;
             return div.innerHTML.replace(/[<>]/g,m=>m==='<'?'&lt;':'&gt;');
@@ -1182,13 +1132,15 @@
                     stopGeneratingBtn.style.display='none';
                     typingIndicator.style.display='none';
                     abortController.abort();
-                },8000);
+                },6000);
                 const aiMessage=document.createElement('div');
                 aiMessage.className='chat-message ai';
                 aiMessage.setAttribute('data-message-id',messageHash);
                 aiMessage.innerHTML=`<div class="chat-message-content"></div><div class="chat-message-meta">Just now</div>`;
                 chatHistory.appendChild(aiMessage);
                 let aiMessageText;
+                const webResults=await WebSearch.search(message);
+                const enrichedPrompt=`User message: ${message}\nWeb search results:\n${webResults}`;
                 if(message.toLowerCase().includes('obfuscate code')||message.toLowerCase().includes('deobfuscate code')){
                     const codeMatch=message.match(/```([\s\S]*?)```/);
                     if(!codeMatch){
@@ -1200,10 +1152,10 @@
                         const code=codeMatch[1].trim();
                         if(message.toLowerCase().includes('obfuscate code')){
                             const obfuscated=Obfuscator.obfuscate(code,'mixed');
-                            aiMessageText=`${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\nObfuscated Code:\n\`\`\`\n${obfuscated}\n\`\`\``;
+                            aiMessageText=`${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\nObfuscated Code:\n\`\`\`hello\n${obfuscated}\n\`\`\``;
                         }else{
                             const deobfuscated=Deobfuscator.deobfuscate(code);
-                            aiMessageText=`${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\nDeobfuscated Code:\n\`\`\`\n${deobfuscated}\n\`\`\``;
+                            aiMessageText=`${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\nDeobfuscated Code:\n\`\`\`hello\n${deobfuscated}\n\`\`\``;
                         }
                         aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
                         responseCache.set(messageHash,aiMessageText);
@@ -1232,7 +1184,7 @@
                             optimized=CodeAnalyzer.optimizeCode(code);
                             codeAnalysisCache.set(codeHash,{issues,optimized});
                         }
-                        aiMessageText=`${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\nCode Analysis:\n${issues.length>0?issues.join('\n'):'No issues found!'}\n\nOptimized Code:\n\`\`\`\n${optimized}\n\`\`\``;
+                        aiMessageText=`${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\nCode Analysis:\n${issues.length>0?issues.join('\n'):'No issues found!'}\n\nOptimized Code:\n\`\`\`hello\n${optimized}\n\`\`\``;
                         aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
                         responseCache.set(messageHash,aiMessageText);
                         await cacheResponse(messageHash,aiMessageText);
@@ -1357,7 +1309,7 @@
                         videoAnalysis:"Analyze the uploaded video with a scene-by-scene breakdown, object detection, audio analysis, and summary: ",
                         robloxScripting:"Create a Roblox Luau script for this request, including mechanics, error handling, and multiplayer support: "
                     };
-                    if(schoolPrompts[selectedSchoolMode])schoolPrompt=`${schoolPrompts[selectedSchoolMode]}"${sanitizeInput(message)}"`;
+                    if(schoolPrompts[selectedSchoolMode])schoolPrompt=`${schoolPrompts[selectedSchoolMode]}"${sanitizeInput(message)}"\nWeb search results:\n${webResults}`;
                     const response=await fetch(Api_URL,{
                         method:'POST',
                         headers:{
@@ -1390,7 +1342,7 @@
                     conversationHistory.push({role:"assistant",content:aiMessageText});
                     chatArea.scrollTop=chatArea.scrollHeight;
                 }else{
-                    const messagesToProcess=[...conversationHistory,{role:"user",content:message}];
+                    const messagesToProcess=[...conversationHistory,{role:"user",content:enrichedPrompt}];
                     const batchResponses=await batchProcessRequests(messagesToProcess);
                     aiMessageText=`${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\n${batchResponses[batchResponses.length-1]}`;
                     aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
@@ -1638,7 +1590,7 @@
         verbiflowUpdatesBtn.addEventListener('click',()=>{
             const updatesMessage=document.createElement('div');
             updatesMessage.className='chat-message ai';
-            updatesMessage.innerHTML=`<div class="chat-message-content">VerbiFlow Updates: Now with Sora and DALL·E for image and video generation, faster AI responses with WebSocket streaming, optimized worker pools, enhanced UI with smoother animations, and duplicate media prevention!</div><div class="chat-message-meta">Just now</div>`;
+            updatesMessage.innerHTML=`<div class="chat-message-content">VerbiFlow Updates: Real-time web search integration, faster AI responses with optimized streaming, styled code blocks for \`\`\`hello\`\`\`, enhanced security, smoother UI animations, and more powerful features!</div><div class="chat-message-meta">Just now</div>`;
             chatHistory.appendChild(updatesMessage);
             chatArea.scrollTop=chatArea.scrollHeight;
         });
@@ -1665,7 +1617,7 @@
             loadTheme();
             requestPermissions();
             DDoSProtection.init();
-            setInterval(prefetchResponses,5000);
+            setInterval(prefetchResponses,4000);
         });
     </script>
 </body>
