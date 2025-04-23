@@ -24,32 +24,6 @@
             color: #1452bd;
         }
         
-        .toggle-container {
-            background-color: white;
-            border-radius: 8px;
-            padding: 4px;
-            display: flex;
-            margin-bottom: 30px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        }
-        
-        .toggle-btn {
-            padding: 8px 20px;
-            border-radius: 6px;
-            border: none;
-            background: transparent;
-            color: #718096;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-weight: 500;
-            font-size: 14px;
-        }
-        
-        .toggle-btn.active {
-            background-color: #1452bd;
-            color: white;
-        }
-        
         .pricing-card {
             background-color: white;
             border-radius: 12px;
@@ -159,31 +133,34 @@
             text-align: center;
         }
         
-        .footer {
-            margin-top: 30px;
+        .show-more {
             text-align: center;
-            color: #4a5568;
-            font-size: 14px;
+            margin: 20px 0;
         }
         
-        .footer a {
+        .show-more-btn {
+            background: none;
+            border: none;
             color: #1452bd;
-            text-decoration: none;
+            font-size: 14px;
             font-weight: 500;
+            cursor: pointer;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
         }
         
-        .footer a:hover {
-            text-decoration: underline;
+        .show-more-btn:hover {
+            background-color: rgba(20, 82, 189, 0.1);
+        }
+        
+        .hidden-features {
+            display: none;
         }
     </style>
 </head>
 <body>
     <h1>Upgrade your plan</h1>
-    
-    <div class="toggle-container">
-        <button class="toggle-btn">Personal</button>
-        <button class="toggle-btn active">Business</button>
-    </div>
     
     <div class="pricing-card">
         <div class="plan-name">Verbiflow Premium</div>
@@ -243,6 +220,56 @@
             <div class="feature-text">Secure data handling with advanced protection</div>
         </div>
         
+        <div class="section-title">Advanced Features</div>
+        <div class="feature-item">
+            <span class="feature-check">✓</span>
+            <div class="feature-text">Real-time code collaboration with AI mentoring</div>
+        </div>
+        
+        <div class="feature-item">
+            <span class="feature-check">✓</span>
+            <div class="feature-text">Interactive learning modules with progress tracking</div>
+        </div>
+        
+        <div class="feature-item">
+            <span class="feature-check">✓</span>
+            <div class="feature-text">Connect to external services via API integration</div>
+        </div>
+        
+        <div class="feature-item hidden-features">
+            <span class="feature-check">✓</span>
+            <div class="feature-text">Generate 3D models and assets for games</div>
+        </div>
+        
+        <div class="feature-item hidden-features">
+            <span class="feature-check">✓</span>
+            <div class="feature-text">Advanced analytics dashboard for usage insights</div>
+        </div>
+        
+        <div class="feature-item hidden-features">
+            <span class="feature-check">✓</span>
+            <div class="feature-text">Media editing suggestions with AI-powered tips</div>
+        </div>
+        
+        <div class="feature-item hidden-features">
+            <span class="feature-check">✓</span>
+            <div class="feature-text">Custom notification system with smart alerts</div>
+        </div>
+        
+        <div class="feature-item hidden-features">
+            <span class="feature-check">✓</span>
+            <div class="feature-text">AI-driven game simulation and testing</div>
+        </div>
+        
+        <div class="feature-item hidden-features">
+            <span class="feature-check">✓</span>
+            <div class="feature-text">Encrypted chat backups with secure storage</div>
+        </div>
+        
+        <div class="show-more">
+            <button class="show-more-btn">Show more features</button>
+        </div>
+        
         <div class="testimonial">
             "Verbiflow completely transformed how our team works. The multimedia analysis and custom workflows save us hours every day!"
             <div class="testimonial-author">- Michael T., Marketing Director</div>
@@ -250,21 +277,18 @@
         
         <div class="small-text">One-time payment. No recurring fees. All future updates included.</div>
     </div>
-    
-    <div class="footer">
-        <div>Need more for your company?</div>
-        <a href="#">Check out Verbiflow Enterprise</a>
-    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const toggleBtns = document.querySelectorAll('.toggle-btn');
+            const showMoreBtn = document.querySelector('.show-more-btn');
+            const hiddenFeatures = document.querySelectorAll('.hidden-features');
             
-            toggleBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    toggleBtns.forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
+            showMoreBtn.addEventListener('click', function() {
+                hiddenFeatures.forEach(feature => {
+                    feature.style.display = feature.style.display === 'flex' ? 'none' : 'flex';
                 });
+                
+                this.textContent = this.textContent === 'Show more features' ? 'Show fewer features' : 'Show more features';
             });
         });
     </script>
