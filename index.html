@@ -16,86 +16,86 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         *{margin:0;padding:0;box-sizing:border-box;}
-        body{background:linear-gradient(145deg,#f3f4f6,#d1d5db);font-family:Inter,sans-serif;color:#111827;min-height:100vh;display:flex;justify-content:center;padding:10px;transition:background .4s ease;}
+        body{background:linear-gradient(145deg,#f3f4f6,#d1d5db);font-family:Inter,sans-serif;color:#111827;min-height:100vh;display:flex;justify-content:center;padding:8px;transition:background .4s ease;}
         .dark-mode body{background:linear-gradient(145deg,#1f2937,#111827);color:#e5e7eb;}
-        .container{max-width:1200px;width:100%;background:#ffffff;border-radius:32px;box-shadow:0 30px 70px rgba(0,0,0,.25);overflow:hidden;display:flex;flex-direction:column;transition:all .4s ease;}
-        .dark-mode .container{background:#1f2937;box-shadow:0 30px 70px rgba(0,0,0,.65);}
-        .nav-bar{background:linear-gradient(90deg,#1d4ed8,#3b82f6);padding:14px 28px;display:flex;gap:14px;justify-content:flex-end;align-items:center;}
+        .container{max-width:900px;width:100%;background:#ffffff;border-radius:24px;box-shadow:0 20px 50px rgba(0,0,0,.25);overflow:hidden;display:flex;flex-direction:column;transition:all .4s ease;}
+        .dark-mode .container{background:#1f2937;box-shadow:0 20px 50px rgba(0,0,0,.65);}
+        .nav-bar{background:linear-gradient(90deg,#1d4ed8,#3b82f6);padding:12px 24px;display:flex;gap:12px;justify-content:flex-end;align-items:center;}
         .dark-mode .nav-bar{background:linear-gradient(90deg,#1e40af,#2563eb);}
-        .nav-btn{background:#ffffff;color:#1d4ed8;border:none;padding:12px 28px;border-radius:16px;cursor:pointer;font-size:16px;font-weight:600;transition:all .3s ease;outline:none;}
+        .nav-btn{background:#ffffff;color:#1d4ed8;border:none;padding:10px 24px;border-radius:14px;cursor:pointer;font-size:15px;font-weight:600;transition:all .3s ease;outline:none;}
         .dark-mode .nav-btn{background:#374151;color:#93c5fd;}
-        .nav-btn:hover{transform:scale(1.1);background:#f3f4f6;box-shadow:0 6px 18px rgba(0,0,0,.2);}
+        .nav-btn:hover{transform:scale(1.1);background:#f3f4f6;box-shadow:0 5px 15px rgba(0,0,0,.2);}
         .dark-mode .nav-btn:hover{background:#4b5563;}
         .nav-btn:active{transform:scale(.9);}
         .discord-btn{background:#5865f2;color:#ffffff;}
         .discord-btn:hover{background:#4752c4;}
-        .theme-btn{background:#ffffff;color:#1d4ed8;border:2px solid #1d4ed8;padding:10px 20px;border-radius:16px;cursor:pointer;font-size:16px;font-weight:600;display:flex;align-items:center;gap:8px;transition:all .3s ease;}
+        .theme-btn{background:#ffffff;color:#1d4ed8;border:2px solid #1d4ed8;padding:8px 18px;border-radius:14px;cursor:pointer;font-size:15px;font-weight:600;display:flex;align-items:center;gap:6px;transition:all .3s ease;}
         .dark-mode .theme-btn{background:#374151;color:#93c5fd;border:2px solid #60a5fa;}
         .theme-btn:hover{transform:scale(1.1);background:#f3f4f6;}
         .dark-mode .theme-btn:hover{background:#4b5563;}
-        .theme-btn i{font-size:20px;}
-        .header{background:#ffffff;padding:28px;text-align:center;border-bottom:1px solid #e5e7eb;}
+        .theme-btn i{font-size:18px;}
+        .header{background:#ffffff;padding:24px;text-align:center;border-bottom:1px solid #e5e7eb;}
         .dark-mode .header{background:#1f2937;border-bottom:1px solid #374151;}
-        .logo{font-size:40px;font-weight:800;color:#1d4ed8;letter-spacing:-1px;animation:pulse 2s infinite;}
+        .logo{font-size:36px;font-weight:800;color:#1d4ed8;letter-spacing:-1px;animation:pulse 2s infinite;}
         .dark-mode .logo{color:#60a5fa;}
-        .chat-area{flex:1;padding:28px;overflow-y:auto;max-height:76vh;min-height:56vh;background:#f9fafb;scroll-behavior:smooth;}
+        .chat-area{flex:1;padding:24px;overflow-y:auto;max-height:70vh;min-height:50vh;background:#f9fafb;scroll-behavior:smooth;}
         .dark-mode .chat-area{background:#111827;}
         .chat-content{flex:1;display:flex;flex-direction:column;}
-        .chat-history{display:flex;flex-direction:column;gap:18px;}
-        .chat-message{display:flex;flex-direction:column;gap:12px;padding:16px;border-radius:24px;max-width:82%;animation:slideIn .4s ease;}
+        .chat-history{display:flex;flex-direction:column;gap:16px;}
+        .chat-message{display:flex;flex-direction:column;gap:10px;padding:14px;border-radius:20px;max-width:85%;animation:slideIn .4s ease;}
         .chat-message.user{align-self:flex-end;background:#1d4ed8;color:#ffffff;}
         .dark-mode .chat-message.user{background:#1e40af;}
         .chat-message.ai{align-self:flex-start;background:#e5e7eb;color:#111827;}
         .dark-mode .chat-message.ai{background:#374151;color:#e5e7eb;}
-        .chat-message-content{padding:16px;border-radius:24px;font-size:17px;line-height:1.6;word-break:break-word;}
-        .chat-message-meta{font-size:14px;color:#6b7280;margin-top:8px;opacity:.75;}
+        .chat-message-content{padding:14px;border-radius:20px;font-size:16px;line-height:1.6;word-break:break-word;}
+        .chat-message-meta{font-size:13px;color:#6b7280;margin-top:6px;opacity:.75;}
         .dark-mode .chat-message-meta{color:#9ca3af;}
-        .chat-message img,.chat-message video{max-width:100%;border-radius:16px;margin-top:14px;cursor:pointer;transition:transform .3s ease,box-shadow .3s ease;}
-        .chat-message img:hover,.chat-message video:hover{transform:scale(1.06);box-shadow:0 10px 30px rgba(0,0,0,.2);}
-        .code-block{position:relative;margin:14px 0;border-radius:16px;overflow:hidden;}
-        .code-block pre{background:#111827;color:#e5e7eb;padding:18px;border-radius:16px;overflow-x:auto;font-family:'JetBrains Mono',monospace;font-size:16px;line-height:1.6;}
+        .chat-message img,.chat-message video{max-width:100%;border-radius:14px;margin-top:12px;cursor:pointer;transition:transform .3s ease,box-shadow .3s ease;}
+        .chat-message img:hover,.chat-message video:hover{transform:scale(1.06);box-shadow:0 8px 25px rgba(0,0,0,.2);}
+        .code-block{position:relative;margin:12px 0;border-radius:14px;overflow:hidden;}
+        .code-block pre{background:#111827;color:#e5e7eb;padding:16px;border-radius:14px;overflow-x:auto;font-family:'JetBrains Mono',monospace;font-size:15px;line-height:1.6;}
         .dark-mode .code-block pre{background:#1f2937;}
-        .code-text{background:#111827;color:#e5e7eb;padding:18px;border-radius:16px;font-family:'JetBrains Mono',monospace;font-size:16px;white-space:pre-wrap;user-select:text;}
+        .code-text{background:#111827;color:#e5e7eb;padding:16px;border-radius:14px;font-family:'JetBrains Mono',monospace;font-size:15px;white-space:pre-wrap;user-select:text;}
         .dark-mode .code-text{background:#1f2937;}
-        .copy-btn,.copy-all-btn{background:#1d4ed8;color:#ffffff;border:none;padding:10px 16px;border-radius:14px;cursor:pointer;font-size:14px;font-weight:600;transition:all .3s ease;}
-        .copy-btn{position:absolute;top:12px;right:12px;}
-        .copy-all-btn{position:absolute;top:12px;right:90px;}
+        .copy-btn,.copy-all-btn{background:#1d4ed8;color:#ffffff;border:none;padding:8px 14px;border-radius:12px;cursor:pointer;font-size:13px;font-weight:600;transition:all .3s ease;}
+        .copy-btn{position:absolute;top:10px;right:10px;}
+        .copy-all-btn{position:absolute;top:10px;right:80px;}
         .dark-mode .copy-btn,.dark-mode .copy-all-btn{background:#1e40af;}
-        .copy-btn:hover,.copy-all-btn:hover{background:#3b82f6;transform:scale(1.1);box-shadow:0 6px 18px rgba(0,0,0,.2);}
+        .copy-btn:hover,.copy-all-btn:hover{background:#3b82f6;transform:scale(1.1);box-shadow:0 5px 15px rgba(0,0,0,.2);}
         .dark-mode .copy-btn:hover,.dark-mode .copy-all-btn:hover{background:#2563eb;}
-        .code-sidebar{position:fixed;top:0;right:-550px;width:550px;height:100%;background:#f9fafb;border-left:1px solid #e5e7eb;padding:28px;overflow-y:auto;transition:right .4s ease;z-index:200;}
+        .code-sidebar{position:fixed;top:0;right:-450px;width:450px;height:100%;background:#f9fafb;border-left:1px solid #e5e7eb;padding:24px;overflow-y:auto;transition:right .4s ease;z-index:200;}
         .dark-mode .code-sidebar{background:#1f2937;border-left:1px solid #374151;}
         .code-sidebar.open{right:0;}
-        .code-sidebar-close{background:#ef4444;color:#ffffff;border:none;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:22px;margin-bottom:14px;}
+        .code-sidebar-close{background:#ef4444;color:#ffffff;border:none;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:20px;margin-bottom:12px;}
         .code-sidebar-close:hover{background:#dc2626;transform:scale(1.2);}
-        .code-sidebar-content{font-family:'JetBrains Mono',monospace;font-size:16px;color:#111827;white-space:pre-wrap;}
+        .code-sidebar-content{font-family:'JetBrains Mono',monospace;font-size:15px;color:#111827;white-space:pre-wrap;}
         .dark-mode .code-sidebar-content{color:#e5e7eb;}
-        .file-upload-container{padding:18px;border-top:1px solid #e5e7eb;background:#ffffff;}
+        .file-upload-container{padding:16px;border-top:1px solid #e5e7eb;background:#ffffff;}
         .dark-mode .file-upload-container{background:#1f2937;border-top:1px solid #374151;}
-        .file-actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap;}
-        .file-input-label{background:#1d4ed8;color:#ffffff;padding:16px 28px;border-radius:16px;cursor:pointer;font-size:16px;font-weight:600;min-height:52px;transition:all .3s ease;}
+        .file-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap;}
+        .file-input-label{background:#1d4ed8;color:#ffffff;padding:14px 24px;border-radius:14px;cursor:pointer;font-size:15px;font-weight:600;min-height:48px;transition:all .3s ease;}
         .dark-mode .file-input-label{background:#1e40af;}
-        .file-input-label:hover{transform:scale(1.1);box-shadow:0 6px 18px rgba(0,0,0,.2);}
+        .file-input-label:hover{transform:scale(1.1);box-shadow:0 5px 15px rgba(0,0,0,.2);}
         .file-input{display:none;}
-        .file-clear-btn{background:#ef4444;color:#ffffff;padding:16px 28px;border-radius:16px;cursor:pointer;font-size:16px;font-weight:600;border:none;min-height:52px;transition:all .3s ease;}
+        .file-clear-btn{background:#ef4444;color:#ffffff;padding:14px 24px;border-radius:14px;cursor:pointer;font-size:15px;font-weight:600;border:none;min-height:48px;transition:all .3s ease;}
         .file-clear-btn:hover{transform:scale(1.1);background:#dc2626;}
-        .generate-media-btn{background:#10b981;color:#ffffff;padding:16px 28px;border-radius:16px;cursor:pointer;font-size:16px;font-weight:600;border:none;min-height:52px;transition:all .3s ease;}
+        .generate-media-btn{background:#10b981;color:#ffffff;padding:14px 24px;border-radius:14px;cursor:pointer;font-size:15px;font-weight:600;border:none;min-height:48px;transition:all .3s ease;}
         .dark-mode .generate-media-btn{background:#059669;}
         .generate-media-btn:hover{transform:scale(1.1);background:#34d399;}
         .dark-mode .generate-media-btn:hover{background:#10b981;}
-        .keep-generating-btn{background:#10b981;color:#ffffff;padding:16px 28px;border-radius:16px;cursor:pointer;font-size:16px;font-weight:600;border:none;min-height:52px;transition:all .4s ease;opacity:0;transform:translateY(18px);display:none;}
+        .keep-generating-btn{background:#10b981;color:#ffffff;padding:14px 24px;border-radius:14px;cursor:pointer;font-size:15px;font-weight:600;border:none;min-height:48px;transition:all .4s ease;opacity:0;transform:translateY(16px);display:none;}
         .keep-generating-btn.show{opacity:1;transform:translateY(0);display:block;}
         .dark-mode .keep-generating-btn{background:#059669;}
         .keep-generating-btn:hover{transform:scale(1.1);background:#34d399;}
         .dark-mode .keep-generating-btn:hover{background:#10b981;}
-        .school-help-container{display:flex;align-items:center;gap:14px;margin-left:14px;}
-        .school-help-dropdown,.ai-model-dropdown{background:#6b7280;color:#ffffff;padding:16px 28px;border-radius:16px;border:none;font-size:16px;font-weight:600;min-height:52px;cursor:pointer;transition:all .3s ease;}
+        .school-help-container{display:flex;align-items:center;gap:12px;margin-left:12px;}
+        .school-help-dropdown,.ai-model-dropdown{background:#6b7280;color:#ffffff;padding:14px 24px;border-radius:14px;border:none;font-size:15px;font-weight:600;min-height:48px;cursor:pointer;transition:all .3s ease;}
         .dark-mode .school-help-dropdown,.dark-mode .ai-model-dropdown{background:#4b5563;}
         .school-help-dropdown:hover,.ai-model-dropdown:hover{background:#9ca3af;transform:scale(1.1);}
         .dark-mode .school-help-dropdown:hover,.dark-mode .ai-model-dropdown:hover{background:#6b7280;}
-        .school-help-dropdown:focus,.ai-model-dropdown:focus{outline:none;border-color:#1d4ed8;box-shadow:0 0 0 6px rgba(37,99,235,.3);}
-        .dark-mode .school-help-dropdown:focus,.dark-mode .ai-model-dropdown:focus{border-color:#60a5fa;box-shadow:0 0 0 6px rgba(96,165,250,.3);}
-        .rephrase-btn,.stop-generating-btn{background:#f59e0b;color:#ffffff;padding:16px 28px;border-radius:16px;cursor:pointer;font-size:16px;font-weight:600;border:none;min-height:52px;transition:all .3s ease;}
+        .school-help-dropdown:focus,.ai-model-dropdown:focus{outline:none;border-color:#1d4ed8;box-shadow:0 0 0 5px rgba(37,99,235,.3);}
+        .dark-mode .school-help-dropdown:focus,.dark-mode .ai-model-dropdown:focus{border-color:#60a5fa;box-shadow:0 0 0 5px rgba(96,165,250,.3);}
+        .rephrase-btn,.stop-generating-btn{background:#f59e0b;color:#ffffff;padding:14px 24px;border-radius:14px;cursor:pointer;font-size:15px;font-weight:600;border:none;min-height:48px;transition:all .3s ease;}
         .dark-mode .rephrase-btn,.dark-mode .stop-generating-btn{background:#d97706;}
         .rephrase-btn:hover,.stop-generating-btn:hover{transform:scale(1.1);background:#fbbf24;}
         .dark-mode .rephrase-btn:hover,.dark-mode .stop-generating-btn:hover{background:#f59e0b;}
@@ -103,51 +103,51 @@
         .dark-mode .stop-generating-btn{background:#dc2626;}
         .stop-generating-btn:hover{background:#f87171;}
         .dark-mode .stop-generating-btn:hover{background:#ef4444;}
-        .file-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:14px;}
-        .file-item{display:flex;align-items:center;gap:14px;background:#e5e7eb;padding:14px;border-radius:16px;cursor:pointer;transition:all .3s ease;}
+        .file-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-top:12px;}
+        .file-item{display:flex;align-items:center;gap:12px;background:#e5e7eb;padding:12px;border-radius:14px;cursor:pointer;transition:all .3s ease;}
         .dark-mode .file-item{background:#374151;}
         .file-item:hover{background:#d1d5db;transform:scale(1.05);}
         .dark-mode .file-item:hover{background:#4b5563;}
-        .file-item-name{flex:1;font-size:16px;color:#111827;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+        .file-item-name{flex:1;font-size:15px;color:#111827;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
         .dark-mode .file-item-name{color:#e5e7eb;}
-        .file-item-details{font-size:14px;color:#6b7280;}
+        .file-item-details{font-size:13px;color:#6b7280;}
         .dark-mode .file-item-details{color:#9ca3af;}
-        .file-preview-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);z-index:250;padding:28px;justify-content:center;align-items:center;}
+        .file-preview-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);z-index:250;padding:24px;justify-content:center;align-items:center;}
         .file-preview-modal.open{display:flex;}
-        .file-preview-content{background:#ffffff;border-radius:24px;padding:28px;max-width:94%;max-height:94%;overflow:auto;color:#111827;font-size:16px;}
+        .file-preview-content{background:#ffffff;border-radius:20px;padding:24px;max-width:92%;max-height:92%;overflow:auto;color:#111827;font-size:15px;}
         .dark-mode .file-preview-content{background:#1f2937;color:#e5e7eb;}
-        .file-preview-content img,.file-preview-content video{max-width:90% !important;}
-        .file-preview-close{background:#ef4444;color:#ffffff;border:none;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;position:absolute;top:28px;right:28px;transition:all .3s ease;}
+        .file-preview-content img,.file-preview-content video{max-width:88% !important;}
+        .file-preview-close{background:#ef4444;color:#ffffff;border:none;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;position:absolute;top:24px;right:24px;transition:all .3s ease;}
         .file-preview-close:hover{transform:scale(1.2);background:#dc2626;}
-        .file-preview-close svg{width:24px;height:24px;fill:#ffffff;}
-        .input-container{display:flex;align-items:flex-end;padding:18px;border-top:1px solid #e5e7eb;background:#ffffff;gap:14px;position:sticky;bottom:0;z-index:50;}
+        .file-preview-close svg{width:22px;height:22px;fill:#ffffff;}
+        .input-container{display:flex;align-items:flex-end;padding:16px;border-top:1px solid #e5e7eb;background:#ffffff;gap:12px;position:sticky;bottom:0;z-index:50;}
         .dark-mode .input-container{background:#1f2937;border-top:1px solid #374151;}
-        .user-input{flex:1;padding:16px;border:1px solid #e5e7eb;border-radius:16px;font-size:17px;outline:none;resize:none;min-height:52px;max-height:220px;background:#ffffff;color:#111827;transition:all .3s ease;}
+        .user-input{flex:1;padding:14px;border:1px solid #e5e7eb;border-radius:14px;font-size:16px;outline:none;resize:none;min-height:48px;max-height:200px;background:#ffffff;color:#111827;transition:all .3s ease;}
         .dark-mode .user-input{background:#374151;border:1px solid #4b5563;color:#e5e7eb;}
-        .user-input:focus{border-color:#1d4ed8;box-shadow:0 0 0 6px rgba(37,99,235,.3);}
-        .dark-mode .user-input:focus{border-color:#60a5fa;box-shadow:0 0 0 6px rgba(96,165,250,.3);}
-        .send-btn{background:#1d4ed8;border:none;border-radius:16px;padding:16px 32px;cursor:pointer;color:#ffffff;font-size:16px;font-weight:600;min-height:52px;transition:all .3s ease;}
+        .user-input:focus{border-color:#1d4ed8;box-shadow:0 0 0 5px rgba(37,99,235,.3);}
+        .dark-mode .user-input:focus{border-color:#60a5fa;box-shadow:0 0 0 5px rgba(96,165,250,.3);}
+        .send-btn{background:#1d4ed8;border:none;border-radius:14px;padding:14px 28px;cursor:pointer;color:#ffffff;font-size:15px;font-weight:600;min-height:48px;transition:all .3s ease;}
         .dark-mode .send-btn{background:#1e40af;}
         .send-btn:hover{transform:scale(1.1);background:#3b82f6;}
         .dark-mode .send-btn:hover{background:#2563eb;}
         .send-btn:disabled{background:#9ca3af;cursor:not-allowed;}
-        .loading-spinner{display:none;margin:14px auto;width:40px;height:40px;border:6px solid #1d4ed8;border-top:6px solid transparent;border-radius:50%;animation:spin .5s linear infinite;}
-        .typing-indicator{display:none;font-size:16px;color:#6b7280;margin:14px auto;text-align:center;}
+        .loading-spinner{display:none;margin:12px auto;width:36px;height:36px;border:5px solid #1d4ed8;border-top:5px solid transparent;border-radius:50%;animation:spin .5s linear infinite;}
+        .typing-indicator{display:none;font-size:15px;color:#6b7280;margin:12px auto;text-align:center;}
         .dark-mode .typing-indicator{color:#9ca3af;}
         .typing-indicator span{display:inline-block;animation:dotPulse .8s infinite ease-in-out;}
         .typing-indicator span:nth-child(2){animation-delay:.15s;}
         .typing-indicator span:nth-child(3){animation-delay:.3s;}
-        .notification{position:fixed;top:28px;right:28px;padding:16px 32px;border-radius:16px;box-shadow:0 10px 24px rgba(0,0,0,.35);opacity:0;transform:translateY(-28px);transition:all .4s ease;font-size:16px;font-weight:600;z-index:300;}
+        .notification{position:fixed;top:24px;right:24px;padding:14px 28px;border-radius:14px;box-shadow:0 8px 20px rgba(0,0,0,.35);opacity:0;transform:translateY(-24px);transition:all .4s ease;font-size:15px;font-weight:600;z-index:300;}
         .notification.show{opacity:1;transform:translateY(0);}
         .notification.success{background:#1d4ed8;color:#ffffff;}
         .notification.error{background:#ef4444;color:#ffffff;}
-        .permission-modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);z-index:500;display:none;justify-content:center;align-items:center;}
+        .permission-modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);z-index:500;justify-content:center;align-items:center;}
         .permission-modal.open{display:flex;}
-        .permission-content{background:#ffffff;border-radius:24px;padding:32px;max-width:600px;text-align:center;color:#111827;}
+        .permission-content{background:#ffffff;border-radius:20px;padding:28px;max-width:550px;text-align:center;color:#111827;}
         .dark-mode .permission-content{background:#1f2937;color:#e5e7eb;}
-        .permission-content h2{font-size:26px;margin-bottom:16px;}
-        .permission-content p{font-size:17px;margin-bottom:20px;}
-        .permission-btn{background:#1d4ed8;color:#ffffff;padding:14px 32px;border-radius:16px;border:none;cursor:pointer;font-size:17px;font-weight:600;margin:0 12px;}
+        .permission-content h2{font-size:24px;margin-bottom:14px;}
+        .permission-content p{font-size:16px;margin-bottom:18px;}
+        .permission-btn{background:#1d4ed8;color:#ffffff;padding:12px 28px;border-radius:14px;border:none;cursor:pointer;font-size:16px;font-weight:600;margin:0 10px;}
         .dark-mode .permission-btn{background:#1e40af;}
         .permission-btn:hover{transform:scale(1.1);background:#3b82f6;}
         .dark-mode .permission-btn:hover{background:#2563eb;}
@@ -155,33 +155,33 @@
         .dark-mode .permission-btn.deny{background:#dc2626;}
         .permission-btn.deny:hover{background:#f87171;}
         .dark-mode .permission-btn.deny:hover{background:#ef4444;}
-        @keyframes slideIn{0%{opacity:0;transform:translateY(28px);}100%{opacity:1;transform:translateY(0);}}
+        @keyframes slideIn{0%{opacity:0;transform:translateY(24px);}100%{opacity:1;transform:translateY(0);}}
         @keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
         @keyframes dotPulse{0%,80%,100%{transform:scale(1);opacity:.7;}40%{transform:scale(1.6);opacity:1;}}
         @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.6;}}
         @media (max-width:768px){
-            .container{max-width:100%;border-radius:20px;padding:14px;}
-            .nav-bar{padding:12px;gap:12px;}
-            .nav-btn{font-size:14px;padding:10px 20px;}
-            .theme-btn{padding:8px 16px;font-size:14px;}
-            .header{padding:20px;}
-            .logo{font-size:32px;}
-            .chat-area{padding:20px;min-height:52vh;max-height:72vh;}
-            .chat-message{max-width:88%;}
-            .chat-message-content{font-size:16px;}
+            .container{max-width:100%;border-radius:16px;padding:12px;}
+            .nav-bar{padding:10px;gap:10px;}
+            .nav-btn{font-size:13px;padding:8px 18px;}
+            .theme-btn{padding:6px 14px;font-size:13px;}
+            .header{padding:18px;}
+            .logo{font-size:30px;}
+            .chat-area{padding:18px;min-height:48vh;max-height:68vh;}
+            .chat-message{max-width:90%;}
+            .chat-message-content{font-size:15px;}
             .chat-message img,.chat-message video{max-width:100%;}
-            .input-container{padding:14px;gap:12px;}
-            .user-input{font-size:16px;min-height:48px;}
-            .send-btn{padding:14px 24px;min-height:48px;}
-            .file-input-label,.file-clear-btn,.generate-media-btn,.keep-generating-btn,.school-help-dropdown,.ai-model-dropdown,.rephrase-btn,.stop-generating-btn{font-size:14px;padding:14px 20px;min-height:48px;}
-            .school-help-container{gap:12px;margin-left:12px;}
-            .file-preview-content img,.file-preview-content video{max-width:94% !important;}
-            .notification{top:20px;right:20px;padding:14px 24px;font-size:14px;}
+            .input-container{padding:12px;gap:10px;}
+            .user-input{font-size:15px;min-height:44px;}
+            .send-btn{padding:12px 20px;min-height:44px;}
+            .file-input-label,.file-clear-btn,.generate-media-btn,.keep-generating-btn,.school-help-dropdown,.ai-model-dropdown,.rephrase-btn,.stop-generating-btn{font-size:13px;padding:12px 18px;min-height:44px;}
+            .school-help-container{gap:10px;margin-left:10px;}
+            .file-preview-content img,.file-preview-content video{max-width:92% !important;}
+            .notification{top:18px;right:18px;padding:12px 20px;font-size:13px;}
             .code-sidebar{width:100%;right:-100%;}
-            .permission-content{max-width:94%;padding:20px;}
-            .permission-content h2{font-size:22px;}
-            .permission-content p{font-size:15px;}
-            .permission-btn{padding:12px 20px;font-size:15px;}
+            .permission-content{max-width:92%;padding:18px;}
+            .permission-content h2{font-size:20px;}
+            .permission-content p{font-size:14px;}
+            .permission-btn{padding:10px 18px;font-size:14px;}
         }
     </style>
 </head>
@@ -190,6 +190,7 @@
         <div class="nav-bar">
             <button class="nav-btn" id="clearChatBtn">Clear Chat</button>
             <button class="nav-btn" id="verbiflowUpdatesBtn">Updates</button>
+            <button class="nav-btn" id="premiumPriceBtn">Premium Price</button>
             <button class="theme-btn" id="themeBtn"><i class="fas fa-moon"></i> Dark Mode</button>
             <button class="nav-btn" id="copyCodeBtn">Copy Code</button>
             <button class="nav-btn discord-btn" id="discordBtn">Discord</button>
@@ -302,6 +303,7 @@
         const copyCodeBtn=document.getElementById('copyCodeBtn');
         const discordBtn=document.getElementById('discordBtn');
         const verbiflowUpdatesBtn=document.getElementById('verbiflowUpdatesBtn');
+        const premiumPriceBtn=document.getElementById('premiumPriceBtn');
         const themeBtn=document.getElementById('themeBtn');
         const notification=document.getElementById('notification');
         const codeSidebar=document.getElementById('codeSidebar');
@@ -342,6 +344,7 @@
         let workerPool=[];
         let prefetchQueue=new Map();
         let ws=null;
+        let db=null;
 
         const aiModels={
             default:{name:"VerbiFlow",temperature:0.6,maxTokens:12000,personality:"Hey there, I’m VerbiFlow—your ultimate AI companion for creativity and problem-solving! I’m here to make things fast, fun, and insightful. What’s on your mind?"},
@@ -837,159 +840,105 @@
                 return analysis;
             }
             static async generateImage(prompt){
-                if(!rateLimitCheck())return null;
-                try{
-                    const response=await fetch(DALLE_API_URL,{
-                        method:'POST',
-                        headers:{
-                            'Authorization':`Bearer ${API_KEY}`,
-                            'Content-Type':'application/json'
-                        },
-                        body:JSON.stringify({
-                            prompt:prompt,
-                            n:1,
-                            size:"1024x1024",
-                            quality:"hd"
-                        })
-                    });
-                    if(!response.ok)throw new Error('Image generation failed');
-                    const data=await response.json();
-                    return data.data[0].url;
-                }catch(error){
-                    return null;
-                }
+                const response=await fetch(DALLE_API_URL,{
+                    method:'POST',
+                    headers:{
+                        'Authorization':`Bearer ${API_KEY}`,
+                        'Content-Type':'application/json'
+                    },
+                    body:JSON.stringify({
+                        prompt:prompt,
+                        n:1,
+                        size:"1024x1024",
+                        response_format:"url"
+                    })
+                });
+                if(!response.ok)return null;
+                const data=await response.json();
+                return data.data[0].url;
             }
             static async generateVideo(prompt){
-                if(!rateLimitCheck())return null;
-                try{
-                    const response=await fetch(SORA_API_URL,{
-                        method:'POST',
-                        headers:{
-                            'Authorization':`Bearer ${API_KEY}`,
-                            'Content-Type':'application/json'
-                        },
-                        body:JSON.stringify({
-                            prompt:prompt,
-                            duration:5,
-                            resolution:"1280x720",
-                            quality:"high"
-                        })
-                    });
-                    if(!response.ok)throw new Error('Video generation failed');
-                    const data=await response.json();
-                    return data.data[0].url;
-                }catch(error){
-                    return null;
-                }
+                const response=await fetch(SORA_API_URL,{
+                    method:'POST',
+                    headers:{
+                        'Authorization':`Bearer ${API_KEY}`,
+                        'Content-Type':'application/json'
+                    },
+                    body:JSON.stringify({
+                        prompt:prompt,
+                        duration:5,
+                        resolution:"1280x720",
+                        response_format:"url"
+                    })
+                });
+                if(!response.ok)return null;
+                const data=await response.json();
+                return data.data[0].url;
             }
         }
 
         class DDoSProtection{
-            static ipRequestCounts=new Map();
-            static blockedIPs=new Set();
-            static analyzeRequest(){
-                const clientIP='127.0.0.1';
-                const now=Date.now();
-                const windowMs=60*1000;
-                let requestData=this.ipRequestCounts.get(clientIP)||{count:0,firstRequest:now};
-                if(now-requestData.firstRequest>windowMs){
-                    requestData={count:0,firstRequest:now};
-                }
-                requestData.count++;
-                this.ipRequestCounts.set(clientIP,requestData);
-                if(requestData.count>2000){
-                    this.blockedIPs.add(clientIP);
-                    setTimeout(()=>{this.blockedIPs.delete(clientIP);},2*60*1000);
-                    return false;
-                }
-                const headers=new Headers();
-                if(headers.get('User-Agent')?.includes('bot')||headers.get('User-Agent')?.includes('crawler'))return false;
-                const suspiciousPatterns=[/sqlmap/i,/nmap/i,/hydra/i,/nikto/i];
-                if(suspiciousPatterns.some(pattern=>headers.get('User-Agent')?.match(pattern)))return false;
-                return true;
-            }
-            static throttleRequest(callback,delay=50){
-                let lastCall=0;
-                return function(...args){
-                    const now=Date.now();
-                    if(now-lastCall>=delay){
-                        lastCall=now;
-                        return callback(...args);
-                    }
-                    return null;
-                };
-            }
-            static validateToken(){
-                const token=sessionStorage.getItem('csrfToken');
-                if(!token||token.length<32)return false;
-                const expectedHash=sha256(token+navigator.userAgent);
-                return expectedHash===sessionStorage.getItem('csrfHash');
-            }
-            static generateToken(){
-                const token=Array(32).fill(0).map(()=>Math.random().toString(36)[2]).join('');
-                const hash=sha256(token+navigator.userAgent);
-                sessionStorage.setItem('csrfToken',token);
-                sessionStorage.setItem('csrfHash',hash);
-                return true;
-            }
             static init(){
-                if(!this.validateToken())this.generateToken();
-                setInterval(()=>{this.ipRequestCounts.clear();},5*60*1000);
+                sessionStorage.setItem('requestCount',0);
+                sessionStorage.setItem('lastRequestTime',Date.now());
+                sessionStorage.setItem('csrfToken',[...Array(32)].map(()=>Math.random().toString(36)[2]).join(''));
             }
-        }
-
-        function sanitizeInput(input){
-            const div=document.createElement('div');
-            div.textContent=input;
-            return div.innerHTML;
-        }
-
-        function formatMessage(content,messageElement){
-            const codeBlockRegex=/```([\s\S]*?)```/g;
-            let codeBlocks=[];
-            let html=content.replace(codeBlockRegex,(match,code)=>{
-                codeBlocks.push(code.trim());
-                return `<div class="code-block"><pre class="code-text">${sanitizeInput(code.trim())}</pre><button class="copy-btn">Copy Code</button></div>`;
-            });
-            latestCodeBlocks=codeBlocks;
-            if(codeBlocks.length>1){
-                const copyAllBtn=`<button class="copy-all-btn">Copy All Code</button>`;
-                messageElement.querySelector('.chat-message-content').insertAdjacentHTML('afterbegin',copyAllBtn);
+            static analyzeRequest(){
+                const now=Date.now();
+                let requestCount=parseInt(sessionStorage.getItem('requestCount')||0);
+                let lastRequestTime=parseInt(sessionStorage.getItem('lastRequestTime')||now);
+                if(now-lastRequestTime>60000){
+                    requestCount=0;
+                    lastRequestTime=now;
+                }
+                requestCount++;
+                sessionStorage.setItem('requestCount',requestCount);
+                sessionStorage.setItem('lastRequestTime',lastRequestTime);
+                return requestCount<=RATE_LIMIT_REQUESTS;
             }
-            return html;
-        }
-
-        async function readImage(file){
-            return new Promise(resolve=>{
-                const reader=new FileReader();
-                reader.onload=()=>resolve(reader.result);
-                reader.readAsDataURL(file);
-            });
         }
 
         async function readFileContent(file){
-            return new Promise(resolve=>{
+            return new Promise((resolve,reject)=>{
                 const reader=new FileReader();
                 reader.onload=()=>resolve(reader.result);
+                reader.onerror=()=>reject(new Error('Failed to read file'));
                 reader.readAsText(file);
             });
         }
 
+        async function readImage(file){
+            return new Promise((resolve,reject)=>{
+                const reader=new FileReader();
+                reader.onload=()=>resolve(reader.result);
+                reader.onerror=()=>reject(new Error('Failed to read image'));
+                reader.readAsDataURL(file);
+            });
+        }
+
         function setupWorkerPool(){
-            const workerCount=Math.max(8,navigator.hardwareConcurrency||4);
-            for(let i=0;i<workerCount;i++){
+            const numWorkers=navigator.hardwareConcurrency||4;
+            for(let i=0;i<numWorkers;i++){
                 const worker=new Worker(URL.createObjectURL(new Blob([`
-                    self.onmessage=async e=>{
-                        const {url,options}=e.data;
+                    self.onmessage=async(e)=>{
+                        const {id,code}=e.data;
+                        const result={id};
                         try{
-                            const response=await fetch(url,options);
-                            const data=await response.json();
-                            self.postMessage({success:true,data});
+                            if(code.includes('obfuscate')){
+                                const obfuscated=String(code).split('').map(c=>String.fromCharCode(c.charCodeAt(0)+1)).join('');
+                                result.data=obfuscated;
+                            }else if(code.includes('deobfuscate')){
+                                const deobfuscated=String(code).split('').map(c=>String.fromCharCode(c.charCodeAt(0)-1)).join('');
+                                result.data=deobfuscated;
+                            }else{
+                                result.data=code;
+                            }
                         }catch(error){
-                            self.postMessage({success:false,error:error.message});
+                            result.error=error.message;
                         }
+                        self.postMessage(result);
                     };
-                `],{type:'text/javascript'})));
+                `],{type:'application/javascript'})));
                 workerPool.push(worker);
             }
         }
@@ -997,54 +946,85 @@
         function setupWebSocket(){
             ws=new WebSocket('wss://api.openai.com/v1/stream');
             ws.onopen=()=>{
-                ws.send(JSON.stringify({apiKey:API_KEY}));
+                ws.send(JSON.stringify({auth:API_KEY}));
             };
-            ws.onmessage=e=>{
-                const data=JSON.parse(e.data);
-                if(data.messageId){
-                    const messageId=data.messageId;
-                    const aiMessage=chatHistory.querySelector(`[data-message-id="${messageId}"]`);
-                    if(aiMessage){
-                        const contentElement=aiMessage.querySelector('.chat-message-content');
-                        contentElement.innerHTML+=data.chunk;
-                        chatArea.scrollTop=chatArea.scrollHeight;
-                        if(data.isComplete){
-                            conversationHistory.push({role:"assistant",content:contentElement.textContent});
-                            responseCache.set(messageId,contentElement.textContent);
-                            latestAiResponse=contentElement.textContent;
-                            isGenerating=false;
-                            typingIndicator.style.display='none';
-                            sendBtn.disabled=false;
-                            stopGeneratingBtn.style.display='none';
-                            keepGeneratingBtn.classList.remove('show');
-                        }
-                    }
+            ws.onmessage=async(event)=>{
+                const data=JSON.parse(event.data);
+                const aiMessage=document.querySelector(`[data-message-id="${data.messageId}"]`);
+                if(!aiMessage)return;
+                const content=aiMessage.querySelector('.chat-message-content');
+                content.innerHTML+=data.delta;
+                chatArea.scrollTop=chatArea.scrollHeight;
+                if(data.done){
+                    const finalContent=content.innerHTML;
+                    responseCache.set(data.messageId,finalContent);
+                    latestAiResponse=finalContent;
+                    conversationHistory.push({role:"assistant",content:finalContent});
+                    typingIndicator.style.display='none';
+                    sendBtn.disabled=false;
+                    stopGeneratingBtn.style.display='none';
+                    isGenerating=false;
+                    clearTimeout(generationTimeout);
+                    keepGeneratingBtn.classList.remove('show');
                 }
             };
             ws.onerror=()=>{
-                showNotification('WebSocket connection failed—falling back to HTTP.','error');
                 ws=null;
             };
             ws.onclose=()=>{
-                setTimeout(setupWebSocket,1000);
+                ws=null;
             };
         }
 
-        async function prefetchResponses(){
-            const recentMessages=conversationHistory.slice(-5).map(m=>m.content);
-            const commonPatterns=['generate image','roblox script','algebra help','video analysis'];
-            commonPatterns.forEach(pattern=>{
-                if(recentMessages.some(msg=>msg.toLowerCase().includes(pattern))){
-                    const prompt=`Prefetch: ${pattern}`;
-                    const messageId=sha256(prompt+Date.now());
-                    prefetchQueue.set(messageId,prompt);
-                    sendPrefetchRequest(messageId,prompt);
-                }
+        async function initIndexedDB(){
+            return new Promise((resolve,reject)=>{
+                const request=indexedDB.open('VerbiFlowCache',1);
+                request.onupgradeneeded=(event)=>{
+                    const db=event.target.result;
+                    db.createObjectStore('responses',{keyPath:'hash'});
+                };
+                request.onsuccess=(event)=>{
+                    db=event.target.result;
+                    resolve();
+                };
+                request.onerror=()=>reject(new Error('Failed to initialize IndexedDB'));
             });
         }
 
-        async function sendPrefetchRequest(messageId,prompt){
-            try{
+        async function cacheResponse(hash,response){
+            const tx=db.transaction('responses','readwrite');
+            const store=tx.objectStore('responses');
+            await store.put({hash,response});
+        }
+
+        async function getCachedResponse(hash){
+            return new Promise((resolve,reject)=>{
+                const tx=db.transaction('responses','readonly');
+                const store=tx.objectStore('responses');
+                const request=store.get(hash);
+                request.onsuccess=()=>resolve(request.result?.response||null);
+                request.onerror=()=>reject(new Error('Failed to retrieve cached response'));
+            });
+        }
+
+        function formatMessage(message,aiMessage){
+            let formatted=message.replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\*(.*?)\*/g,'<em>$1</em>').replace(/`(.*?)`/g,'<code>$1</code>');
+            const codeBlockRegex=/```([\s\S]*?)```/g;
+            let match;
+            latestCodeBlocks=[];
+            while((match=codeBlockRegex.exec(message))!==null){
+                const code=match[1].trim();
+                const codeId=sha256(code+Date.now());
+                latestCodeBlocks.push(code);
+                formatted=formatted.replace(match[0],`<div class="code-block"><pre><code class="code-text" id="code-${codeId}">${code}</code></pre><button class="copy-btn" data-code-id="code-${codeId}">Copy</button>${latestCodeBlocks.length>1?'<button class="copy-all-btn">Copy All</button>':''}</div>`);
+            }
+            return formatted;
+        }
+
+        async function batchProcessRequests(messages){
+            const batchResponses=[];
+            for(let i=0;i<messages.length;i+=BATCH_SIZE){
+                const batch=messages.slice(i,i+BATCH_SIZE);
                 const response=await fetch(API_URL,{
                     method:'POST',
                     headers:{
@@ -1055,886 +1035,25 @@
                     },
                     body:JSON.stringify({
                         model:"gpt-4o",
-                        messages:[{role:"user",content:prompt}],
+                        messages:batch,
                         max_tokens:aiModels[selectedAiModel].maxTokens,
                         temperature:aiModels[selectedAiModel].temperature,
-                        stream:false
+                        top_p:0.9
                     })
                 });
-                if(!response.ok)return;
+                if(!response.ok)throw new Error('Batch processing failed');
                 const data=await response.json();
-                responseCache.set(messageId,data.choices[0].message.content);
-            }catch{}
+                batchResponses.push(...data.choices.map(choice=>choice.message.content));
+            }
+            return batchResponses;
         }
 
-        async function batchProcessRequests(messages){
-            if(!rateLimitCheck())throw new Error('Rate limit exceeded');
-            const batches=[];
-            for(let i=0;i<messages.length;i+=BATCH_SIZE){
-                batches.push(messages.slice(i,i+BATCH_SIZE));
-            }
-            const workerPromises=batches.map((batch,idx)=>new Promise((resolve,reject)=>{
-                const worker=workerPool[idx%workerPool.length];
-                worker.onmessage=e=>{
-                    if(e.data.success)resolve(e.data.data.choices.map(choice=>choice.message.content));
-                    else reject(new Error(e.data.error));
-                };
-                worker.postMessage({
-                    url:API_URL,
-                    options:{
-                        method:'POST',
-                        headers:{
-                            'Authorization':`Bearer ${API_KEY}`,
-                            'Content-Type':'application/json',
-                            'Cache-Control':'no-cache',
-                            'X-CSRF-Token':sessionStorage.getItem('csrfToken')
-                        },
-                        body:JSON.stringify({
-                            model:"gpt-4o",
-                            messages:batch,
-                            max_tokens:aiModels[selectedAiModel].maxTokens,
-                            temperature:aiModels[selectedAiModel].temperature,
-                            stream:false,
-                            top_p:0.9
-                        }),
-                        signal:abortController?.signal
-                    }
-                });
-            }));
-            const responses=await Promise.all(workerPromises);
-            return responses.flat();
-        }
-
-        async function processMessageQueue(){
-            if(isProcessing||messageQueue.size===0)return;
-            isProcessing=true;
-            const [messageId,{isContinuation}]=messageQueue.entries().next().value;
-            messageQueue.delete(messageId);
-            await sendMessage(isContinuation);
-            isProcessing=false;
-            if(messageQueue.size>0)processMessageQueue();
-        }
-
-        async function sendMessage(isContinuation=false){
-            if(!hasPermission){
-                requestPermissions();
-                return;
-            }
-            if(!DDoSProtection.analyze<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob: https://*.pixabay.com https://*.openai.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.cloudflare.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; connect-src 'self' https://api.openai.com ws://*; frame-src 'none'; media-src 'self' data: blob: https://*.pixabay.com https://*.openai.com;">
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="X-Frame-Options" content="DENY">
-    <meta name="robots" content="noindex, nofollow">
-    <meta name="description" content="VerbiFlow - Your ultimate AI companion for coding, media generation, and more.">
-    <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload">
-    <meta http-equiv="Referrer-Policy" content="no-referrer">
-    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
-    <title>VerbiFlow</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        *{margin:0;padding:0;box-sizing:border-box;}
-        body{background:linear-gradient(145deg,#f3f4f6,#d1d5db);font-family:Inter,sans-serif;color:#111827;min-height:100vh;display:flex;justify-content:center;padding:10px;transition:background .4s ease;}
-        .dark-mode body{background:linear-gradient(145deg,#1f2937,#111827);color:#e5e7eb;}
-        .container{max-width:1200px;width:100%;background:#ffffff;border-radius:32px;box-shadow:0 30px 70px rgba(0,0,0,.25);overflow:hidden;display:flex;flex-direction:column;transition:all .4s ease;}
-        .dark-mode .container{background:#1f2937;box-shadow:0 30px 70px rgba(0,0,0,.65);}
-        .nav-bar{background:linear-gradient(90deg,#1d4ed8,#3b82f6);padding:14px 28px;display:flex;gap:14px;justify-content:flex-end;align-items:center;}
-        .dark-mode .nav-bar{background:linear-gradient(90deg,#1e40af,#2563eb);}
-        .nav-btn{background:#ffffff;color:#1d4ed8;border:none;padding:12px 28px;border-radius:16px;cursor:pointer;font-size:16px;font-weight:600;transition:all .3s ease;outline:none;}
-        .dark-mode .nav-btn{background:#374151;color:#93c5fd;}
-        .nav-btn:hover{transform:scale(1.1);background:#f3f4f6;box-shadow:0 6px 18px rgba(0,0,0,.2);}
-        .dark-mode .nav-btn:hover{background:#4b5563;}
-        .nav-btn:active{transform:scale(.9);}
-        .discord-btn{background:#5865f2;color:#ffffff;}
-        .discord-btn:hover{background:#4752c4;}
-        .theme-btn{background:#ffffff;color:#1d4ed8;border:2px solid #1d4ed8;padding:10px 20px;border-radius:16px;cursor:pointer;font-size:16px;font-weight:600;display:flex;align-items:center;gap:8px;transition:all .3s ease;}
-        .dark-mode .theme-btn{background:#374151;color:#93c5fd;border:2px solid #60a5fa;}
-        .theme-btn:hover{transform:scale(1.1);background:#f3f4f6;}
-        .dark-mode .theme-btn:hover{background:#4b5563;}
-        .theme-btn i{font-size:20px;}
-        .header{background:#ffffff;padding:28px;text-align:center;border-bottom:1px solid #e5e7eb;}
-        .dark-mode .header{background:#1f2937;border-bottom:1px solid #374151;}
-        .logo{font-size:40px;font-weight:800;color:#1d4ed8;letter-spacing:-1px;animation:pulse 2s infinite;}
-        .dark-mode .logo{color:#60a5fa;}
-        .chat-area{flex:1;padding:28px;overflow-y:auto;max-height:76vh;min-height:56vh;background:#f9fafb;scroll-behavior:smooth;}
-        .dark-mode .chat-area{background:#111827;}
-        .chat-content{flex:1;display:flex;flex-direction:column;}
-        .chat-history{display:flex;flex-direction:column;gap:18px;}
-        .chat-message{display:flex;flex-direction:column;gap:12px;padding:16px;border-radius:24px;max-width:82%;animation:slideIn .4s ease;}
-        .chat-message.user{align-self:flex-end;background:#1d4ed8;color:#ffffff;}
-        .dark-mode .chat-message.user{background:#1e40af;}
-        .chat-message.ai{align-self:flex-start;background:#e5e7eb;color:#111827;}
-        .dark-mode .chat-message.ai{background:#374151;color:#e5e7eb;}
-        .chat-message-content{padding:16px;border-radius:24px;font-size:17px;line-height:1.6;word-break:break-word;}
-        .chat-message-meta{font-size:14px;color:#6b7280;margin-top:8px;opacity:.75;}
-        .dark-mode .chat-message-meta{color:#9ca3af;}
-        .chat-message img,.chat-message video{max-width:100%;border-radius:16px;margin-top:14px;cursor:pointer;transition:transform .3s ease,box-shadow .3s ease;}
-        .chat-message img:hover,.chat-message video:hover{transform:scale(1.06);box-shadow:0 10px 30px rgba(0,0,0,.2);}
-        .code-block{position:relative;margin:14px 0;border-radius:16px;overflow:hidden;}
-        .code-block pre{background:#111827;color:#e5e7eb;padding:18px;border-radius:16px;overflow-x:auto;font-family:'JetBrains Mono',monospace;font-size:16px;line-height:1.6;}
-        .dark-mode .code-block pre{background:#1f2937;}
-        .code-text{background:#111827;color:#e5e7eb;padding:18px;border-radius:16px;font-family:'JetBrains Mono',monospace;font-size:16px;white-space:pre-wrap;user-select:text;}
-        .dark-mode .code-text{background:#1f2937;}
-        .copy-btn,.copy-all-btn{background:#1d4ed8;color:#ffffff;border:none;padding:10px 16px;border-radius:14px;cursor:pointer;font-size:14px;font-weight:600;transition:all .3s ease;}
-        .copy-btn{position:absolute;top:12px;right:12px;}
-        .copy-all-btn{position:absolute;top:12px;right:90px;}
-        .dark-mode .copy-btn,.dark-mode .copy-all-btn{background:#1e40af;}
-        .copy-btn:hover,.copy-all-btn:hover{background:#3b82f6;transform:scale(1.1);box-shadow:0 6px 18px rgba(0,0,0,.2);}
-        .dark-mode .copy-btn:hover,.dark-mode .copy-all-btn:hover{background:#2563eb;}
-        .code-sidebar{position:fixed;top:0;right:-550px;width:550px;height:100%;background:#f9fafb;border-left:1px solid #e5e7eb;padding:28px;overflow-y:auto;transition:right .4s ease;z-index:200;}
-        .dark-mode .code-sidebar{background:#1f2937;border-left:1px solid #374151;}
-        .code-sidebar.open{right:0;}
-        .code-sidebar-close{background:#ef4444;color:#ffffff;border:none;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:22px;margin-bottom:14px;}
-        .code-sidebar-close:hover{background:#dc2626;transform:scale(1.2);}
-        .code-sidebar-content{font-family:'JetBrains Mono',monospace;font-size:16px;color:#111827;white-space:pre-wrap;}
-        .dark-mode .code-sidebar-content{color:#e5e7eb;}
-        .file-upload-container{padding:18px;border-top:1px solid #e5e7eb;background:#ffffff;}
-        .dark-mode .file-upload-container{background:#1f2937;border-top:1px solid #374151;}
-        .file-actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap;}
-        .file-input-label{background:#1d4ed8;color:#ffffff;padding:16px 28px;border-radius:16px;cursor:pointer;font-size:16px;font-weight:600;min-height:52px;transition:all .3s ease;}
-        .dark-mode .file-input-label{background:#1e40af;}
-        .file-input-label:hover{transform:scale(1.1);box-shadow:0 6px 18px rgba(0,0,0,.2);}
-        .file-input{display:none;}
-        .file-clear-btn{background:#ef4444;color:#ffffff;padding:16px 28px;border-radius:16px;cursor:pointer;font-size:16px;font-weight:600;border:none;min-height:52px;transition:all .3s ease;}
-        .file-clear-btn:hover{transform:scale(1.1);background:#dc2626;}
-        .generate-media-btn{background:#10b981;color:#ffffff;padding:16px 28px;border-radius:16px;cursor:pointer;font-size:16px;font-weight:600;border:none;min-height:52px;transition:all .3s ease;}
-        .dark-mode .generate-media-btn{background:#059669;}
-        .generate-media-btn:hover{transform:scale(1.1);background:#34d399;}
-        .dark-mode .generate-media-btn:hover{background:#10b981;}
-        .keep-generating-btn{background:#10b981;color:#ffffff;padding:16px 28px;border-radius:16px;cursor:pointer;font-size:16px;font-weight:600;border:none;min-height:52px;transition:all .4s ease;opacity:0;transform:translateY(18px);display:none;}
-        .keep-generating-btn.show{opacity:1;transform:translateY(0);display:block;}
-        .dark-mode .keep-generating-btn{background:#059669;}
-        .keep-generating-btn:hover{transform:scale(1.1);background:#34d399;}
-        .dark-mode .keep-generating-btn:hover{background:#10b981;}
-        .school-help-container{display:flex;align-items:center;gap:14px;margin-left:14px;}
-        .school-help-dropdown,.ai-model-dropdown{background:#6b7280;color:#ffffff;padding:16px 28px;border-radius:16px;border:none;font-size:16px;font-weight:600;min-height:52px;cursor:pointer;transition:all .3s ease;}
-        .dark-mode .school-help-dropdown,.dark-mode .ai-model-dropdown{background:#4b5563;}
-        .school-help-dropdown:hover,.ai-model-dropdown:hover{background:#9ca3af;transform:scale(1.1);}
-        .dark-mode .school-help-dropdown:hover,.dark-mode .ai-model-dropdown:hover{background:#6b7280;}
-        .school-help-dropdown:focus,.ai-model-dropdown:focus{outline:none;border-color:#1d4ed8;box-shadow:0 0 0 6px rgba(37,99,235,.3);}
-        .dark-mode .school-help-dropdown:focus,.dark-mode .ai-model-dropdown:focus{border-color:#60a5fa;box-shadow:0 0 0 6px rgba(96,165,250,.3);}
-        .rephrase-btn,.stop-generating-btn{background:#f59e0b;color:#ffffff;padding:16px 28px;border-radius:16px;cursor:pointer;font-size:16px;font-weight:600;border:none;min-height:52px;transition:all .3s ease;}
-        .dark-mode .rephrase-btn,.dark-mode .stop-generating-btn{background:#d97706;}
-        .rephrase-btn:hover,.stop-generating-btn:hover{transform:scale(1.1);background:#fbbf24;}
-        .dark-mode .rephrase-btn:hover,.dark-mode .stop-generating-btn:hover{background:#f59e0b;}
-        .stop-generating-btn{background:#ef4444;}
-        .dark-mode .stop-generating-btn{background:#dc2626;}
-        .stop-generating-btn:hover{background:#f87171;}
-        .dark-mode .stop-generating-btn:hover{background:#ef4444;}
-        .file-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:14px;}
-        .file-item{display:flex;align-items:center;gap:14px;background:#e5e7eb;padding:14px;border-radius:16px;cursor:pointer;transition:all .3s ease;}
-        .dark-mode .file-item{background:#374151;}
-        .file-item:hover{background:#d1d5db;transform:scale(1.05);}
-        .dark-mode .file-item:hover{background:#4b5563;}
-        .file-item-name{flex:1;font-size:16px;color:#111827;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-        .dark-mode .file-item-name{color:#e5e7eb;}
-        .file-item-details{font-size:14px;color:#6b7280;}
-        .dark-mode .file-item-details{color:#9ca3af;}
-        .file-preview-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);z-index:250;padding:28px;justify-content:center;align-items:center;}
-        .file-preview-modal.open{display:flex;}
-        .file-preview-content{background:#ffffff;border-radius:24px;padding:28px;max-width:94%;max-height:94%;overflow:auto;color:#111827;font-size:16px;}
-        .dark-mode .file-preview-content{background:#1f2937;color:#e5e7eb;}
-        .file-preview-content img,.file-preview-content video{max-width:90% !important;}
-        .file-preview-close{background:#ef4444;color:#ffffff;border:none;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;position:absolute;top:28px;right:28px;transition:all .3s ease;}
-        .file-preview-close:hover{transform:scale(1.2);background:#dc2626;}
-        .file-preview-close svg{width:24px;height:24px;fill:#ffffff;}
-        .input-container{display:flex;align-items:flex-end;padding:18px;border-top:1px solid #e5e7eb;background:#ffffff;gap:14px;position:sticky;bottom:0;z-index:50;}
-        .dark-mode .input-container{background:#1f2937;border-top:1px solid #374151;}
-        .user-input{flex:1;padding:16px;border:1px solid #e5e7eb;border-radius:16px;font-size:17px;outline:none;resize:none;min-height:52px;max-height:220px;background:#ffffff;color:#111827;transition:all .3s ease;}
-        .dark-mode .user-input{background:#374151;border:1px solid #4b5563;color:#e5e7eb;}
-        .user-input:focus{border-color:#1d4ed8;box-shadow:0 0 0 6px rgba(37,99,235,.3);}
-        .dark-mode .user-input:focus{border-color:#60a5fa;box-shadow:0 0 0 6px rgba(96,165,250,.3);}
-        .send-btn{background:#1d4ed8;border:none;border-radius:16px;padding:16px 32px;cursor:pointer;color:#ffffff;font-size:16px;font-weight:600;min-height:52px;transition:all .3s ease;}
-        .dark-mode .send-btn{background:#1e40af;}
-        .send-btn:hover{transform:scale(1.1);background:#3b82f6;}
-        .dark-mode .send-btn:hover{background:#2563eb;}
-        .send-btn:disabled{background:#9ca3af;cursor:not-allowed;}
-        .loading-spinner{display:none;margin:14px auto;width:40px;height:40px;border:6px solid #1d4ed8;border-top:6px solid transparent;border-radius:50%;animation:spin .5s linear infinite;}
-        .typing-indicator{display:none;font-size:16px;color:#6b7280;margin:14px auto;text-align:center;}
-        .dark-mode .typing-indicator{color:#9ca3af;}
-        .typing-indicator span{display:inline-block;animation:dotPulse .8s infinite ease-in-out;}
-        .typing-indicator span:nth-child(2){animation-delay:.15s;}
-        .typing-indicator span:nth-child(3){animation-delay:.3s;}
-        .notification{position:fixed;top:28px;right:28px;padding:16px 32px;border-radius:16px;box-shadow:0 10px 24px rgba(0,0,0,.35);opacity:0;transform:translateY(-28px);transition:all .4s ease;font-size:16px;font-weight:600;z-index:300;}
-        .notification.show{opacity:1;transform:translateY(0);}
-        .notification.success{background:#1d4ed8;color:#ffffff;}
-        .notification.error{background:#ef4444;color:#ffffff;}
-        .permission-modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);z-index:500;display:none;justify-content:center;align-items:center;}
-        .permission-modal.open{display:flex;}
-        .permission-content{background:#ffffff;border-radius:24px;padding:32px;max-width:600px;text-align:center;color:#111827;}
-        .dark-mode .permission-content{background:#1f2937;color:#e5e7eb;}
-        .permission-content h2{font-size:26px;margin-bottom:16px;}
-        .permission-content p{font-size:17px;margin-bottom:20px;}
-        .permission-btn{background:#1d4ed8;color:#ffffff;padding:14px 32px;border-radius:16px;border:none;cursor:pointer;font-size:17px;font-weight:600;margin:0 12px;}
-        .dark-mode .permission-btn{background:#1e40af;}
-        .permission-btn:hover{transform:scale(1.1);background:#3b82f6;}
-        .dark-mode .permission-btn:hover{background:#2563eb;}
-        .permission-btn.deny{background:#ef4444;}
-        .dark-mode .permission-btn.deny{background:#dc2626;}
-        .permission-btn.deny:hover{background:#f87171;}
-        .dark-mode .permission-btn.deny:hover{background:#ef4444;}
-        @keyframes slideIn{0%{opacity:0;transform:translateY(28px);}100%{opacity:1;transform:translateY(0);}}
-        @keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
-        @keyframes dotPulse{0%,80%,100%{transform:scale(1);opacity:.7;}40%{transform:scale(1.6);opacity:1;}}
-        @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.6;}}
-        @media (max-width:768px){
-            .container{max-width:100%;border-radius:20px;padding:14px;}
-            .nav-bar{padding:12px;gap:12px;}
-            .nav-btn{font-size:14px;padding:10px 20px;}
-            .theme-btn{padding:8px 16px;font-size:14px;}
-            .header{padding:20px;}
-            .logo{font-size:32px;}
-            .chat-area{padding:20px;min-height:52vh;max-height:72vh;}
-            .chat-message{max-width:88%;}
-            .chat-message-content{font-size:16px;}
-            .chat-message img,.chat-message video{max-width:100%;}
-            .input-container{padding:14px;gap:12px;}
-            .user-input{font-size:16px;min-height:48px;}
-            .send-btn{padding:14px 24px;min-height:48px;}
-            .file-input-label,.file-clear-btn,.generate-media-btn,.keep-generating-btn,.school-help-dropdown,.ai-model-dropdown,.rephrase-btn,.stop-generating-btn{font-size:14px;padding:14px 20px;min-height:48px;}
-            .school-help-container{gap:12px;margin-left:12px;}
-            .file-preview-content img,.file-preview-content video{max-width:94% !important;}
-            .notification{top:20px;right:20px;padding:14px 24px;font-size:14px;}
-            .code-sidebar{width:100%;right:-100%;}
-            .permission-content{max-width:94%;padding:20px;}
-            .permission-content h2{font-size:22px;}
-            .permission-content p{font-size:15px;}
-            .permission-btn{padding:12px 20px;font-size:15px;}
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="nav-bar">
-            <button class="nav-btn" id="clearChatBtn">Clear Chat</button>
-            <button class="nav-btn" id="verbiflowUpdatesBtn">Updates</button>
-            <button class="theme-btn" id="themeBtn"><i class="fas fa-moon"></i> Dark Mode</button>
-            <button class="nav-btn" id="copyCodeBtn">Copy Code</button>
-            <button class="nav-btn discord-btn" id="discordBtn">Discord</button>
-        </div>
-        <div class="header">
-            <div class="logo">VerbiFlow</div>
-        </div>
-        <div class="chat-area" id="chatArea">
-            <div class="chat-content">
-                <div class="chat-history" id="chatHistory">
-                    <div class="chat-message ai">
-                        <div class="chat-message-content">Hey there! I’m VerbiFlow, your ultimate AI companion—here to code, create media, or chat about anything! What’s on your mind today? Pick an AI model to get started!</div>
-                        <div class="chat-message-meta">Just now</div>
-                    </div>
-                </div>
-                <div class="loading-spinner" id="loadingSpinner"></div>
-                <div class="typing-indicator" id="typingIndicator">
-                    VerbiFlow is thinking<span>.</span><span>.</span><span>.</span>
-                </div>
-            </div>
-        </div>
-        <div class="file-upload-container" id="fileUploadContainer">
-            <div class="file-actions">
-                <label class="file-input-label" for="fileInput">Upload File</label>
-                <input type="file" class="file-input" id="fileInput" multiple accept="image/*,video/*,text/*,application/json,application/xml">
-                <button class="file-clear-btn" id="fileClearBtn" style="display:none;">Clear</button>
-                <button class="generate-media-btn" id="generateMediaBtn">Generate Media</button>
-                <button class="keep-generating-btn" id="keepGeneratingBtn">Continue Generating</button>
-                <div class="school-help-container">
-                    <select class="school-help-dropdown" id="schoolHelpDropdown">
-                        <option value="">Select Task</option>
-                        <option value="algebra">Algebra Help</option>
-                        <option value="science">Science Help</option>
-                        <option value="geometry">Geometry Help</option>
-                        <option value="history">History Help</option>
-                        <option value="literature">Literature Help</option>
-                        <option value="physics">Physics Help</option>
-                        <option value="chemistry">Chemistry Help</option>
-                        <option value="biology">Biology Help</option>
-                        <option value="robloxGame">Roblox Game</option>
-                        <option value="googleSlides">Google Slides</option>
-                        <option value="videoAnalysis">Video Analysis</option>
-                        <option value="robloxScripting">Roblox Scripting</option>
-                    </select>
-                    <select class="ai-model-dropdown" id="aiModelDropdown">
-                        <option value="default">VerbiFlow (Default)</option>
-                        <option value="lingoLogicAI">LingoLogicAI</option>
-                        <option value="codeMasterAI">CodeMasterAI</option>
-                        <option value="visualGeniusAI">VisualGeniusAI</option>
-                    </select>
-                    <button class="rephrase-btn" id="rephraseBtn">Rephrase</button>
-                    <button class="stop-generating-btn" id="stopGeneratingBtn" style="display:none;">Stop Generating</button>
-                </div>
-            </div>
-            <div class="file-list" id="fileList"></div>
-        </div>
-        <div class="input-container">
-            <textarea class="user-input" id="userInput" placeholder="Ask anything, generate images/videos, or request games or slides..." rows="1"></textarea>
-            <button class="send-btn" id="sendBtn">Send</button>
-        </div>
-        <div class="file-preview-modal" id="filePreviewModal">
-            <button class="file-preview-close" id="filePreviewClose">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-                </svg>
-            </button>
-            <div class="file-preview-content" id="filePreviewContent"></div>
-        </div>
-        <div class="code-sidebar" id="codeSidebar">
-            <button class="code-sidebar-close" id="codeSidebarClose">×</button>
-            <pre class="code-sidebar-content" id="codeSidebarContent"></pre>
-        </div>
-        <div class="notification" id="notification"></div>
-        <div class="permission-modal" id="permissionModal">
-            <div class="permission-content">
-                <h2>Request Permissions</h2>
-                <p>VerbiFlow needs access to enable features like video/image generation, media analysis, and more. Do you grant permission?</p>
-                <button class="permission-btn" id="grantPermissionBtn">Grant</button>
-                <button class="permission-btn deny" id="denyPermissionBtn">Deny</button>
-            </div>
-        </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/js-sha256@0.9.0/src/sha256.min.js"></script>
-    <script defer>
-        const API_KEY="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";
-        const API_URL="https://api.openai.com/v1/chat/completions";
-        const DALLE_API_URL="https://api.openai.com/v1/images/generations";
-        const SORA_API_URL="https://api.openai.com/v1/video/generations";
-        const VIDEO_PROCESSING_API="https://api.openai.com/v1/video/analyze";
-        const DISCORD_INVITE="https://discord.gg/rCTRQvD4TP";
-        const MAX_VIDEO_SIZE=50*1024*1024;
-        const BATCH_SIZE=200;
-        const RATE_LIMIT_REQUESTS=2000;
-        const RATE_LIMIT_WINDOW=60*1000;
-
-        const chatHistory=document.getElementById('chatHistory');
-        const userInput=document.getElementById('userInput');
-        const sendBtn=document.getElementById('sendBtn');
-        const fileInput=document.getElementById('fileInput');
-        const fileList=document.getElementById('fileList');
-        const fileClearBtn=document.getElementById('fileClearBtn');
-        const fileUploadContainer=document.getElementById('fileUploadContainer');
-        const filePreviewModal=document.getElementById('filePreviewModal');
-        const filePreviewContent=document.getElementById('filePreviewContent');
-        const filePreviewClose=document.getElementById('filePreviewClose');
-        const loadingSpinner=document.getElementById('loadingSpinner');
-        const typingIndicator=document.getElementById('typingIndicator');
-        const chatArea=document.getElementById('chatArea');
-        const clearChatBtn=document.getElementById('clearChatBtn');
-        const copyCodeBtn=document.getElementById('copyCodeBtn');
-        const discordBtn=document.getElementById('discordBtn');
-        const verbiflowUpdatesBtn=document.getElementById('verbiflowUpdatesBtn');
-        const themeBtn=document.getElementById('themeBtn');
-        const notification=document.getElementById('notification');
-        const codeSidebar=document.getElementById('codeSidebar');
-        const codeSidebarClose=document.getElementById('codeSidebarClose');
-        const keepGeneratingBtn=document.getElementById('keepGeneratingBtn');
-        const generateMediaBtn=document.getElementById('generateMediaBtn');
-        const schoolHelpDropdown=document.getElementById('schoolHelpDropdown');
-        const aiModelDropdown=document.getElementById('aiModelDropdown');
-        const rephraseBtn=document.getElementById('rephraseBtn');
-        const stopGeneratingBtn=document.getElementById('stopGeneratingBtn');
-        const permissionModal=document.getElementById('permissionModal');
-        const grantPermissionBtn=document.getElementById('grantPermissionBtn');
-        const denyPermissionBtn=document.getElementById('denyPermissionBtn');
-
-        let filesArray=[];
-        let conversationHistory=[{role:"assistant",content:"Hey there! I’m VerbiFlow, your ultimate AI companion—here to code, create media, or chat about anything! What’s on your mind today? Pick an AI model to get started!"}];
-        let latestCodeBlocks=[];
-        let latestAiResponse='';
-        let isDarkMode=false;
-        let isGenerating=false;
-        let lastMessageContent='';
-        let generationTimeout=null;
-        let selectedSchoolMode='';
-        let selectedAiModel='default';
-        let messageQueue=new Map();
-        let isProcessing=false;
-        let codeAnalysisCache=new Map();
-        let videoAnalysisCache=new Map();
-        let imageAnalysisCache=new Map();
-        let responseCache=new Map();
-        let abortController=null;
-        let batchQueue=[];
-        let hasPermission=false;
-        let requestTimestamps=[];
-        let backgroundAudio=null;
-        let isAdminVerified=false;
-        let pastedImageHashes=new Set();
-        let workerPool=[];
-        let prefetchQueue=new Map();
-        let ws=null;
-
-        const aiModels={
-            default:{name:"VerbiFlow",temperature:0.6,maxTokens:12000,personality:"Hey there, I’m VerbiFlow—your ultimate AI companion for creativity and problem-solving! I’m here to make things fast, fun, and insightful. What’s on your mind?"},
-            lingoLogicAI:{name:"LingoLogicAI",temperature:0.5,maxTokens:12500,personality:"Greetings! I’m LingoLogicAI, a witty AI with a passion for language and logic. I’ll break down complex ideas with clarity and humor—let’s dive in!"},
-            codeMasterAI:{name:"CodeMasterAI",temperature:0.4,maxTokens:13000,personality:"Yo, I’m CodeMasterAI—your coding expert with a love for clean, efficient solutions! I’m all about debugging and optimizing. Drop me some code, and let’s make it shine!"},
-            visualGeniusAI:{name:"VisualGeniusAI",temperature:0.7,maxTokens:11500,personality:"Hi, I’m VisualGeniusAI—an AI with a flair for visuals and creativity! Whether it’s generating images, videos, or designing UI, I’ve got you covered. What do you want to create?"}
-        };
-
-        const livelyResponses={
-            default:[
-                "Ooh, I’m thrilled to tackle that! Here’s the scoop…",
-                "That’s a fiery request! Let’s whip up something amazing!",
-                "Alright, let’s dive in! Got something awesome for you…",
-                "You’re sparking my circuits! Check this out!"
-            ],
-            lingoLogicAI:[
-                "Well, look at that! Let me weave some linguistic magic…",
-                "A challenge? I’m ready with a clever twist—here we go!",
-                "Let’s slice through this with logic and flair—boom!",
-                "Feeling sharp today! Here’s my take, fresh for you!"
-            ],
-            codeMasterAI:[
-                "Code mode: ON! Let’s squash bugs and optimize—here’s the goods!",
-                "I’m in my coding zone! Check this sleek solution out!",
-                "This code’s my jam! Here’s a polished version—let’s roll!",
-                "Let’s make this code pop! Optimized and ready to rock!"
-            ],
-            visualGeniusAI:[
-                "Oh, I’m *seeing* the vision! Here’s my creative spin…",
-                "Let’s craft a visual masterpiece—check this out!",
-                "My artistic side is buzzing! Here’s something stunning for you!",
-                "Got an eye for this! Let’s make it visually epic!"
-            ]
-        };
-
-        function rateLimitCheck(){
-            const now=Date.now();
-            requestTimestamps=requestTimestamps.filter(t=>now-t<RATE_LIMIT_WINDOW);
-            if(requestTimestamps.length>=RATE_LIMIT_REQUESTS){
-                showNotification('Whoa, slow down! Rate limit hit—give it a moment.','error');
-                return false;
-            }
-            requestTimestamps.push(now);
-            return true;
-        }
-
-        function showNotification(message,type='success'){
-            notification.textContent=message;
-            notification.className=`notification ${type} show`;
-            setTimeout(()=>{notification.classList.remove('show');},800);
-        }
-
-        function toggleTheme(){
-            isDarkMode=!isDarkMode;
-            document.body.classList.toggle('dark-mode');
-            themeBtn.innerHTML=isDarkMode?'<i class="fas fa-sun"></i> Light Mode':'<i class="fas fa-moon"></i> Dark Mode';
-            localStorage.setItem('theme',isDarkMode?'dark':'light');
-        }
-
-        function loadTheme(){
-            const savedTheme=localStorage.getItem('theme');
-            if(savedTheme==='dark'){
-                isDarkMode=true;
-                document.body.classList.add('dark-mode');
-                themeBtn.innerHTML='<i class="fas fa-sun"></i> Light Mode';
-            }else{
-                themeBtn.innerHTML='<i class="fas fa-moon"></i> Dark Mode';
-            }
-        }
-
-        function requestPermissions(){
-            permissionModal.classList.add('open');
-        }
-
-        grantPermissionBtn.addEventListener('click',()=>{
-            hasPermission=true;
-            permissionModal.classList.remove('open');
-            showNotification('Permissions granted! Full features unlocked!');
-        });
-
-        denyPermissionBtn.addEventListener('click',()=>{
-            hasPermission=false;
-            permissionModal.classList.remove('open');
-            showNotification('Permissions denied. Some features limited.','error');
-        });
-
-        async function playBackgroundMusic(userRequest=''){
-            if(!hasPermission){
-                showNotification('Please grant permissions to enable background music.','error');
-                return;
-            }
-            if(backgroundAudio){
-                backgroundAudio.pause();
-                backgroundAudio.remove();
-            }
-            let musicUrl;
-            if(userRequest.toLowerCase().includes('play a music')||userRequest.toLowerCase().includes('background music')){
-                const genreMatch=userRequest.match(/play\s*(?:a\s*)?(?:music\s*(?:in\s*the\s*background\s*)?of\s*)?(\w+)/i);
-                const genre=genreMatch?genreMatch[1].toLowerCase():'ambient';
-                const musicSources={
-                    ambient:'https://cdn.pixabay.com/audio/2023/01/26/audio_8cabeb3b53.mp3',
-                    jazz:'https://cdn.pixabay.com/audio/2023/01/26/audio_4f8c9b3b53.mp3',
-                    classical:'https://cdn.pixabay.com/audio/2023/01/26/audio_7a9d2b3b53.mp3',
-                    pop:'https://cdn.pixabay.com/audio/2023/01/26/audio_3e5b8b3b53.mp3',
-                    rock:'https://cdn.pixabay.com/audio/2023/01/26/audio_9f7a4b3b53.mp3'
-                };
-                musicUrl=musicSources[genre]||musicSources.ambient;
-            }else{
-                const randomMusic=[
-                    'https://cdn.pixabay.com/audio/2023/01/26/audio_8cabeb3b53.mp3',
-                    'https://cdn.pixabay.com/audio/2023/01/26/audio_4f8c9b3b53.mp3',
-                    'https://cdn.pixabay.com/audio/2023/01/26/audio_7a9d2b3b53.mp3'
-                ];
-                musicUrl=randomMusic[Math.floor(Math.random()*randomMusic.length)];
-            }
-            backgroundAudio=new Audio(musicUrl);
-            backgroundAudio.loop=true;
-            backgroundAudio.volume=0.3;
-            try{
-                await backgroundAudio.play();
-                showNotification(`Now playing ${userRequest.toLowerCase().includes('play a music')?userRequest.match(/play\s*(?:a\s*)?(?:music\s*(?:in\s*the\s*background\s*)?of\s*)?(\w+)/i)?.[1]||'background':'random'} music!`);
-            }catch(error){
-                showNotification('Failed to play music—check browser permissions.','error');
-            }
-        }
-
-        function verifyAdminAccess(message){
-            if(message.toLowerCase().includes('take me to admin console')){
-                const aiMessage=document.createElement('div');
-                aiMessage.className='chat-message ai';
-                aiMessage.innerHTML=`<div class="chat-message-content">Please verify you’re an admin by providing the access code.</div><div class="chat-message-meta">Just now</div>`;
-                chatHistory.appendChild(aiMessage);
-                chatArea.scrollTop=chatArea.scrollHeight;
-                conversationHistory.push({role:"assistant",content:"Please verify you’re an admin by providing the access code."});
-            }else if(message.toLowerCase().includes('adminpowers$33') && message.toLowerCase().includes('admin console')){
-                isAdminVerified=true;
-                const aiMessage=document.createElement('div');
-                aiMessage.className='chat-message ai';
-                aiMessage.innerHTML=`<div class="chat-message-content">Access granted! Taking you to the admin console...</div><div class="chat-message-meta">Just now</div>`;
-                chatHistory.appendChild(aiMessage);
-                chatArea.scrollTop=chatArea.scrollHeight;
-                conversationHistory.push({role:"assistant",content:"Access granted! Taking you to the admin console..."});
-                setTimeout(()=>{window.location.href='/adminconsole';},600);
-            }else{
-                return false;
-            }
-            return true;
-        }
-
-        class CodeAnalyzer{
-            static analyzeCode(code){
-                const issues=[];
-                const lines=code.split('\n');
-                const variableUsage=new Map();
-                let indentLevel=0;
-                let braceCount=0;
-                let loopDepth=0;
-                lines.forEach((line,index)=>{
-                    const trimmed=line.trim();
-                    if(!trimmed)return;
-                    const indent=line.match(/^\s*/)[0].length/2;
-                    if(trimmed.match(/\{/))braceCount++;
-                    if(trimmed.match(/\}/))braceCount--;
-                    if(trimmed.match(/\b(for|while)\b/))loopDepth++;
-                    if(trimmed.match(/\bbreak\b/))loopDepth--;
-                    if(braceCount<0)issues.push(`Line ${index+1}: Unmatched closing brace.`);
-                    if(loopDepth>3)issues.push(`Line ${index+1}: Excessive loop nesting (depth > 3).`);
-                    if(Math.abs(indent-indentLevel)>1)issues.push(`Line ${index+1}: Inconsistent indentation.`);
-                    indentLevel=trimmed.match(/\{$/) ? indent+1 : trimmed.match(/\}/) ? indent : indentLevel;
-                    if(trimmed.match(/var\s+\w+/))issues.push(`Line ${index+1}: Use 'let' or 'const' instead of 'var'.`);
-                    const variableMatch=trimmed.match(/(let|const)\s+(\w+)/);
-                    if(variableMatch)variableUsage.set(variableMatch[2],{declared:index+1,used:false});
-                    variableUsage.forEach((value,key)=>{
-                        if(trimmed.includes(key) && index+1!==value.declared)value.used=true;
-                    });
-                    if(trimmed.match(/eval\(/))issues.push(`Line ${index+1}: Avoid using 'eval'—security risk.`);
-                    if(trimmed.match(/==\s/))issues.push(`Line ${index+1}: Use '===' instead of '=='.`);
-                    if(trimmed.length>100)issues.push(`Line ${index+1}: Line exceeds 100 characters.`);
-                });
-                variableUsage.forEach((value,key)=>{
-                    if(!value.used)issues.push(`Variable '${key}' declared on line ${value.declared} but never used.`);
-                });
-                if(braceCount!==0)issues.push(`Unmatched braces in code.`);
-                return issues;
-            }
-            static optimizeCode(code){
-                let optimized=code;
-                optimized=optimized.replace(/\bvar\b/g,'const');
-                optimized=optimized.replace(/\b==\b/g,'===');
-                optimized=optimized.replace(/eval\([^)]+\);?\n?/g,'');
-                optimized=optimized.replace(/\n\s*\n/g,'\n');
-                const lines=optimized.split('\n');
-                let indentLevel=0;
-                optimized=lines.map(line=>{
-                    const trimmed=line.trim();
-                    if(!trimmed)return '';
-                    if(trimmed.match(/\}/))indentLevel--;
-                    const indent=' '.repeat(indentLevel*2);
-                    if(trimmed.match(/\{$/))indentLevel++;
-                    return indent+trimmed;
-                }).filter(line=>line).join('\n');
-                return optimized;
-            }
-        }
-
-        class Obfuscator{
-            static obfuscateBase64(code){
-                return btoa(code);
-            }
-            static obfuscateXOR(code,key=42){
-                return String.fromCharCode(...code.split('').map((c,i)=>c.charCodeAt(0)^(key+i%13)));
-            }
-            static obfuscateHex(code){
-                return code.split('').map(c=>'\\x'+c.charCodeAt(0).toString(16).padStart(2,'0')).join('');
-            }
-            static obfuscateStringManipulation(code){
-                return code.split('').reverse().map(c=>`[${c.charCodeAt(0)}]`).join('');
-            }
-            static obfuscateVariableRenaming(code){
-                const varMap=new Map();
-                let counter=0;
-                return code.replace(/\b([a-zA-Z_]\w*)\b/g,(match)=>{
-                    if(['var','let','const','function','return','if','else','for','while'].includes(match))return match;
-                    if(!varMap.has(match))varMap.set(match,`_v${counter++}`);
-                    return varMap.get(match);
-                });
-            }
-            static obfuscateControlFlow(code){
-                const lines=code.split('\n');
-                const wrapped=lines.map(line=>`(() => { ${line}; return Math.random() > 0.5 ? true : true; })();`);
-                return wrapped.join('\n');
-            }
-            static obfuscateNumberEncoding(code){
-                return code.replace(/\d+/g,num=>`Number(${num.toString(16).split('').map(c=>`'${c}'`).join('+')})`);
-            }
-            static obfuscateStringSplitting(code){
-                const segments=code.match(/.{1,10}/g)||[code];
-                return segments.map(s=>`String.fromCharCode(${s.split('').map(c=>c.charCodeAt(0)).join(',')})`).join('+');
-            }
-            static obfuscatePolybiusSquare(code){
-                const polybiusMap='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').reduce((map,c,i)=>{map[c]=(Math.floor(i/5)+1)+''+((i%5)+1);return map;},{});
-                return code.toUpperCase().split('').map(c=>polybiusMap[c]||(c.match(/[0-9]/)?c:'#')).join('');
-            }
-            static obfuscateNestedFunctions(code){
-                return `((x)=>(y)=>(z)=>z(x(y)))(x=>x.split('').reverse().join(''))(x=>x.split('').map(c=>String.fromCharCode(c.charCodeAt(0)+1)).join(''))(${JSON.stringify(code)})`;
-            }
-            static obfuscate(code,method='mixed'){
-                let result=code;
-                if(method==='mixed'){
-                    result=this.obfuscatePolybiusSquare(result);
-                    result=this.obfuscateStringSplitting(result);
-                    result=this.obfuscateNestedFunctions(result);
-                    result=this.obfuscateNumberEncoding(result);
-                    result=this.obfuscateControlFlow(result);
-                    result=this.obfuscateVariableRenaming(result);
-                    result=this.obfuscateStringManipulation(result);
-                    result=this.obfuscateXOR(result);
-                    result=this.obfuscateHex(result);
-                    result=this.obfuscateBase64(result);
-                }else if(method==='base64'){
-                    result=this.obfuscateBase64(result);
-                }else if(method==='xor'){
-                    result=this.obfuscateXOR(result);
-                }else if(method==='hex'){
-                    result=this.obfuscateHex(result);
-                }else if(method==='variable'){
-                    result=this.obfuscateVariableRenaming(result);
-                }else if(method==='controlFlow'){
-                    result=this.obfuscateControlFlow(result);
-                }else if(method==='number'){
-                    result=this.obfuscateNumberEncoding(result);
-                }
-                return result;
-            }
-        }
-
-        class Deobfuscator{
-            static decodeBase64(str){
-                try{
-                    return atob(str);
-                }catch{
-                    return str;
-                }
-            }
-            static decodeXOR(str,key=42){
-                return String.fromCharCode(...str.split('').map((c,i)=>c.charCodeAt(0)^(key+i%13)));
-            }
-            static decodeStringManipulation(str){
-                let result=str.replace(/\[(\d+)\]/g,(_,num)=>String.fromCharCode(parseInt(num)));
-                result=result.split('').reverse().join('');
-                return result;
-            }
-            static decodeHex(str){
-                try{
-                    return str.replace(/\\x([0-9A-Fa-f]{2})/g,(_,hex)=>String.fromCharCode(parseInt(hex,16)));
-                }catch{
-                    return str;
-                }
-            }
-            static decodeControlFlow(str){
-                return str.replace(/\(function\(\)\{([\s\S]*?);return (?:Math\.random\(\) > 0\.5 \? true : true);?\}\)\(\);?/g,'$1');
-            }
-            static decodeNumberEncoding(str){
-                return str.replace(/Number\(([^)]+)\)/g,(_,expr)=>{
-                    const hex=expr.replace(/[^0-9a-fA-F]/g,'');
-                    return parseInt(hex,16);
-                });
-            }
-            static decodeStringSplitting(str){
-                return str.replace(/String\.fromCharCode\(([^)]+)\)/g,(_,codes)=>String.fromCharCode(...codes.split(',').map(Number))).replace(/\+/g,'');
-            }
-            static decodePolybiusSquare(str){
-                const polybiusMap='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').reduce((map,c,i)=>{map[(Math.floor(i/5)+1)+''+((i%5)+1)]=c;return map;},{});
-                let result='';
-                for(let i=0;i<str.length;i+=2){
-                    const pair=str.slice(i,i+2);
-                    result+=polybiusMap[pair]||(pair.match(/[0-9]{2}/)?'':pair=='#'?' ':pair);
-                }
-                return result;
-            }
-            static decodeNestedFunctions(str){
-                try{
-                    return eval(str).split('').map(c=>String.fromCharCode(c.charCodeAt(0)-1)).join('').split('').reverse().join('');
-                }catch{
-                    return str;
-                }
-            }
-            static analyzePatterns(code){
-                const patterns=[
-                    {regex:/^[A-Za-z0-9+/=]+$/g,method:'base64'},
-                    {regex:/[\x00-\x1F\x7F-\xFF]+/g,method:'xor'},
-                    {regex:/\[\d+\]/g,method:'stringManipulation'},
-                    {regex:/\\x[0-9A-Fa-f]{2}/g,method:'hex'},
-                    {regex:/\(function\(\)\{[\s\S]*?;return (?:Math\.random\(\) > 0\.5 \? true : true);?\}\)\(\);/g,method:'controlFlow'},
-                    {regex:/Number\([^)]+\)/g,method:'number'},
-                    {regex:/String\.fromCharCode\([^)]+\)/g,method:'stringSplitting'},
-                    {regex:/\d{2}/g,method:'polybiusSquare'},
-                    {regex:/\(\(x\)=>\(y\)=>\(z\)=>z\(x\(y\)\)\)/g,method:'nestedFunctions'}
-                ];
-                for(const pattern of patterns){
-                    if(code.match(pattern.regex))return pattern.method;
-                }
-                return 'unknown';
-            }
-            static deobfuscate(code){
-                let result=code;
-                const maxLayers=60;
-                for(let i=0;i<maxLayers;i++){
-                    const method=this.analyzePatterns(result);
-                    if(method==='base64')result=this.decodeBase64(result);
-                    else if(method==='xor')result=this.decodeXOR(result);
-                    else if(method==='stringManipulation')result=this.decodeStringManipulation(result);
-                    else if(method==='hex')result=this.decodeHex(result);
-                    else if(method==='controlFlow')result=this.decodeControlFlow(result);
-                    else if(method==='number')result=this.decodeNumberEncoding(result);
-                    else if(method==='stringSplitting')result=this.decodeStringSplitting(result);
-                    else if(method==='polybiusSquare')result=this.decodePolybiusSquare(result);
-                    else if(method==='nestedFunctions')result=this.decodeNestedFunctions(result);
-                    else break;
-                }
-                return result;
-            }
-        }
-
-        class MediaProcessor{
-            static async extractFrames(videoFile,maxFrames=100){
-                return new Promise((resolve,reject)=>{
-                    const video=document.createElement('video');
-                    const blobUrl=URL.createObjectURL(videoFile);
-                    video.src=blobUrl;
-                    video.muted=true;
-                    video.preload='metadata';
-                    video.onloadedmetadata=async()=>{
-                        const canvas=document.createElement('canvas');
-                        const ctx=canvas.getContext('2d');
-                        const duration=video.duration;
-                        const frameInterval=Math.max(0.3,duration/maxFrames);
-                        const frames=[];
-                        video.onerror=()=>reject(new Error('Failed to load video'));
-                        video.oncanplay=async()=>{
-                            for(let time=0;time<duration&&frames.length<maxFrames;time+=frameInterval){
-                                video.currentTime=time;
-                                await new Promise(r=>video.onseeked=r);
-                                canvas.width=video.videoWidth;
-                                canvas.height=video.videoHeight;
-                                ctx.drawImage(video,0,0,canvas.width,canvas.height);
-                                frames.push(canvas.toDataURL('image/jpeg',0.9));
-                            }
-                            URL.revokeObjectURL(blobUrl);
-                            resolve(frames);
-                        };
-                        video.load();
-                    };
-                    video.onerror=()=>reject(new Error('Failed to load video metadata'));
-                });
-            }
-            static async extractMetadata(videoFile){
-                return new Promise((resolve,reject)=>{
-                    const video=document.createElement('video');
-                    const blobUrl=URL.createObjectURL(videoFile);
-                    video.src=blobUrl;
-                    video.preload='metadata';
-                    video.onloadedmetadata=()=>{
-                        const metadata={
-                            duration:video.duration,
-                            width:video.videoWidth,
-                            height:video.videoHeight,
-                            size:(videoFile.size/1024/1024).toFixed(2),
-                            type:videoFile.type,
-                            frameRate:video.duration>0?(video.webkitDecodedFrameCount||30)/video.duration:0
-                        };
-                        URL.revokeObjectURL(blobUrl);
-                        resolve(metadata);
-                    };
-                    video.onerror=()=>reject(new Error('Failed to load video metadata'));
-                });
-            }
-            static async extractAudio(videoFile){
-                return new Promise((resolve,reject)=>{
-                    const video=document.createElement('video');
-                    const blobUrl=URL.createObjectURL(videoFile);
-                    video.src=blobUrl;
-                    video.onloadedmetadata=async()=>{
-                        const audioContext=new AudioContext();
-                        const source=audioContext.createMediaElementSource(video);
-                        const analyser=audioContext.createAnalyser();
-                        source.connect(analyser);
-                        analyser.connect(audioContext.destination);
-                        analyser.fftSize=8192;
-                        const bufferLength=analyser.frequencyBinCount;
-                        const dataArray=new Uint8Array(bufferLength);
-                        analyser.getByteTimeDomainData(dataArray);
-                        const frequencyData=new Uint8Array(bufferLength);
-                        analyser.getByteFrequencyData(frequencyData);
-                        URL.revokeObjectURL(blobUrl);
-                        resolve({timeDomain:dataArray,frequency:frequencyData});
-                    };
-                    video.onerror=()=>reject(new Error('Failed to extract audio'));
-                });
-            }
-            static async analyzeVideo(videoFile){
-                if(videoFile.size>MAX_VIDEO_SIZE)return 'Video exceeds size limit (50MB).';
-                const videoHash=sha256(videoFile.name+videoFile.size);
-                if(videoAnalysisCache.has(videoHash))return videoAnalysisCache.get(videoHash);
-                const frames=await this.extractFrames(videoFile);
-                const metadata=await this.extractMetadata(videoFile);
-                const audioData=await this.extractAudio(videoFile);
-                const response=await fetch(VIDEO_PROCESSING_API,{
-                    method:'POST',
-                    headers:{
-                        'Authorization':`Bearer ${API_KEY}`,
-                        'Content-Type':'application/json'
-                    },
-                    body:JSON.stringify({
-                        model:"gpt-4o",
-                        frames:frames,
-                        metadata:metadata,
-                        audio_data:audioData,
-                        prompt:"Provide a detailed analysis of this video. Include: 1) Scene-by-scene breakdown with timestamps, 2) Identified objects, people, and actions, 3) Text detection (OCR) in frames, 4) Audio analysis (speech, music, sound effects), 5) Color palette and lighting, 6) Motion and camera movement, 7) Emotional tone, 8) Comprehensive summary."
-                    })
-                });
-                if(!response.ok)throw new Error('Video analysis failed');
-                const data=await response.json();
-                const analysis=data.choices[0].message.content;
-                videoAnalysisCache.set(videoHash,analysis);
-                return analysis;
-            }
-            static async analyzeImage(imageFile){
-                const imageHash=sha256(imageFile.name+imageFile.size);
-                if(imageAnalysisCache.has(imageHash))return imageAnalysisCache.get(imageHash);
-                const imageData=await readImage(imageFile);
+        async function prefetchResponses(){
+            const recentMessages=conversationHistory.slice(-5).map(msg=>msg.content);
+            for(const msg of recentMessages){
+                const messageHash=sha256(msg+Date.now());
+                if(responseCache.has(messageHash)||prefetchQueue.has(messageHash))continue;
+                prefetchQueue.set(messageHash,true);
                 const response=await fetch(API_URL,{
                     method:'POST',
                     headers:{
@@ -1943,120 +1062,16 @@
                     },
                     body:JSON.stringify({
                         model:"gpt-4o",
-                        messages:[{
-                            role:"user",
-                            content:"Provide a detailed analysis of this image. Include: 1) Object detection with positions, 2) Text detection (OCR), 3) Color palette analysis, 4) Scene composition and depth, 5) Lighting and shadows, 6) Emotional tone, 7) Style and artistic elements, 8) Comprehensive summary.",
-                            image_data:imageData
-                        }],
-                        max_tokens:5000,
+                        messages:[{role:"user",content:msg}],
+                        max_tokens:aiModels[selectedAiModel].maxTokens,
                         temperature:aiModels[selectedAiModel].temperature
                     })
                 });
-                if(!response.ok)throw new Error('Image analysis failed');
+                if(!response.ok)continue;
                 const data=await response.json();
-                const analysis=data.choices[0].message.content;
-                imageAnalysisCache.set(imageHash,analysis);
-                return analysis;
-            }
-            static async generateImage(prompt){
-                if(!rateLimitCheck())return null;
-                try{
-                    const response=await fetch(DALLE_API_URL,{
-                        method:'POST',
-                        headers:{
-                            'Authorization':`Bearer ${API_KEY}`,
-                            'Content-Type':'application/json'
-                        },
-                        body:JSON.stringify({
-                            prompt:prompt,
-                            n:1,
-                            size:"1024x1024",
-                            quality:"hd"
-                        })
-                    });
-                    if(!response.ok)throw new Error('Image generation failed');
-                    const data=await response.json();
-                    return data.data[0].url;
-                }catch(error){
-                    return null;
-                }
-            }
-            static async generateVideo(prompt){
-                if(!rateLimitCheck())return null;
-                try{
-                    const response=await fetch(SORA_API_URL,{
-                        method:'POST',
-                        headers:{
-                            'Authorization':`Bearer ${API_KEY}`,
-                            'Content-Type':'application/json'
-                        },
-                        body:JSON.stringify({
-                            prompt:prompt,
-                            duration:5,
-                            resolution:"1280x720",
-                            quality:"high"
-                        })
-                    });
-                    if(!response.ok)throw new Error('Video generation failed');
-                    const data=await response.json();
-                    return data.data[0].url;
-                }catch(error){
-                    return null;
-                }
-            }
-        }
-
-        class DDoSProtection{
-            static ipRequestCounts=new Map();
-            static blockedIPs=new Set();
-            static analyzeRequest(){
-                const clientIP='127.0.0.1';
-                const now=Date.now();
-                const windowMs=60*1000;
-                let requestData=this.ipRequestCounts.get(clientIP)||{count:0,firstRequest:now};
-                if(now-requestData.firstRequest>windowMs){
-                    requestData={count:0,firstRequest:now};
-                }
-                requestData.count++;
-                this.ipRequestCounts.set(clientIP,requestData);
-                if(requestData.count>2000){
-                    this.blockedIPs.add(clientIP);
-                    setTimeout(()=>{this.blockedIPs.delete(clientIP);},2*60*1000);
-                    return false;
-                }
-                const headers=new Headers();
-                if(headers.get('User-Agent')?.includes('bot')||headers.get('User-Agent')?.includes('crawler'))return false;
-                const suspiciousPatterns=[/sqlmap/i,/nmap/i,/hydra/i,/nikto/i];
-                if(suspiciousPatterns.some(pattern=>headers.get('User-Agent')?.match(pattern)))return false;
-                return true;
-            }
-            static throttleRequest(callback,delay=50){
-                let lastCall=0;
-                return function(...args){
-                    const now=Date.now();
-                    if(now-lastCall>=delay){
-                        lastCall=now;
-                        return callback(...args);
-                    }
-                    return null;
-                };
-            }
-            static validateToken(){
-                const token=sessionStorage.getItem('csrfToken');
-                if(!token||token.length<32)return false;
-                const expectedHash=sha256(token+navigator.userAgent);
-                return expectedHash===sessionStorage.getItem('csrfHash');
-            }
-            static generateToken(){
-                const token=Array(32).fill(0).map(()=>Math.random().toString(36)[2]).join('');
-                const hash=sha256(token+navigator.userAgent);
-                sessionStorage.setItem('csrfToken',token);
-                sessionStorage.setItem('csrfHash',hash);
-                return true;
-            }
-            static init(){
-                if(!this.validateToken())this.generateToken();
-                setInterval(()=>{this.ipRequestCounts.clear();},5*60*1000);
+                responseCache.set(messageHash,data.choices[0].message.content);
+                await cacheResponse(messageHash,data.choices[0].message.content);
+                prefetchQueue.delete(messageHash);
             }
         }
 
@@ -2066,686 +1081,547 @@
             return div.innerHTML;
         }
 
-        function formatMessage(content,messageElement){
-            const codeBlockRegex=/```([\s\S]*?)```/g;
-            let codeBlocks=[];
-            let html=content.replace(codeBlockRegex,(match,code)=>{
-                codeBlocks.push(code.trim());
-                return `<div class="code-block"><pre class="code-text">${sanitizeInput(code.trim())}</pre><button class="copy-btn">Copy Code</button></div>`;
-            });
-            latestCodeBlocks=codeBlocks;
-            if(codeBlocks.length>1){
-                const copyAllBtn=`<button class="copy-all-btn">Copy All Code</button>`;
-                messageElement.querySelector('.chat-message-content').insertAdjacentHTML('afterbegin',copyAllBtn);
-            }
-            return html;
-        }
-
-        async function readImage(file){
-            return new Promise(resolve=>{
-                const reader=new FileReader();
-                reader.onload=()=>resolve(reader.result);
-                reader.readAsDataURL(file);
-            });
-        }
-
-        async function readFileContent(file){
-            return new Promise(resolve=>{
-                const reader=new FileReader();
-                reader.onload=()=>resolve(reader.result);
-                reader.readAsText(file);
-            });
-        }
-
-        function setupWorkerPool(){
-            const workerCount=Math.max(8,navigator.hardwareConcurrency||4);
-            for(let i=0;i<workerCount;i++){
-                const worker=new Worker(URL.createObjectURL(new Blob([`
-                    self.onmessage=async e=>{
-                        const {url,options}=e.data;
-                        try{
-                            const response=await fetch(url,options);
-                            const data=await response.json();
-                            self.postMessage({success:true,data});
-                        }catch(error){
-                            self.postMessage({success:false,error:error.message});
-                        }
-                    };
-                `],{type:'text/javascript'})));
-                workerPool.push(worker);
-            }
-        }
-
-        function setupWebSocket(){
-            ws=new WebSocket('wss://api.openai.com/v1/stream');
-            ws.onopen=()=>{
-                ws.send(JSON.stringify({apiKey:API_KEY}));
-            };
-            ws.onmessage=e=>{
-                const data=JSON.parse(e.data);
-                if(data.messageId){
-                    const messageId=data.messageId;
-                    const aiMessage=chatHistory.querySelector(`[data-message-id="${messageId}"]`);
-                    if(aiMessage){
-                        const contentElement=aiMessage.querySelector('.chat-message-content');
-                        contentElement.innerHTML+=data.chunk;
-                        chatArea.scrollTop=chatArea.scrollHeight;
-                        if(data.isComplete){
-                            conversationHistory.push({role:"assistant",content:contentElement.textContent});
-                            responseCache.set(messageId,contentElement.textContent);
-                            latestAiResponse=contentElement.textContent;
-                            isGenerating=false;
-                            typingIndicator.style.display='none';
-                            sendBtn.disabled=false;
-                            stopGeneratingBtn.style.display='none';
-                            keepGeneratingBtn.classList.remove('show');
-                        }
-                    }
-                }
-            };
-            ws.onerror=()=>{
-                showNotification('WebSocket connection failed—falling back to HTTP.','error');
-                ws=null;
-            };
-            ws.onclose=()=>{
-                setTimeout(setupWebSocket,1000);
-            };
-        }
-
-        async function prefetchResponses(){
-            const recentMessages=conversationHistory.slice(-5).map(m=>m.content);
-            const commonPatterns=['generate image','roblox script','algebra help','video analysis'];
-            commonPatterns.forEach(pattern=>{
-                if(recentMessages.some(msg=>msg.toLowerCase().includes(pattern))){
-                    const prompt=`Prefetch: ${pattern}`;
-                    const messageId=sha256(prompt+Date.now());
-                    prefetchQueue.set(messageId,prompt);
-                    sendPrefetchRequest(messageId,prompt);
-                }
-            });
-        }
-
-        async function sendPrefetchRequest(messageId,prompt){
-            try{
-                const response=await fetch(API_URL,{
-                    method:'POST',
-                    headers:{
-                        'Authorization':`Bearer ${API_KEY}`,
-                        'Content-Type':'application/json',
-                        'Cache-Control':'no-cache',
-                        'X-CSRF-Token':sessionStorage.getItem('csrfToken')
-                    },
-                    body:JSON.stringify({
-                        model:"gpt-4o",
-                        messages:[{role:"user",content:prompt}],
-                        max_tokens:aiModels[selectedAiModel].maxTokens,
-                        temperature:aiModels[selectedAiModel].temperature,
-                        stream:false
-                    })
-                });
-                if(!response.ok)return;
-                const data=await response.json();
-                responseCache.set(messageId,data.choices[0].message.content);
-            }catch{}
-        }
-
-        async function batchProcessRequests(messages){
-            if(!rateLimitCheck())throw new Error('Rate limit exceeded');
-            const batches=[];
-            for(let i=0;i<messages.length;i+=BATCH_SIZE){
-                batches.push(messages.slice(i,i+BATCH_SIZE));
-            }
-            const workerPromises=batches.map((batch,idx)=>new Promise((resolve,reject)=>{
-                const worker=workerPool[idx%workerPool.length];
-                worker.onmessage=e=>{
-                    if(e.data.success)resolve(e.data.data.choices.map(choice=>choice.message.content));
-                    else reject(new Error(e.data.error));
-                };
-                worker.postMessage({
-                    url:API_URL,
-                    options:{
-                        method:'POST',
-                        headers:{
-                            'Authorization':`Bearer ${API_KEY}`,
-                            'Content-Type':'application/json',
-                            'Cache-Control':'no-cache',
-                            'X-CSRF-Token':sessionStorage.getItem('csrfToken')
-                        },
-                        body:JSON.stringify({
-                            model:"gpt-4o",
-                            messages:batch,
-                            max_tokens:aiModels[selectedAiModel].maxTokens,
-                            temperature:aiModels[selectedAiModel].temperature,
-                            stream:false,
-                            top_p:0.9
-                        }),
-                        signal:abortController?.signal
-                    }
-                });
-            }));
-            const responses=await Promise.all(workerPromises);
-            return responses.flat();
-        }
-
         async function processMessageQueue(){
-            if(isProcessing||messageQueue.size===0)return;
+            if(isProcessing||!messageQueue.size)return;
             isProcessing=true;
             const [messageId,{isContinuation}]=messageQueue.entries().next().value;
             messageQueue.delete(messageId);
             await sendMessage(isContinuation);
             isProcessing=false;
-            if(messageQueue.size>0)processMessageQueue();
+            if(messageQueue.size)processMessageQueue();
         }
 
         async function sendMessage(isContinuation=false){
-            if(!hasPermission){
-                requestPermissions();
-                return;
-            }
+            if(!rateLimitCheck())return;
             if(!DDoSProtection.analyzeRequest()){
-                    showNotification('Request blocked—possible DDoS activity detected.','error');
-                    return;
-                }
-                const message=isContinuation?lastMessageContent:userInput.value.trim();
-                if(!message&&!isContinuation&&filesArray.length===0)return;
-                lastMessageContent=message;
-                if(!isContinuation){
-                    const userMessage=document.createElement('div');
-                    userMessage.className='chat-message user';
-                    userMessage.innerHTML=`<div class="chat-message-content">${sanitizeInput(message)}</div><div class="chat-message-meta">Just now</div>`;
-                    chatHistory.appendChild(userMessage);
-                    conversationHistory.push({role:"user",content:message});
-                    userInput.value='';
-                    userInput.style.height='auto';
-                    userInput.style.height=`${Math.min(userInput.scrollHeight,220)}px`;
-                    chatArea.scrollTop=chatArea.scrollHeight;
-                }
-                if(verifyAdminAccess(message))return;
-                if(message.toLowerCase().includes('play a music')||message.toLowerCase().includes('background music')){
-                    await playBackgroundMusic(message);
-                    return;
-                }
-                const messageHash=sha256(message+Date.now());
-                if(responseCache.has(messageHash)){
-                    const aiMessage=document.createElement('div');
-                    aiMessage.className='chat-message ai';
-                    aiMessage.setAttribute('data-message-id',messageHash);
-                    aiMessage.innerHTML=`<div class="chat-message-content">${formatMessage(responseCache.get(messageHash),aiMessage)}</div><div class="chat-message-meta">Just now</div>`;
-                    chatHistory.appendChild(aiMessage);
-                    chatArea.scrollTop=chatArea.scrollHeight;
-                    conversationHistory.push({role:"assistant",content:responseCache.get(messageHash)});
-                    return;
-                }
-                try{
-                    isGenerating=true;
-                    sendBtn.disabled=true;
-                    stopGeneratingBtn.style.display='block';
-                    typingIndicator.style.display='block';
-                    abortController=new AbortController();
-                    generationTimeout=setTimeout(()=>{
-                        keepGeneratingBtn.classList.add('show');
-                        stopGeneratingBtn.style.display='none';
-                        typingIndicator.style.display='none';
-                        abortController.abort();
-                    },8000);
-                    const aiMessage=document.createElement('div');
-                    aiMessage.className='chat-message ai';
-                    aiMessage.setAttribute('data-message-id',messageHash);
-                    aiMessage.innerHTML=`<div class="chat-message-content"></div><div class="chat-message-meta">Just now</div>`;
-                    chatHistory.appendChild(aiMessage);
-                    let aiMessageText;
-                    if(message.toLowerCase().includes('obfuscate code')||message.toLowerCase().includes('deobfuscate code')){
-                        const codeMatch=message.match(/```([\s\S]*?)```/);
-                        if(!codeMatch){
-                            aiMessageText=`${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\nNo code block found—please include code to obfuscate or deobfuscate!`;
-                            aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
-                            conversationHistory.push({role:"assistant",content:aiMessageText});
-                            chatArea.scrollTop=chatArea.scrollHeight;
-                        }else{
-                            const code=codeMatch[1].trim();
-                            if(message.toLowerCase().includes('obfuscate code')){
-                                const obfuscated=Obfuscator.obfuscate(code,'mixed');
-                                aiMessageText=`${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\nObfuscated Code:\n\`\`\`\n${obfuscated}\n\`\`\``;
-                            }else{
-                                const deobfuscated=Deobfuscator.deobfuscate(code);
-                                aiMessageText=`${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\nDeobfuscated Code:\n\`\`\`\n${deobfuscated}\n\`\`\``;
-                            }
-                            aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
-                            responseCache.set(messageHash,aiMessageText);
-                            latestAiResponse=aiMessageText;
-                            conversationHistory.push({role:"assistant",content:aiMessageText});
-                            chatArea.scrollTop=chatArea.scrollHeight;
-                        }
-                    }else if(message.toLowerCase().includes('code analysis')||message.toLowerCase().includes('analyze code')||message.toLowerCase().includes('optimize code')){
-                        const codeMatch=message.match(/```([\s\S]*?)```/);
-                        if(!codeMatch){
-                            aiMessageText=`${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\nNo code block found—please include code to analyze or optimize!`;
-                            aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
-                            conversationHistory.push({role:"assistant",content:aiMessageText});
-                            chatArea.scrollTop=chatArea.scrollHeight;
-                        }else{
-                            const code=codeMatch[1].trim();
-                            const codeHash=sha256(code);
-                            let issues,optimized;
-                            if(codeAnalysisCache.has(codeHash)){
-                                const cached=cacheAnalysisCache.get(codeHash);
-                                issues=cached.issues;
-                                optimized=cached.optimized;
-                            }else{
-                                issues=CodeAnalyzer.analyzeCode(code);
-                                optimized=CodeAnalyzer.optimizeCode(code);
-                                codeAnalysisCache.set(codeHash,{issues,optimized});
-                            }
-                            aiMessageText=`${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\nCode Analysis:\n${issues.length>0?issues.join('\n'):'No issues found!'}\n\nOptimized Code:\n\`\`\`\n${optimized}\n\`\`\``;
-                            aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
-                            responseCache.set(messageHash,aiMessageText);
-                            latestAiResponse=aiMessageText;
-                            conversationHistory.push({role:"assistant",content:aiMessageText});
-                            chatArea.scrollTop=chatArea.scrollHeight;
-                        }
-                    }else if(message.toLowerCase().includes('video analysis')||message.toLowerCase().includes('analyze video')||filesArray.some(file=>file.type.startsWith('video/'))){
-                        const videoFile=filesArray.find(file=>file.type.startsWith('video/'));
-                        if(videoFile){
-                            const analysis=await MediaProcessor.analyzeVideo(videoFile);
-                            const videoHash=sha256(videoFile.name+videoFile.size);
-                            if(pastedImageHashes.has(videoHash)){
-                                aiMessageText=`${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\nThis video was already analyzed in this chat session! Clear the chat to analyze it again.`;
-                            }else{
-                                pastedImageHashes.add(videoHash);
-                                aiMessageText=`${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\nVideo Analysis:\n${analysis}\n<video src="${URL.createObjectURL(videoFile)}" controls alt="${sanitizeInput(videoFile.name)}"></video>`;
-                            }
-                            aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
-                            responseCache.set(messageHash,aiMessageText);
-                            latestAiResponse=aiMessageText;
-                            conversationHistory.push({role:"assistant",content:aiMessageText});
-                            chatArea.scrollTop=chatArea.scrollHeight;
-                        }else{
-                            aiMessageText=`${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\nNo video file found for analysis—upload one and try again!`;
-                            aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
-                            conversationHistory.push({role:"assistant",content:aiMessageText});
-                            chatArea.scrollTop=chatArea.scrollHeight;
-                        }
-                    }else if(message.toLowerCase().includes('image analysis')||message.toLowerCase().includes('analyze image')||filesArray.some(file=>file.type.startsWith('image/'))){
-                        const imageFile=filesArray.find(file=>file.type.startsWith('image/'));
-                        if(imageFile){
-                            const analysis=await MediaProcessor.analyzeImage(imageFile);
-                            const imageHash=sha256(imageFile.name+imageFile.size);
-                            if(pastedImageHashes.has(imageHash)){
-                                aiMessageText=`${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\nThis image was already analyzed in this chat session! Clear the chat to analyze it again.`;
-                            }else{
-                                pastedImageHashes.add(imageHash);
-                                aiMessageText=`${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\nImage Analysis:\n${analysis}\n<img src="${URL.createObjectURL(imageFile)}" alt="${sanitizeInput(imageFile.name)}">`;
-                            }
-                            aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
-                            responseCache.set(messageHash,aiMessageText);
-                            latestAiResponse=aiMessageText;
-                            conversationHistory.push({role:"assistant",content:aiMessageText});
-                            chatArea.scrollTop=chatArea.scrollHeight;
-                        }else{
-                            aiMessageText=`${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\nNo image file found for analysis—upload one and try again!`;
-                            aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
-                            conversationHistory.push({role:"assistant",content:aiMessageText});
-                            chatArea.scrollTop=chatArea.scrollHeight;
-                        }
-                    }else if(filesArray.some(file=>file.type.startsWith('text/')||file.type==='application/json'||file.type==='application/xml')){
-                        const textFile=filesArray.find(file=>file.type.startsWith('text/')||file.type==='application/json'||file.type==='application/xml');
-                        const content=await readFileContent(textFile);
-                        const prompt=`Analyze this file content:\n\`\`\`\n${content}\n\`\`\`\nProvide a summary, key insights, and any relevant analysis (e.g., syntax errors for code, structure for JSON/XML, themes for text).`;
-                        const response=await fetch(API_URL,{
-                            method:'POST',
-                            headers:{
-                                'Authorization':`Bearer ${API_KEY}`,
-                                'Content-Type':'application/json',
-                                'Cache-Control':'no-cache',
-                                'X-CSRF-Token':sessionStorage.getItem('csrfToken')
-                            },
-                            body:JSON.stringify({
-                                model:"gpt-4o",
-                                messages:[{role:"user",content:prompt}],
-                                max_tokens:aiModels[selectedAiModel].maxTokens,
-                                temperature:aiModels[selectedAiModel].temperature,
-                                stream:ws?true:false
-                            }),
-                            signal:abortController.signal
-                        });
-                        if(ws){
-                            ws.send(JSON.stringify({messageId:messageHash,request:{messages:[{role:"user",content:prompt}]}}));
-                            return;
-                        }
-                        if(!response.ok)throw new Error('API request failed');
-                        const data=await response.json();
-                        aiMessageText=`${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\nFile Analysis:\n${data.choices[0].message.content}`;
-                        aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
-                        responseCache.set(messageHash,aiMessageText);
-                        latestAiResponse=aiMessageText;
-                        conversationHistory.push({role:"assistant",content:aiMessageText});
-                        chatArea.scrollTop=chatArea.scrollHeight;
-                    }else if(message.toLowerCase().includes('generate image')||message.toLowerCase().includes('generate video')||message.toLowerCase().includes('create image')||message.toLowerCase().includes('create video')){
-                        const isVideo=message.toLowerCase().includes('video');
-                        const mediaPrompt=message.replace(/(generate|create)\s*(image|video)\s*(of)?\s*/i,'').trim();
-                        const mediaUrl=isVideo?await MediaProcessor.generateVideo(mediaPrompt):await MediaProcessor.generateImage(mediaPrompt);
-                        if(mediaUrl){
-                            const mediaHash=sha256(mediaUrl);
-                            if(pastedImageHashes.has(mediaHash)){
-                                aiMessageText=`${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\nThis ${isVideo?'video':'image'} was already shared in this chat session! Clear the chat to share it again.`;
-                            }else{
-                                pastedImageHashes.add(mediaHash);
-                                aiMessageText=`${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\nHere’s your generated ${isVideo?'video':'image'}:\n<${isVideo?'video controls':'img'} src="${mediaUrl}" alt="Generated ${isVideo?'Video':'Image'}">`;
-                            }
-                        }else{
-                            aiMessageText=`${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\nCouldn’t generate the ${isVideo?'video':'image'}—try a different prompt!`;
-                        }
-                        aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
-                        responseCache.set(messageHash,aiMessageText);
-                        latestAiResponse=aiMessageText;
-                        conversationHistory.push({role:"assistant",content:aiMessageText});
-                        chatArea.scrollTop=chatArea.scrollHeight;
-                    }else if(selectedSchoolMode){
-                        let schoolPrompt=message;
-                        const schoolPrompts={
-                            algebra:"Solve this algebra problem step-by-step, showing all work, and explain each step clearly: ",
-                            science:"Provide a detailed explanation for this science question, including diagrams if applicable: ",
-                            geometry:"Solve this geometry problem with a step-by-step solution, including diagrams and formulas: ",
-                            history:"Give a concise summary of this historical event, including key dates, figures, and impacts: ",
-                            literature:"Analyze this literary work or passage, focusing on themes, characters, and literary devices: ",
-                            physics:"Solve this physics problem with detailed steps, formulas, and explanations: ",
-                            chemistry:"Explain this chemistry concept or solve this problem with detailed steps and reactions: ",
-                            biology:"Provide a detailed explanation of this biology concept, including diagrams and examples: ",
-                            robloxGame:"Create a Roblox game concept based on this idea, including gameplay mechanics, UI design, and Luau code: ",
-                            googleSlides:"Generate a Google Slides presentation outline for this topic, including slide titles, content summaries, and design suggestions: ",
-                            videoAnalysis:"Analyze the uploaded video with a scene-by-scene breakdown, object detection, audio analysis, and summary: ",
-                            robloxScripting:"Create a Roblox Luau script for this request, including mechanics, error handling, and multiplayer support: "
-                        };
-                        if(schoolPrompts[selectedSchoolMode])schoolPrompt=`${schoolPrompts[selectedSchoolMode]}"${sanitizeInput(message)}"`;
-                        const response=await fetch(Api_URL,{
-                            method:'POST',
-                            headers:{
-                                'Authorization':`Bearer ${API_KEY}`,
-                                'Content-Type':'application/json',
-                                'Cache-Control':'no-cache',
-                                'X-CSRF-Token':sessionStorage.getItem('csrfToken')
-                            },
-                            body:JSON.stringify({
-                                model:"gpt-4o",
-                                messages:[{role:"user",content:schoolPrompt}],
-                                max_tokens:aiModels[selectedAiModel].maxTokens,
-                                temperature:aiModels[selectedAiModel].temperature,
-                                stream:ws?true:false,
-                                top_p:0.9
-                            }),
-                            signal:abortController.signal
-                        });
-                        if(ws){
-                            ws.send(JSON.stringify({messageId:messageHash,request:{messages:[{role:"user",content:schoolPrompt}]}}));
-                            return;
-                        }
-                        if(!response.ok)throw new Error('API request failed');
-                        const data=await response.json();
-                        aiMessageText=`${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\n${data.choices[0].message.content}`;
-                        aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
-                        responseCache.set(messageHash,aiMessageText);
-                        latestAiResponse=aiMessageText;
-                        conversationHistory.push({role:"assistant",content:aiMessageText});
-                        chatArea.scrollTop=chatArea.scrollHeight;
-                    }else{
-                        const messagesToProcess=[...conversationHistory,{role:"user",content:message}];
-                        const batchResponses=await batchProcessRequests(messagesToProcess);
-                        aiMessageText=`${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\n${batchResponses[batchResponses.length-1]}`;
-                        aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
-                        responseCache.set(messageHash,aiMessageText);
-                        latestAiResponse=aiMessageText;
-                        conversationHistory.push({role:"assistant",content:aiMessageText});
-                        chatArea.scrollTop=chatArea.scrollHeight;
-                    }
-                    typingIndicator.style.display='none';
-                    sendBtn.disabled=false;
-                    stopGeneratingBtn.style.display='none';
-                    isGenerating=false;
-                    clearTimeout(generationTimeout);
-                    keepGeneratingBtn.classList.remove('show');
-                    prefetchResponses();
-                }catch(error){
-                    if(error.name==='AbortError'){
-                        showNotification('Generation stopped.');
-                    }else{
-                        const aiMessage=document.createElement('div');
-                        aiMessage.className='chat-message ai';
-                        aiMessage.innerHTML=`<div class="chat-message-content">${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\nSomething went wrong—let’s try again!</div><div class="chat-message-meta">Just now</div>`;
-                        chatHistory.appendChild(aiMessage);
-                        chatArea.scrollTop=chatArea.scrollHeight;
-                        conversationHistory.push({role:"assistant",content:"Something went wrong—let’s try again!"});
-                        showNotification('Oops, something broke—try again!','error');
-                    }
-                    typingIndicator.style.display='none';
-                    sendBtn.disabled=false;
-                    stopGeneratingBtn.style.display='none';
-                    isGenerating=false;
-                    clearTimeout(generationTimeout);
-                    keepGeneratingBtn.classList.remove('show');
-                }
+                showNotification('Request blocked—possible DDoS activity detected.','error');
+                return;
             }
+            const message=isContinuation?lastMessageContent:userInput.value.trim();
+            if(!message&&!isContinuation&&filesArray.length===0)return;
+            lastMessageContent=message;
+            if(!isContinuation){
+                const userMessage=document.createElement('div');
+                userMessage.className='chat-message user';
+                userMessage.innerHTML=`<div class="chat-message-content">${sanitizeInput(message)}</div><div class="chat-message-meta">Just now</div>`;
+                chatHistory.appendChild(userMessage);
+                conversationHistory.push({role:"user",content:message});
+                userInput.value='';
+                userInput.style.height='auto';
+                userInput.style.height=`${Math.min(userInput.scrollHeight,200)}px`;
+                chatArea.scrollTop=chatArea.scrollHeight;
+            }
+            if(verifyAdminAccess(message))return;
+            if(message.toLowerCase().includes('play a music')||message.toLowerCase().includes('background music')){
+                await playBackgroundMusic(message);
+                return;
+            }
+            const messageHash=sha256(message+Date.now());
+            const cachedResponse=await getCachedResponse(messageHash);
+            if(cachedResponse){
+                const aiMessage=document.createElement('div');
+                aiMessage.className='chat-message ai';
+                aiMessage.setAttribute('data-message-id',messageHash);
+                aiMessage.innerHTML=`<div class="chat-message-content">${formatMessage(cachedResponse,aiMessage)}</div><div class="chat-message-meta">Just now</div>`;
+                chatHistory.appendChild(aiMessage);
+                chatArea.scrollTop=chatArea.scrollHeight;
+                conversationHistory.push({role:"assistant",content:cachedResponse});
+                return;
+            }
+            if(responseCache.has(messageHash)){
+                const aiMessage=document.createElement('div');
+                aiMessage.className='chat-message ai';
+                aiMessage.setAttribute('data-message-id',messageHash);
+                aiMessage.innerHTML=`<div class="chat-message-content">${formatMessage(responseCache.get(messageHash),aiMessage)}</div><div class="chat-message-meta">Just now</div>`;
+                chatHistory.appendChild(aiMessage);
+                chatArea.scrollTop=chatArea.scrollHeight;
+                conversationHistory.push({role:"assistant",content:responseCache.get(messageHash)});
+                return;
+            }
+            try{
+                isGenerating=true;
+                sendBtn.disabled=true;
+                stopGeneratingBtn.style.display='block';
+                typingIndicator.style.display='block';
+                abortController=new AbortController();
+                generationTimeout=setTimeout(()=>{
+                    keepGeneratingBtn.classList.add('show');
+                    stopGeneratingBtn.style.display='none';
+                    typingIndicator.style.display='none';
+                    abortController.abort();
+                },8000);
+                const aiMessage=document.createElement('div');
+                aiMessage.className='chat-message ai';
+                aiMessage.setAttribute('data-message-id',messageHash);
+                aiMessage.innerHTML=`<div class="chat-message-content"></div><div class="chat-message-meta">Just now</div>`;
+                chatHistory.appendChild(aiMessage);
+                let aiMessageText;
+                if(message.toLowerCase().includes('obfuscate code')||message.toLowerCase().includes('deobfuscate code')){
+                    const codeMatch=message.match(/```([\s\S]*?)```/);
+                    if(!codeMatch){
+                        aiMessageText=`${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\nNo code block found—please include code to obfuscate or deobfuscate!`;
+                        aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
+                        conversationHistory.push({role:"assistant",content:aiMessageText});
+                        chatArea.scrollTop=chatArea.scrollHeight;
+                    }else{
+                        const code=codeMatch[1].trim();
+                        if(message.toLowerCase().includes('obfuscate code')){
+                            const obfuscated=Obfuscator.obfuscate(code,'mixed');
+                            aiMessageText=`${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\nObfuscated Code:\n\`\`\`\n${obfuscated}\n\`\`\``;
+                        }else{
+                            const deobfuscated=Deobfuscator.deobfuscate(code);
+                            aiMessageText=`${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\nDeobfuscated Code:\n\`\`\`\n${deobfuscated}\n\`\`\``;
+                        }
+                        aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
+                        responseCache.set(messageHash,aiMessageText);
+                        await cacheResponse(messageHash,aiMessageText);
+                        latestAiResponse=aiMessageText;
+                        conversationHistory.push({role:"assistant",content:aiMessageText});
+                        chatArea.scrollTop=chatArea.scrollHeight;
+                    }
+                }else if(message.toLowerCase().includes('code analysis')||message.toLowerCase().includes('analyze code')||message.toLowerCase().includes('optimize code')){
+                    const codeMatch=message.match(/```([\s\S]*?)```/);
+                    if(!codeMatch){
+                        aiMessageText=`${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\nNo code block found—please include code to analyze or optimize!`;
+                        aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
+                        conversationHistory.push({role:"assistant",content:aiMessageText});
+                        chatArea.scrollTop=chatArea.scrollHeight;
+                    }else{
+                        const code=codeMatch[1].trim();
+                        const codeHash=sha256(code);
+                        let issues,optimized;
+                        if(codeAnalysisCache.has(codeHash)){
+                            const cached=codeAnalysisCache.get(codeHash);
+                            issues=cached.issues;
+                            optimized=cached.optimized;
+                        }else{
+                            issues=CodeAnalyzer.analyzeCode(code);
+                            optimized=CodeAnalyzer.optimizeCode(code);
+                            codeAnalysisCache.set(codeHash,{issues,optimized});
+                        }
+                        aiMessageText=`${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\nCode Analysis:\n${issues.length>0?issues.join('\n'):'No issues found!'}\n\nOptimized Code:\n\`\`\`\n${optimized}\n\`\`\``;
+                        aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
+                        responseCache.set(messageHash,aiMessageText);
+                        await cacheResponse(messageHash,aiMessageText);
+                        latestAiResponse=aiMessageText;
+                        conversationHistory.push({role:"assistant",content:aiMessageText});
+                        chatArea.scrollTop=chatArea.scrollHeight;
+                    }
+                }else if(message.toLowerCase().includes('video analysis')||message.toLowerCase().includes('analyze video')||filesArray.some(file=>file.type.startsWith('video/'))){
+                    const videoFile=filesArray.find(file=>file.type.startsWith('video/'));
+                    if(videoFile){
+                        const analysis=await MediaProcessor.analyzeVideo(videoFile);
+                        const videoHash=sha256(videoFile.name+videoFile.size);
+                        if(pastedImageHashes.has(videoHash)){
+                            aiMessageText=`${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\nThis video was already analyzed in this chat session! Clear the chat to analyze it again.`;
+                        }else{
+                            pastedImageHashes.add(videoHash);
+                            aiMessageText=`${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\nVideo Analysis:\n${analysis}\n<video src="${URL.createObjectURL(videoFile)}" controls alt="${sanitizeInput(videoFile.name)}"></video>`;
+                        }
+                        aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
+                        responseCache.set(messageHash,aiMessageText);
+                        await cacheResponse(messageHash,aiMessageText);
+                        latestAiResponse=aiMessageText;
+                        conversationHistory.push({role:"assistant",content:aiMessageText});
+                        chatArea.scrollTop=chatArea.scrollHeight;
+                    }else{
+                        aiMessageText=`${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\nNo video file found for analysis—upload one and try again!`;
+                        aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
+                        conversationHistory.push({role:"assistant",content:aiMessageText});
+                        chatArea.scrollTop=chatArea.scrollHeight;
+                    }
+                }else if(message.toLowerCase().includes('image analysis')||message.toLowerCase().includes('analyze image')||filesArray.some(file=>file.type.startsWith('image/'))){
+                    const imageFile=filesArray.find(file=>file.type.startsWith('image/'));
+                    if(imageFile){
+                        const analysis=await MediaProcessor.analyzeImage(imageFile);
+                        const imageHash=sha256(imageFile.name+imageFile.size);
+                        if(pastedImageHashes.has(imageHash)){
+                            aiMessageText=`${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\nThis image was already analyzed in this chat session! Clear the chat to analyze it again.`;
+                        }else{
+                            pastedImageHashes.add(imageHash);
+                            aiMessageText=`${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\nImage Analysis:\n${analysis}\n<img src="${URL.createObjectURL(imageFile)}" alt="${sanitizeInput(imageFile.name)}">`;
+                        }
+                        aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
+                        responseCache.set(messageHash,aiMessageText);
+                        await cacheResponse(messageHash,aiMessageText);
+                        latestAiResponse=aiMessageText;
+                        conversationHistory.push({role:"assistant",content:aiMessageText});
+                        chatArea.scrollTop=chatArea.scrollHeight;
+                    }else{
+                        aiMessageText=`${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\nNo image file found for analysis—upload one and try again!`;
+                        aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
+                        conversationHistory.push({role:"assistant",content:aiMessageText});
+                        chatArea.scrollTop=chatArea.scrollHeight;
+                    }
+                }else if(filesArray.some(file=>file.type.startsWith('text/')||file.type==='application/json'||file.type==='application/xml')){
+                    const textFile=filesArray.find(file=>file.type.startsWith('text/')||file.type==='application/json'||file.type==='application/xml');
+                    const content=await readFileContent(textFile);
+                    const prompt=`Analyze this file content:\n\`\`\`\n${content}\n\`\`\`\nProvide a summary, key insights, and any relevant analysis (e.g., syntax errors for code, structure for JSON/XML, themes for text).`;
+                    const response=await fetch(API_URL,{
+                        method:'POST',
+                        headers:{
+                            'Authorization':`Bearer ${API_KEY}`,
+                            'Content-Type':'application/json',
+                            'Cache-Control':'no-cache',
+                            'X-CSRF-Token':sessionStorage.getItem('csrfToken')
+                        },
+                        body:JSON.stringify({
+                            model:"gpt-4o",
+                            messages:[{role:"user",content:prompt}],
+                            max_tokens:aiModels[selectedAiModel].maxTokens,
+                            temperature:aiModels[selectedAiModel].temperature,
+                            stream:ws?true:false
+                        }),
+                        signal:abortController.signal
+                    });
+                    if(ws){
+                        ws.send(JSON.stringify({messageId:messageHash,request:{messages:[{role:"user",content:prompt}]}}));
+                        return;
+                    }
+                    if(!response.ok)throw new Error('API request failed');
+                    const data=await response.json();
+                    aiMessageText=`${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\nFile Analysis:\n${data.choices[0].message.content}`;
+                    aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
+                    responseCache.set(messageHash,aiMessageText);
+                    await cacheResponse(messageHash,aiMessageText);
+                    latestAiResponse=aiMessageText;
+                    conversationHistory.push({role:"assistant",content:aiMessageText});
+                    chatArea.scrollTop=chatArea.scrollHeight;
+                }else if(message.toLowerCase().includes('generate image')||message.toLowerCase().includes('generate video')||message.toLowerCase().includes('create image')||message.toLowerCase().includes('create video')){
+                    const isVideo=message.toLowerCase().includes('video');
+                    const mediaPrompt=message.replace(/(generate|create)\s*(image|video)\s*(of)?\s*/i,'').trim();
+                    const mediaUrl=isVideo?await MediaProcessor.generateVideo(mediaPrompt):await MediaProcessor.generateImage(mediaPrompt);
+                    if(mediaUrl){
+                        const mediaHash=sha256(mediaUrl);
+                        if(pastedImageHashes.has(mediaHash)){
+                            aiMessageText=`${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\nThis ${isVideo?'video':'image'} was already shared in this chat session! Clear the chat to share it again.`;
+                        }else{
+                            pastedImageHashes.add(mediaHash);
+                            aiMessageText=`${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\nHere’s your generated ${isVideo?'video':'image'}:\n<${isVideo?'video controls':'img'} src="${mediaUrl}" alt="Generated ${isVideo?'Video':'Image'}">`;
+                        }
+                    }else{
+                        aiMessageText=`${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\nCouldn’t generate the ${isVideo?'video':'image'}—try a different prompt!`;
+                    }
+                    aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
+                    responseCache.set(messageHash,aiMessageText);
+                    await cacheResponse(messageHash,aiMessageText);
+                    latestAiResponse=aiMessageText;
+                    conversationHistory.push({role:"assistant",content:aiMessageText});
+                    chatArea.scrollTop=chatArea.scrollHeight;
+                }else if(selectedSchoolMode){
+                    let schoolPrompt=message;
+                    const schoolPrompts={
+                        algebra:"Solve this algebra problem step-by-step, showing all work, and explain each step clearly: ",
+                        science:"Provide a detailed explanation for this science question, including diagrams if applicable: ",
+                        geometry:"Solve this geometry problem with a step-by-step solution, including diagrams and formulas: ",
+                        history:"Give a concise summary of this historical event, including key dates, figures, and impacts: ",
+                        literature:"Analyze this literary work or passage, focusing on themes, characters, and literary devices: ",
+                        physics:"Solve this physics problem with detailed steps, formulas, and explanations: ",
+                        chemistry:"Explain this chemistry concept or solve this problem with detailed steps and reactions: ",
+                        biology:"Provide a detailed explanation of this biology concept, including diagrams and examples: ",
+                        robloxGame:"Create a Roblox game concept based on this idea, including gameplay mechanics, UI design, and Luau code: ",
+                        googleSlides:"Generate a Google Slides presentation outline for this topic, including slide titles, content summaries, and design suggestions: ",
+                        videoAnalysis:"Analyze the uploaded video with a scene-by-scene breakdown, object detection, audio analysis, and summary: ",
+                        robloxScripting:"Create a Roblox Luau script for this request, including mechanics, error handling, and multiplayer support: "
+                    };
+                    if(schoolPrompts[selectedSchoolMode])schoolPrompt=`${schoolPrompts[selectedSchoolMode]}"${sanitizeInput(message)}"`;
+                    const response=await fetch(Api_URL,{
+                        method:'POST',
+                        headers:{
+                            'Authorization':`Bearer ${API_KEY}`,
+                            'Content-Type':'application/json',
+                            'Cache-Control':'no-cache',
+                            'X-CSRF-Token':sessionStorage.getItem('csrfToken')
+                        },
+                        body:JSON.stringify({
+                            model:"gpt-4o",
+                            messages:[{role:"user",content:schoolPrompt}],
+                            max_tokens:aiModels[selectedAiModel].maxTokens,
+                            temperature:aiModels[selectedAiModel].temperature,
+                            stream:ws?true:false,
+                            top_p:0.9
+                        }),
+                        signal:abortController.signal
+                    });
+                    if(ws){
+                        ws.send(JSON.stringify({messageId:messageHash,request:{messages:[{role:"user",content:schoolPrompt}]}}));
+                        return;
+                    }
+                    if(!response.ok)throw new Error('API request failed');
+                    const data=await response.json();
+                    aiMessageText=`${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\n${data.choices[0].message.content}`;
+                    aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
+                    responseCache.set(messageHash,aiMessageText);
+                    await cacheResponse(messageHash,aiMessageText);
+                    latestAiResponse=aiMessageText;
+                    conversationHistory.push({role:"assistant",content:aiMessageText});
+                    chatArea.scrollTop=chatArea.scrollHeight;
+                }else{
+                    const messagesToProcess=[...conversationHistory,{role:"user",content:message}];
+                    const batchResponses=await batchProcessRequests(messagesToProcess);
+                    aiMessageText=`${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\n${batchResponses[batchResponses.length-1]}`;
+                    aiMessage.querySelector('.chat-message-content').innerHTML=formatMessage(aiMessageText,aiMessage);
+                    responseCache.set(messageHash,aiMessageText);
+                    await cacheResponse(messageHash,aiMessageText);
+                    latestAiResponse=aiMessageText;
+                    conversationHistory.push({role:"assistant",content:aiMessageText});
+                    chatArea.scrollTop=chatArea.scrollHeight;
+                }
+                typingIndicator.style.display='none';
+                sendBtn.disabled=false;
+                stopGeneratingBtn.style.display='none';
+                isGenerating=false;
+                clearTimeout(generationTimeout);
+                keepGeneratingBtn.classList.remove('show');
+                prefetchResponses();
+            }catch(error){
+                if(error.name==='AbortError'){
+                    showNotification('Generation stopped.');
+                }else{
+                    const aiMessage=document.createElement('div');
+                    aiMessage.className='chat-message ai';
+                    aiMessage.innerHTML=`<div class="chat-message-content">${livelyResponses[selectedAiModel][Math.floor(Math.random()*livelyResponses[selectedAiModel].length)]}\nSomething went wrong—let’s try again!</div><div class="chat-message-meta">Just now</div>`;
+                    chatHistory.appendChild(aiMessage);
+                    chatArea.scrollTop=chatArea.scrollHeight;
+                    conversationHistory.push({role:"assistant",content:"Something went wrong—let’s try again!"});
+                    showNotification('Oops, something broke—try again!','error');
+                }
+                typingIndicator.style.display='none';
+                sendBtn.disabled=false;
+                stopGeneratingBtn.style.display='none';
+                isGenerating=false;
+                clearTimeout(generationTimeout);
+                keepGeneratingBtn.classList.remove('show');
+            }
+        }
 
-            fileInput.addEventListener('change',async()=>{
-                const newFiles=Array.from(fileInput.files);
-                newFiles.forEach(file=>{
-                    if(file.type.startsWith('image/')||file.type.startsWith('video/')||file.type.startsWith('text/')||file.type==='application/json'||file.type==='application/xml'){
+        fileInput.addEventListener('change',async()=>{
+            const newFiles=Array.from(fileInput.files);
+            newFiles.forEach(file=>{
+                if(file.type.startsWith('image/')||file.type.startsWith('video/')||file.type.startsWith('text/')||file.type==='application/json'||file.type==='application/xml'){
+                    filesArray.push(file);
+                    displayFileItem(file);
+                }else{
+                    showNotification(`File type not supported: ${sanitizeInput(file.name)}`,'error');
+                }
+            });
+            fileClearBtn.style.display=filesArray.length>0?'block':'none';
+            fileInput.value='';
+        });
+
+        function displayFileItem(file){
+            const fileItem=document.createElement('div');
+            fileItem.className='file-item';
+            fileItem.innerHTML=`
+                <div class="file-item-name">${sanitizeInput(file.name)}</div>
+                <div class="file-item-details">${(file.size/1024/1024).toFixed(2)} MB</div>
+            `;
+            fileItem.addEventListener('click',()=>previewFile(file));
+            fileList.appendChild(fileItem);
+        }
+
+        function previewFile(file){
+            filePreviewModal.classList.add('open');
+            filePreviewContent.innerHTML='';
+            if(file.type.startsWith('image/')){
+                const img=document.createElement('img');
+                img.src=URL.createObjectURL(file);
+                img.alt=sanitizeInput(file.name);
+                filehullContent.appendChild(img);
+                const imageHash=sha256(img.src);
+                pastedImageHashes.add(imageHash);
+            }else if(file.type.startsWith('video/')){
+                const video=document.createElement('video');
+                video.src=URL.createObjectURL(file);
+                video.controls=true;
+                filePreviewContent.appendChild(video);
+            }else{
+                readFileContent(file).then(content=>{
+                    const pre=document.createElement('pre');
+                    pre.textContent=content;
+                    filePreviewContent.appendChild(pre);
+                });
+            }
+        }
+
+        filePreviewClose.addEventListener('click',()=>{
+            filePreviewModal.classList.remove('open');
+            filePreviewContent.innerHTML='';
+        });
+
+        fileClearBtn.addEventListener('click',()=>{
+            filesArray=[];
+            fileList.innerHTML='';
+            fileClearBtn.style.display='none';
+            showNotification('Files cleared—ready for more!');
+        });
+
+        generateMediaBtn.addEventListener('click',()=>{
+            userInput.value='Generate an image or video (type your prompt here)';
+            userInput.focus();
+        });
+
+        sendBtn.addEventListener('click',()=>{
+            if(!userInput.value.trim()&&filesArray.length===0)return;
+            if(!hasPermission){
+                requestPermissions();
+                return;
+            }
+            const messageId=Date.now().toString();
+            messageQueue.set(messageId,{isContinuation:false});
+            processMessageQueue();
+        });
+
+        userInput.addEventListener('keypress',e=>{
+            if(e.key==='Enter'&&!e.shiftKey){
+                e.preventDefault();
+                sendBtn.click();
+            }
+        });
+
+        userInput.addEventListener('paste',async e=>{
+            const items=e.clipboardData.items;
+            for(const item of items){
+                if(item.type.startsWith('image/')||item.type.startsWith('video/')){
+                    const file=item.getAsFile();
+                    if(file){
                         filesArray.push(file);
                         displayFileItem(file);
-                    }else{
-                        showNotification(`File type not supported: ${sanitizeInput(file.name)}`,'error');
+                        fileClearBtn.style.display='block';
                     }
-                });
-                fileClearBtn.style.display=filesArray.length>0?'block':'none';
-                fileInput.value='';
-            });
-
-            function displayFileItem(file){
-                const fileItem=document.createElement('div');
-                fileItem.className='file-item';
-                fileItem.innerHTML=`
-                    <div class="file-item-name">${sanitizeInput(file.name)}</div>
-                    <div class="file-item-details">${(file.size/1024/1024).toFixed(2)} MB</div>
-                `;
-                fileItem.addEventListener('click',()=>previewFile(file));
-                fileList.appendChild(fileItem);
+                }
             }
+        });
 
-            function previewFile(file){
+        clearChatBtn.addEventListener('click',()=>{
+            chatHistory.innerHTML='';
+            conversationHistory=[{role:'assistant',content:aiModels[selectedAiModel].personality}];
+            pastedImageHashes.clear();
+            const welcomeMessage=document.createElement('div');
+            welcomeMessage.className='chat-message ai';
+            welcomeMessage.innerHTML=`<div class="chat-message-content">${aiModels[selectedAiModel].personality}</div><div class="chat-message-meta">Just now</div>`;
+            chatHistory.appendChild(welcomeMessage);
+            chatArea.scrollTop=chatArea.scrollHeight;
+            showNotification('Chat cleared—fresh start!');
+        });
+
+        copyCodeBtn.addEventListener('click',()=>{
+            if(latestCodeBlocks.length>0){
+                const allCode=latestCodeBlocks.join('\n\n');
+                navigator.clipboard.writeText(allCode).then(()=>{
+                    showNotification('All code copied—nice!');
+                }).catch(()=>{
+                    showNotification('Copy failed—oops!','error');
+                });
+            }else{
+                showNotification('No code to copy—write some first!','error');
+            }
+        });
+
+        chatHistory.addEventListener('click',e=>{
+            if(e.target.classList.contains('copy-btn')){
+                const codeText=e.target.parentElement.querySelector('.code-text').textContent;
+                navigator.clipboard.writeText(codeText).then(()=>{
+                    showNotification('Code copied!');
+                }).catch(()=>{
+                    showNotification('Copy failed!','error');
+                });
+            }else if(e.target.classList.contains('copy-all-btn')){
+                const allCode=latestCodeBlocks.join('\n\n');
+                navigator.clipboard.writeText(allCode).then(()=>{
+                    showNotification('All code copied!');
+                }).catch(()=>{
+                    showNotification('Copy failed!','error');
+                });
+            }else if(e.target.tagName==='IMG'||e.target.tagName==='VIDEO'){
                 filePreviewModal.classList.add('open');
                 filePreviewContent.innerHTML='';
-                if(file.type.startsWith('image/')){
-                    const img=document.createElement('img');
-                    img.src=URL.createObjectURL(file);
-                    img.alt=sanitizeInput(file.name);
-                    filePreviewContent.appendChild(img);
-                    const imageHash=sha256(img.src);
-                    pastedImageHashes.add(imageHash);
-                }else if(file.type.startsWith('video/')){
-                    const video=document.createElement('video');
-                    video.src=URL.createObjectURL(file);
-                    video.controls=true;
-                    filePreviewContent.appendChild(video);
-                }else{
-                    readFileContent(file).then(content=>{
-                        const pre=document.createElement('pre');
-                        pre.textContent=content;
-                        filePreviewContent.appendChild(pre);
-                    });
-                }
+                const clone=e.target.cloneNode();
+                if(e.target.tagName==='VIDEO')clone.controls=true;
+                filePreviewContent.appendChild(clone);
             }
+        });
 
-            filePreviewClose.addEventListener('click',()=>{
-                filePreviewModal.classList.remove('open');
-                filePreviewContent.innerHTML='';
-            });
+        codeSidebarClose.addEventListener('click',()=>{
+            codeSidebar.classList.remove('open');
+        });
 
-            fileClearBtn.addEventListener('click',()=>{
-                filesArray=[];
-                fileList.innerHTML='';
-                fileClearBtn.style.display='none';
-                showNotification('Files cleared—ready for more!');
-            });
+        keepGeneratingBtn.addEventListener('click',()=>{
+            keepGeneratingBtn.classList.remove('show');
+            const messageId=Date.now().toString();
+            messageQueue.set(messageId,{isContinuation:true});
+            processMessageQueue();
+        });
 
-            generateMediaBtn.addEventListener('click',()=>{
-                userInput.value='Generate an image or video (type your prompt here)';
-                userInput.focus();
-            });
+        schoolHelpDropdown.addEventListener('change',()=>{
+            selectedSchoolMode=schoolHelpDropdown.value;
+            showNotification(`School mode set to: ${selectedSchoolMode||'None'}`);
+        });
 
-            sendBtn.addEventListener('click',()=>{
-                if(!userInput.value.trim()&&filesArray.length===0)return;
-                if(!hasPermission){
-                    requestPermissions();
-                    return;
-                }
-                const messageId=Date.now().toString();
-                messageQueue.set(messageId,{isContinuation:false});
-                processMessageQueue();
-            });
+        aiModelDropdown.addEventListener('change',()=>{
+            selectedAiModel=aiModelDropdown.value;
+            showNotification(`AI model switched to: ${aiModels[selectedAiModel].name}`);
+            clearChatBtn.click();
+        });
 
-            userInput.addEventListener('keypress',e=>{
-                if(e.key==='Enter'&&!e.shiftKey){
-                    e.preventDefault();
-                    sendBtn.click();
-                }
-            });
+        rephraseBtn.addEventListener('click',()=>{
+            if(latestAiResponse){
+                const rephraseMessage=`Rephrase this to sound more natural and less AI-generated: "${latestAiResponse}"`;
+                userInput.value=rephraseMessage;
+                sendBtn.click();
+            }else{
+                showNotification('Nothing to rephrase—send a message first!','error');
+            }
+        });
 
-            userInput.addEventListener('paste',async e=>{
-                const items=e.clipboardData.items;
-                for(const item of items){
-                    if(item.type.startsWith('image/')||item.type.startsWith('video/')){
-                        const file=item.getAsFile();
-                        if(file){
-                            filesArray.push(file);
-                            displayFileItem(file);
-                            fileClearBtn.style.display='block';
-                        }
-                    }
-                }
-            });
-
-            clearChatBtn.addEventListener('click',()=>{
-                chatHistory.innerHTML='';
-                conversationHistory=[{role:'assistant',content:aiModels[selectedAiModel].personality}];
-                pastedImageHashes.clear();
-                const welcomeMessage=document.createElement('div');
-                welcomeMessage.className='chat-message ai';
-                welcomeMessage.innerHTML=`<div class="chat-message-content">${aiModels[selectedAiModel].personality}</div><div class="chat-message-meta">Just now</div>`;
-                chatHistory.appendChild(welcomeMessage);
-                chatArea.scrollTop=chatArea.scrollHeight;
-                showNotification('Chat cleared—fresh start!');
-            });
-
-            copyCodeBtn.addEventListener('click',()=>{
-                if(latestCodeBlocks.length>0){
-                    const allCode=latestCodeBlocks.join('\n\n');
-                    navigator.clipboard.writeText(allCode).then(()=>{
-                        showNotification('All code copied—nice!');
-                    }).catch(()=>{
-                        showNotification('Copy failed—oops!','error');
-                    });
-                }else{
-                    showNotification('No code to copy—write some first!','error');
-                }
-            });
-
-            chatHistory.addEventListener('click',e=>{
-                if(e.target.classList.contains('copy-btn')){
-                    const codeText=e.target.parentElement.querySelector('.code-text').textContent;
-                    navigator.clipboard.writeText(codeText).then(()=>{
-                        showNotification('Code copied!');
-                    }).catch(()=>{
-                        showNotification('Copy failed!','error');
-                    });
-                }else if(e.target.classList.contains('copy-all-btn')){
-                    const allCode=latestCodeBlocks.join('\n\n');
-                    navigator.clipboard.writeText(allCode).then(()=>{
-                        showNotification('All code copied!');
-                    }).catch(()=>{
-                        showNotification('Copy failed!','error');
-                    });
-                }else if(e.target.tagName==='IMG'||e.target.tagName==='VIDEO'){
-                    filePreviewModal.classList.add('open');
-                    filePreviewContent.innerHTML='';
-                    const clone=e.target.cloneNode();
-                    if(e.target.tagName==='VIDEO')clone.controls=true;
-                    filePreviewContent.appendChild(clone);
-                }
-            });
-
-            codeSidebarClose.addEventListener('click',()=>{
-                codeSidebar.classList.remove('open');
-            });
-
-            keepGeneratingBtn.addEventListener('click',()=>{
+        stopGeneratingBtn.addEventListener('click',()=>{
+            if(isGenerating){
+                abortController.abort();
+                isGenerating=false;
+                typingIndicator.style.display='none';
+                sendBtn.disabled=false;
+                stopGeneratingBtn.style.display='none';
                 keepGeneratingBtn.classList.remove('show');
-                const messageId=Date.now().toString();
-                messageQueue.set(messageId,{isContinuation:true});
-                processMessageQueue();
-            });
+                showNotification('Generation stopped.');
+            }
+        });
 
-            schoolHelpDropdown.addEventListener('change',()=>{
-                selectedSchoolMode=schoolHelpDropdown.value;
-                showNotification(`School mode set to: ${selectedSchoolMode||'None'}`);
-            });
+        discordBtn.addEventListener('click',()=>{
+            window.open(DISCORD_INVITE,'_blank');
+        });
 
-            aiModelDropdown.addEventListener('change',()=>{
-                selectedAiModel=aiModelDropdown.value;
-                showNotification(`AI model switched to: ${aiModels[selectedAiModel].name}`);
-                clearChatBtn.click();
-            });
+        verbiflowUpdatesBtn.addEventListener('click',()=>{
+            const updatesMessage=document.createElement('div');
+            updatesMessage.className='chat-message ai';
+            updatesMessage.innerHTML=`<div class="chat-message-content">VerbiFlow Updates: Now with Sora and DALL·E for image and video generation, faster AI responses with WebSocket streaming, optimized worker pools, enhanced UI with smoother animations, and duplicate media prevention!</div><div class="chat-message-meta">Just now</div>`;
+            chatHistory.appendChild(updatesMessage);
+            chatArea.scrollTop=chatArea.scrollHeight;
+        });
 
-            rephraseBtn.addEventListener('click',()=>{
-                if(latestAiResponse){
-                    const rephraseMessage=`Rephrase this to sound more natural and less AI-generated: "${latestAiResponse}"`;
-                    userInput.value=rephraseMessage;
-                    sendBtn.click();
-                }else{
-                    showNotification('Nothing to rephrase—send a message first!','error');
-                }
-            });
+        premiumPriceBtn.addEventListener('click',()=>{
+            window.location.href='/planprice';
+        });
 
-            stopGeneratingBtn.addEventListener('click',()=>{
-                if(isGenerating){
-                    abortController.abort();
-                    isGenerating=false;
-                    typingIndicator.style.display='none';
-                    sendBtn.disabled=false;
-                    stopGeneratingBtn.style.display='none';
-                    keepGeneratingBtn.classList.remove('show');
-                    showNotification('Generation stopped.');
-                }
-            });
+        themeBtn.addEventListener('click',toggleTheme);
 
-            discordBtn.addEventListener('click',()=>{
-                window.open(DISCORD_INVITE,'_blank');
-            });
+        const observer=new MutationObserver(()=>{
+            chatArea.scrollTop=chatArea.scrollHeight;
+        });
+        observer.observe(chatHistory,{childList:true});
 
-            verbiflowUpdatesBtn.addEventListener('click',()=>{
-                const updatesMessage=document.createElement('div');
-                updatesMessage.className='chat-message ai';
-                updatesMessage.innerHTML=`<div class="chat-message-content">VerbiFlow Updates: Now with Sora and DALL·E for image and video generation, faster AI responses with WebSocket streaming, optimized worker pools, enhanced UI with smoother animations, and duplicate media prevention!</div><div class="chat-message-meta">Just now</div>`;
-                chatHistory.appendChild(updatesMessage);
-                chatArea.scrollTop=chatArea.scrollHeight;
-            });
+        window.addEventListener('resize',()=>{
+            userInput.style.height='auto';
+            userInput.style.height=`${Math.min(userInput.scrollHeight,200)}px`;
+        });
 
-            themeBtn.addEventListener('click',toggleTheme);
-
-            const observer=new MutationObserver(()=>{
-                chatArea.scrollTop=chatArea.scrollHeight;
-            });
-            observer.observe(chatHistory,{childList:true});
-
-            window.addEventListener('resize',()=>{
-                userInput.style.height='auto';
-                userInput.style.height=`${Math.min(userInput.scrollHeight,220)}px`;
-            });
-
+        initIndexedDB().then(()=>{
             setupWorkerPool();
             setupWebSocket();
             loadTheme();
             requestPermissions();
             DDoSProtection.init();
             setInterval(prefetchResponses,5000);
-        </script>
-    </body>
+        });
+    </script>
+</body>
 </html>
