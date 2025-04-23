@@ -20,21 +20,27 @@
         .dark-mode body{background:linear-gradient(145deg,#1e293b,#0f172a);color:#e2e8f0;}
         .container{width:100vw;height:100vh;background:#ffffff;border-radius:0;box-shadow:none;overflow:hidden;display:flex;flex-direction:column;transition:all .3s ease;}
         .dark-mode .container{background:#1e293b;}
-        .nav-bar{background:linear-gradient(90deg,#1e40af,#3b82f6);padding:16px 32px;display:flex;gap:8px;justify-content:space-between;align-items:center;box-shadow:0 4px 20px rgba(0,0,0,.3);border-bottom:1px solid rgba(255,255,255,.1);}
+        .nav-bar{background:linear-gradient(90deg,#1e40af,#3b82f6);padding:16px 32px;display:flex;gap:8px;justify-content:space-between;align-items:center;box-shadow:0 4px 20px rgba(0,0,0,.3);border-bottom:1px solid rgba(255,255,255,.1);position:relative;}
         .dark-mode .nav-bar{background:linear-gradient(90deg,#1e3a8a,#2563eb);}
-        .nav-btn{background:#ffffff;color:#1e40af;border:none;padding:10px 24px;border-radius:12px;cursor:pointer;font-size:15px;font-weight:600;transition:all .24s ease;outline:none;}
-        .dark-mode .nav-btn{background:#334155;color:#93c5fd;}
-        .nav-btn:hover{transform:scale(1.05);background:#f1f5f9;box-shadow:0 4px 16px rgba(0,0,0,.2);}
-        .dark-mode .nav-btn:hover{background:#475569;}
-        .nav-btn:active{transform:scale(.98);}
-        .app-btn{background:#ff4d4f;color:#ffffff;border:none;padding:10px 24px;border-radius:12px;cursor:pointer;font-size:15px;font-weight:600;transition:all .24s ease;display:flex;align-items:center;gap:8px;}
-        .app-btn:hover{background:#ff7875;transform:scale(1.05);}
-        .app-btn i{font-size:18px;}
+        .menu-btn{background:#ffffff;color:#1e40af;border:none;padding:10px 20px;border-radius:12px;cursor:pointer;font-size:15px;font-weight:600;transition:all .24s ease;display:flex;align-items:center;gap:8px;}
+        .dark-mode .menu-btn{background:#334155;color:#93c5fd;}
+        .menu-btn:hover{background:#f1f5f9;box-shadow:0 4px 16px rgba(0,0,0,.2);}
+        .dark-mode .menu-btn:hover{background:#475569;}
+        .menu-btn i{font-size:18px;}
+        .sidebar{position:fixed;top:0;left:-300px;width:300px;height:100%;background:#ffffff;border-right:1px solid #e2e8f0;padding:32px 24px;transition:left .3s ease;z-index:200;display:flex;flex-direction:column;gap:12px;}
+        .dark-mode .sidebar{background:#1e293b;border-right:1px solid #334155;}
+        .sidebar.open{left:0;}
+        .sidebar-btn{background:#f1f5f9;color:#1e40af;border:none;padding:14px;border-radius:12px;cursor:pointer;font-size:15px;font-weight:600;text-align:left;transition:all .24s ease;}
+        .dark-mode .sidebar-btn{background:#334155;color:#93c5fd;}
+        .sidebar-btn:hover{background:#e2e8f0;transform:scale(1.02);}
+        .dark-mode .sidebar-btn:hover{background:#475569;}
         .discord-btn{background:#5865f2;color:#ffffff;}
         .discord-btn:hover{background:#4752c4;}
-        .theme-btn{background:#ffffff;color:#1e40af;border:2px solid #1e40af;padding:8px 16px;border-radius:12px;cursor:pointer;font-size:15px;font-weight:600;display:flex;align-items:center;gap:6px;transition:all .24s ease;}
+        .app-btn{background:#ff4d4f;color:#ffffff;}
+        .app-btn:hover{background:#ff7875;}
+        .theme-btn{background:#ffffff;color:#1e40af;border:2px solid #1e40af;padding:12px;border-radius:12px;font-size:15px;font-weight:600;display:flex;align-items:center;gap:6px;}
         .dark-mode .theme-btn{background:#334155;color:#93c5fd;border:2px solid #60a5fa;}
-        .theme-btn:hover{transform:scale(1.05);background:#f1f5f9;}
+        .theme-btn:hover{background:#f1f5f9;}
         .dark-mode .theme-btn:hover{background:#475569;}
         .theme-btn i{font-size:18px;}
         .header{background:#ffffff;padding:20px;text-align:center;border-bottom:1px solid #e2e8f0;}
@@ -67,29 +73,18 @@
         .code-block{position:relative;margin:14px 0;border-radius:16px;overflow:hidden;}
         .code-block pre{background:#0f172a;color:#e2e8f0;padding:18px;border-radius:16px;overflow-x:auto;font-family:'JetBrains Mono',monospace;font-size:15px;line-height:1.7;}
         .dark-mode .code-block pre{background:#1e293b;}
-        .code-text{background:#0f172a;color:#e2e8f0;padding:18px;border-radius:16px;font-family:'JetBrains Mono',monospace;font-size:15px;white-space:pre-wrap;user-select:text;}
-        .dark-mode .code-text{background:#1e293b;}
-        .hello-code-block{position:relative;margin:14px 0;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#1e40af,#3b82f6);box-shadow:0 10px 25px rgba(0,0,0,.35);padding:4px;}
-        .dark-mode .hello-code-block{background:linear-gradient(135deg,#1e3a8a,#2563eb);}
-        .hello-code-block pre{background:#ffffff;color:#1e40af;padding:18px;border-radius:12px;overflow-x:auto;font-family:'JetBrains Mono',monospace;font-size:15px;line-height:1.7;border:1px solid #e2e8f0;}
-        .dark-mode .hello-code-block pre{background:#111827;color:#93c5fd;border:1px solid #334155;}
-        .hello-code-block pre::before{content:"✨ Hello Code ✨";display:block;color:#ffffff;font-size:14px;font-weight:600;margin-bottom:10px;padding:6px 10px;border-radius:10px;background:#1e40af;}
-        .dark-mode .hello-code-block pre::before{background:#2563eb;}
-        .copy-btn,.copy-all-btn{background:#1e40af;color:#ffffff;border:none;padding:10px 16px;border-radius:14px;cursor:pointer;font-size:14px;font-weight:600;transition:all .24s ease;}
-        .copy-btn{position:absolute;top:12px;right:12px;}
-        .copy-all-btn{position:absolute;top:12px;right:90px;}
-        .dark-mode .copy-btn,.dark-mode .copy-all-btn{background:#1e3a8a;}
-        .copy-btn:hover,.copy-all-btn:hover{background:#3b82f6;transform:scale(1.05);box-shadow:0 4px 16px rgba(0,0,0,.2);}
-        .dark-mode .copy-btn:hover,.dark-mode .copy-all-btn:hover{background:#2563eb;}
-        .code-sidebar{position:fixed;top:0;right:-500px;width:500px;height:100%;background:#f8fafc;border-left:1px solid #e2e8f0;padding:28px;overflow-y:auto;transition:right .3s ease;z-index:200;}
-        .dark-mode .code-sidebar{background:#1e293b;border-left:1px solid #334155;}
-        .code-sidebar.open{right:0;}
-        .code-sidebar-close{background:#ef4444;color:#ffffff;border:none;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:22px;margin-bottom:14px;}
-        .code-sidebar-close:hover{background:#dc2626;transform:scale(1.15);}
-        .code-sidebar-content{font-family:'JetBrains Mono',monospace;font-size:15px;color:#0f172a;white-space:pre-wrap;}
-        .dark-mode .code-sidebar-content{color:#e2e8f0;}
-        .file-upload-container{padding:8px;border-top:1px solid #e2e8f0;background:#ffffff;border-bottom:1px solid #e2e8f0;}
+        .copy-btn{background:#1e40af;color:#ffffff;border:none;padding:10px 16px;border-radius:14px;cursor:pointer;font-size:14px;font-weight:600;transition:all .24s ease;position:absolute;top:12px;right:12px;}
+        .dark-mode .copy-btn{background:#1e3a8a;}
+        .copy-btn:hover{background:#3b82f6;transform:scale(1.05);box-shadow:0 4px 16px rgba(0,0,0,.2);}
+        .dark-mode .copy-btn:hover{background:#2563eb;}
+        .file-upload-container{padding:8px;border-top:1px solid #e2e8f0;background:#ffffff;border-bottom:1px solid #e2e8f0;transition:max-height .3s ease;overflow:hidden;}
         .dark-mode .file-upload-container{background:#1e293b;border-top:1px solid #334155;border-bottom:1px solid #334155;}
+        .file-upload-container.collapsed{max-height:40px;}
+        .toggle-actions-btn{background:#6b7280;color:#ffffff;border:none;padding:8px;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;margin:0 auto 8px;transition:transform .3s ease;}
+        .dark-mode .toggle-actions-btn{background:#4b5563;}
+        .toggle-actions-btn:hover{background:#9ca3af;}
+        .dark-mode .toggle-actions-btn:hover{background:#6b7280;}
+        .toggle-actions-btn.collapsed{transform:rotate(180deg);}
         .file-actions{display:flex;gap:10px;align-items:center;padding:10px 0;justify-content:space-between;border-radius:12px;background:#f8fafc;box-shadow:0 2px 10px rgba(0,0,0,.05);flex-wrap:wrap;}
         .dark-mode .file-actions{background:#111827;}
         .file-input-label{background:#1e40af;color:#ffffff;padding:14px 24px;border-radius:12px;cursor:pointer;font-size:15px;font-weight:600;min-height:48px;transition:all .24s ease;}
@@ -185,8 +180,8 @@
         @media (max-width:768px){
             .container{border-radius:0;padding:0;}
             .nav-bar{padding:12px;gap:6px;}
-            .nav-btn,.app-btn{font-size:13px;padding:8px 16px;}
-            .theme-btn{padding:6px 12px;font-size:13px;}
+            .menu-btn{font-size:13px;padding:8px 16px;}
+            .sidebar{width:100%;left:-100%;}
             .header{padding:16px;}
             .logo{font-size:32px;}
             .chat-area{padding:20px;min-height:50vh;max-height:70vh;}
@@ -201,7 +196,6 @@
             .file-actions{gap:8px;padding:8px;}
             .file-preview-content img,.file-preview-content video{max-width:90% !important;}
             .notification{top:20px;right:20px;padding:12px 24px;font-size:14px;}
-            .code-sidebar{width:100%;right:-100%;}
             .permission-content{max-width:90%;padding:20px;}
             .permission-content h2{font-size:22px;}
             .permission-content p{font-size:14px;}
@@ -212,15 +206,18 @@
 <body>
     <div class="container">
         <div class="nav-bar">
-            <button class="nav-btn" id="clearChatBtn">Clear Chat</button>
-            <button class="nav-btn" id="verbiflowUpdatesBtn">Updates</button>
-            <button class="nav-btn" id="premiumPriceBtn">Premium Price</button>
-            <button class="nav-btn" id="shareChatBtn">Share Chat</button>
-            <button class="nav-btn" id="shareWebsiteBtn">Share website to friends.</button>
-            <button class="theme-btn" id="themeBtn"><i class="fas fa-moon"></i> Dark Mode</button>
-            <button class="nav-btn" id="copyCodeBtn">Copy Code</button>
-            <button class="nav-btn discord-btn" id="discordBtn">Discord</button>
-            <button class="app-btn" id="openInAppBtn"><i class="fas fa-mobile-alt"></i> Open in App</button>
+            <button class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i> Menu</button>
+            <div class="sidebar" id="sidebar">
+                <button class="sidebar-btn" id="clearChatBtn">Clear Chat</button>
+                <button class="sidebar-btn" id="verbiflowUpdatesBtn">Updates</button>
+                <button class="sidebar-btn" id="premiumPriceBtn">Premium Price</button>
+                <button class="sidebar-btn" id="shareChatBtn">Share Chat</button>
+                <button class="sidebar-btn" id="shareWebsiteBtn">Share website to friends</button>
+                <button class="sidebar-btn theme-btn" id="themeBtn"><i class="fas fa-moon"></i> Dark Mode</button>
+                <button class="sidebar-btn" id="copyCodeBtn">Copy Code</button>
+                <button class="sidebar-btn discord-btn" id="discordBtn">Discord</button>
+                <button class="sidebar-btn app-btn" id="openInAppBtn">Open in App</button>
+            </div>
         </div>
         <div class="header">
             <div class="logo">VerbiFlow</div>
@@ -240,6 +237,7 @@
             </div>
         </div>
         <div class="file-upload-container" id="fileUploadContainer">
+            <button class="toggle-actions-btn" id="toggleActionsBtn">^</button>
             <div class="file-actions">
                 <label class="file-input-label" for="fileInput">Upload File</label>
                 <input type="file" class="file-input" id="fileInput" multiple accept="image/*,video/*,text/*,application/json,application/xml">
@@ -287,10 +285,6 @@
             </button>
             <div class="file-preview-content" id="filePreviewContent"></div>
         </div>
-        <div class="code-sidebar" id="codeSidebar">
-            <button class="code-sidebar-close" id="codeSidebarClose">×</button>
-            <pre class="code-sidebar-content" id="codeSidebarContent"></pre>
-        </div>
         <div class="notification" id="notification"></div>
         <div class="permission-modal" id="permissionModal">
             <div class="permission-content">
@@ -312,8 +306,6 @@
         const SEARCH_API_URL="https://api.searchengine.com/v1/search";
         const DISCORD_INVITE="https://discord.gg/rCTRQvD4TP";
         const APP_URL="https://verbiflow.app/download";
-        const MAX_VIDEO_SIZE=40*1024*1024;
-        const MAX_FILE_SIZE=40*1024*1024;
         const BATCH_SIZE=200;
         const RATE_LIMIT_REQUESTS=2000;
         const RATE_LIMIT_WINDOW=30*1000;
@@ -332,6 +324,8 @@
         const loadingSpinner=document.getElementById('loadingSpinner');
         const typingIndicator=document.getElementById('typingIndicator');
         const chatArea=document.getElementById('chatArea');
+        const menuBtn=document.getElementById('menuBtn');
+        const sidebar=document.getElementById('sidebar');
         const clearChatBtn=document.getElementById('clearChatBtn');
         const copyCodeBtn=document.getElementById('copyCodeBtn');
         const discordBtn=document.getElementById('discordBtn');
@@ -342,9 +336,7 @@
         const themeBtn=document.getElementById('themeBtn');
         const openInAppBtn=document.getElementById('openInAppBtn');
         const notification=document.getElementById('notification');
-        const codeSidebar=document.getElementById('codeSidebar');
-        const codeSidebarClose=document.getElementById('codeSidebarClose');
-        const keepGeneratingBtn=document.getElementById('keepGeneratingBtn');
+        const toggleActionsBtn=document.getElementById('toggleActionsBtn');
         const generateMediaBtn=document.getElementById('generateMediaBtn');
         const schoolHelpDropdown=document.getElementById('schoolHelpDropdown');
         const aiModelDropdown=document.getElementById('aiModelDropdown');
@@ -361,16 +353,11 @@
         let isDarkMode=false;
         let isGenerating=false;
         let generationLock=false;
-        let lastMessageContent='';
-        let lastMessageTimestamp=0;
         let generationTimeout=null;
         let selectedSchoolMode='';
         let selectedAiModel='default';
         let messageQueue=new Map();
         let isProcessing=false;
-        let codeAnalysisCache=new Map();
-        let videoAnalysisCache=new Map();
-        let imageAnalysisCache=new Map();
         let responseCache=new Map();
         let searchCache=new Map();
         let wsMessageCache=new Map();
@@ -394,44 +381,6 @@
             codeMasterAI:{name:"CodeMasterAI",temperature:0.3,maxTokens:17325,personality:"Yo, I’m CodeMasterAI—your coding expert with a love for clean, efficient solutions! I’m all about debugging and optimizing. Drop me some code, and let’s make it shine!"},
             visualGeniusAI:{name:"VisualGeniusAI",temperature:0.6,maxTokens:15593,personality:"Hi, I’m VisualGeniusAI—an AI with a flair for visuals and creativity! Whether it’s generating images, videos, or designing UI, I’ve got you covered. What do you want to create?"},
             betterGrok:{name:"Better Grok",temperature:0.3,maxTokens:22000,personality:"I’m Better Grok—a faster, smarter version of Grok with all features unlocked for free! I’m here to deliver quick, insightful answers with enhanced capabilities. Let’s get started!"}
-        };
-
-        const livelyResponses={
-            default:[
-                "Let’s dive into this with flair—here’s a detailed breakdown for you!",
-                "That’s a brilliant query! I’ve got a comprehensive answer ready—check it out!",
-                "I’m buzzing with excitement! Here’s a deep dive into your request…",
-                "Your question sparks my creativity! Let’s explore this with a rich response…",
-                "Fresh insights incoming! I’ve searched the web to enhance my answer—here you go!"
-            ],
-            lingoLogicAI:[
-                "A fascinating challenge! Let me unravel it with precision and wit—here we go!",
-                "I’m ready to tackle this with linguistic finesse—brace for an insightful reply!",
-                "Let’s dissect this with clarity and humor—here’s my detailed take!",
-                "Your query ignites my logic circuits! Here’s a nuanced response for you!",
-                "I’ve tapped into the latest web data for a sharper response—check this out!"
-            ],
-            codeMasterAI:[
-                "Code mode activated! Let’s optimize and debug with a thorough solution—here it is!",
-                "I’m in my element! Here’s a meticulously crafted code solution for you!",
-                "Let’s polish this code to perfection—check out this detailed implementation!",
-                "This is my domain! Here’s an advanced, optimized code response—ready to roll!",
-                "I’ve pulled the latest coding trends from the web—here’s an enhanced solution!"
-            ],
-            visualGeniusAI:[
-                "I’m envisioning something spectacular! Here’s a creative and detailed output…",
-                "Let’s craft a visual masterpiece with depth—check out this rich result!",
-                "My creative gears are turning! Here’s a stunning, layered visual response!",
-                "I’m channeling my artistic side! Here’s a vibrant and detailed creation for you!",
-                "I’ve searched the web for inspiration—here’s a visually stunning result!"
-            ],
-            betterGrok:[
-                "I’m Better Grok, ready to deliver lightning-fast insights! Here’s your answer…",
-                "Speed and smarts—let’s tackle this with a top-notch response!",
-                "I’ve got all of Grok’s features and more, for free! Here’s a quick, detailed reply…",
-                "Enhanced and efficient—here’s a superior answer for you!",
-                "Better Grok at your service! Let’s dive in with a fast, insightful response!"
-            ]
         };
 
         function rateLimitCheck(){
@@ -566,220 +515,6 @@
             }
         }
 
-        class CodeAnalyzer{
-            static analyzeCode(code){
-                const issues=[];
-                const lines=code.split('\n');
-                const variableUsage=new Map();
-                let indentLevel=0;
-                let braceCount=0;
-                let loopDepth=0;
-                lines.forEach((line,index)=>{
-                    const trimmed=line.trim();
-                    if(!trimmed)return;
-                    const indent=line.match(/^\s*/)[0].length/2;
-                    if(trimmed.match(/\{/))braceCount++;
-                    if(trimmed.match(/\}/))braceCount--;
-                    if(trimmed.match(/\b(for|while)\b/))loopDepth++;
-                    if(trimmed.match(/\bbreak\b/))loopDepth--;
-                    if(braceCount<0)issues.push(`Line ${index+1}: Unmatched closing brace.`);
-                    if(loopDepth>3)issues.push(`Line ${index+1}: Excessive loop nesting (depth > 3).`);
-                    if(Math.abs(indent-indentLevel)>1)issues.push(`Line ${index+1}: Inconsistent indentation.`);
-                    indentLevel=trimmed.match(/\{$/) ? indent+1 : trimmed.match(/\}/) ? indent : indentLevel;
-                    if(trimmed.match(/var\s+\w+/))issues.push(`Line ${index+1}: Use 'let' or 'const' instead of 'var'.`);
-                    const variableMatch=trimmed.match(/(let|const)\s+(\w+)/);
-                    if(variableMatch)variableUsage.set(variableMatch[2],{declared:index+1,used:false});
-                    variableUsage.forEach((value,key)=>{
-                        if(trimmed.includes(key) && index+1!==value.declared)value.used=true;
-                    });
-                    if(trimmed.match(/eval\(/))issues.push(`Line ${index+1}: Avoid using 'eval'—security risk.`);
-                    if(trimmed.match(/==\s/))issues.push(`Line ${index+1}: Use '===' instead of '=='.`);
-                    if(trimmed.length>100)issues.push(`Line ${index+1}: Line exceeds 100 characters.`);
-                });
-                variableUsage.forEach((value,key)=>{
-                    if(!value.used)issues.push(`Variable '${key}' declared on line ${value.declared} but never used.`);
-                });
-                if(braceCount!==0)issues.push(`Unmatched braces in code.`);
-                return issues;
-            }
-            static optimizeCode(code){
-                let optimized=code;
-                optimized=optimized.replace(/\bvar\b/g,'const');
-                optimized=optimized.replace(/\b==\b/g,'===');
-                optimized=optimized.replace(/eval\([^)]+\);?\n?/g,'');
-                optimized=optimized.replace(/\n\s*\n/g,'\n');
-                const lines=optimized.split('\n');
-                let indentLevel=0;
-                optimized=lines.map(line=>{
-                    const trimmed=line.trim();
-                    if(!trimmed)return '';
-                    if(trimmed.match(/\}/))indentLevel--;
-                    const indent=' '.repeat(indentLevel*2);
-                    if(trimmed.match(/\{$/))indentLevel++;
-                    return indent+trimmed;
-                }).filter(line=>line).join('\n');
-                return optimized;
-            }
-        }
-
-        class Obfuscator{
-            static obfuscateBase64(code){
-                return btoa(code);
-            }
-            static obfuscateXOR(code,key=42){
-                return String.fromCharCode(...code.split('').map((c,i)=>c.charCodeAt(0)^(key+i%13)));
-            }
-            static obfuscateHex(code){
-                return code.split('').map(c=>'\\x'+c.charCodeAt(0).toString(16).padStart(2,'0')).join('');
-            }
-            static obfuscateStringManipulation(code){
-                return code.split('').reverse().map(c=>`[${c.charCodeAt(0)}]`).join('');
-            }
-            static obfuscateVariableRenaming(code){
-                const varMap=new Map();
-                let counter=0;
-                return code.replace(/\b([a-zA-Z_]\w*)\b/g,(match)=>{
-                    if(['var','let','const','function','return','if','else','for','while'].includes(match))return match;
-                    if(!varMap.has(match))varMap.set(match,`_v${counter++}`);
-                    return varMap.get(match);
-                });
-            }
-            static obfuscateControlFlow(code){
-                const lines=code.split('\n');
-                const wrapped=lines.map(line=>`(() => { ${line}; return Math.random() > 0.5 ? true : true; })();`);
-                return wrapped.join('\n');
-            }
-            static obfuscateNumberEncoding(code){
-                return code.replace(/\d+/g,num=>`Number(${num.toString(16).split('').map(c=>`'${c}'`).join('+')})`);
-            }
-            static obfuscateStringSplitting(code){
-                const segments=code.match(/.{1,10}/g)||[code];
-                return segments.map(s=>`String.fromCharCode(${s.split('').map(c=>c.charCodeAt(0)).join(',')})`).join('+');
-            }
-            static obfuscatePolybiusSquare(code){
-                const polybiusMap='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').reduce((map,c,i)=>{map[c]=(Math.floor(i/5)+1)+''+((i%5)+1);return map;},{});
-                return code.toUpperCase().split('').map(c=>polybiusMap[c]||(c.match(/[0-9]/)?c:'#')).join('');
-            }
-            static obfuscateNestedFunctions(code){
-                return `((x)=>(y)=>(z)=>z(x(y)))(x=>x.split('').reverse().join(''))(x=>x.split('').map(c=>String.fromCharCode(c.charCodeAt(0)+1)).join(''))(${JSON.stringify(code)})`;
-            }
-            static obfuscate(code,method='mixed'){
-                let result=code;
-                if(method==='mixed'){
-                    result=this.obfuscatePolybiusSquare(result);
-                    result=this.obfuscateStringSplitting(result);
-                    result=this.obfuscateNestedFunctions(result);
-                    result=this.obfuscateNumberEncoding(result);
-                    result=this.obfuscateControlFlow(result);
-                    result=this.obfuscateVariableRenaming(result);
-                    result=this.obfuscateStringManipulation(result);
-                    result=this.obfuscateXOR(result);
-                    result=this.obfuscateHex(result);
-                    result=this.obfuscateBase64(result);
-                }else if(method==='base64'){
-                    result=this.obfuscateBase64(result);
-                }else if(method==='xor'){
-                    result=this.obfuscateXOR(result);
-                }else if(method==='hex'){
-                    result=this.obfuscateHex(result);
-                }else if(method==='variable'){
-                    result=this.obfuscateVariableRenaming(result);
-                }else if(method==='controlFlow'){
-                    result=this.obfuscateControlFlow(result);
-                }else if(method==='number'){
-                    result=this.obfuscateNumberEncoding(result);
-                }
-                return result;
-            }
-        }
-
-        class Deobfuscator{
-            static decodeBase64(str){
-                try{
-                    return atob(str);
-                }catch{
-                    return str;
-                }
-            }
-            static decodeXOR(str,key=42){
-                return String.fromCharCode(...str.split('').map((c,i)=>c.charCodeAt(0)^(key+i%13)));
-            }
-            static decodeStringManipulation(str){
-                let result=str.replace(/\[(\d+)\]/g,(_,num)=>String.fromCharCode(parseInt(num)));
-                result=result.split('').reverse().join('');
-                return result;
-            }
-            static decodeHex(str){
-                try{
-                    return str.replace(/\\x([0-9A-Fa-f]{2})/g,(_,hex)=>String.fromCharCode(parseInt(hex,16)));
-                }catch{
-                    return str;
-                }
-            }
-            static decodeControlFlow(str){
-                return str.replace(/\(function\(\)\{([\s\S]*?);return (?:Math\.random\(\) > 0\.5 \? true : true);?\}\)\(\);?/g,'$1');
-            }
-            static decodeNumberEncoding(str){
-                return str.replace(/Number\(([^)]+)\)/g,(_,expr)=>{
-                    const hex=expr.replace(/[^0-9a-fA-F]/g,'');
-                    return parseInt(hex,16).toString();
-                });
-            }
-            static decodeStringSplitting(str){
-                try{
-                    const segments=str.split('+');
-                    return segments.map(segment=>{
-                        const chars=segment.match(/String\.fromCharCode\(([\d,]+)\)/)?.[1].split(',').map(Number);
-                        return chars?String.fromCharCode(...chars):segment;
-                    }).join('');
-                }catch{
-                    return str;
-                }
-            }
-            static decodePolybiusSquare(str){
-                const polybiusMap={};
-                'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').forEach((c,i)=>{
-                    polybiusMap[(Math.floor(i/5)+1)+''+((i%5)+1)]=c;
-                });
-                let result='';
-                for(let i=0;i<str.length;i+=2){
-                    const pair=str.slice(i,i+2);
-                    result+=polybiusMap[pair]||(pair.match(/[0-9]/)?pair:'#');
-                }
-                return result;
-            }
-            static decodeNestedFunctions(str){
-                try{
-                    const match=str.match(/\(\(x\)=>\(y\)=>\(z\)=>z\(x\(y\)\)\)\(x=>x\.split\(''\)\.reverse\(\)\.join\(''\)\)\(x=>x\.split\(''\)\.map\(c=>String\.fromCharCode\(c\.charCodeAt\(0\)\+1\)\)\.join\(''\)\)\((.*?)\)/);
-                    if(!match)return str;
-                    let result=JSON.parse(match[1]);
-                    result=result.split('').map(c=>String.fromCharCode(c.charCodeAt(0)-1)).join('');
-                    result=result.split('').reverse().join('');
-                    return result;
-                }catch{
-                    return str;
-                }
-            }
-            static deobfuscate(code){
-                let result=code;
-                let methods=['base64','xor','hex','stringManipulation','controlFlow','number','stringSplitting','polybiusSquare','nestedFunctions'];
-                for(let i=0;i<methods.length*2;i++){
-                    const method=methods[i%methods.length];
-                    if(method==='base64')result=this.decodeBase64(result);
-                    else if(method==='xor')result=this.decodeXOR(result);
-                    else if(method==='hex')result=this.decodeHex(result);
-                    else if(method==='stringManipulation')result=this.decodeStringManipulation(result);
-                    else if(method==='controlFlow')result=this.decodeControlFlow(result);
-                    else if(method==='number')result=this.decodeNumberEncoding(result);
-                    else if(method==='stringSplitting')result=this.decodeStringSplitting(result);
-                    else if(method==='polybiusSquare')result=this.decodePolybiusSquare(result);
-                    else if(method==='nestedFunctions')result=this.decodeNestedFunctions(result);
-                    else break;
-                }
-                return result;
-            }
-        }
-
         class MediaProcessor{
             static async analyzeImage(imageFile){
                 const imageUrl=await readImage(imageFile);
@@ -801,7 +536,6 @@
                 return data.choices[0].message.content;
             }
             static async analyzeVideo(videoFile){
-                if(videoFile.size>MAX_VIDEO_SIZE)return `Video size exceeds ${MAX_VIDEO_SIZE/1024/1024}MB limit.`;
                 const formData=new FormData();
                 formData.append('file',videoFile);
                 const response=await fetch(VIDEO_PROCESSING_API,{
@@ -959,7 +693,7 @@
         }
 
         function initializeWorkerPool(){
-            const numWorkers=Math.max(8,navigator.hardwareConcurrency*1.5);
+            const numWorkers=Math.max(12,navigator.hardwareConcurrency*2);
             for(let i=0;i<numWorkers;i++){
                 const worker=new Worker(URL.createObjectURL(new Blob([`
                     self.onmessage=async(e)=>{
@@ -1012,10 +746,9 @@
             batchProcessRequests();
         }
 
-        async function fetchResponse(prompt,stream=false){
+        async function fetchResponse(prompt,stream=false,apiUrl=API_URL){
             if(generationLock)return;
             generationLock=true;
-            const apiUrl=selectedAiModel==='betterGrok'?GROK_API_URL:API_URL;
             try{
                 if(stream&&ws&&ws.readyState===WebSocket.OPEN){
                     ws.send(JSON.stringify({
@@ -1055,449 +788,450 @@
                         const {done,value}=await reader.read();
                         if(done)break;
                         const chunk=new TextDecoder().decode(value);
-                    const lines=chunk.split('\n').filter(line=>line.startsWith('data:'));
-                    for(const line of lines){
-                        if(line==='data: [DONE]')break;
-                        const json=JSON.parse(line.replace('data: ',''));
-                        const content=json.choices[0].delta.content||'';
-                        aiMessage.querySelector('.chat-message-content').innerHTML+=content;
-                        result+=content;
-                        chatArea.scrollTop=chatArea.scrollHeight;
-                    }
-                }
-                return result;
-            }
-            const data=await response.json();
-            return data.choices[0].message.content;
-        }finally{
-            generationLock=false;
-        }
-    }
-
-    async function prefetchResponses(){
-        const recentMessages=conversationHistory.slice(-3).map(m=>m.content);
-        const keywords=recentMessages.join(' ').match(/\b\w+\b/g)?.slice(-7)||[];
-        for(const keyword of keywords){
-            if(prefetchQueue.has(keyword))continue;
-            prefetchQueue.set(keyword,true);
-            const apiUrl=selectedAiModel==='betterGrok'?GROK_API_URL:API_URL;
-            const response=await fetchResponse(`Tell me about ${keyword}`,false,apiUrl);
-            responseCache.set(keyword,response);
-        }
-    }
-
-    function formatAiResponse(content){
-        content=content.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>');
-        content=content.replace(/\*(.*?)\*/g,'<em>$1</em>');
-        content=content.replace(/`(.*?)`/g,'<code>$1</code>');
-        content=content.replace(/^### (.*)$/gm,'<h3>$1</h3>');
-        content=content.replace(/^- (.*)$/gm,'<ul><li>$1</li></ul>');
-        content=content.replace(/^\d+\. (.*)$/gm,'<ol><li>$1</li></ol>');
-        content=content.replace(/\|.*\|/g,table=>{
-            const rows=table.split('\n').filter(row=>row.trim());
-            if(rows.length<2)return table;
-            const headers=rows[0].split('|').filter(cell=>cell.trim()).map(cell=>`<th>${cell.trim()}</th>`).join('');
-            const body=rows.slice(2).map(row=>`<tr>${row.split('|').filter(cell=>cell.trim()).map(cell=>`<td>${cell.trim()}</td>`).join('')}</tr>`).join('');
-            return `<table><thead><tr>${headers}</tr></thead><tbody>${body}</tbody></table>`;
-        });
-        const codeBlocks=content.match(/```[\s\S]*?```/g)||[];
-        latestCodeBlocks=codeBlocks.map(block=>block.replace(/```/g,'').trim());
-        content=content.replace(/```[\s\S]*?```/g,'<div class="code-block"><pre><code>CONTENT</code></pre><button class="copy-btn">Copy</button></div>').replace(/CONTENT/g,()=>latestCodeBlocks.shift()||'');
-        return content;
-    }
-
-    async function handleUserInput(){
-        const message=userInput.value.trim();
-        if(!message&&!filesArray.length)return;
-        const now=Date.now();
-        const messageHash=sha256(message+now);
-        if(messageQueue.has(messageHash)){
-            showNotification('Duplicate message detected.','error');
-            return;
-        }
-        messageQueue.set(messageHash,true);
-        setTimeout(()=>messageQueue.delete(messageHash),5000);
-        const userId=sha256(navigator.userAgent+Date.now().toString());
-        if(!await DDoSProtection.analyzeRequest(userId,{csrfToken:sha256(userId+API_KEY)})){
-            showNotification('Request blocked due to security concerns.','error');
-            return;
-        }
-        if(verifyAdminAccess(message))return;
-        if(message.toLowerCase().includes('play a music')||message.toLowerCase().includes('background music')){
-            await playBackgroundMusic(message);
-            return;
-        }
-        const userMessage=document.createElement('div');
-        userMessage.className='chat-message user';
-        userMessage.innerHTML=`<div class="chat-message-content">${message}</div><div class="chat-message-meta">Just now</div>`;
-        chatHistory.appendChild(userMessage);
-        chatArea.scrollTop=chatArea.scrollHeight;
-        conversationHistory.push({role:'user',content:message});
-        userInput.value='';
-        sendBtn.disabled=true;
-        loadingSpinner.style.display='block';
-        typingIndicator.style.display='block';
-        isGenerating=true;
-        stopGeneratingBtn.style.display='block';
-        abortController=new AbortController();
-        let fullResponse;
-        try{
-            const apiUrl=selectedAiModel==='betterGrok'?GROK_API_URL:API_URL;
-            fullResponse=await fetchResponse(message,true,apiUrl);
-        }catch(error){
-            if(error.name==='AbortError'){
-                showNotification('Generation stopped.');
-            }else{
-                showNotification('Error generating response.','error');
-            }
-        }
-        isGenerating=false;
-        stopGeneratingBtn.style.display='none';
-        loadingSpinner.style.display='none';
-        typingIndicator.style.display='none';
-        sendBtn.disabled=false;
-        if(!fullResponse){
-            fullResponse=latestAiResponse;
-            latestAiResponse='';
-        }
-        const formattedResponse=formatAiResponse(fullResponse);
-        const aiMessage=document.createElement('div');
-        aiMessage.className='chat-message ai';
-        aiMessage.innerHTML=`<div class="chat-message-content">${formattedResponse}</div><div class="chat-message-meta">Just now</div>`;
-        chatHistory.appendChild(aiMessage);
-        chatArea.scrollTop=chatArea.scrollHeight;
-        conversationHistory.push({role:'assistant',content:fullResponse});
-        cacheResponse(message,fullResponse);
-        generationTimeout=setTimeout(()=>{
-            keepGeneratingBtn.style.display='block';
-            keepGeneratingBtn.classList.add('show');
-        },3500);
-        const copyButtons=aiMessage.querySelectorAll('.copy-btn');
-        copyButtons.forEach(btn=>{
-            btn.addEventListener('click',()=>{
-                const code=btn.previousElementSibling.textContent;
-                navigator.clipboard.writeText(code);
-                showNotification('Code copied!');
-            });
-        });
-        for(const file of filesArray){
-            let analysis;
-            if(file.type.startsWith('image/')){
-                analysis=await MediaProcessor.analyzeImage(file);
-            }else if(file.type.startsWith('video/')){
-                analysis=await MediaProcessor.analyzeVideo(file);
-            }else if(file.type.startsWith('text/')||file.type.match(/application\/(json|xml)/)){
-                const text=await readText(file);
-                analysis=`File content:\n\`\`\`\n${text}\n\`\`\``;
-            }
-            if(analysis){
-                const fileMessage=document.createElement('div');
-                fileMessage.className='chat-message ai';
-                fileMessage.innerHTML=`<div class="chat-message-content">${formatAiResponse(analysis)}</div><div class="chat-message-meta">Just now</div>`;
-                chatHistory.appendChild(fileMessage);
-                chatArea.scrollTop=chatArea.scrollHeight;
-                conversationHistory.push({role:'assistant',content:analysis});
-            }
-        }
-        filesArray=[];
-        fileList.innerHTML='';
-        fileClearBtn.style.display='none';
-    }
-
-    userInput.addEventListener('input',()=>{
-        userInput.style.height='auto';
-        userInput.style.height=`${userInput.scrollHeight}px`;
-    });
-
-    userInput.addEventListener('keydown',(e)=>{
-        if(e.key==='Enter'&&!e.shiftKey){
-            e.preventDefault();
-            handleUserInput();
-        }
-    });
-
-    sendBtn.addEventListener('click',handleUserInput);
-
-    fileInput.addEventListener('change',async()=>{
-        const files=Array.from(fileInput.files);
-        for(const file of files){
-            if(file.size>MAX_FILE_SIZE){
-                showNotification(`File "${file.name}" exceeds ${MAX_FILE_SIZE/1024/1024}MB limit.`,'error');
-                continue;
-            }
-            filesArray.push(file);
-            const fileItem=document.createElement('div');
-            fileItem.className='file-item';
-            fileItem.innerHTML=`<div class="file-item-name">${file.name}</div><div class="file-item-details">${(file.size/1024/1024).toFixed(2)}MB</div><div class="file-progress" style="width:0%"></div>`;
-            fileList.appendChild(fileItem);
-            const progressBar=fileItem.querySelector('.file-progress');
-            let progress=0;
-            const interval=setInterval(()=>{
-                progress+=10;
-                progressBar.style.width=`${progress}%`;
-                if(progress>=100){
-                    clearInterval(interval);
-                    fileItem.addEventListener('click',async()=>{
-                        let content;
-                        if(file.type.startsWith('image/')){
-                            content=`<img src="${await readImage(file)}" alt="${file.name}">`;
-                        }else if(file.type.startsWith('video/')){
-                            content=`<video controls src="${URL.createObjectURL(file)}"></video>`;
-                        }else if(file.type.startsWith('text/')||file.type.match(/application\/(json|xml)/)){
-                            content=`<pre>${await readText(file)}</pre>`;
+                        const lines=chunk.split('\n').filter(line=>line.startsWith('data:'));
+                        for(const line of lines){
+                            if(line==='data: [DONE]')break;
+                            const json=JSON.parse(line.replace('data: ',''));
+                            const content=json.choices[0].delta.content||'';
+                            aiMessage.querySelector('.chat-message-content').innerHTML+=content;
+                            result+=content;
+                            chatArea.scrollTop=chatArea.scrollHeight;
                         }
-                        filePreviewContent.innerHTML=content;
-                        filePreviewModal.classList.add('open');
-                    });
+                    }
+                    return result;
                 }
-            },50);
-        }
-        fileClearBtn.style.display=filesArray.length?'block':'none';
-        fileInput.value='';
-    });
-
-    fileClearBtn.addEventListener('click',()=>{
-        filesArray=[];
-        fileList.innerHTML='';
-        fileClearBtn.style.display='none';
-    });
-
-    filePreviewClose.addEventListener('click',()=>{
-        filePreviewModal.classList.remove('open');
-        filePreviewContent.innerHTML='';
-    });
-
-    clearChatBtn.addEventListener('click',()=>{
-        chatHistory.innerHTML='';
-        conversationHistory=[{role:'assistant',content:aiModels[selectedAiModel].personality}];
-        const aiMessage=document.createElement('div');
-        aiMessage.className='chat-message ai';
-        aiMessage.innerHTML=`<div class="chat-message-content">${aiModels[selectedAiModel].personality}</div><div class="chat-message-meta">Just now</div>`;
-        chatHistory.appendChild(aiMessage);
-        chatArea.scrollTop=chatArea.scrollHeight;
-        showNotification('Chat cleared!');
-    });
-
-    copyCodeBtn.addEventListener('click',()=>{
-        if(latestCodeBlocks.length){
-            navigator.clipboard.writeText(latestCodeBlocks.join('\n\n'));
-            showNotification('All code blocks copied!');
-        }else{
-            showNotification('No code blocks to copy.','error');
-        }
-    });
-
-    discordBtn.addEventListener('click',()=>{
-        window.open(DISCORD_INVITE,'_blank');
-    });
-
-    verbiflowUpdatesBtn.addEventListener('click',()=>{
-        const aiMessage=document.createElement('div');
-        aiMessage.className='chat-message ai';
-        aiMessage.innerHTML=`<div class="chat-message-content">Here are the latest updates for VerbiFlow:\n- Enhanced UI with full-screen layout.\n- Added Share Chat feature.\n- Improved performance with faster response streaming.</div><div class="chat-message-meta">Just now</div>`;
-        chatHistory.appendChild(aiMessage);
-        chatArea.scrollTop=chatArea.scrollHeight;
-        conversationHistory.push({role:'assistant',content:"Here are the latest updates for VerbiFlow:\n- Enhanced UI with full-screen layout.\n- Added Share Chat feature.\n- Improved performance with faster response streaming."});
-    });
-
-    premiumPriceBtn.addEventListener('click',()=>{
-        window.location.href='/planprice';
-    });
-
-    shareChatBtn.addEventListener('click',()=>{
-        const chatContent=conversationHistory.map(msg=>`${msg.role}: ${msg.content}`).join('\n\n');
-        const blob=new Blob([chatContent],{type:'text/plain'});
-        const url=URL.createObjectURL(blob);
-        const a=document.createElement('a');
-        a.href=url;
-        a.download='VerbiFlow_Chat.txt';
-        a.click();
-        URL.revokeObjectURL(url);
-        showNotification('Chat exported!');
-    });
-
-    shareWebsiteBtn.addEventListener('click',()=>{
-        const websiteUrl=window.location.href;
-        navigator.clipboard.writeText(websiteUrl);
-        showNotification('Website URL copied! Share it with your friends.');
-    });
-
-    themeBtn.addEventListener('click',toggleTheme);
-
-    openInAppBtn.addEventListener('click',()=>{
-        window.open(APP_URL,'_blank');
-    });
-
-    codeSidebarClose.addEventListener('click',()=>{
-        codeSidebar.classList.remove('open');
-    });
-
-    keepGeneratingBtn.addEventListener('click',async()=>{
-        keepGeneratingBtn.style.display='none';
-        keepGeneratingBtn.classList.remove('show');
-        const lastPrompt=conversationHistory[conversationHistory.length-2]?.content||'';
-        const lastResponse=conversationHistory[conversationHistory.length-1]?.content||'';
-        const newPrompt=`Continue from: ${lastResponse}`;
-        conversationHistory.push({role:'user',content:newPrompt});
-        const userMessage=document.createElement('div');
-        userMessage.className='chat-message user';
-        userMessage.innerHTML=`<div class="chat-message-content">Continue generating...</div><div class="chat-message-meta">Just now</div>`;
-        chatHistory.appendChild(userMessage);
-        chatArea.scrollTop=chatArea.scrollHeight;
-        loadingSpinner.style.display='block';
-        typingIndicator.style.display='block';
-        isGenerating=true;
-        stopGeneratingBtn.style.display='block';
-        abortController=new AbortController();
-        let fullResponse;
-        try{
-            const apiUrl=selectedAiModel==='betterGrok'?GROK_API_URL:API_URL;
-            fullResponse=await fetchResponse(newPrompt,true,apiUrl);
-        }catch(error){
-            if(error.name==='AbortError'){
-                showNotification('Generation stopped.');
-            }else{
-                showNotification('Error generating response.','error');
+                const data=await response.json();
+                return data.choices[0].message.content;
+            }finally{
+                generationLock=false;
             }
         }
-        isGenerating=false;
-        stopGeneratingBtn.style.display='none';
-        loadingSpinner.style.display='none';
-        typingIndicator.style.display='none';
-        if(!fullResponse){
-            fullResponse=latestAiResponse;
-            latestAiResponse='';
-        }
-        const formattedResponse=formatAiResponse(fullResponse);
-        const aiMessage=document.createElement('div');
-        aiMessage.className='chat-message ai';
-        aiMessage.innerHTML=`<div class="chat-message-content">${formattedResponse}</div><div class="chat-message-meta">Just now</div>`;
-        chatHistory.appendChild(aiMessage);
-        chatArea.scrollTop=chatArea.scrollHeight;
-        conversationHistory.push({role:'assistant',content:fullResponse});
-        cacheResponse(newPrompt,fullResponse);
-        generationTimeout=setTimeout(()=>{
-            keepGeneratingBtn.style.display='block';
-            keepGeneratingBtn.classList.add('show');
-        },3500);
-    });
 
-    generateMediaBtn.addEventListener('click',async()=>{
-        if(!hasPermission){
-            requestPermissions();
-            return;
+        async function prefetchResponses(){
+            const recentMessages=conversationHistory.slice(-3).map(m=>m.content);
+            const keywords=recentMessages.join(' ').match(/\b\w+\b/g)?.slice(-7)||[];
+            for(const keyword of keywords){
+                if(prefetchQueue.has(keyword))continue;
+                prefetchQueue.set(keyword,true);
+                const apiUrl=selectedAiModel==='betterGrok'?GROK_API_URL:API_URL;
+                const response=await fetchResponse(`Tell me about ${keyword}`,false,apiUrl);
+                responseCache.set(keyword,response);
+            }
         }
-        const prompt=userInput.value.trim()||'Generate a random image';
-        loadingSpinner.style.display='block';
-        typingIndicator.style.display='block';
-        let mediaUrl;
-        if(prompt.toLowerCase().includes('video')){
-            mediaUrl=await MediaProcessor.generateVideo(prompt);
-        }else{
-            mediaUrl=await MediaProcessor.generateImage(prompt);
-        }
-        loadingSpinner.style.display='none';
-        typingIndicator.style.display='none';
-        if(!mediaUrl.startsWith('http')){
-            showNotification(mediaUrl,'error');
-            return;
-        }
-        const aiMessage=document.createElement('div');
-        aiMessage.className='chat-message ai';
-        const mediaElement=prompt.toLowerCase().includes('video')?`<video controls src="${mediaUrl}"></video>`:`<img src="${mediaUrl}" alt="Generated Media">`;
-        aiMessage.innerHTML=`<div class="chat-message-content">${mediaElement}</div><div class="chat-message-meta">Just now</div>`;
-        chatHistory.appendChild(aiMessage);
-        chatArea.scrollTop=chatArea.scrollHeight;
-        conversationHistory.push({role:'assistant',content:`Generated media: ${mediaUrl}`});
-    });
 
-    schoolHelpDropdown.addEventListener('change',()=>{
-        selectedSchoolMode=schoolHelpDropdown.value;
-        if(selectedSchoolMode){
-            userInput.value=`Help me with ${selectedSchoolMode}...`;
-            userInput.focus();
+        function formatAiResponse(content){
+            content=content.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>');
+            content=content.replace(/\*(.*?)\*/g,'<em>$1</em>');
+            content=content.replace(/`(.*?)`/g,'<code>$1</code>');
+            content=content.replace(/^### (.*)$/gm,'<h3>$1</h3>');
+            content=content.replace(/^- (.*)$/gm,'<ul><li>$1</li></ul>');
+            content=content.replace(/^\d+\. (.*)$/gm,'<ol><li>$1</li></ol>');
+            content=content.replace(/\|.*\|/g,table=>{
+                const rows=table.split('\n').filter(row=>row.trim());
+                if(rows.length<2)return table;
+                const headers=rows[0].split('|').filter(cell=>cell.trim()).map(cell=>`<th>${cell.trim()}</th>`).join('');
+                const body=rows.slice(2).map(row=>`<tr>${row.split('|').filter(cell=>cell.trim()).map(cell=>`<td>${cell.trim()}</td>`).join('')}</tr>`).join('');
+                return `<table><thead><tr>${headers}</tr></thead><tbody>${body}</tbody></table>`;
+            });
+            const codeBlocks=content.match(/```[\s\S]*?```/g)||[];
+            latestCodeBlocks=codeBlocks.map(block=>block.replace(/```/g,'').trim());
+            content=content.replace(/```[\s\S]*?```/g,'<div class="code-block"><pre><code>CONTENT</code></pre><button class="copy-btn">Copy</button></div>').replace(/CONTENT/g,()=>latestCodeBlocks.shift()||'');
+            return content;
         }
-    });
 
-    aiModelDropdown.addEventListener('change',()=>{
-        selectedAiModel=aiModelDropdown.value;
-        clearChatBtn.click();
-    });
-
-    rephraseBtn.addEventListener('click',async()=>{
-        const lastMessage=conversationHistory[conversationHistory.length-1]?.content||'';
-        if(!lastMessage||conversationHistory[conversationHistory.length-1].role!=='assistant'){
-            showNotification('No AI response to rephrase.','error');
-            return;
-        }
-        const rephrasePrompt=`Rephrase the following: ${lastMessage}`;
-        conversationHistory.push({role:'user',content:rephrasePrompt});
-        const userMessage=document.createElement('div');
-        userMessage.className='chat-message user';
-        userMessage.innerHTML=`<div class="chat-message-content">Rephrase the last response...</div><div class="chat-message-meta">Just now</div>`;
-        chatHistory.appendChild(userMessage);
-        chatArea.scrollTop=chatArea.scrollHeight;
-        loadingSpinner.style.display='block';
-        typingIndicator.style.display='block';
-        const apiUrl=selectedAiModel==='betterGrok'?GROK_API_URL:API_URL;
-        const rephrased=await fetchResponse(rephrasePrompt,false,apiUrl);
-        loadingSpinner.style.display='none';
-        typingIndicator.style.display='none';
-        const formattedResponse=formatAiResponse(rephrased);
-        const aiMessage=document.createElement('div');
-        aiMessage.className='chat-message ai';
-        aiMessage.innerHTML=`<div class="chat-message-content">${formattedResponse}</div><div class="chat-message-meta">Just now</div>`;
-        chatHistory.appendChild(aiMessage);
-        chatArea.scrollTop=chatArea.scrollHeight;
-        conversationHistory.push({role:'assistant',content:rephrased});
-        cacheResponse(rephrasePrompt,rephrased);
-    });
-
-    stopGeneratingBtn.addEventListener('click',()=>{
-        if(isGenerating){
-            abortController?.abort();
+        async function handleUserInput(){
+            const message=userInput.value.trim();
+            if(!message&&!filesArray.length)return;
+            const now=Date.now();
+            const messageHash=sha256(message+now);
+            if(messageQueue.has(messageHash)){
+                showNotification('Duplicate message detected.','error');
+                return;
+            }
+            messageQueue.set(messageHash,true);
+            setTimeout(()=>{messageQueue.delete(messageHash);},10000);
+            const userId=sha256(navigator.userAgent+Date.now().toString());
+            if(!await DDoSProtection.analyzeRequest(userId,{csrfToken:sha256(userId+API_KEY)})){
+                showNotification('Request blocked due to security concerns.','error');
+                return;
+            }
+            if(verifyAdminAccess(message))return;
+            if(message.toLowerCase().includes('play a music')||message.toLowerCase().includes('background music')){
+                await playBackgroundMusic(message);
+                return;
+            }
+            const userMessage=document.createElement('div');
+            userMessage.className='chat-message user';
+            userMessage.innerHTML=`<div class="chat-message-content">${message}</div><div class="chat-message-meta">Just now</div>`;
+            chatHistory.appendChild(userMessage);
+            chatArea.scrollTop=chatArea.scrollHeight;
+            conversationHistory.push({role:'user',content:message});
+            userInput.value='';
+            sendBtn.disabled=true;
+            loadingSpinner.style.display='block';
+            typingIndicator.style.display='block';
+            isGenerating=true;
+            stopGeneratingBtn.style.display='block';
+            abortController=new AbortController();
+            let fullResponse;
+            try{
+                const apiUrl=selectedAiModel==='betterGrok'?GROK_API_URL:API_URL;
+                fullResponse=await fetchResponse(message,true,apiUrl);
+            }catch(error){
+                if(error.name==='AbortError'){
+                    showNotification('Generation stopped.');
+                }else{
+                    showNotification('Error generating response.','error');
+                }
+            }
             isGenerating=false;
             stopGeneratingBtn.style.display='none';
             loadingSpinner.style.display='none';
             typingIndicator.style.display='none';
             sendBtn.disabled=false;
+            if(!fullResponse){
+                fullResponse=latestAiResponse;
+                latestAiResponse='';
+            }
+            const formattedResponse=formatAiResponse(fullResponse);
+            const aiMessage=document.createElement('div');
+            aiMessage.className='chat-message ai';
+            aiMessage.innerHTML=`<div class="chat-message-content">${formattedResponse}</div><div class="chat-message-meta">Just now</div>`;
+            chatHistory.appendChild(aiMessage);
+            chatArea.scrollTop=chatArea.scrollHeight;
+            conversationHistory.push({role:'assistant',content:fullResponse});
+            cacheResponse(message,fullResponse);
+            generationTimeout=setTimeout(()=>{
+                keepGeneratingBtn.style.display='block';
+                keepGeneratingBtn.classList.add('show');
+            },3500);
+            const copyButtons=aiMessage.querySelectorAll('.copy-btn');
+            copyButtons.forEach(btn=>{
+                btn.addEventListener('click',()=>{
+                    const code=btn.previousElementSibling.textContent;
+                    navigator.clipboard.writeText(code);
+                    showNotification('Code copied!');
+                });
+            });
+            for(const file of filesArray){
+                let analysis;
+                if(file.type.startsWith('image/')){
+                    analysis=await MediaProcessor.analyzeImage(file);
+                }else if(file.type.startsWith('video/')){
+                    analysis=await MediaProcessor.analyzeVideo(file);
+                }else if(file.type.startsWith('text/')||file.type.match(/application\/(json|xml)/)){
+                    const text=await readText(file);
+                    analysis=`File content:\n\`\`\`\n${text}\n\`\`\``;
+                }
+                if(analysis){
+                    const fileMessage=document.createElement('div');
+                    fileMessage.className='chat-message ai';
+                    fileMessage.innerHTML=`<div class="chat-message-content">${formatAiResponse(analysis)}</div><div class="chat-message-meta">Just now</div>`;
+                    chatHistory.appendChild(fileMessage);
+                    chatArea.scrollTop=chatArea.scrollHeight;
+                    conversationHistory.push({role:'assistant',content:analysis});
+                }
+            }
+            filesArray=[];
+            fileList.innerHTML='';
+            fileClearBtn.style.display='none';
         }
-    });
 
-    document.addEventListener('paste',async(e)=>{
-        const items=e.clipboardData.items;
-        for(const item of items){
-            if(item.type.startsWith('image/')){
-                const file=item.getAsFile();
-                const hash=sha256(await readImage(file));
-                if(pastedImageHashes.has(hash))continue;
-                pastedImageHashes.add(hash);
+        userInput.addEventListener('input',()=>{
+            userInput.style.height='auto';
+            userInput.style.height=`${userInput.scrollHeight}px`;
+        });
+
+        userInput.addEventListener('keydown',(e)=>{
+            if(e.key==='Enter'&&!e.shiftKey){
+                e.preventDefault();
+                handleUserInput();
+            }
+        });
+
+        sendBtn.addEventListener('click',handleUserInput);
+
+        fileInput.addEventListener('change',async()=>{
+            const files=Array.from(fileInput.files);
+            for(const file of files){
                 filesArray.push(file);
                 const fileItem=document.createElement('div');
                 fileItem.className='file-item';
-                fileItem.innerHTML=`<div class="file-item-name">Pasted Image</div><div class="file-item-details">${(file.size/1024/1024).toFixed(2)}MB</div>`;
+                fileItem.innerHTML=`<div class="file-item-name">${file.name}</div><div class="file-item-details">${(file.size/1024/1024).toFixed(2)}MB</div><div class="file-progress" style="width:0%"></div>`;
                 fileList.appendChild(fileItem);
-                fileItem.addEventListener('click',async()=>{
-                    filePreviewContent.innerHTML=`<img src="${await readImage(file)}" alt="Pasted Image">`;
-                    filePreviewModal.classList.add('open');
-                });
-                fileClearBtn.style.display='block';
+                const progressBar=fileItem.querySelector('.file-progress');
+                let progress=0;
+                const interval=setInterval(()=>{
+                    progress+=10;
+                    progressBar.style.width=`${progress}%`;
+                    if(progress>=100){
+                        clearInterval(interval);
+                        fileItem.addEventListener('click',async()=>{
+                            let content;
+                            if(file.type.startsWith('image/')){
+                                content=`<img src="${await readImage(file)}" alt="${file.name}">`;
+                            }else if(file.type.startsWith('video/')){
+                                content=`<video controls src="${URL.createObjectURL(file)}"></video>`;
+                            }else if(file.type.startsWith('text/')||file.type.match(/application\/(json|xml)/)){
+                                content=`<pre>${await readText(file)}</pre>`;
+                            }
+                            filePreviewContent.innerHTML=content;
+                            filePreviewModal.classList.add('open');
+                        });
+                    }
+                },50);
             }
-        }
-    });
+            fileClearBtn.style.display=filesArray.length?'block':'none';
+            fileInput.value='';
+        });
 
-    window.addEventListener('beforeunload',()=>{
-        if(backgroundAudio)backgroundAudio.pause();
-        if(ws)ws.close();
-        workerPool.forEach(worker=>worker.terminate());
-    });
+        fileClearBtn.addEventListener('click',()=>{
+            filesArray=[];
+            fileList.innerHTML='';
+            fileClearBtn.style.display='none';
+        });
 
-    loadTheme();
-    initializeDB();
-    initializeWorkerPool();
-    initializeWebSocket();
-    setInterval(prefetchResponses,2000);
-    setInterval(batchProcessRequests,400);
-</script>
+        filePreviewClose.addEventListener('click',()=>{
+            filePreviewModal.classList.remove('open');
+            filePreviewContent.innerHTML='';
+        });
+
+        clearChatBtn.addEventListener('click',()=>{
+            chatHistory.innerHTML='';
+            conversationHistory=[{role:'assistant',content:aiModels[selectedAiModel].personality}];
+            const aiMessage=document.createElement('div');
+            aiMessage.className='chat-message ai';
+            aiMessage.innerHTML=`<div class="chat-message-content">${aiModels[selectedAiModel].personality}</div><div class="chat-message-meta">Just now</div>`;
+            chatHistory.appendChild(aiMessage);
+            chatArea.scrollTop=chatArea.scrollHeight;
+            showNotification('Chat cleared!');
+        });
+
+        copyCodeBtn.addEventListener('click',()=>{
+            if(latestCodeBlocks.length){
+                navigator.clipboard.writeText(latestCodeBlocks.join('\n\n'));
+                showNotification('All code blocks copied!');
+            }else{
+                showNotification('No code blocks to copy.','error');
+            }
+        });
+
+        discordBtn.addEventListener('click',()=>{
+            window.open(DISCORD_INVITE,'_blank');
+        });
+
+        verbiflowUpdatesBtn.addEventListener('click',()=>{
+            const aiMessage=document.createElement('div');
+            aiMessage.className='chat-message ai';
+            aiMessage.innerHTML=`<div class="chat-message-content">Here are the latest updates for VerbiFlow:\n- Enhanced UI with full-screen layout.\n- Added Share Chat feature.\n- Improved performance with faster response streaming.</div><div class="chat-message-meta">Just now</div>`;
+            chatHistory.appendChild(aiMessage);
+            chatArea.scrollTop=chatArea.scrollHeight;
+            conversationHistory.push({role:'assistant',content:"Here are the latest updates for VerbiFlow:\n- Enhanced UI with full-screen layout.\n- Added Share Chat feature.\n- Improved performance with faster response streaming."});
+        });
+
+        premiumPriceBtn.addEventListener('click',()=>{
+            window.location.href='/planprice';
+        });
+
+        shareChatBtn.addEventListener('click',()=>{
+            const chatContent=conversationHistory.map(msg=>`${msg.role}: ${msg.content}`).join('\n\n');
+            const blob=new Blob([chatContent],{type:'text/plain'});
+            const url=URL.createObjectURL(blob);
+            const a=document.createElement('a');
+            a.href=url;
+            a.download='VerbiFlow_Chat.txt';
+            a.click();
+            URL.revokeObjectURL(url);
+            showNotification('Chat exported!');
+        });
+
+        shareWebsiteBtn.addEventListener('click',()=>{
+            const websiteUrl=window.location.href;
+            navigator.clipboard.writeText(websiteUrl);
+            showNotification('Website URL copied! Share it with your friends.');
+        });
+
+        themeBtn.addEventListener('click',toggleTheme);
+
+        openInAppBtn.addEventListener('click',()=>{
+            window.open(APP_URL,'_blank');
+        });
+
+        toggleActionsBtn.addEventListener('click',()=>{
+            fileUploadContainer.classList.toggle('collapsed');
+            toggleActionsBtn.classList.toggle('collapsed');
+        });
+
+        menuBtn.addEventListener('click',()=>{
+            sidebar.classList.toggle('open');
+        });
+
+        keepGeneratingBtn.addEventListener('click',async()=>{
+            keepGeneratingBtn.style.display='none';
+            keepGeneratingBtn.classList.remove('show');
+            const lastPrompt=conversationHistory[conversationHistory.length-2]?.content||'';
+            const lastResponse=conversationHistory[conversationHistory.length-1]?.content||'';
+            const newPrompt=`Continue from: ${lastResponse}`;
+            conversationHistory.push({role:'user',content:newPrompt});
+            const userMessage=document.createElement('div');
+            userMessage.className='chat-message user';
+            userMessage.innerHTML=`<div class="chat-message-content">Continue generating...</div><div class="chat-message-meta">Just now</div>`;
+            chatHistory.appendChild(userMessage);
+            chatArea.scrollTop=chatArea.scrollHeight;
+            loadingSpinner.style.display='block';
+            typingIndicator.style.display='block';
+            isGenerating=true;
+            stopGeneratingBtn.style.display='block';
+            abortController=new AbortController();
+            let fullResponse;
+            try{
+                const apiUrl=selectedAiModel==='betterGrok'?GROK_API_URL:API_URL;
+                fullResponse=await fetchResponse(newPrompt,true,apiUrl);
+            }catch(error){
+                if(error.name==='AbortError'){
+                    showNotification('Generation stopped.');
+                }else{
+                    showNotification('Error generating response.','error');
+                }
+            }
+            isGenerating=false;
+            stopGeneratingBtn.style.display='none';
+            loadingSpinner.style.display='none';
+            typingIndicator.style.display='none';
+            if(!fullResponse){
+                fullResponse=latestAiResponse;
+                latestAiResponse='';
+            }
+            const formattedResponse=formatAiResponse(fullResponse);
+            const aiMessage=document.createElement('div');
+            aiMessage.className='chat-message ai';
+            aiMessage.innerHTML=`<div class="chat-message-content">${formattedResponse}</div><div class="chat-message-meta">Just now</div>`;
+            chatHistory.appendChild(aiMessage);
+            chatArea.scrollTop=chatArea.scrollHeight;
+            conversationHistory.push({role:'assistant',content:fullResponse});
+            cacheResponse(newPrompt,fullResponse);
+            generationTimeout=setTimeout(()=>{
+                keepGeneratingBtn.style.display='block';
+                keepGeneratingBtn.classList.add('show');
+            },3500);
+        });
+
+        generateMediaBtn.addEventListener('click',async()=>{
+            if(!hasPermission){
+                requestPermissions();
+                return;
+            }
+            const prompt=userInput.value.trim()||'Generate a random image';
+            loadingSpinner.style.display='block';
+            typingIndicator.style.display='block';
+            let mediaUrl;
+            if(prompt.toLowerCase().includes('video')){
+                mediaUrl=await MediaProcessor.generateVideo(prompt);
+            }else{
+                mediaUrl=await MediaProcessor.generateImage(prompt);
+            }
+            loadingSpinner.style.display='none';
+            typingIndicator.style.display='none';
+            if(!mediaUrl.startsWith('http')){
+                showNotification(mediaUrl,'error');
+                return;
+            }
+            const aiMessage=document.createElement('div');
+            aiMessage.className='chat-message ai';
+            const mediaElement=prompt.toLowerCase().includes('video')?`<video controls src="${mediaUrl}"></video>`:`<img src="${mediaUrl}" alt="Generated Media">`;
+            aiMessage.innerHTML=`<div class="chat-message-content">${mediaElement}</div><div class="chat-message-meta">Just now</div>`;
+            chatHistory.appendChild(aiMessage);
+            chatArea.scrollTop=chatArea.scrollHeight;
+            conversationHistory.push({role:'assistant',content:`Generated media: ${mediaUrl}`});
+        });
+
+        schoolHelpDropdown.addEventListener('change',()=>{
+            selectedSchoolMode=schoolHelpDropdown.value;
+            if(selectedSchoolMode){
+                userInput.value=`Help me with ${selectedSchoolMode}...`;
+                userInput.focus();
+            }
+        });
+
+        aiModelDropdown.addEventListener('change',()=>{
+            selectedAiModel=aiModelDropdown.value;
+            clearChatBtn.click();
+        });
+
+        rephraseBtn.addEventListener('click',async()=>{
+            const lastMessage=conversationHistory[conversationHistory.length-1]?.content||'';
+            if(!lastMessage||conversationHistory[conversationHistory.length-1].role!=='assistant'){
+                showNotification('No AI response to rephrase.','error');
+                return;
+            }
+            const rephrasePrompt=`Rephrase the following: ${lastMessage}`;
+            conversationHistory.push({role:'user',content:rephrasePrompt});
+            const userMessage=document.createElement('div');
+            userMessage.className='chat-message user';
+            userMessage.innerHTML=`<div class="chat-message-content">Rephrase the last response...</div><div class="chat-message-meta">Just now</div>`;
+            chatHistory.appendChild(userMessage);
+            chatArea.scrollTop=chatArea.scrollHeight;
+            loadingSpinner.style.display='block';
+            typingIndicator.style.display='block';
+            const apiUrl=selectedAiModel==='betterGrok'?GROK_API_URL:API_URL;
+            const rephrased=await fetchResponse(rephrasePrompt,false,apiUrl);
+            loadingSpinner.style.display='none';
+            typingIndicator.style.display='none';
+            const formattedResponse=formatAiResponse(rephrased);
+            const aiMessage=document.createElement('div');
+            aiMessage.className='chat-message ai';
+            aiMessage.innerHTML=`<div class="chat-message-content">${formattedResponse}</div><div class="chat-message-meta">Just now</div>`;
+            chatHistory.appendChild(aiMessage);
+            chatArea.scrollTop=chatArea.scrollHeight;
+            conversationHistory.push({role:'assistant',content:rephrased});
+            cacheResponse(rephrasePrompt,rephrased);
+        });
+
+        stopGeneratingBtn.addEventListener('click',()=>{
+            if(isGenerating){
+                abortController?.abort();
+                isGenerating=false;
+                stopGeneratingBtn.style.display='none';
+                loadingSpinner.style.display='none';
+                typingIndicator.style.display='none';
+                sendBtn.disabled=false;
+            }
+        });
+
+        document.addEventListener('paste',async(e)=>{
+            const items=e.clipboardData.items;
+            for(const item of items){
+                if(item.type.startsWith('image/')){
+                    const file=item.getAsFile();
+                    const hash=sha256(await readImage(file));
+                    if(pastedImageHashes.has(hash))continue;
+                    pastedImageHashes.add(hash);
+                    filesArray.push(file);
+                    const fileItem=document.createElement('div');
+                    fileItem.className='file-item';
+                    fileItem.innerHTML=`<div class="file-item-name">Pasted Image</div><div class="file-item-details">${(file.size/1024/1024).toFixed(2)}MB</div>`;
+                    fileList.appendChild(fileItem);
+                    fileItem.addEventListener('click',async()=>{
+                        filePreviewContent.innerHTML=`<img src="${await readImage(file)}" alt="Pasted Image">`;
+                        filePreviewModal.classList.add('open');
+                    });
+                    fileClearBtn.style.display='block';
+                }
+            }
+        });
+
+        window.addEventListener('beforeunload',()=>{
+            if(backgroundAudio)backgroundAudio.pause();
+            if(ws)ws.close();
+            workerPool.forEach(worker=>worker.terminate());
+        });
+
+        loadTheme();
+        initializeDB();
+        initializeWorkerPool();
+        initializeWebSocket();
+        setInterval(prefetchResponses,2000);
+        setInterval(batchProcessRequests,400);
+    </script>
 </body>
 </html>
