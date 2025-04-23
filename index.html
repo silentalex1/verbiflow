@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob: https://*.pixabay.com https://*.openai.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.cloudflare.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; connect-src 'self' https://api.openai.com ws://*; frame-src 'none'; media-src 'self' data: blob: https://*.pixabay.com https://*.openai.com;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob: https://*.pixabay.com https://*.openai.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.cloudflare.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; connect-src 'self' https://api.openai.com wss://api.openai.com; frame-src 'none'; media-src 'self' data: blob: https://*.pixabay.com https://*.openai.com;">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta name="robots" content="noindex, nofollow">
@@ -141,7 +141,7 @@
         .notification.show{opacity:1;transform:translateY(0);}
         .notification.success{background:#1d4ed8;color:#ffffff;}
         .notification.error{background:#ef4444;color:#ffffff;}
-        .permission-modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);z-index:500;justify-content:center;align-items:center;}
+        .permission-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);z-index:500;justify-content:center;align-items:center;}
         .permission-modal.open{display:flex;}
         .permission-content{background:#ffffff;border-radius:20px;padding:28px;max-width:550px;text-align:center;color:#111827;}
         .dark-mode .permission-content{background:#1f2937;color:#e5e7eb;}
@@ -282,9 +282,9 @@
         const VIDEO_PROCESSING_API="https://api.openai.com/v1/video/analyze";
         const DISCORD_INVITE="https://discord.gg/rCTRQvD4TP";
         const MAX_VIDEO_SIZE=50*1024*1024;
-        const BATCH_SIZE=200;
-        const RATE_LIMIT_REQUESTS=2000;
-        const RATE_LIMIT_WINDOW=60*1000;
+        const BATCH_SIZE=300;
+        const RATE_LIMIT_REQUESTS=1500;
+        const RATE_LIMIT_WINDOW=45*1000;
 
         const chatHistory=document.getElementById('chatHistory');
         const userInput=document.getElementById('userInput');
@@ -347,36 +347,36 @@
         let db=null;
 
         const aiModels={
-            default:{name:"VerbiFlow",temperature:0.6,maxTokens:12000,personality:"Hey there, I’m VerbiFlow—your ultimate AI companion for creativity and problem-solving! I’m here to make things fast, fun, and insightful. What’s on your mind?"},
-            lingoLogicAI:{name:"LingoLogicAI",temperature:0.5,maxTokens:12500,personality:"Greetings! I’m LingoLogicAI, a witty AI with a passion for language and logic. I’ll break down complex ideas with clarity and humor—let’s dive in!"},
-            codeMasterAI:{name:"CodeMasterAI",temperature:0.4,maxTokens:13000,personality:"Yo, I’m CodeMasterAI—your coding expert with a love for clean, efficient solutions! I’m all about debugging and optimizing. Drop me some code, and let’s make it shine!"},
-            visualGeniusAI:{name:"VisualGeniusAI",temperature:0.7,maxTokens:11500,personality:"Hi, I’m VisualGeniusAI—an AI with a flair for visuals and creativity! Whether it’s generating images, videos, or designing UI, I’ve got you covered. What do you want to create?"}
+            default:{name:"VerbiFlow",temperature:0.5,maxTokens:14000,personality:"Hey there, I’m VerbiFlow—your ultimate AI companion for creativity and problem-solving! I’m here to make things fast, fun, and insightful. What’s on your mind?"},
+            lingoLogicAI:{name:"LingoLogicAI",temperature:0.4,maxTokens:14500,personality:"Greetings! I’m LingoLogicAI, a witty AI with a passion for language and logic. I’ll break down complex ideas with clarity and humor—let’s dive in!"},
+            codeMasterAI:{name:"CodeMasterAI",temperature:0.3,maxTokens:15000,personality:"Yo, I’m CodeMasterAI—your coding expert with a love for clean, efficient solutions! I’m all about debugging and optimizing. Drop me some code, and let’s make it shine!"},
+            visualGeniusAI:{name:"VisualGeniusAI",temperature:0.6,maxTokens:13500,personality:"Hi, I’m VisualGeniusAI—an AI with a flair for visuals and creativity! Whether it’s generating images, videos, or designing UI, I’ve got you covered. What do you want to create?"}
         };
 
         const livelyResponses={
             default:[
-                "Ooh, I’m thrilled to tackle that! Here’s the scoop…",
-                "That’s a fiery request! Let’s whip up something amazing!",
-                "Alright, let’s dive in! Got something awesome for you…",
-                "You’re sparking my circuits! Check this out!"
+                "Let’s dive into this with flair—here’s a detailed breakdown for you!",
+                "That’s a brilliant query! I’ve got a comprehensive answer ready—check it out!",
+                "I’m buzzing with excitement! Here’s a deep dive into your request…",
+                "Your question sparks my creativity! Let’s explore this with a rich response…"
             ],
             lingoLogicAI:[
-                "Well, look at that! Let me weave some linguistic magic…",
-                "A challenge? I’m ready with a clever twist—here we go!",
-                "Let’s slice through this with logic and flair—boom!",
-                "Feeling sharp today! Here’s my take, fresh for you!"
+                "A fascinating challenge! Let me unravel it with precision and wit—here we go!",
+                "I’m ready to tackle this with linguistic finesse—brace for an insightful reply!",
+                "Let’s dissect this with clarity and humor—here’s my detailed take!",
+                "Your query ignites my logic circuits! Here’s a nuanced response for you!"
             ],
             codeMasterAI:[
-                "Code mode: ON! Let’s squash bugs and optimize—here’s the goods!",
-                "I’m in my coding zone! Check this sleek solution out!",
-                "This code’s my jam! Here’s a polished version—let’s roll!",
-                "Let’s make this code pop! Optimized and ready to rock!"
+                "Code mode activated! Let’s optimize and debug with a thorough solution—here it is!",
+                "I’m in my element! Here’s a meticulously crafted code solution for you!",
+                "Let’s polish this code to perfection—check out this detailed implementation!",
+                "This is my domain! Here’s an advanced, optimized code response—ready to roll!"
             ],
             visualGeniusAI:[
-                "Oh, I’m *seeing* the vision! Here’s my creative spin…",
-                "Let’s craft a visual masterpiece—check this out!",
-                "My artistic side is buzzing! Here’s something stunning for you!",
-                "Got an eye for this! Let’s make it visually epic!"
+                "I’m envisioning something spectacular! Here’s a creative and detailed output…",
+                "Let’s craft a visual masterpiece with depth—check out this rich result!",
+                "My creative gears are turning! Here’s a stunning, layered visual response!",
+                "I’m channeling my artistic side! Here’s a vibrant and detailed creation for you!"
             ]
         };
 
@@ -384,7 +384,7 @@
             const now=Date.now();
             requestTimestamps=requestTimestamps.filter(t=>now-t<RATE_LIMIT_WINDOW);
             if(requestTimestamps.length>=RATE_LIMIT_REQUESTS){
-                showNotification('Whoa, slow down! Rate limit hit—give it a moment.','error');
+                showNotification('Rate limit exceeded—please wait a moment.','error');
                 return false;
             }
             requestTimestamps.push(now);
@@ -422,18 +422,18 @@
         grantPermissionBtn.addEventListener('click',()=>{
             hasPermission=true;
             permissionModal.classList.remove('open');
-            showNotification('Permissions granted! Full features unlocked!');
+            showNotification('Permissions granted! All features are now available!');
         });
 
         denyPermissionBtn.addEventListener('click',()=>{
             hasPermission=false;
             permissionModal.classList.remove('open');
-            showNotification('Permissions denied. Some features limited.','error');
+            showNotification('Permissions denied. Features are limited—grant access to unlock everything.','error');
         });
 
         async function playBackgroundMusic(userRequest=''){
             if(!hasPermission){
-                showNotification('Please grant permissions to enable background music.','error');
+                showNotification('Grant permissions to enable background music.','error');
                 return;
             }
             if(backgroundAudio){
@@ -465,7 +465,7 @@
             backgroundAudio.volume=0.3;
             try{
                 await backgroundAudio.play();
-                showNotification(`Now playing ${userRequest.toLowerCase().includes('play a music')?userRequest.match(/play\s*(?:a\s*)?(?:music\s*(?:in\s*the\s*background\s*)?of\s*)?(\w+)/i)?.[1]||'background':'random'} music!`);
+                showNotification(`Playing ${userRequest.toLowerCase().includes('play a music')?userRequest.match(/play\s*(?:a\s*)?(?:music\s*(?:in\s*the\s*background\s*)?of\s*)?(\w+)/i)?.[1]||'background':'random'} music!`);
             }catch(error){
                 showNotification('Failed to play music—check browser permissions.','error');
             }
@@ -881,7 +881,7 @@
             static init(){
                 sessionStorage.setItem('requestCount',0);
                 sessionStorage.setItem('lastRequestTime',Date.now());
-                sessionStorage.setItem('csrfToken',[...Array(32)].map(()=>Math.random().toString(36)[2]).join(''));
+                sessionStorage.setItem('csrfToken',btoa([...Array(32)].map(()=>Math.random().toString(36)[2]).join('')));
             }
             static analyzeRequest(){
                 const now=Date.now();
@@ -895,6 +895,9 @@
                 sessionStorage.setItem('requestCount',requestCount);
                 sessionStorage.setItem('lastRequestTime',lastRequestTime);
                 return requestCount<=RATE_LIMIT_REQUESTS;
+            }
+            static validateCsrfToken(token){
+                return token===sessionStorage.getItem('csrfToken');
             }
         }
 
@@ -953,8 +956,12 @@
                 const aiMessage=document.querySelector(`[data-message-id="${data.messageId}"]`);
                 if(!aiMessage)return;
                 const content=aiMessage.querySelector('.chat-message-content');
-                content.innerHTML+=data.delta;
-                chatArea.scrollTop=chatArea.scrollHeight;
+                const chunkSize=500;
+                for(let i=0;i<data.delta.length;i+=chunkSize){
+                    content.innerHTML+=data.delta.slice(i,i+chunkSize);
+                    chatArea.scrollTop=chatArea.scrollHeight;
+                    await new Promise(r=>setTimeout(r,10));
+                }
                 if(data.done){
                     const finalContent=content.innerHTML;
                     responseCache.set(data.messageId,finalContent);
@@ -992,9 +999,10 @@
         }
 
         async function cacheResponse(hash,response){
+            const encrypted=encryptData(response);
             const tx=db.transaction('responses','readwrite');
             const store=tx.objectStore('responses');
-            await store.put({hash,response});
+            await store.put({hash,response:encrypted});
         }
 
         async function getCachedResponse(hash){
@@ -1002,9 +1010,22 @@
                 const tx=db.transaction('responses','readonly');
                 const store=tx.objectStore('responses');
                 const request=store.get(hash);
-                request.onsuccess=()=>resolve(request.result?.response||null);
+                request.onsuccess=()=>{
+                    const encrypted=request.result?.response||null;
+                    resolve(encrypted?decryptData(encrypted):null);
+                };
                 request.onerror=()=>reject(new Error('Failed to retrieve cached response'));
             });
+        }
+
+        function encryptData(data){
+            const key=42;
+            return String.fromCharCode(...data.split('').map((c,i)=>c.charCodeAt(0)^(key+i%13)));
+        }
+
+        function decryptData(data){
+            const key=42;
+            return String.fromCharCode(...data.split('').map((c,i)=>c.charCodeAt(0)^(key+i%13)));
         }
 
         function formatMessage(message,aiMessage){
@@ -1023,9 +1044,10 @@
 
         async function batchProcessRequests(messages){
             const batchResponses=[];
+            const batchPromises=[];
             for(let i=0;i<messages.length;i+=BATCH_SIZE){
                 const batch=messages.slice(i,i+BATCH_SIZE);
-                const response=await fetch(API_URL,{
+                batchPromises.push(fetch(API_URL,{
                     method:'POST',
                     headers:{
                         'Authorization':`Bearer ${API_KEY}`,
@@ -1038,20 +1060,26 @@
                         messages:batch,
                         max_tokens:aiModels[selectedAiModel].maxTokens,
                         temperature:aiModels[selectedAiModel].temperature,
-                        top_p:0.9
+                        top_p:0.95
                     })
-                });
-                if(!response.ok)throw new Error('Batch processing failed');
-                const data=await response.json();
-                batchResponses.push(...data.choices.map(choice=>choice.message.content));
+                }).then(response=>{
+                    if(!response.ok)throw new Error('Batch processing failed');
+                    return response.json();
+                }).then(data=>data.choices.map(choice=>choice.message.content)));
             }
+            const results=await Promise.all(batchPromises);
+            batchResponses.push(...results.flat());
             return batchResponses;
         }
 
         async function prefetchResponses(){
             const recentMessages=conversationHistory.slice(-5).map(msg=>msg.content);
-            for(const msg of recentMessages){
-                const messageHash=sha256(msg+Date.now());
+            const keywords=recentMessages.flatMap(msg=>msg.toLowerCase().split(/\W+/).filter(w=>w.length>3));
+            const keywordCounts=new Map();
+            keywords.forEach(k=>keywordCounts.set(k,(keywordCounts.get(k)||0)+1));
+            const topKeywords=[...keywordCounts.entries()].sort((a,b)=>b[1]-a[1]).slice(0,3).map(e=>e[0]);
+            for(const keyword of topKeywords){
+                const messageHash=sha256(keyword+Date.now());
                 if(responseCache.has(messageHash)||prefetchQueue.has(messageHash))continue;
                 prefetchQueue.set(messageHash,true);
                 const response=await fetch(API_URL,{
@@ -1062,9 +1090,10 @@
                     },
                     body:JSON.stringify({
                         model:"gpt-4o",
-                        messages:[{role:"user",content:msg}],
+                        messages:[{role:"user",content:`Provide detailed information about ${keyword}`}],
                         max_tokens:aiModels[selectedAiModel].maxTokens,
-                        temperature:aiModels[selectedAiModel].temperature
+                        temperature:aiModels[selectedAiModel].temperature,
+                        top_p:0.95
                     })
                 });
                 if(!response.ok)continue;
@@ -1078,7 +1107,7 @@
         function sanitizeInput(input){
             const div=document.createElement('div');
             div.textContent=input;
-            return div.innerHTML;
+            return div.innerHTML.replace(/[<>]/g,m=>m==='<'?'&lt;':'&gt;');
         }
 
         async function processMessageQueue(){
@@ -1092,8 +1121,12 @@
         }
 
         async function sendMessage(isContinuation=false){
+            if(!hasPermission){
+                showNotification('Grant permissions to enable this feature.','error');
+                return;
+            }
             if(!rateLimitCheck())return;
-            if(!DDoSProtection.analyzeRequest()){
+            if(!DDoSProtection.analyzeRequest()||!DDoSProtection.validateCsrfToken(sessionStorage.getItem('csrfToken'))){
                 showNotification('Request blocked—possible DDoS activity detected.','error');
                 return;
             }
@@ -1339,7 +1372,7 @@
                             max_tokens:aiModels[selectedAiModel].maxTokens,
                             temperature:aiModels[selectedAiModel].temperature,
                             stream:ws?true:false,
-                            top_p:0.9
+                            top_p:0.95
                         }),
                         signal:abortController.signal
                     });
@@ -1396,6 +1429,10 @@
         }
 
         fileInput.addEventListener('change',async()=>{
+            if(!hasPermission){
+                showNotification('Grant permissions to enable file uploads.','error');
+                return;
+            }
             const newFiles=Array.from(fileInput.files);
             newFiles.forEach(file=>{
                 if(file.type.startsWith('image/')||file.type.startsWith('video/')||file.type.startsWith('text/')||file.type==='application/json'||file.type==='application/xml'){
@@ -1427,7 +1464,7 @@
                 const img=document.createElement('img');
                 img.src=URL.createObjectURL(file);
                 img.alt=sanitizeInput(file.name);
-                filehullContent.appendChild(img);
+                filePreviewContent.appendChild(img);
                 const imageHash=sha256(img.src);
                 pastedImageHashes.add(imageHash);
             }else if(file.type.startsWith('video/')){
@@ -1457,6 +1494,10 @@
         });
 
         generateMediaBtn.addEventListener('click',()=>{
+            if(!hasPermission){
+                showNotification('Grant permissions to enable media generation.','error');
+                return;
+            }
             userInput.value='Generate an image or video (type your prompt here)';
             userInput.focus();
         });
@@ -1480,6 +1521,10 @@
         });
 
         userInput.addEventListener('paste',async e=>{
+            if(!hasPermission){
+                showNotification('Grant permissions to enable pasting media.','error');
+                return;
+            }
             const items=e.clipboardData.items;
             for(const item of items){
                 if(item.type.startsWith('image/')||item.type.startsWith('video/')){
