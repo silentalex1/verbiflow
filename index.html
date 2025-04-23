@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob: https://*.pixabay.com https://*.openai.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.cloudflare.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; connect-src 'self' https://api.openai.com wss://api.openai.com https://api.searchengine.com; frame-src 'none'; media-src 'self' data: blob: https://*.pixabay.com https://*.openai.com;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob: https://*.pixabay.com https://*.openai.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.cloudflare.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; connect-src 'self' https://api.openai.com wss://api.openai.com https://api.searchengine.com https://api.x.ai; frame-src 'none'; media-src 'self' data: blob: https://*.pixabay.com https://*.openai.com;">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta name="robots" content="noindex, nofollow">
@@ -27,6 +27,9 @@
         .nav-btn:hover{transform:scale(1.05);background:#f1f5f9;box-shadow:0 4px 16px rgba(0,0,0,.2);}
         .dark-mode .nav-btn:hover{background:#475569;}
         .nav-btn:active{transform:scale(.98);}
+        .app-btn{background:#ff4d4f;color:#ffffff;border:none;padding:10px 24px;border-radius:12px;cursor:pointer;font-size:15px;font-weight:600;transition:all .24s ease;display:flex;align-items:center;gap:8px;}
+        .app-btn:hover{background:#ff7875;transform:scale(1.05);}
+        .app-btn i{font-size:18px;}
         .discord-btn{background:#5865f2;color:#ffffff;}
         .discord-btn:hover{background:#4752c4;}
         .theme-btn{background:#ffffff;color:#1e40af;border:2px solid #1e40af;padding:8px 16px;border-radius:12px;cursor:pointer;font-size:15px;font-weight:600;display:flex;align-items:center;gap:6px;transition:all .24s ease;}
@@ -85,9 +88,10 @@
         .code-sidebar-close:hover{background:#dc2626;transform:scale(1.15);}
         .code-sidebar-content{font-family:'JetBrains Mono',monospace;font-size:15px;color:#0f172a;white-space:pre-wrap;}
         .dark-mode .code-sidebar-content{color:#e2e8f0;}
-        .file-upload-container{padding:10px;border-top:1px solid #e2e8f0;background:#ffffff;}
-        .dark-mode .file-upload-container{background:#1e293b;border-top:1px solid #334155;}
-        .file-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+        .file-upload-container{padding:8px;border-top:1px solid #e2e8f0;background:#ffffff;border-bottom:1px solid #e2e8f0;}
+        .dark-mode .file-upload-container{background:#1e293b;border-top:1px solid #334155;border-bottom:1px solid #334155;}
+        .file-actions{display:flex;gap:10px;align-items:center;padding:10px 0;justify-content:space-between;border-radius:12px;background:#f8fafc;box-shadow:0 2px 10px rgba(0,0,0,.05);flex-wrap:wrap;}
+        .dark-mode .file-actions{background:#111827;}
         .file-input-label{background:#1e40af;color:#ffffff;padding:14px 24px;border-radius:12px;cursor:pointer;font-size:15px;font-weight:600;min-height:48px;transition:all .24s ease;}
         .dark-mode .file-input-label{background:#1e3a8a;}
         .file-input-label:hover{transform:scale(1.05);box-shadow:0 4px 16px rgba(0,0,0,.2);}
@@ -103,7 +107,7 @@
         .dark-mode .keep-generating-btn{background:#059669;}
         .keep-generating-btn:hover{transform:scale(1.05);background:#34d399;}
         .dark-mode .keep-generating-btn:hover{background:#10b981;}
-        .school-help-container{display:flex;align-items:center;gap:8px;margin-left:8px;}
+        .school-help-container{display:flex;align-items:center;gap:10px;}
         .school-help-dropdown,.ai-model-dropdown{background:#6b7280;color:#ffffff;padding:14px 24px;border-radius:12px;border:none;font-size:15px;font-weight:600;min-height:48px;cursor:pointer;transition:all .24s ease;}
         .dark-mode .school-help-dropdown,.dark-mode .ai-model-dropdown{background:#4b5563;}
         .school-help-dropdown:hover,.ai-model-dropdown:hover{background:#9ca3af;transform:scale(1.05);}
@@ -118,7 +122,7 @@
         .dark-mode .stop-generating-btn{background:#dc2626;}
         .stop-generating-btn:hover{background:#f87171;}
         .dark-mode .stop-generating-btn:hover{background:#ef4444;}
-        .file-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:14px;}
+        .file-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:14px;padding:0 10px;}
         .file-item{display:flex;align-items:center;gap:14px;background:#e2e8f0;padding:14px;border-radius:16px;cursor:pointer;transition:all .24s ease;position:relative;}
         .dark-mode .file-item{background:#334155;}
         .file-item:hover{background:#d1d5db;transform:scale(1.03);}
@@ -181,7 +185,7 @@
         @media (max-width:768px){
             .container{border-radius:0;padding:0;}
             .nav-bar{padding:12px;gap:6px;}
-            .nav-btn{font-size:13px;padding:8px 16px;}
+            .nav-btn,.app-btn{font-size:13px;padding:8px 16px;}
             .theme-btn{padding:6px 12px;font-size:13px;}
             .header{padding:16px;}
             .logo{font-size:32px;}
@@ -193,7 +197,8 @@
             .user-input{font-size:15px;min-height:48px;}
             .send-btn{padding:12px 20px;min-height:48px;}
             .file-input-label,.file-clear-btn,.generate-media-btn,.keep-generating-btn,.school-help-dropdown,.ai-model-dropdown,.rephrase-btn,.stop-generating-btn{font-size:14px;padding:12px 18px;min-height:48px;}
-            .school-help-container{gap:8px;margin-left:8px;}
+            .school-help-container{gap:8px;}
+            .file-actions{gap:8px;padding:8px;}
             .file-preview-content img,.file-preview-content video{max-width:90% !important;}
             .notification{top:20px;right:20px;padding:12px 24px;font-size:14px;}
             .code-sidebar{width:100%;right:-100%;}
@@ -215,6 +220,7 @@
             <button class="theme-btn" id="themeBtn"><i class="fas fa-moon"></i> Dark Mode</button>
             <button class="nav-btn" id="copyCodeBtn">Copy Code</button>
             <button class="nav-btn discord-btn" id="discordBtn">Discord</button>
+            <button class="app-btn" id="openInAppBtn"><i class="fas fa-mobile-alt"></i> Open in App</button>
         </div>
         <div class="header">
             <div class="logo">VerbiFlow</div>
@@ -299,15 +305,17 @@
     <script defer>
         const API_KEY="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";
         const API_URL="https://api.openai.com/v1/chat/completions";
+        const GROK_API_URL="https://api.x.ai/v1/grok-3-beta/completions";
         const DALLE_API_URL="https://api.openai.com/v1/images/generations";
         const SORA_API_URL="https://api.openai.com/v1/video/generations";
         const VIDEO_PROCESSING_API="https://api.openai.com/v1/video/analyze";
         const SEARCH_API_URL="https://api.searchengine.com/v1/search";
         const DISCORD_INVITE="https://discord.gg/rCTRQvD4TP";
+        const APP_URL="https://verbiflow.app/download";
         const MAX_VIDEO_SIZE=40*1024*1024;
         const MAX_FILE_SIZE=40*1024*1024;
-        const BATCH_SIZE=150;
-        const RATE_LIMIT_REQUESTS=1500;
+        const BATCH_SIZE=200;
+        const RATE_LIMIT_REQUESTS=2000;
         const RATE_LIMIT_WINDOW=30*1000;
         const MAX_CACHE_SIZE=8*1024*1024;
 
@@ -332,6 +340,7 @@
         const shareChatBtn=document.getElementById('shareChatBtn');
         const shareWebsiteBtn=document.getElementById('shareWebsiteBtn');
         const themeBtn=document.getElementById('themeBtn');
+        const openInAppBtn=document.getElementById('openInAppBtn');
         const notification=document.getElementById('notification');
         const codeSidebar=document.getElementById('codeSidebar');
         const codeSidebarClose=document.getElementById('codeSidebarClose');
@@ -353,6 +362,7 @@
         let isGenerating=false;
         let generationLock=false;
         let lastMessageContent='';
+        let lastMessageTimestamp=0;
         let generationTimeout=null;
         let selectedSchoolMode='';
         let selectedAiModel='default';
@@ -383,7 +393,7 @@
             lingoLogicAI:{name:"LingoLogicAI",temperature:0.4,maxTokens:16748,personality:"Greetings! I’m LingoLogicAI, a witty AI with a passion for language and logic. I’ll break down complex ideas with clarity and humor—let’s dive in!"},
             codeMasterAI:{name:"CodeMasterAI",temperature:0.3,maxTokens:17325,personality:"Yo, I’m CodeMasterAI—your coding expert with a love for clean, efficient solutions! I’m all about debugging and optimizing. Drop me some code, and let’s make it shine!"},
             visualGeniusAI:{name:"VisualGeniusAI",temperature:0.6,maxTokens:15593,personality:"Hi, I’m VisualGeniusAI—an AI with a flair for visuals and creativity! Whether it’s generating images, videos, or designing UI, I’ve got you covered. What do you want to create?"},
-            betterGrok:{name:"Better Grok",temperature:0.4,maxTokens:20000,personality:"I’m Better Grok—a faster, smarter version of Grok with all features unlocked for free! I’m here to deliver quick, insightful answers with enhanced capabilities. Let’s get started!"}
+            betterGrok:{name:"Better Grok",temperature:0.3,maxTokens:22000,personality:"I’m Better Grok—a faster, smarter version of Grok with all features unlocked for free! I’m here to deliver quick, insightful answers with enhanced capabilities. Let’s get started!"}
         };
 
         const livelyResponses={
@@ -853,7 +863,7 @@
             static async analyzeRequest(userId,options={}){
                 const now=Date.now();
                 const window=60*1000;
-                const maxRequests=150;
+                const maxRequests=200;
                 const userData=userRequestCounts.get(userId)||{count:0,firstRequest:now};
                 if(now-userData.firstRequest>window){
                     userData.count=0;
@@ -949,19 +959,19 @@
         }
 
         function initializeWorkerPool(){
-            const numWorkers=Math.max(6,navigator.hardwareConcurrency*1.15);
+            const numWorkers=Math.max(8,navigator.hardwareConcurrency*1.5);
             for(let i=0;i<numWorkers;i++){
                 const worker=new Worker(URL.createObjectURL(new Blob([`
                     self.onmessage=async(e)=>{
-                        const {prompt}=e.data;
-                        const response=await fetch('https://api.openai.com/v1/chat/completions',{
+                        const {prompt,apiUrl}=e.data;
+                        const response=await fetch(apiUrl,{
                             method:'POST',
                             headers:{
                                 'Authorization':'Bearer ${API_KEY}',
                                 'Content-Type':'application/json'
                             },
                             body:JSON.stringify({
-                                model:'gpt-4o',
+                                model:apiUrl.includes('x.ai')?'grok-3-beta':'gpt-4o',
                                 messages:[{role:'user',content:prompt}],
                                 max_tokens:${aiModels[selectedAiModel].maxTokens},
                                 temperature:${aiModels[selectedAiModel].temperature}
@@ -974,12 +984,12 @@
             }
         }
 
-        async function processWithWorker(prompt){
+        async function processWithWorker(prompt,apiUrl){
             const worker=workerPool.shift();
             return new Promise((resolve,reject)=>{
                 worker.onmessage=(e)=>resolve(e.data);
                 worker.onerror=reject;
-                worker.postMessage({prompt});
+                worker.postMessage({prompt,apiUrl});
                 workerPool.push(worker);
             });
         }
@@ -988,13 +998,13 @@
             if(isProcessing||!batchQueue.length)return;
             isProcessing=true;
             const batch=batchQueue.splice(0,BATCH_SIZE);
-            const promises=batch.map(async({message,userId,resolve})=>{
+            const promises=batch.map(async({message,userId,apiUrl,resolve})=>{
                 const isAllowed=await DDoSProtection.analyzeRequest(userId,{csrfToken:sha256(userId+API_KEY)});
                 if(!isAllowed){
                     resolve("Request blocked due to security concerns.");
                     return;
                 }
-                const response=await processWithWorker(message);
+                const response=await processWithWorker(message,apiUrl);
                 resolve(response);
             });
             await Promise.all(promises);
@@ -1005,25 +1015,26 @@
         async function fetchResponse(prompt,stream=false){
             if(generationLock)return;
             generationLock=true;
+            const apiUrl=selectedAiModel==='betterGrok'?GROK_API_URL:API_URL;
             try{
                 if(stream&&ws&&ws.readyState===WebSocket.OPEN){
                     ws.send(JSON.stringify({
                         type:'request',
                         prompt,
-                        model:'gpt-4o',
+                        model:apiUrl.includes('x.ai')?'grok-3-beta':'gpt-4o',
                         max_tokens:aiModels[selectedAiModel].maxTokens,
                         temperature:aiModels[selectedAiModel].temperature
                     }));
                     return '';
                 }
-                const response=await fetch(API_URL,{
+                const response=await fetch(apiUrl,{
                     method:'POST',
                     headers:{
                         'Authorization':`Bearer ${API_KEY}`,
                         'Content-Type':'application/json'
                     },
                     body:JSON.stringify({
-                        model:'gpt-4o',
+                        model:apiUrl.includes('x.ai')?'grok-3-beta':'gpt-4o',
                         messages:conversationHistory.concat([{role:'user',content:prompt}]),
                         max_tokens:aiModels[selectedAiModel].maxTokens,
                         temperature:aiModels[selectedAiModel].temperature,
@@ -1044,443 +1055,449 @@
                         const {done,value}=await reader.read();
                         if(done)break;
                         const chunk=new TextDecoder().decode(value);
-                        const lines=chunk.split('\n').filter(line=>line.startsWith('data:'));
-                        for(const line of lines){
-                            if(line==='data: [DONE]')break;
-                            const json=JSON.parse(line.replace('data: ',''));
-                            const content=json.choices[0].delta.content||'';
-                            aiMessage.querySelector('.chat-message-content').innerHTML+=content;
-                            result+=content;
-                            chatArea.scrollTop=chatArea.scrollHeight;
-                        }
+                    const lines=chunk.split('\n').filter(line=>line.startsWith('data:'));
+                    for(const line of lines){
+                        if(line==='data: [DONE]')break;
+                        const json=JSON.parse(line.replace('data: ',''));
+                        const content=json.choices[0].delta.content||'';
+                        aiMessage.querySelector('.chat-message-content').innerHTML+=content;
+                        result+=content;
+                        chatArea.scrollTop=chatArea.scrollHeight;
                     }
-                    return result;
                 }
-                const data=await response.json();
-                return data.choices[0].message.content;
-            }finally{
-                generationLock=false;
+                return result;
+            }
+            const data=await response.json();
+            return data.choices[0].message.content;
+        }finally{
+            generationLock=false;
+        }
+    }
+
+    async function prefetchResponses(){
+        const recentMessages=conversationHistory.slice(-3).map(m=>m.content);
+        const keywords=recentMessages.join(' ').match(/\b\w+\b/g)?.slice(-7)||[];
+        for(const keyword of keywords){
+            if(prefetchQueue.has(keyword))continue;
+            prefetchQueue.set(keyword,true);
+            const apiUrl=selectedAiModel==='betterGrok'?GROK_API_URL:API_URL;
+            const response=await fetchResponse(`Tell me about ${keyword}`,false,apiUrl);
+            responseCache.set(keyword,response);
+        }
+    }
+
+    function formatAiResponse(content){
+        content=content.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>');
+        content=content.replace(/\*(.*?)\*/g,'<em>$1</em>');
+        content=content.replace(/`(.*?)`/g,'<code>$1</code>');
+        content=content.replace(/^### (.*)$/gm,'<h3>$1</h3>');
+        content=content.replace(/^- (.*)$/gm,'<ul><li>$1</li></ul>');
+        content=content.replace(/^\d+\. (.*)$/gm,'<ol><li>$1</li></ol>');
+        content=content.replace(/\|.*\|/g,table=>{
+            const rows=table.split('\n').filter(row=>row.trim());
+            if(rows.length<2)return table;
+            const headers=rows[0].split('|').filter(cell=>cell.trim()).map(cell=>`<th>${cell.trim()}</th>`).join('');
+            const body=rows.slice(2).map(row=>`<tr>${row.split('|').filter(cell=>cell.trim()).map(cell=>`<td>${cell.trim()}</td>`).join('')}</tr>`).join('');
+            return `<table><thead><tr>${headers}</tr></thead><tbody>${body}</tbody></table>`;
+        });
+        const codeBlocks=content.match(/```[\s\S]*?```/g)||[];
+        latestCodeBlocks=codeBlocks.map(block=>block.replace(/```/g,'').trim());
+        content=content.replace(/```[\s\S]*?```/g,'<div class="code-block"><pre><code>CONTENT</code></pre><button class="copy-btn">Copy</button></div>').replace(/CONTENT/g,()=>latestCodeBlocks.shift()||'');
+        return content;
+    }
+
+    async function handleUserInput(){
+        const message=userInput.value.trim();
+        if(!message&&!filesArray.length)return;
+        const now=Date.now();
+        const messageHash=sha256(message+now);
+        if(messageQueue.has(messageHash)){
+            showNotification('Duplicate message detected.','error');
+            return;
+        }
+        messageQueue.set(messageHash,true);
+        setTimeout(()=>messageQueue.delete(messageHash),5000);
+        const userId=sha256(navigator.userAgent+Date.now().toString());
+        if(!await DDoSProtection.analyzeRequest(userId,{csrfToken:sha256(userId+API_KEY)})){
+            showNotification('Request blocked due to security concerns.','error');
+            return;
+        }
+        if(verifyAdminAccess(message))return;
+        if(message.toLowerCase().includes('play a music')||message.toLowerCase().includes('background music')){
+            await playBackgroundMusic(message);
+            return;
+        }
+        const userMessage=document.createElement('div');
+        userMessage.className='chat-message user';
+        userMessage.innerHTML=`<div class="chat-message-content">${message}</div><div class="chat-message-meta">Just now</div>`;
+        chatHistory.appendChild(userMessage);
+        chatArea.scrollTop=chatArea.scrollHeight;
+        conversationHistory.push({role:'user',content:message});
+        userInput.value='';
+        sendBtn.disabled=true;
+        loadingSpinner.style.display='block';
+        typingIndicator.style.display='block';
+        isGenerating=true;
+        stopGeneratingBtn.style.display='block';
+        abortController=new AbortController();
+        let fullResponse;
+        try{
+            const apiUrl=selectedAiModel==='betterGrok'?GROK_API_URL:API_URL;
+            fullResponse=await fetchResponse(message,true,apiUrl);
+        }catch(error){
+            if(error.name==='AbortError'){
+                showNotification('Generation stopped.');
+            }else{
+                showNotification('Error generating response.','error');
             }
         }
-
-        async function prefetchResponses(){
-            const recentMessages=conversationHistory.slice(-3).map(m=>m.content);
-            const keywords=recentMessages.join(' ').match(/\b\w+\b/g)?.slice(-7)||[];
-            for(const keyword of keywords){
-                if(prefetchQueue.has(keyword))continue;
-                prefetchQueue.set(keyword,true);
-                const response=await fetchResponse(`Tell me about ${keyword}`,false);
-                responseCache.set(keyword,response);
-            }
+        isGenerating=false;
+        stopGeneratingBtn.style.display='none';
+        loadingSpinner.style.display='none';
+        typingIndicator.style.display='none';
+        sendBtn.disabled=false;
+        if(!fullResponse){
+            fullResponse=latestAiResponse;
+            latestAiResponse='';
         }
-
-        function formatAiResponse(content){
-            content=content.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>');
-            content=content.replace(/\*(.*?)\*/g,'<em>$1</em>');
-            content=content.replace(/`(.*?)`/g,'<code>$1</code>');
-            content=content.replace(/^### (.*)$/gm,'<h3>$1</h3>');
-            content=content.replace(/^- (.*)$/gm,'<ul><li>$1</li></ul>');
-            content=content.replace(/^\d+\. (.*)$/gm,'<ol><li>$1</li></ol>');
-            content=content.replace(/\|.*\|/g,table=>{
-                const rows=table.split('\n').filter(row=>row.trim());
-                if(rows.length<2)return table;
-                const headers=rows[0].split('|').filter(cell=>cell.trim()).map(cell=>`<th>${cell.trim()}</th>`).join('');
-                const body=rows.slice(2).map(row=>`<tr>${row.split('|').filter(cell=>cell.trim()).map(cell=>`<td>${cell.trim()}</td>`).join('')}</tr>`).join('');
-                return `<table><thead><tr>${headers}</tr></thead><tbody>${body}</tbody></table>`;
+        const formattedResponse=formatAiResponse(fullResponse);
+        const aiMessage=document.createElement('div');
+        aiMessage.className='chat-message ai';
+        aiMessage.innerHTML=`<div class="chat-message-content">${formattedResponse}</div><div class="chat-message-meta">Just now</div>`;
+        chatHistory.appendChild(aiMessage);
+        chatArea.scrollTop=chatArea.scrollHeight;
+        conversationHistory.push({role:'assistant',content:fullResponse});
+        cacheResponse(message,fullResponse);
+        generationTimeout=setTimeout(()=>{
+            keepGeneratingBtn.style.display='block';
+            keepGeneratingBtn.classList.add('show');
+        },3500);
+        const copyButtons=aiMessage.querySelectorAll('.copy-btn');
+        copyButtons.forEach(btn=>{
+            btn.addEventListener('click',()=>{
+                const code=btn.previousElementSibling.textContent;
+                navigator.clipboard.writeText(code);
+                showNotification('Code copied!');
             });
-            const codeBlocks=content.match(/```[\s\S]*?```/g)||[];
-            latestCodeBlocks=codeBlocks.map(block=>block.replace(/```/g,'').trim());
-            content=content.replace(/```[\s\S]*?```/g,'<div class="code-block"><pre><code>CONTENT</code></pre><button class="copy-btn">Copy</button></div>').replace(/CONTENT/g,()=>latestCodeBlocks.shift()||'');
-            return content;
+        });
+        for(const file of filesArray){
+            let analysis;
+            if(file.type.startsWith('image/')){
+                analysis=await MediaProcessor.analyzeImage(file);
+            }else if(file.type.startsWith('video/')){
+                analysis=await MediaProcessor.analyzeVideo(file);
+            }else if(file.type.startsWith('text/')||file.type.match(/application\/(json|xml)/)){
+                const text=await readText(file);
+                analysis=`File content:\n\`\`\`\n${text}\n\`\`\``;
+            }
+            if(analysis){
+                const fileMessage=document.createElement('div');
+                fileMessage.className='chat-message ai';
+                fileMessage.innerHTML=`<div class="chat-message-content">${formatAiResponse(analysis)}</div><div class="chat-message-meta">Just now</div>`;
+                chatHistory.appendChild(fileMessage);
+                chatArea.scrollTop=chatArea.scrollHeight;
+                conversationHistory.push({role:'assistant',content:analysis});
+            }
         }
+        filesArray=[];
+        fileList.innerHTML='';
+        fileClearBtn.style.display='none';
+    }
 
-        async function handleUserInput(){
-            const message=userInput.value.trim();
-            if(!message&&!filesArray.length)return;
-            if(lastMessageContent===message && filesArray.length===0){
-                showNotification('Duplicate message detected.','error');
-                return;
+    userInput.addEventListener('input',()=>{
+        userInput.style.height='auto';
+        userInput.style.height=`${userInput.scrollHeight}px`;
+    });
+
+    userInput.addEventListener('keydown',(e)=>{
+        if(e.key==='Enter'&&!e.shiftKey){
+            e.preventDefault();
+            handleUserInput();
+        }
+    });
+
+    sendBtn.addEventListener('click',handleUserInput);
+
+    fileInput.addEventListener('change',async()=>{
+        const files=Array.from(fileInput.files);
+        for(const file of files){
+            if(file.size>MAX_FILE_SIZE){
+                showNotification(`File "${file.name}" exceeds ${MAX_FILE_SIZE/1024/1024}MB limit.`,'error');
+                continue;
             }
-            lastMessageContent=message;
-            const userId=sha256(navigator.userAgent+Date.now().toString());
-            if(!await DDoSProtection.analyzeRequest(userId,{csrfToken:sha256(userId+API_KEY)})){
-                showNotification('Request blocked due to security concerns.','error');
-                return;
-            }
-            if(verifyAdminAccess(message))return;
-            if(message.toLowerCase().includes('play a music')||message.toLowerCase().includes('background music')){
-                await playBackgroundMusic(message);
-                return;
-            }
-            const userMessage=document.createElement('div');
-            userMessage.className='chat-message user';
-            userMessage.innerHTML=`<div class="chat-message-content">${message}</div><div class="chat-message-meta">Just now</div>`;
-            chatHistory.appendChild(userMessage);
-            chatArea.scrollTop=chatArea.scrollHeight;
-            conversationHistory.push({role:'user',content:message});
-            userInput.value='';
-            sendBtn.disabled=true;
-            loadingSpinner.style.display='block';
-            typingIndicator.style.display='block';
-            isGenerating=true;
-            stopGeneratingBtn.style.display='block';
-            abortController=new AbortController();
-            let fullResponse;
-            try{
-                fullResponse=await fetchResponse(message,true);
-            }catch(error){
-                if(error.name==='AbortError'){
-                    showNotification('Generation stopped.');
-                }else{
-                    showNotification('Error generating response.','error');
+            filesArray.push(file);
+            const fileItem=document.createElement('div');
+            fileItem.className='file-item';
+            fileItem.innerHTML=`<div class="file-item-name">${file.name}</div><div class="file-item-details">${(file.size/1024/1024).toFixed(2)}MB</div><div class="file-progress" style="width:0%"></div>`;
+            fileList.appendChild(fileItem);
+            const progressBar=fileItem.querySelector('.file-progress');
+            let progress=0;
+            const interval=setInterval(()=>{
+                progress+=10;
+                progressBar.style.width=`${progress}%`;
+                if(progress>=100){
+                    clearInterval(interval);
+                    fileItem.addEventListener('click',async()=>{
+                        let content;
+                        if(file.type.startsWith('image/')){
+                            content=`<img src="${await readImage(file)}" alt="${file.name}">`;
+                        }else if(file.type.startsWith('video/')){
+                            content=`<video controls src="${URL.createObjectURL(file)}"></video>`;
+                        }else if(file.type.startsWith('text/')||file.type.match(/application\/(json|xml)/)){
+                            content=`<pre>${await readText(file)}</pre>`;
+                        }
+                        filePreviewContent.innerHTML=content;
+                        filePreviewModal.classList.add('open');
+                    });
                 }
+            },50);
+        }
+        fileClearBtn.style.display=filesArray.length?'block':'none';
+        fileInput.value='';
+    });
+
+    fileClearBtn.addEventListener('click',()=>{
+        filesArray=[];
+        fileList.innerHTML='';
+        fileClearBtn.style.display='none';
+    });
+
+    filePreviewClose.addEventListener('click',()=>{
+        filePreviewModal.classList.remove('open');
+        filePreviewContent.innerHTML='';
+    });
+
+    clearChatBtn.addEventListener('click',()=>{
+        chatHistory.innerHTML='';
+        conversationHistory=[{role:'assistant',content:aiModels[selectedAiModel].personality}];
+        const aiMessage=document.createElement('div');
+        aiMessage.className='chat-message ai';
+        aiMessage.innerHTML=`<div class="chat-message-content">${aiModels[selectedAiModel].personality}</div><div class="chat-message-meta">Just now</div>`;
+        chatHistory.appendChild(aiMessage);
+        chatArea.scrollTop=chatArea.scrollHeight;
+        showNotification('Chat cleared!');
+    });
+
+    copyCodeBtn.addEventListener('click',()=>{
+        if(latestCodeBlocks.length){
+            navigator.clipboard.writeText(latestCodeBlocks.join('\n\n'));
+            showNotification('All code blocks copied!');
+        }else{
+            showNotification('No code blocks to copy.','error');
+        }
+    });
+
+    discordBtn.addEventListener('click',()=>{
+        window.open(DISCORD_INVITE,'_blank');
+    });
+
+    verbiflowUpdatesBtn.addEventListener('click',()=>{
+        const aiMessage=document.createElement('div');
+        aiMessage.className='chat-message ai';
+        aiMessage.innerHTML=`<div class="chat-message-content">Here are the latest updates for VerbiFlow:\n- Enhanced UI with full-screen layout.\n- Added Share Chat feature.\n- Improved performance with faster response streaming.</div><div class="chat-message-meta">Just now</div>`;
+        chatHistory.appendChild(aiMessage);
+        chatArea.scrollTop=chatArea.scrollHeight;
+        conversationHistory.push({role:'assistant',content:"Here are the latest updates for VerbiFlow:\n- Enhanced UI with full-screen layout.\n- Added Share Chat feature.\n- Improved performance with faster response streaming."});
+    });
+
+    premiumPriceBtn.addEventListener('click',()=>{
+        window.location.href='/planprice';
+    });
+
+    shareChatBtn.addEventListener('click',()=>{
+        const chatContent=conversationHistory.map(msg=>`${msg.role}: ${msg.content}`).join('\n\n');
+        const blob=new Blob([chatContent],{type:'text/plain'});
+        const url=URL.createObjectURL(blob);
+        const a=document.createElement('a');
+        a.href=url;
+        a.download='VerbiFlow_Chat.txt';
+        a.click();
+        URL.revokeObjectURL(url);
+        showNotification('Chat exported!');
+    });
+
+    shareWebsiteBtn.addEventListener('click',()=>{
+        const websiteUrl=window.location.href;
+        navigator.clipboard.writeText(websiteUrl);
+        showNotification('Website URL copied! Share it with your friends.');
+    });
+
+    themeBtn.addEventListener('click',toggleTheme);
+
+    openInAppBtn.addEventListener('click',()=>{
+        window.open(APP_URL,'_blank');
+    });
+
+    codeSidebarClose.addEventListener('click',()=>{
+        codeSidebar.classList.remove('open');
+    });
+
+    keepGeneratingBtn.addEventListener('click',async()=>{
+        keepGeneratingBtn.style.display='none';
+        keepGeneratingBtn.classList.remove('show');
+        const lastPrompt=conversationHistory[conversationHistory.length-2]?.content||'';
+        const lastResponse=conversationHistory[conversationHistory.length-1]?.content||'';
+        const newPrompt=`Continue from: ${lastResponse}`;
+        conversationHistory.push({role:'user',content:newPrompt});
+        const userMessage=document.createElement('div');
+        userMessage.className='chat-message user';
+        userMessage.innerHTML=`<div class="chat-message-content">Continue generating...</div><div class="chat-message-meta">Just now</div>`;
+        chatHistory.appendChild(userMessage);
+        chatArea.scrollTop=chatArea.scrollHeight;
+        loadingSpinner.style.display='block';
+        typingIndicator.style.display='block';
+        isGenerating=true;
+        stopGeneratingBtn.style.display='block';
+        abortController=new AbortController();
+        let fullResponse;
+        try{
+            const apiUrl=selectedAiModel==='betterGrok'?GROK_API_URL:API_URL;
+            fullResponse=await fetchResponse(newPrompt,true,apiUrl);
+        }catch(error){
+            if(error.name==='AbortError'){
+                showNotification('Generation stopped.');
+            }else{
+                showNotification('Error generating response.','error');
             }
+        }
+        isGenerating=false;
+        stopGeneratingBtn.style.display='none';
+        loadingSpinner.style.display='none';
+        typingIndicator.style.display='none';
+        if(!fullResponse){
+            fullResponse=latestAiResponse;
+            latestAiResponse='';
+        }
+        const formattedResponse=formatAiResponse(fullResponse);
+        const aiMessage=document.createElement('div');
+        aiMessage.className='chat-message ai';
+        aiMessage.innerHTML=`<div class="chat-message-content">${formattedResponse}</div><div class="chat-message-meta">Just now</div>`;
+        chatHistory.appendChild(aiMessage);
+        chatArea.scrollTop=chatArea.scrollHeight;
+        conversationHistory.push({role:'assistant',content:fullResponse});
+        cacheResponse(newPrompt,fullResponse);
+        generationTimeout=setTimeout(()=>{
+            keepGeneratingBtn.style.display='block';
+            keepGeneratingBtn.classList.add('show');
+        },3500);
+    });
+
+    generateMediaBtn.addEventListener('click',async()=>{
+        if(!hasPermission){
+            requestPermissions();
+            return;
+        }
+        const prompt=userInput.value.trim()||'Generate a random image';
+        loadingSpinner.style.display='block';
+        typingIndicator.style.display='block';
+        let mediaUrl;
+        if(prompt.toLowerCase().includes('video')){
+            mediaUrl=await MediaProcessor.generateVideo(prompt);
+        }else{
+            mediaUrl=await MediaProcessor.generateImage(prompt);
+        }
+        loadingSpinner.style.display='none';
+        typingIndicator.style.display='none';
+        if(!mediaUrl.startsWith('http')){
+            showNotification(mediaUrl,'error');
+            return;
+        }
+        const aiMessage=document.createElement('div');
+        aiMessage.className='chat-message ai';
+        const mediaElement=prompt.toLowerCase().includes('video')?`<video controls src="${mediaUrl}"></video>`:`<img src="${mediaUrl}" alt="Generated Media">`;
+        aiMessage.innerHTML=`<div class="chat-message-content">${mediaElement}</div><div class="chat-message-meta">Just now</div>`;
+        chatHistory.appendChild(aiMessage);
+        chatArea.scrollTop=chatArea.scrollHeight;
+        conversationHistory.push({role:'assistant',content:`Generated media: ${mediaUrl}`});
+    });
+
+    schoolHelpDropdown.addEventListener('change',()=>{
+        selectedSchoolMode=schoolHelpDropdown.value;
+        if(selectedSchoolMode){
+            userInput.value=`Help me with ${selectedSchoolMode}...`;
+            userInput.focus();
+        }
+    });
+
+    aiModelDropdown.addEventListener('change',()=>{
+        selectedAiModel=aiModelDropdown.value;
+        clearChatBtn.click();
+    });
+
+    rephraseBtn.addEventListener('click',async()=>{
+        const lastMessage=conversationHistory[conversationHistory.length-1]?.content||'';
+        if(!lastMessage||conversationHistory[conversationHistory.length-1].role!=='assistant'){
+            showNotification('No AI response to rephrase.','error');
+            return;
+        }
+        const rephrasePrompt=`Rephrase the following: ${lastMessage}`;
+        conversationHistory.push({role:'user',content:rephrasePrompt});
+        const userMessage=document.createElement('div');
+        userMessage.className='chat-message user';
+        userMessage.innerHTML=`<div class="chat-message-content">Rephrase the last response...</div><div class="chat-message-meta">Just now</div>`;
+        chatHistory.appendChild(userMessage);
+        chatArea.scrollTop=chatArea.scrollHeight;
+        loadingSpinner.style.display='block';
+        typingIndicator.style.display='block';
+        const apiUrl=selectedAiModel==='betterGrok'?GROK_API_URL:API_URL;
+        const rephrased=await fetchResponse(rephrasePrompt,false,apiUrl);
+        loadingSpinner.style.display='none';
+        typingIndicator.style.display='none';
+        const formattedResponse=formatAiResponse(rephrased);
+        const aiMessage=document.createElement('div');
+        aiMessage.className='chat-message ai';
+        aiMessage.innerHTML=`<div class="chat-message-content">${formattedResponse}</div><div class="chat-message-meta">Just now</div>`;
+        chatHistory.appendChild(aiMessage);
+        chatArea.scrollTop=chatArea.scrollHeight;
+        conversationHistory.push({role:'assistant',content:rephrased});
+        cacheResponse(rephrasePrompt,rephrased);
+    });
+
+    stopGeneratingBtn.addEventListener('click',()=>{
+        if(isGenerating){
+            abortController?.abort();
             isGenerating=false;
             stopGeneratingBtn.style.display='none';
             loadingSpinner.style.display='none';
             typingIndicator.style.display='none';
             sendBtn.disabled=false;
-            if(!fullResponse){
-                fullResponse=latestAiResponse;
-                latestAiResponse='';
-            }
-            const formattedResponse=formatAiResponse(fullResponse);
-            const aiMessage=document.createElement('div');
-            aiMessage.className='chat-message ai';
-            aiMessage.innerHTML=`<div class="chat-message-content">${formattedResponse}</div><div class="chat-message-meta">Just now</div>`;
-            chatHistory.appendChild(aiMessage);
-            chatArea.scrollTop=chatArea.scrollHeight;
-            conversationHistory.push({role:'assistant',content:fullResponse});
-            cacheResponse(message,fullResponse);
-            generationTimeout=setTimeout(()=>{
-                keepGeneratingBtn.style.display='block';
-                keepGeneratingBtn.classList.add('show');
-            },3500);
-            const copyButtons=aiMessage.querySelectorAll('.copy-btn');
-            copyButtons.forEach(btn=>{
-                btn.addEventListener('click',()=>{
-                    const code=btn.previousElementSibling.textContent;
-                    navigator.clipboard.writeText(code);
-                    showNotification('Code copied!');
-                });
-            });
-            for(const file of filesArray){
-                let analysis;
-                if(file.type.startsWith('image/')){
-                    analysis=await MediaProcessor.analyzeImage(file);
-                }else if(file.type.startsWith('video/')){
-                    analysis=await MediaProcessor.analyzeVideo(file);
-                }else if(file.type.startsWith('text/')||file.type.match(/application\/(json|xml)/)){
-                    const text=await readText(file);
-                    analysis=`File content:\n\`\`\`\n${text}\n\`\`\``;
-                }
-                if(analysis){
-                    const fileMessage=document.createElement('div');
-                    fileMessage.className='chat-message ai';
-                    fileMessage.innerHTML=`<div class="chat-message-content">${formatAiResponse(analysis)}</div><div class="chat-message-meta">Just now</div>`;
-                    chatHistory.appendChild(fileMessage);
-                    chatArea.scrollTop=chatArea.scrollHeight;
-                    conversationHistory.push({role:'assistant',content:analysis});
-                }
-            }
-            filesArray=[];
-            fileList.innerHTML='';
-            fileClearBtn.style.display='none';
         }
+    });
 
-        userInput.addEventListener('input',()=>{
-            userInput.style.height='auto';
-            userInput.style.height=`${userInput.scrollHeight}px`;
-        });
-
-        userInput.addEventListener('keydown',(e)=>{
-            if(e.key==='Enter'&&!e.shiftKey){
-                e.preventDefault();
-                handleUserInput();
-            }
-        });
-
-        sendBtn.addEventListener('click',handleUserInput);
-
-        fileInput.addEventListener('change',async()=>{
-            const files=Array.from(fileInput.files);
-            for(const file of files){
-                if(file.size>MAX_FILE_SIZE){
-                    showNotification(`File "${file.name}" exceeds ${MAX_FILE_SIZE/1024/1024}MB limit.`,'error');
-                    continue;
-                }
+    document.addEventListener('paste',async(e)=>{
+        const items=e.clipboardData.items;
+        for(const item of items){
+            if(item.type.startsWith('image/')){
+                const file=item.getAsFile();
+                const hash=sha256(await readImage(file));
+                if(pastedImageHashes.has(hash))continue;
+                pastedImageHashes.add(hash);
                 filesArray.push(file);
                 const fileItem=document.createElement('div');
                 fileItem.className='file-item';
-                fileItem.innerHTML=`<div class="file-item-name">${file.name}</div><div class="file-item-details">${(file.size/1024/1024).toFixed(2)}MB</div><div class="file-progress" style="width:0%"></div>`;
+                fileItem.innerHTML=`<div class="file-item-name">Pasted Image</div><div class="file-item-details">${(file.size/1024/1024).toFixed(2)}MB</div>`;
                 fileList.appendChild(fileItem);
-                const progressBar=fileItem.querySelector('.file-progress');
-                let progress=0;
-                const interval=setInterval(()=>{
-                    progress+=10;
-                    progressBar.style.width=`${progress}%`;
-                    if(progress>=100){
-                        clearInterval(interval);
-                        fileItem.addEventListener('click',async()=>{
-                            let content;
-                            if(file.type.startsWith('image/')){
-                                content=`<img src="${await readImage(file)}" alt="${file.name}">`;
-                            }else if(file.type.startsWith('video/')){
-                                content=`<video controls src="${URL.createObjectURL(file)}"></video>`;
-                            }else if(file.type.startsWith('text/')||file.type.match(/application\/(json|xml)/)){
-                                content=`<pre>${await readText(file)}</pre>`;
-                            }
-                            filePreviewContent.innerHTML=content;
-                            filePreviewModal.classList.add('open');
-                        });
-                    }
-                },50);
+                fileItem.addEventListener('click',async()=>{
+                    filePreviewContent.innerHTML=`<img src="${await readImage(file)}" alt="Pasted Image">`;
+                    filePreviewModal.classList.add('open');
+                });
+                fileClearBtn.style.display='block';
             }
-            fileClearBtn.style.display=filesArray.length?'block':'none';
-            fileInput.value='';
-        });
+        }
+    });
 
-        fileClearBtn.addEventListener('click',()=>{
-            filesArray=[];
-            fileList.innerHTML='';
-            fileClearBtn.style.display='none';
-        });
+    window.addEventListener('beforeunload',()=>{
+        if(backgroundAudio)backgroundAudio.pause();
+        if(ws)ws.close();
+        workerPool.forEach(worker=>worker.terminate());
+    });
 
-        filePreviewClose.addEventListener('click',()=>{
-            filePreviewModal.classList.remove('open');
-            filePreviewContent.innerHTML='';
-        });
-
-        clearChatBtn.addEventListener('click',()=>{
-            chatHistory.innerHTML='';
-            conversationHistory=[{role:'assistant',content:aiModels[selectedAiModel].personality}];
-            const aiMessage=document.createElement('div');
-            aiMessage.className='chat-message ai';
-            aiMessage.innerHTML=`<div class="chat-message-content">${aiModels[selectedAiModel].personality}</div><div class="chat-message-meta">Just now</div>`;
-            chatHistory.appendChild(aiMessage);
-            chatArea.scrollTop=chatArea.scrollHeight;
-            showNotification('Chat cleared!');
-        });
-
-        copyCodeBtn.addEventListener('click',()=>{
-            if(latestCodeBlocks.length){
-                navigator.clipboard.writeText(latestCodeBlocks.join('\n\n'));
-                showNotification('All code blocks copied!');
-            }else{
-                showNotification('No code blocks to copy.','error');
-            }
-        });
-
-        discordBtn.addEventListener('click',()=>{
-            window.open(DISCORD_INVITE,'_blank');
-        });
-
-        verbiflowUpdatesBtn.addEventListener('click',()=>{
-            const aiMessage=document.createElement('div');
-            aiMessage.className='chat-message ai';
-            aiMessage.innerHTML=`<div class="chat-message-content">Here are the latest updates for VerbiFlow:\n- Enhanced UI with full-screen layout.\n- Added Share Chat feature.\n- Improved performance with faster response streaming.</div><div class="chat-message-meta">Just now</div>`;
-            chatHistory.appendChild(aiMessage);
-            chatArea.scrollTop=chatArea.scrollHeight;
-            conversationHistory.push({role:'assistant',content:"Here are the latest updates for VerbiFlow:\n- Enhanced UI with full-screen layout.\n- Added Share Chat feature.\n- Improved performance with faster response streaming."});
-        });
-
-        premiumPriceBtn.addEventListener('click',()=>{
-            const aiMessage=document.createElement('div');
-            aiMessage.className='chat-message ai';
-            aiMessage.innerHTML=`<div class="chat-message-content">For premium pricing details, please visit our official page: <a href="https://x.ai/grok" target="_blank">x.ai/grok</a>.</div><div class="chat-message-meta">Just now</div>`;
-            chatHistory.appendChild(aiMessage);
-            chatArea.scrollTop=chatArea.scrollHeight;
-            conversationHistory.push({role:'assistant',content:"For premium pricing details, please visit our official page: https://x.ai/grok"});
-        });
-
-        shareChatBtn.addEventListener('click',()=>{
-            const chatContent=conversationHistory.map(msg=>`${msg.role}: ${msg.content}`).join('\n\n');
-            const blob=new Blob([chatContent],{type:'text/plain'});
-            const url=URL.createObjectURL(blob);
-            const a=document.createElement('a');
-            a.href=url;
-            a.download='VerbiFlow_Chat.txt';
-            a.click();
-            URL.revokeObjectURL(url);
-            showNotification('Chat exported!');
-        });
-
-        shareWebsiteBtn.addEventListener('click',()=>{
-            const websiteUrl=window.location.href;
-            navigator.clipboard.writeText(websiteUrl);
-            showNotification('Website URL copied! Share it with your friends.');
-        });
-
-        themeBtn.addEventListener('click',toggleTheme);
-
-        codeSidebarClose.addEventListener('click',()=>{
-            codeSidebar.classList.remove('open');
-        });
-
-        keepGeneratingBtn.addEventListener('click',async()=>{
-            keepGeneratingBtn.style.display='none';
-            keepGeneratingBtn.classList.remove('show');
-            const lastPrompt=conversationHistory[conversationHistory.length-2]?.content||'';
-            const lastResponse=conversationHistory[conversationHistory.length-1]?.content||'';
-            const newPrompt=`Continue from: ${lastResponse}`;
-            conversationHistory.push({role:'user',content:newPrompt});
-            const userMessage=document.createElement('div');
-            userMessage.className='chat-message user';
-            userMessage.innerHTML=`<div class="chat-message-content">Continue generating...</div><div class="chat-message-meta">Just now</div>`;
-            chatHistory.appendChild(userMessage);
-            chatArea.scrollTop=chatArea.scrollHeight;
-            loadingSpinner.style.display='block';
-            typingIndicator.style.display='block';
-            isGenerating=true;
-            stopGeneratingBtn.style.display='block';
-            abortController=new AbortController();
-            let fullResponse;
-            try{
-                fullResponse=await fetchResponse(newPrompt,true);
-            }catch(error){
-                if(error.name==='AbortError'){
-                    showNotification('Generation stopped.');
-                }else{
-                    showNotification('Error generating response.','error');
-                }
-            }
-            isGenerating=false;
-            stopGeneratingBtn.style.display='none';
-            loadingSpinner.style.display='none';
-            typingIndicator.style.display='none';
-            if(!fullResponse){
-                fullResponse=latestAiResponse;
-                latestAiResponse='';
-            }
-            const formattedResponse=formatAiResponse(fullResponse);
-            const aiMessage=document.createElement('div');
-            aiMessage.className='chat-message ai';
-            aiMessage.innerHTML=`<div class="chat-message-content">${formattedResponse}</div><div class="chat-message-meta">Just now</div>`;
-            chatHistory.appendChild(aiMessage);
-            chatArea.scrollTop=chatArea.scrollHeight;
-            conversationHistory.push({role:'assistant',content:fullResponse});
-            cacheResponse(newPrompt,fullResponse);
-            generationTimeout=setTimeout(()=>{
-                keepGeneratingBtn.style.display='block';
-                keepGeneratingBtn.classList.add('show');
-            },3500);
-        });
-
-        generateMediaBtn.addEventListener('click',async()=>{
-            if(!hasPermission){
-                requestPermissions();
-                return;
-            }
-            const prompt=userInput.value.trim()||'Generate a random image';
-            loadingSpinner.style.display='block';
-            typingIndicator.style.display='block';
-            let mediaUrl;
-            if(prompt.toLowerCase().includes('video')){
-                mediaUrl=await MediaProcessor.generateVideo(prompt);
-            }else{
-                mediaUrl=await MediaProcessor.generateImage(prompt);
-            }
-            loadingSpinner.style.display='none';
-            typingIndicator.style.display='none';
-            if(!mediaUrl.startsWith('http')){
-                showNotification(mediaUrl,'error');
-                return;
-            }
-            const aiMessage=document.createElement('div');
-            aiMessage.className='chat-message ai';
-            const mediaElement=prompt.toLowerCase().includes('video')?`<video controls src="${mediaUrl}"></video>`:`<img src="${mediaUrl}" alt="Generated Media">`;
-            aiMessage.innerHTML=`<div class="chat-message-content">${mediaElement}</div><div class="chat-message-meta">Just now</div>`;
-            chatHistory.appendChild(aiMessage);
-            chatArea.scrollTop=chatArea.scrollHeight;
-            conversationHistory.push({role:'assistant',content:`Generated media: ${mediaUrl}`});
-        });
-
-        schoolHelpDropdown.addEventListener('change',()=>{
-            selectedSchoolMode=schoolHelpDropdown.value;
-            if(selectedSchoolMode){
-                userInput.value=`Help me with ${selectedSchoolMode}...`;
-                userInput.focus();
-            }
-        });
-
-        aiModelDropdown.addEventListener('change',()=>{
-            selectedAiModel=aiModelDropdown.value;
-            clearChatBtn.click();
-        });
-
-        rephraseBtn.addEventListener('click',async()=>{
-            const lastMessage=conversationHistory[conversationHistory.length-1]?.content||'';
-            if(!lastMessage||conversationHistory[conversationHistory.length-1].role!=='assistant'){
-                showNotification('No AI response to rephrase.','error');
-                return;
-            }
-            const rephrasePrompt=`Rephrase the following: ${lastMessage}`;
-            conversationHistory.push({role:'user',content:rephrasePrompt});
-            const userMessage=document.createElement('div');
-            userMessage.className='chat-message user';
-            userMessage.innerHTML=`<div class="chat-message-content">Rephrase the last response...</div><div class="chat-message-meta">Just now</div>`;
-            chatHistory.appendChild(userMessage);
-            chatArea.scrollTop=chatArea.scrollHeight;
-            loadingSpinner.style.display='block';
-            typingIndicator.style.display='block';
-            const rephrased=await fetchResponse(rephrasePrompt,false);
-            loadingSpinner.style.display='none';
-            typingIndicator.style.display='none';
-            const formattedResponse=formatAiResponse(rephrased);
-            const aiMessage=document.createElement('div');
-            aiMessage.className='chat-message ai';
-            aiMessage.innerHTML=`<div class="chat-message-content">${formattedResponse}</div><div class="chat-message-meta">Just now</div>`;
-            chatHistory.appendChild(aiMessage);
-            chatArea.scrollTop=chatArea.scrollHeight;
-            conversationHistory.push({role:'assistant',content:rephrased});
-            cacheResponse(rephrasePrompt,rephrased);
-        });
-
-        stopGeneratingBtn.addEventListener('click',()=>{
-            if(isGenerating){
-                abortController?.abort();
-                isGenerating=false;
-                stopGeneratingBtn.style.display='none';
-                loadingSpinner.style.display='none';
-                typingIndicator.style.display='none';
-                sendBtn.disabled=false;
-            }
-        });
-
-        document.addEventListener('paste',async(e)=>{
-            const items=e.clipboardData.items;
-            for(const item of items){
-                if(item.type.startsWith('image/')){
-                    const file=item.getAsFile();
-                    const hash=sha256(await readImage(file));
-                    if(pastedImageHashes.has(hash))continue;
-                    pastedImageHashes.add(hash);
-                    filesArray.push(file);
-                    const fileItem=document.createElement('div');
-                    fileItem.className='file-item';
-                    fileItem.innerHTML=`<div class="file-item-name">Pasted Image</div><div class="file-item-details">${(file.size/1024/1024).toFixed(2)}MB</div>`;
-                    fileList.appendChild(fileItem);
-                    fileItem.addEventListener('click',async()=>{
-                        filePreviewContent.innerHTML=`<img src="${await readImage(file)}" alt="Pasted Image">`;
-                        filePreviewModal.classList.add('open');
-                    });
-                    fileClearBtn.style.display='block';
-                }
-            }
-        });
-
-        window.addEventListener('beforeunload',()=>{
-            if(backgroundAudio)backgroundAudio.pause();
-            if(ws)ws.close();
-            workerPool.forEach(worker=>worker.terminate());
-        });
-
-        loadTheme();
-        initializeDB();
-        initializeWorkerPool();
-        initializeWebSocket();
-        setInterval(prefetchResponses,2500);
-        setInterval(batchProcessRequests,500);
-    </script>
+    loadTheme();
+    initializeDB();
+    initializeWorkerPool();
+    initializeWebSocket();
+    setInterval(prefetchResponses,2000);
+    setInterval(batchProcessRequests,400);
+</script>
 </body>
 </html>
