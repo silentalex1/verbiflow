@@ -20,7 +20,7 @@
         .dark-mode body{background:linear-gradient(145deg,#1e293b,#0f172a);color:#e2e8f0;}
         .container{width:100vw;height:100vh;background:#ffffff;border-radius:0;box-shadow:none;overflow:hidden;display:flex;flex-direction:column;transition:all .3s ease;}
         .dark-mode .container{background:#1e293b;}
-        .nav-bar{background:linear-gradient(90deg,#1e40af,#3b82f6);padding:16px 32px;display:flex;gap:10px;justify-content:space-between;align-items:center;box-shadow:0 4px 20px rgba(0,0,0,.3);border-bottom:1px solid rgba(255,255,255,.1);}
+        .nav-bar{background:linear-gradient(90deg,#1e40af,#3b82f6);padding:16px 32px;display:flex;gap:8px;justify-content:space-between;align-items:center;box-shadow:0 4px 20px rgba(0,0,0,.3);border-bottom:1px solid rgba(255,255,255,.1);}
         .dark-mode .nav-bar{background:linear-gradient(90deg,#1e3a8a,#2563eb);}
         .nav-btn{background:#ffffff;color:#1e40af;border:none;padding:10px 24px;border-radius:12px;cursor:pointer;font-size:15px;font-weight:600;transition:all .24s ease;outline:none;}
         .dark-mode .nav-btn{background:#334155;color:#93c5fd;}
@@ -85,7 +85,7 @@
         .code-sidebar-close:hover{background:#dc2626;transform:scale(1.15);}
         .code-sidebar-content{font-family:'JetBrains Mono',monospace;font-size:15px;color:#0f172a;white-space:pre-wrap;}
         .dark-mode .code-sidebar-content{color:#e2e8f0;}
-        .file-upload-container{padding:20px;border-top:1px solid #e2e8f0;background:#ffffff;}
+        .file-upload-container{padding:10px;border-top:1px solid #e2e8f0;background:#ffffff;}
         .dark-mode .file-upload-container{background:#1e293b;border-top:1px solid #334155;}
         .file-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
         .file-input-label{background:#1e40af;color:#ffffff;padding:14px 24px;border-radius:12px;cursor:pointer;font-size:15px;font-weight:600;min-height:48px;transition:all .24s ease;}
@@ -180,7 +180,7 @@
         @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.55;}}
         @media (max-width:768px){
             .container{border-radius:0;padding:0;}
-            .nav-bar{padding:12px;gap:8px;}
+            .nav-bar{padding:12px;gap:6px;}
             .nav-btn{font-size:13px;padding:8px 16px;}
             .theme-btn{padding:6px 12px;font-size:13px;}
             .header{padding:16px;}
@@ -211,6 +211,7 @@
             <button class="nav-btn" id="verbiflowUpdatesBtn">Updates</button>
             <button class="nav-btn" id="premiumPriceBtn">Premium Price</button>
             <button class="nav-btn" id="shareChatBtn">Share Chat</button>
+            <button class="nav-btn" id="shareWebsiteBtn">Share website to friends.</button>
             <button class="theme-btn" id="themeBtn"><i class="fas fa-moon"></i> Dark Mode</button>
             <button class="nav-btn" id="copyCodeBtn">Copy Code</button>
             <button class="nav-btn discord-btn" id="discordBtn">Discord</button>
@@ -260,6 +261,7 @@
                         <option value="lingoLogicAI">LingoLogicAI</option>
                         <option value="codeMasterAI">CodeMasterAI</option>
                         <option value="visualGeniusAI">VisualGeniusAI</option>
+                        <option value="betterGrok">Better Grok</option>
                     </select>
                     <button class="rephrase-btn" id="rephraseBtn">Rephrase</button>
                     <button class="stop-generating-btn" id="stopGeneratingBtn" style="display:none;">Stop Generating</button>
@@ -328,6 +330,7 @@
         const verbiflowUpdatesBtn=document.getElementById('verbiflowUpdatesBtn');
         const premiumPriceBtn=document.getElementById('premiumPriceBtn');
         const shareChatBtn=document.getElementById('shareChatBtn');
+        const shareWebsiteBtn=document.getElementById('shareWebsiteBtn');
         const themeBtn=document.getElementById('themeBtn');
         const notification=document.getElementById('notification');
         const codeSidebar=document.getElementById('codeSidebar');
@@ -379,7 +382,8 @@
             default:{name:"VerbiFlow",temperature:0.5,maxTokens:16170,personality:"Hey there, I’m VerbiFlow—your ultimate AI companion for creativity and problem-solving! I’m here to make things fast, fun, and insightful. What’s on your mind?"},
             lingoLogicAI:{name:"LingoLogicAI",temperature:0.4,maxTokens:16748,personality:"Greetings! I’m LingoLogicAI, a witty AI with a passion for language and logic. I’ll break down complex ideas with clarity and humor—let’s dive in!"},
             codeMasterAI:{name:"CodeMasterAI",temperature:0.3,maxTokens:17325,personality:"Yo, I’m CodeMasterAI—your coding expert with a love for clean, efficient solutions! I’m all about debugging and optimizing. Drop me some code, and let’s make it shine!"},
-            visualGeniusAI:{name:"VisualGeniusAI",temperature:0.6,maxTokens:15593,personality:"Hi, I’m VisualGeniusAI—an AI with a flair for visuals and creativity! Whether it’s generating images, videos, or designing UI, I’ve got you covered. What do you want to create?"}
+            visualGeniusAI:{name:"VisualGeniusAI",temperature:0.6,maxTokens:15593,personality:"Hi, I’m VisualGeniusAI—an AI with a flair for visuals and creativity! Whether it’s generating images, videos, or designing UI, I’ve got you covered. What do you want to create?"},
+            betterGrok:{name:"Better Grok",temperature:0.4,maxTokens:20000,personality:"I’m Better Grok—a faster, smarter version of Grok with all features unlocked for free! I’m here to deliver quick, insightful answers with enhanced capabilities. Let’s get started!"}
         };
 
         const livelyResponses={
@@ -410,6 +414,13 @@
                 "My creative gears are turning! Here’s a stunning, layered visual response!",
                 "I’m channeling my artistic side! Here’s a vibrant and detailed creation for you!",
                 "I’ve searched the web for inspiration—here’s a visually stunning result!"
+            ],
+            betterGrok:[
+                "I’m Better Grok, ready to deliver lightning-fast insights! Here’s your answer…",
+                "Speed and smarts—let’s tackle this with a top-notch response!",
+                "I’ve got all of Grok’s features and more, for free! Here’s a quick, detailed reply…",
+                "Enhanced and efficient—here’s a superior answer for you!",
+                "Better Grok at your service! Let’s dive in with a fast, insightful response!"
             ]
         };
 
@@ -433,7 +444,7 @@
         function toggleTheme(){
             isDarkMode=!isDarkMode;
             document.body.classList.toggle('dark-mode');
-            themeBtn.innerHTML=isDarkMode?'<i class="fas fa-sun"></i> Light Mode':'<i class="fas fa-moon"></i>aaaaaaaaaaaa Dark Mode';
+            themeBtn.innerHTML=`<i class="fas ${isDarkMode?'fa-sun':'fa-moon'}"></i> ${isDarkMode?'Light Mode':'Dark Mode'}`;
             localStorage.setItem('theme',isDarkMode?'dark':'light');
         }
 
@@ -785,7 +796,9 @@
                 formData.append('file',videoFile);
                 const response=await fetch(VIDEO_PROCESSING_API,{
                     method:'POST',
-                    headers:{'Authorization':`Bearer ${API_KEY}`},
+                    headers:{
+                        'Authorization':`Bearer ${API_KEY}`
+                    },
                     body:formData
                 });
                 if(!response.ok)return "Unable to analyze video.";
@@ -793,54 +806,69 @@
                 return data.analysis||'No analysis available.';
             }
             static async generateImage(prompt){
-                const response=await fetch(DALLE_API_URL,{
-                    method:'POST',
-                    headers:{
-                        'Authorization':`Bearer ${API_KEY}`,
-                        'Content-Type':'application/json'
-                    },
-                    body:JSON.stringify({
-                        prompt:prompt,
-                        n:1,
-                        size:"1024x1024"
-                    })
-                });
-                if(!response.ok)return "Failed to generate image.";
-                const data=await response.json();
-                return data.data[0].url;
+                try{
+                    const response=await fetch(DALLE_API_URL,{
+                        method:'POST',
+                        headers:{
+                            'Authorization':`Bearer ${API_KEY}`,
+                            'Content-Type':'application/json'
+                        },
+                        body:JSON.stringify({
+                            prompt:prompt,
+                            n:1,
+                            size:'1024x1024'
+                        })
+                    });
+                    if(!response.ok)return "Failed to generate image.";
+                    const data=await response.json();
+                    return data.data[0].url;
+                }catch(error){
+                    return "Error generating image.";
+                }
             }
             static async generateVideo(prompt){
-                const response=await fetch(SORA_API_URL,{
-                    method:'POST',
-                    headers:{
-                        'Authorization':`Bearer ${API_KEY}`,
-                        'Content-Type':'application/json'
-                    },
-                    body:JSON.stringify({
-                        prompt:prompt,
-                        duration:10,
-                        resolution:"1280x720"
-                    })
-                });
-                if(!response.ok)return "Failed to generate video.";
-                const data=await response.json();
-                return data.data[0].url;
+                try{
+                    const response=await fetch(SORA_API_URL,{
+                        method:'POST',
+                        headers:{
+                            'Authorization':`Bearer ${API_KEY}`,
+                            'Content-Type':'application/json'
+                        },
+                        body:JSON.stringify({
+                            prompt:prompt,
+                            duration:5,
+                            resolution:'1280x720'
+                        })
+                    });
+                    if(!response.ok)return "Failed to generate video.";
+                    const data=await response.json();
+                    return data.data[0].url;
+                }catch(error){
+                    return "Error generating video.";
+                }
             }
         }
 
         class DDoSProtection{
-            static analyzeRequest(userId,request){
+            static async analyzeRequest(userId,options={}){
                 const now=Date.now();
-                const userRequests=userRequestCounts.get(userId)||[];
-                const recentRequests=userRequests.filter(t=>now-t<RATE_LIMIT_WINDOW);
-                userRequestCounts.set(userId,recentRequests);
-                if(recentRequests.length>=RATE_LIMIT_REQUESTS){
-                    const delay=Math.min(5000,500*recentRequests.length);
-                    return new Promise(resolve=>setTimeout(resolve,delay,true));
+                const window=60*1000;
+                const maxRequests=150;
+                const userData=userRequestCounts.get(userId)||{count:0,firstRequest:now};
+                if(now-userData.firstRequest>window){
+                    userData.count=0;
+                    userData.firstRequest=now;
                 }
-                recentRequests.push(now);
-                userRequestCounts.set(userId,recentRequests);
-                if(!request.csrfToken||request.csrfToken!==sha256(userId+API_KEY))return false;
+                userData.count++;
+                userRequestCounts.set(userId,userData);
+                if(userData.count>maxRequests){
+                    showNotification('Too many requests—please wait.','error');
+                    return false;
+                }
+                if(options.csrfToken&&options.csrfToken!==sha256(userId+API_KEY)){
+                    showNotification('CSRF token mismatch—request blocked.','error');
+                    return false;
+                }
                 return true;
             }
         }
@@ -921,7 +949,7 @@
         }
 
         function initializeWorkerPool(){
-            const numWorkers=navigator.hardwareConcurrency*1.15||6;
+            const numWorkers=Math.max(6,navigator.hardwareConcurrency*1.15);
             for(let i=0;i<numWorkers;i++){
                 const worker=new Worker(URL.createObjectURL(new Blob([`
                     self.onmessage=async(e)=>{
@@ -1275,6 +1303,12 @@
             a.click();
             URL.revokeObjectURL(url);
             showNotification('Chat exported!');
+        });
+
+        shareWebsiteBtn.addEventListener('click',()=>{
+            const websiteUrl=window.location.href;
+            navigator.clipboard.writeText(websiteUrl);
+            showNotification('Website URL copied! Share it with your friends.');
         });
 
         themeBtn.addEventListener('click',toggleTheme);
