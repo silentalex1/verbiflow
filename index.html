@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; connect-src 'self' https://api.openai.com ws://*; frame-src 'none'; media-src 'self' data: blob:;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.cloudflare.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; connect-src 'self' https://api.openai.com ws://*; frame-src 'none'; media-src 'self' data: blob: https://cdn.pixabay.com;">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta name="robots" content="noindex, nofollow">
@@ -139,11 +139,11 @@
         .notification.error{background:#ef4444;color:#ffffff;}
         .permission-modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.9);z-index:500;display:none;justify-content:center;align-items:center;}
         .permission-modal.open{display:flex;}
-        .permission-content{background:#ffffff;border-radius:16px;padding:16px;max-width:350px;text-align:center;color:#111827;}
+        .permission-content{background:#ffffff;border-radius:16px;padding:20px;max-width:450px;text-align:center;color:#111827;}
         .dark-mode .permission-content{background:#1f2937;color:#e5e7eb;}
-        .permission-content h2{font-size:18px;margin-bottom:8px;}
-        .permission-content p{font-size:13px;margin-bottom:12px;}
-        .permission-btn{background:#1d4ed8;color:#ffffff;padding:6px 16px;border-radius:10px;border:none;cursor:pointer;font-size:13px;font-weight:500;margin:0 4px;}
+        .permission-content h2{font-size:20px;margin-bottom:10px;}
+        .permission-content p{font-size:14px;margin-bottom:14px;}
+        .permission-btn{background:#1d4ed8;color:#ffffff;padding:8px 20px;border-radius:10px;border:none;cursor:pointer;font-size:14px;font-weight:500;margin:0 6px;}
         .dark-mode .permission-btn{background:#1e40af;}
         .permission-btn:hover{transform:scale(1.05);background:#3b82f6;}
         .dark-mode .permission-btn:hover{background:#2563eb;}
@@ -151,8 +151,7 @@
         .dark-mode .permission-btn.deny{background:#dc2626;}
         .permission-btn.deny:hover{background:#f87171;}
         .dark-mode .permission-btn.deny:hover{background:#ef4444;}
-        @keyframes slideIn{0%{opacity:0;transform:translateY(â¦
-16px);}100%{opacity:1;transform:translateY(0);}}
+        @keyframes slideIn{0%{opacity:0;transform:translateY(16px);}100%{opacity:1;transform:translateY(0);}}
         @keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
         @keyframes dotPulse{0%,80%,100%{transform:scale(1);opacity:.5;}40%{transform:scale(1.4);opacity:1;}}
         @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.75;}}
@@ -175,10 +174,10 @@
             .file-preview-content img,.file-preview-content video{max-width:85% !important;}
             .notification{top:12px;right:12px;padding:8px 16px;font-size:11px;}
             .code-sidebar{width:100%;right:-100%;}
-            .permission-content{max-width:85%;padding:12px;}
-            .permission-content h2{font-size:14px;}
-            .permission-content p{font-size:11px;}
-            .permission-btn{padding:5px 12px;font-size:11px;}
+            .permission-content{max-width:90%;padding:14px;}
+            .permission-content h2{font-size:16px;}
+            .permission-content p{font-size:12px;}
+            .permission-btn{padding:6px 14px;font-size:12px;}
         }
     </style>
 </head>
@@ -225,9 +224,9 @@
                         <option value="physics">Physics Help</option>
                         <option value="chemistry">Chemistry Help</option>
                         <option value="biology">Biology Help</option>
-                        <option value="roblox">Roblox Game</option>
-                        <option value="slides">Google Slides</option>
-                        <option value="video">Video Analysis</option>
+                        <option value="robloxGame">Roblox Game</option>
+                        <option value="googleSlides">Google Slides</option>
+                        <option value="videoAnalysis">Video Analysis</option>
                         <option value="robloxScripting">Roblox Scripting</option>
                     </select>
                     <select class="ai-model-dropdown" id="aiModelDropdown">
@@ -262,7 +261,7 @@
         <div class="permission-modal" id="permissionModal">
             <div class="permission-content">
                 <h2>Request Permissions</h2>
-                <p>VerbiFlow needs access to enable features like video and image analysis, custom AI models, and more. Do you grant permission?</p>
+                <p>VerbiFlow needs access to enable features like video and image analysis, custom AI models, background music, and more. Do you grant permission?</p>
                 <button class="permission-btn" id="grantPermissionBtn">Grant</button>
                 <button class="permission-btn deny" id="denyPermissionBtn">Deny</button>
             </div>
@@ -276,8 +275,8 @@
         const VIDEO_PROCESSING_API="https://api.openai.com/v1/video/analyze";
         const DISCORD_INVITE="https://discord.gg/rCTRQvD4TP";
         const MAX_VIDEO_SIZE=50*1024*1024;
-        const BATCH_SIZE=20;
-        const RATE_LIMIT_REQUESTS=250;
+        const BATCH_SIZE=50;
+        const RATE_LIMIT_REQUESTS=500;
         const RATE_LIMIT_WINDOW=60*1000;
 
         const chatHistory=document.getElementById('chatHistory');
@@ -331,38 +330,40 @@
         let batchQueue=[];
         let hasPermission=false;
         let requestTimestamps=[];
+        let backgroundAudio=null;
+        let isAdminVerified=false;
 
         const aiModels={
-            default:{name:"VerbiFlow",temperature:0.7,maxTokens:8000,personality:"Hey there, I’m VerbiFlow—your go-to AI pal with a knack for creativity and problem-solving! I’m here to make things fun, fast, and insightful. What’s on your mind?"},
-            lingoLogicAI:{name:"LingoLogicAI",temperature:0.6,maxTokens:8500,personality:"Greetings! I’m LingoLogicAI, a sharp-witted AI with a love for language and logic. I’ll break down complex ideas with clarity and a touch of humor—let’s get to it!"},
-            codeMasterAI:{name:"CodeMasterAI",temperature:0.5,maxTokens:9000,personality:"Yo, I’m CodeMasterAI—your coding guru with a passion for clean, efficient solutions! I live for debugging and optimizing. Drop me some code, and let’s make it shine!"},
-            visualGeniusAI:{name:"VisualGeniusAI",temperature:0.8,maxTokens:7500,personality:"Hi, I’m VisualGeniusAI—an AI with an eye for visuals and creativity! Whether it’s analyzing images, videos, or designing stunning UI, I’ve got a flair for the visual arts. What do you want to create?"}
+            default:{name:"VerbiFlow",temperature:0.6,maxTokens:8000,personality:"Hey there, I’m VerbiFlow—your go-to AI pal with a knack for creativity and problem-solving! I’m here to make things fun, fast, and insightful. What’s on your mind?"},
+            lingoLogicAI:{name:"LingoLogicAI",temperature:0.5,maxTokens:8500,personality:"Greetings! I’m LingoLogicAI, a sharp-witted AI with a love for language and logic. I’ll break down complex ideas with clarity and a touch of humor—let’s get to it!"},
+            codeMasterAI:{name:"CodeMasterAI",temperature:0.4,maxTokens:9000,personality:"Yo, I’m CodeMasterAI—your coding guru with a passion for clean, efficient solutions! I live for debugging and optimizing. Drop me some code, and let’s make it shine!"},
+            visualGeniusAI:{name:"VisualGeniusAI",temperature:0.7,maxTokens:7500,personality:"Hi, I’m VisualGeniusAI—an AI with an eye for visuals and creativity! Whether it’s analyzing images, videos, or designing stunning UI, I’ve got a flair for the visual arts. What do you want to create?"}
         };
 
         const livelyResponses={
             default:[
-                "Ooh, I’m excited to help with that! Let’s dive in—here’s what I’ve got for you…",
-                "That’s a great request! I’m buzzing with ideas—check this out!",
-                "Alright, let’s do this! I’ve got just the thing for you—take a look!",
-                "You’ve got my circuits firing! Here’s my take on that—hope you love it!"
+                "Ooh, I’m pumped to tackle that! Here’s the scoop…",
+                "That’s a spicy request! Let’s cook up something awesome!",
+                "Alright, let’s roll! Got something cool for you right here…",
+                "You’re sparking my circuits! Check this out!"
             ],
             lingoLogicAI:[
-                "Well, well, look at that! Let me put my thinking cap on—here’s my witty response…",
-                "Aha, a challenge! I’ll break this down with some clever logic—here you go!",
-                "Let’s unravel this with a dash of flair—here’s what I came up with!",
-                "I’m feeling particularly sharp today! Here’s my take—let me know what you think!"
+                "Well, look at that! Let me weave some linguistic magic…",
+                "A challenge? I’m ready with a clever twist—here’s the deal!",
+                "Let’s slice through this with logic and flair—boom!",
+                "Feeling sharp today! Here’s my take, hot off the press!"
             ],
             codeMasterAI:[
-                "Code time, baby! Let’s get those bugs squashed—here’s the optimized solution!",
-                "I’m in my element now! Check out this clean code—let’s make it even better!",
-                "This code’s speaking my language! Here’s my fix—ready to roll!",
-                "Let’s make this code sing! Here’s my streamlined version—enjoy!"
+                "Code mode: ON! Let’s squash bugs and optimize—here’s the goods!",
+                "I’m in my coding zone! Check this sleek solution out!",
+                "This code’s my jam! Here’s a polished version—let’s go!",
+                "Let’s make this code pop! Optimized and ready to rock!"
             ],
             visualGeniusAI:[
-                "Oh, I can *see* this coming together! Here’s my visual magic for you…",
-                "Let’s paint a picture with this! Here’s what I’ve envisioned—pretty cool, right?",
-                "My creative juices are flowing! Check out this visual masterpiece I made for you!",
-                "I’ve got an eye for this! Here’s my take—let’s make it even more stunning!"
+                "Oh, I’m *seeing* the vision! Here’s my creative spin…",
+                "Let’s craft a visual masterpiece—check this out!",
+                "My artistic side is buzzing! Here’s something stunning for you!",
+                "Got an eye for this! Let’s make it visually epic!"
             ]
         };
 
@@ -374,6 +375,109 @@
                 return false;
             }
             requestTimestamps.push(now);
+            return true;
+        }
+
+        function showNotification(message,type='success'){
+            notification.textContent=message;
+            notification.className=`notification ${type} show`;
+            setTimeout(()=>{notification.classList.remove('show');},800);
+        }
+
+        function toggleTheme(){
+            isDarkMode=!isDarkMode;
+            document.body.classList.toggle('dark-mode');
+            themeBtn.innerHTML=isDarkMode?'<i class="fas fa-sun"></i> Light Mode':'<i class="fas fa-moon"></i> Dark Mode';
+            localStorage.setItem('theme',isDarkMode?'dark':'light');
+        }
+
+        function loadTheme(){
+            const savedTheme=localStorage.getItem('theme');
+            if(savedTheme==='dark'){
+                isDarkMode=true;
+                document.body.classList.add('dark-mode');
+                themeBtn.innerHTML='<i class="fas fa-sun"></i> Light Mode';
+            }else{
+                themeBtn.innerHTML='<i class="fas fa-moon"></i> Dark Mode';
+            }
+        }
+
+        function requestPermissions(){
+            permissionModal.classList.add('open');
+        }
+
+        grantPermissionBtn.addEventListener('click',()=>{
+            hasPermission=true;
+            permissionModal.classList.remove('open');
+            showNotification('Permissions granted! Full features unlocked!');
+        });
+
+        denyPermissionBtn.addEventListener('click',()=>{
+            hasPermission=false;
+            permissionModal.classList.remove('open');
+            showNotification('Permissions denied. Some features limited.','error');
+        });
+
+        async function playBackgroundMusic(userRequest=''){
+            if(!hasPermission){
+                showNotification('Please grant permissions to enable background music.','error');
+                return;
+            }
+            if(backgroundAudio){
+                backgroundAudio.pause();
+                backgroundAudio.remove();
+            }
+            let musicUrl;
+            if(userRequest.toLowerCase().includes('play a music')||userRequest.toLowerCase().includes('background music')){
+                const genreMatch=userRequest.match(/play\s*(?:a\s*)?(?:music\s*(?:in\s*the\s*background\s*)?of\s*)?(\w+)/i);
+                const genre=genreMatch?genreMatch[1].toLowerCase():'ambient';
+                const musicSources={
+                    ambient:'https://cdn.pixabay.com/audio/2023/01/26/audio_8cabeb3b53.mp3',
+                    jazz:'https://cdn.pixabay.com/audio/2023/01/26/audio_4f8c9b3b53.mp3',
+                    classical:'https://cdn.pixabay.com/audio/2023/01/26/audio_7a9d2b3b53.mp3',
+                    pop:'https://cdn.pixabay.com/audio/2023/01/26/audio_3e5b8b3b53.mp3',
+                    rock:'https://cdn.pixabay.com/audio/2023/01/26/audio_9f7a4b3b53.mp3'
+                };
+                musicUrl=musicSources[genre]||musicSources.ambient;
+            }else{
+                const randomMusic=[
+                    'https://cdn.pixabay.com/audio/2023/01/26/audio_8cabeb3b53.mp3',
+                    'https://cdn.pixabay.com/audio/2023/01/26/audio_4f8c9b3b53.mp3',
+                    'https://cdn.pixabay.com/audio/2023/01/26/audio_7a9d2b3b53.mp3'
+                ];
+                musicUrl=randomMusic[Math.floor(Math.random()*randomMusic.length)];
+            }
+            backgroundAudio=new Audio(musicUrl);
+            backgroundAudio.loop=true;
+            backgroundAudio.volume=0.3;
+            try{
+                await backgroundAudio.play();
+                showNotification(`Now playing ${userRequest.toLowerCase().includes('play a music')?userRequest.match(/play\s*(?:a\s*)?(?:music\s*(?:in\s*the\s*background\s*)?of\s*)?(\w+)/i)?.[1]||'background':'random'} music!`);
+            }catch(error){
+                showNotification('Failed to play music—check browser permissions.','error');
+            }
+        }
+
+        function verifyAdminAccess(message){
+            if(message.toLowerCase().includes('take me to admin console')){
+                const aiMessage=document.createElement('div');
+                aiMessage.className='chat-message ai';
+                aiMessage.innerHTML=`<div class="chat-message-content">Please verify you’re an admin by providing the access code.</div><div class="chat-message-meta">Just now</div>`;
+                chatHistory.appendChild(aiMessage);
+                chatArea.scrollTop=chatArea.scrollHeight;
+                conversationHistory.push({role:"assistant",content:"Please verify you’re an admin by providing the access code."});
+            }else if(message.toLowerCase().includes('adminpowers$33') && message.toLowerCase().includes('admin console')){
+                isAdminVerified=true;
+                const aiMessage=document.createElement('div');
+                aiMessage.className='chat-message ai';
+                aiMessage.innerHTML=`<div class="chat-message-content">Access granted! Taking you to the admin console...</div><div class="chat-message-meta">Just now</div>`;
+                chatHistory.appendChild(aiMessage);
+                chatArea.scrollTop=chatArea.scrollHeight;
+                conversationHistory.push({role:"assistant",content:"Access granted! Taking you to the admin console..."});
+                setTimeout(()=>{window.location.href='/adminconsole';},1000);
+            }else{
+                return false;
+            }
             return true;
         }
 
@@ -551,7 +655,7 @@
         }
 
         class MediaProcessor{
-            static async extractFrames(videoFile,maxFrames=30){
+            static async extractFrames(videoFile,maxFrames=60){
                 return new Promise((resolve,reject)=>{
                     const video=document.createElement('video');
                     const blobUrl=URL.createObjectURL(videoFile);
@@ -562,9 +666,8 @@
                         const canvas=document.createElement('canvas');
                         const ctx=canvas.getContext('2d');
                         const duration=video.duration;
-                        const frameInterval=Math.max(1,duration/maxFrames);
+                        const frameInterval=Math.max(0.5,duration/maxFrames);
                         const frames=[];
-
                         video.onerror=()=>reject(new Error('Failed to load video'));
                         video.oncanplay=async()=>{
                             for(let time=0;time<duration&&frames.length<maxFrames;time+=frameInterval){
@@ -573,7 +676,7 @@
                                 canvas.width=video.videoWidth;
                                 canvas.height=video.videoHeight;
                                 ctx.drawImage(video,0,0,canvas.width,canvas.height);
-                                frames.push(canvas.toDataURL('image/jpeg',0.7));
+                                frames.push(canvas.toDataURL('image/jpeg',0.8));
                             }
                             URL.revokeObjectURL(blobUrl);
                             resolve(frames);
@@ -595,7 +698,8 @@
                             width:video.videoWidth,
                             height:video.videoHeight,
                             size:(videoFile.size/1024/1024).toFixed(2),
-                            type:videoFile.type
+                            type:videoFile.type,
+                            frameRate:video.duration>0?(video.webkitDecodedFrameCount||30)/video.duration:0
                         };
                         URL.revokeObjectURL(blobUrl);
                         resolve(metadata);
@@ -618,8 +722,10 @@
                         const bufferLength=analyser.frequencyBinCount;
                         const dataArray=new Uint8Array(bufferLength);
                         analyser.getByteTimeDomainData(dataArray);
+                        const frequencyData=new Uint8Array(bufferLength);
+                        analyser.getByteFrequencyData(frequencyData);
                         URL.revokeObjectURL(blobUrl);
-                        resolve(dataArray);
+                        resolve({timeDomain:dataArray,frequency:frequencyData});
                     };
                     video.onerror=()=>reject(new Error('Failed to extract audio'));
                 });
@@ -628,7 +734,6 @@
                 if(videoFile.size>MAX_VIDEO_SIZE)return 'Video exceeds size limit (50MB).';
                 const videoHash=sha256(videoFile.name+videoFile.size);
                 if(videoAnalysisCache.has(videoHash))return videoAnalysisCache.get(videoHash);
-
                 const frames=await this.extractFrames(videoFile);
                 const metadata=await this.extractMetadata(videoFile);
                 const audioData=await this.extractAudio(videoFile);
@@ -643,7 +748,7 @@
                         frames:frames,
                         metadata:metadata,
                         audio_data:audioData,
-                        prompt:"Analyze this video in detail. Describe its content, key scenes, objects, activities, text, audio elements, and provide a comprehensive summary."
+                        prompt:"Provide a detailed analysis of this video. Include: 1) Scene-by-scene breakdown with timestamps, 2) Identified objects, people, and actions, 3) Text detection (OCR) in frames, 4) Audio analysis (speech, music, sound effects), 5) Color palette and lighting, 6) Motion and camera movement, 7) Emotional tone, 8) Comprehensive summary."
                     })
                 });
                 if(!response.ok)throw new Error('Video analysis failed');
@@ -655,7 +760,6 @@
             static async analyzeImage(imageFile){
                 const imageHash=sha256(imageFile.name+imageFile.size);
                 if(imageAnalysisCache.has(imageHash))return imageAnalysisCache.get(imageHash);
-
                 const imageData=await readImage(imageFile);
                 const response=await fetch(API_URL,{
                     method:'POST',
@@ -667,10 +771,10 @@
                         model:"gpt-4o",
                         messages:[{
                             role:"user",
-                            content:"Analyze this image in detail. Describe its content, objects, colors, text, and provide a comprehensive summary.",
+                            content:"Provide a detailed analysis of this image. Include: 1) Object detection with positions, 2) Text detection (OCR), 3) Color palette analysis, 4) Scene composition and depth, 5) Lighting and shadows, 6) Emotional tone, 7) Style and artistic elements, 8) Comprehensive summary.",
                             image_data:imageData
                         }],
-                        max_tokens:2000,
+                        max_tokens:3000,
                         temperature:aiModels[selectedAiModel].temperature
                     })
                 });
@@ -680,295 +784,6 @@
                 imageAnalysisCache.set(imageHash,analysis);
                 return analysis;
             }
-        }
-
-        function showNotification(message,type='success'){
-            notification.textContent=message;
-            notification.className=`notification ${type} show`;
-            setTimeout(()=>{notification.classList.remove('show');},800);
-        }
-
-        function toggleTheme(){
-            isDarkMode=!isDarkMode;
-            document.body.classList.toggle('dark-mode');
-            themeBtn.innerHTML=isDarkMode?'<i class="fas fa-sun"></i> Light Mode':'<i class="fas fa-moon"></i> Dark Mode';
-            localStorage.setItem('theme',isDarkMode?'dark':'light');
-        }
-
-        function loadTheme(){
-            const savedTheme=localStorage.getItem('theme');
-            if(savedTheme==='dark'){
-                isDarkMode=true;
-                document.body.classList.add('dark-mode');
-                themeBtn.innerHTML='<i class="fas fa-sun"></i> Light Mode';
-            }else{
-                themeBtn.innerHTML='<i class="fas fa-moon"></i> Dark Mode';
-            }
-        }
-
-        function requestPermissions(){
-            permissionModal.classList.add('open');
-        }
-
-        grantPermissionBtn.addEventListener('click',()=>{
-            hasPermission=true;
-            permissionModal.classList.remove('open');
-            showNotification('Permissions granted! Let’s roll with all features!');
-        });
-
-        denyPermissionBtn.addEventListener('click',()=>{
-            hasPermission=false;
-            permissionModal.classList.remove('open');
-            showNotification('Permissions denied. Some features may be limited.','error');
-        });
-
-        window.addEventListener('beforeunload',e=>{
-            e.preventDefault();
-            e.returnValue='Sure you want to leave VerbiFlow?';
-        });
-
-        themeBtn.addEventListener('click',toggleTheme);
-
-        discordBtn.addEventListener('click',()=>{
-            navigator.clipboard.writeText(DISCORD_INVITE);
-            showNotification('Discord link copied—join the party!');
-        });
-
-        verbiflowUpdatesBtn.addEventListener('click',()=>{
-            window.open('/updates','_blank');
-        });
-
-        userInput.addEventListener('input',()=>{
-            userInput.style.height='auto';
-            userInput.style.height=`${Math.min(userInput.scrollHeight,160)}px`;
-        });
-
-        userInput.addEventListener('paste',async e=>{
-            const items=e.clipboardData.items;
-            for(const item of items){
-                if(item.type.startsWith('image/')||item.type.startsWith('video/')){
-                    e.preventDefault();
-                    const file=item.getAsFile();
-                    filesArray.push(file);
-                    displayFileItem(file);
-                    const userMessage=document.createElement('div');
-                    userMessage.className='chat-message user';
-                    const blobUrl=URL.createObjectURL(file);
-                    userMessage.innerHTML=`
-                        <div class="chat-message-content">
-                            ${item.type.startsWith('image/')?`<img src="${blobUrl}" alt="${sanitizeInput(file.name)}">`:`<video controls src="${blobUrl}"></video>`}
-                        </div>
-                        <div class="chat-message-meta">Just now</div>
-                    `;
-                    chatHistory.appendChild(userMessage);
-                    chatArea.scrollTop=chatArea.scrollHeight;
-                }
-            }
-        });
-
-        fileInput.addEventListener('change',handleFileUpload);
-        fileUploadContainer.addEventListener('dragover',e=>{
-            e.preventDefault();
-            fileUploadContainer.style.background=isDarkMode?'#4b5563':'#e5e7eb';
-        });
-        fileUploadContainer.addEventListener('dragleave',()=>{
-            fileUploadContainer.style.background=isDarkMode?'#1f2937':'#ffffff';
-        });
-        fileUploadContainer.addEventListener('drop',e=>{
-            e.preventDefault();
-            fileUploadContainer.style.background=isDarkMode?'#1f2937':'#ffffff';
-            fileInput.files=e.dataTransfer.files;
-            handleFileUpload();
-        });
-
-        function handleFileUpload(){
-            const files=Array.from(fileInput.files);
-            files.forEach(file=>{
-                if(!filesArray.some(f=>f.name===file.name&&f.size===file.size)){
-                    filesArray.push(file);
-                    displayFileItem(file);
-                }
-            });
-            fileClearBtn.style.display=filesArray.length?'block':'none';
-            fileInput.value='';
-        }
-
-        function displayFileItem(file){
-            const fileItem=document.createElement('div');
-            fileItem.className='file-item';
-            fileItem.innerHTML=`
-                <span class="file-item-name">${sanitizeInput(file.name)}</span>
-                <span class="file-item-details">${(file.size/1024/1024).toFixed(2)} MB</span>
-            `;
-            fileItem.addEventListener('click',()=>previewFile(file));
-            fileList.appendChild(fileItem);
-        }
-
-        fileClearBtn.addEventListener('click',()=>{
-            filesArray=[];
-            fileList.innerHTML='';
-            fileClearBtn.style.display='none';
-            showNotification('Files cleared—fresh start!');
-        });
-
-        function previewFile(file){
-            filePreviewContent.innerHTML=`<strong>${sanitizeInput(file.name)}</strong><br>Size: ${(file.size/1024/1024).toFixed(2)} MB<br>Type: ${file.type}`;
-            if(file.type.startsWith('image/')){
-                const img=document.createElement('img');
-                img.src=URL.createObjectURL(file);
-                img.style.maxWidth='100%';
-                filePreviewContent.appendChild(img);
-            }else if(file.type.startsWith('video/')){
-                const video=document.createElement('video');
-                const blobUrl=URL.createObjectURL(file);
-                video.src=blobUrl;
-                video.controls=true;
-                video.style.maxWidth='100%';
-                filePreviewContent.appendChild(video);
-            }else if(file.type.startsWith('text/')||file.type.includes('json')||file.type.includes('xml')){
-                const reader=new FileReader();
-                reader.onload=e=>{
-                    const pre=document.createElement('pre');
-                    pre.textContent=e.target.result;
-                    filePreviewContent.appendChild(pre);
-                };
-                reader.readAsText(file);
-            }else{
-                filePreviewContent.innerHTML+='<br>Preview not available.';
-            }
-            filePreviewModal.classList.add('open');
-        }
-
-        filePreviewClose.addEventListener('click',()=>{
-            filePreviewModal.classList.remove('open');
-            filePreviewContent.innerHTML='';
-        });
-
-        clearChatBtn.addEventListener('click',()=>{
-            chatHistory.innerHTML=`
-                <div class="chat-message ai">
-                    <div class="chat-message-content">Hey there! I’m VerbiFlow, your lively AI buddy—here to dive into coding, whip up games, analyze media, or chat about anything! What’s sparking your interest today? Pick an AI model to get started!</div>
-                    <div class="chat-message-meta">Just now</div>
-                </div>
-            `;
-            conversationHistory=[{role:"assistant",content:"Hey there! I’m VerbiFlow, your lively AI buddy—here to dive into coding, whip up games, analyze media, or chat about anything! What’s sparking your interest today? Pick an AI model to get started!"}];
-            filesArray=[];
-            fileList.innerHTML='';
-            fileClearBtn.style.display='none';
-            keepGeneratingBtn.classList.remove('show');
-            stopGeneratingBtn.style.display='none';
-            userInput.value='';
-            userInput.style.height='auto';
-            chatArea.scrollTop=0;
-            latestCodeBlocks=[];
-            latestAiResponse='';
-            codeSidebarContent.textContent='';
-            schoolHelpDropdown.value='';
-            aiModelDropdown.value='default';
-            selectedSchoolMode='';
-            selectedAiModel='default';
-            codeAnalysisCache.clear();
-            videoAnalysisCache.clear();
-            imageAnalysisCache.clear();
-            responseCache.clear();
-            showNotification('Chat reset—let’s start fresh!');
-        });
-
-        copyCodeBtn.addEventListener('click',()=>{
-            const lastMessageWithCode=Array.from(chatHistory.querySelectorAll('.chat-message.ai')).reverse().find(msg=>msg.querySelector('.code-block'));
-            if(lastMessageWithCode&&latestCodeBlocks.length>0){
-                const codeToCopy=latestCodeBlocks.join('\n\n');
-                navigator.clipboard.writeText(codeToCopy).then(()=>{
-                    showNotification('Code copied—nice!');
-                    codeSidebarContent.textContent=codeToCopy;
-                    codeSidebar.classList.add('open');
-                }).catch(()=>{
-                    showNotification('Copy failed—oops!','error');
-                });
-            }else{
-                showNotification('No code to copy—try generating some!','error');
-            }
-        });
-
-        codeSidebarClose.addEventListener('click',()=>{
-            codeSidebar.classList.remove('open');
-        });
-
-        sendBtn.addEventListener('click',()=>{
-            const messageId=Date.now().toString();
-            messageQueue.set(messageId,{isContinuation:false});
-            processMessageQueue();
-        });
-
-        userInput.addEventListener('keypress',e=>{
-            if(e.key==='Enter'&&!e.shiftKey){
-                e.preventDefault();
-                const messageId=Date.now().toString();
-                messageQueue.set(messageId,{isContinuation:false});
-                processMessageQueue();
-            }
-        });
-
-        keepGeneratingBtn.addEventListener('click',()=>{
-            if(lastMessageContent){
-                keepGeneratingBtn.classList.remove('show');
-                stopGeneratingBtn.style.display='none';
-                const messageId=Date.now().toString();
-                messageQueue.set(messageId,{isContinuation:true});
-                processMessageQueue();
-            }
-        });
-
-        stopGeneratingBtn.addEventListener('click',()=>{
-            if(isGenerating){
-                abortController.abort();
-                isGenerating=false;
-                typingIndicator.style.display='none';
-                sendBtn.disabled=false;
-                stopGeneratingBtn.style.display='none';
-                keepGeneratingBtn.classList.add('show');
-                showNotification('Stopped generating—let’s pivot!');
-            }
-        });
-
-        schoolHelpDropdown.addEventListener('change',e=>{
-            selectedSchoolMode=e.target.value;
-            if(selectedSchoolMode){
-                showNotification(`Switched to ${e.target.options[e.target.selectedIndex].text} mode—ready to help!`);
-            }else{
-                showNotification('Task mode off—back to basics!');
-            }
-        });
-
-        aiModelDropdown.addEventListener('change',e=>{
-            selectedAiModel=e.target.value;
-            showNotification(`Now chatting with ${aiModels[selectedAiModel].name}—${aiModels[selectedAiModel].personality}`);
-        });
-
-        rephraseBtn.addEventListener('click',()=>{
-            if(latestAiResponse){
-                userInput.value=`Rephrase this naturally: ${latestAiResponse}`;
-                userInput.style.height='auto';
-                userInput.style.height=`${Math.min(userInput.scrollHeight,160)}px`;
-                showNotification('Ready to rephrase—let’s tweak it!');
-            }else{
-                showNotification('No response to rephrase—try again!','error');
-            }
-        });
-
-        function showError(message){
-            const errorMessage=document.createElement('div');
-            errorMessage.className='chat-message ai';
-            errorMessage.innerHTML=`
-                <div class="chat-message-content">${message}</div>
-                <div class="chat-message-meta">Just now</div>
-            `;
-            chatHistory.appendChild(errorMessage);
-            chatArea.scrollTop=chatArea.scrollHeight;
-            latestCodeBlocks=[];
-            latestAiResponse='';
-            keepGeneratingBtn.classList.remove('show');
-            stopGeneratingBtn.style.display='none';
         }
 
         function sanitizeInput(input){
@@ -989,16 +804,6 @@
                 const copyAllBtn=`<button class="copy-all-btn">Copy All Code</button>`;
                 messageElement.querySelector('.chat-message-content').insertAdjacentHTML('afterbegin',copyAllBtn);
             }
-            messageElement.querySelectorAll('.copy-btn, .copy-all-btn').forEach(btn=>{
-                btn.addEventListener('click',()=>{
-                    const code=btn.classList.contains('copy-all-btn')?codeBlocks.join('\n\n'):codeBlocks[Array.from(messageElement.querySelectorAll('.copy-btn')).indexOf(btn)];
-                    navigator.clipboard.writeText(code).then(()=>{
-                        showNotification(btn.classList.contains('copy-all-btn')?'All code copied—awesome!':'Code copied—nice!');
-                    }).catch(()=>{
-                        showNotification('Copy failed—oops!','error');
-                    });
-                });
-            });
             return html;
         }
 
@@ -1089,7 +894,6 @@
             }
             let message=isContinuation?lastMessageContent:sanitizeInput(userInput.value.trim());
             if(!message&&filesArray.length===0&&!isContinuation)return;
-
             if(!isContinuation){
                 lastMessageContent=message;
                 const userMessage=document.createElement('div');
@@ -1112,25 +916,26 @@
                 chatArea.scrollTop=chatArea.scrollHeight;
                 conversationHistory.push({role:"user",content:messageContent});
             }
-
+            if(verifyAdminAccess(message))return;
+            if(message.toLowerCase().includes('play a music')||message.toLowerCase().includes('background music')){
+                await playBackgroundMusic(message);
+                return;
+            }
             typingIndicator.style.display='block';
             sendBtn.disabled=true;
             stopGeneratingBtn.style.display='block';
             isGenerating=true;
             clearTimeout(generationTimeout);
             abortController=new AbortController();
-
             generationTimeout=setTimeout(()=>{
                 if(isGenerating)keepGeneratingBtn.classList.add('show');
             },300);
-
             try{
                 let aiMessageText='';
                 const aiMessage=document.createElement('div');
                 aiMessage.className='chat-message ai';
                 aiMessage.innerHTML=`<div class="chat-message-content"></div><div class="chat-message-meta">Just now</div>`;
                 chatHistory.appendChild(aiMessage);
-
                 let codeAnalysisResult='';
                 const codeBlockMatch=message.match(/```([\s\S]*?)```/);
                 if(codeBlockMatch){
@@ -1150,7 +955,6 @@
                     }
                     message+=`\n\n${codeAnalysisResult}`;
                 }
-
                 const messageHash=sha256(message);
                 if(responseCache.has(messageHash)){
                     aiMessageText=responseCache.get(messageHash);
@@ -1214,7 +1018,7 @@
                     chatArea.scrollTop=chatArea.scrollHeight;
                 }else if(message.toLowerCase().includes('ui design')||message.toLowerCase().includes('user interface')){
                     const uiPrompt=`Design a delightful, wonderful, and amazing UI for a Roblox game based on: "${sanitizeInput(message)}". Provide optimized Luau code for a Roblox UI with modern design, animations, interactivity, responsive layouts, and visually stunning elements to surprise the user.`;
-                    const response=await fetch(API_URL,{
+                    const response=await fetch(Api_URL,{
                         method:'POST',
                         headers:{
                             'Authorization':`Bearer ${API_KEY}`,
@@ -1354,12 +1158,10 @@
                         chatArea.scrollTop=chatArea.scrollHeight;
                     }
                 }
-
                 typingIndicator.style.display='none';
                 sendBtn.disabled=false;
                 stopGeneratingBtn.style.display='none';
                 isGenerating=false;
-
                 const codeBlocks=aiMessage.querySelectorAll('.code-block');
                 codeBlocks.forEach(block=>{
                     const copyBtn=block.querySelector('.copy-btn');
@@ -1374,7 +1176,6 @@
                         });
                     }
                 });
-
                 const copyAllBtn=aiMessage.querySelector('.copy-all-btn');
                 if(copyAllBtn){
                     copyAllBtn.addEventListener('click',()=>{
@@ -1390,9 +1191,214 @@
                 if(error.name==='AbortError'){
                     return;
                 }
-                showError(`Error: ${error.message}`);
+                showNotification(`Error: ${error.message}`,'error');
             }
         }
+
+        window.addEventListener('beforeunload',e=>{
+            e.preventDefault();
+            e.returnValue='Sure you want to leave VerbiFlow?';
+        });
+
+        themeBtn.addEventListener('click',toggleTheme);
+
+        discordBtn.addEventListener('click',()=>{
+            navigator.clipboard.writeText(DISCORD_INVITE);
+            showNotification('Discord link copied—join the party!');
+        });
+
+        verbiflowUpdatesBtn.addEventListener('click',()=>{
+            window.open('/updates','_blank');
+        });
+
+        userInput.addEventListener('input',()=>{
+            userInput.style.height='auto';
+            userInput.style.height=`${Math.min(userInput.scrollHeight,160)}px`;
+        });
+
+        userInput.addEventListener('paste',async e=>{
+            const items=e.clipboardData.items;
+            for(const item of items){
+                if(item.type.startsWith('image/')||item.type.startsWith('video/')){
+                    e.preventDefault();
+                    const file=item.getAsFile();
+                    filesArray.push(file);
+                    displayFileItem(file);
+                    const userMessage=document.createElement('div');
+                    userMessage.className='chat-message user';
+                    const blobUrl=URL.createObjectURL(file);
+                    userMessage.innerHTML=`
+                        <div class="chat-message-content">
+                            ${item.type.startsWith('image/')?`<img src="${blobUrl}" alt="${sanitizeInput(file.name)}">`:`<video controls src="${blobUrl}"></video>`}
+                        </div>
+                        <div class="chat-message-meta">Just now</div>
+                    `;
+                    chatHistory.appendChild(userMessage);
+                    chatArea.scrollTop=chatArea.scrollHeight;
+                    fileClearBtn.style.display=filesArray.length>0?'block':'none';
+                }
+            }
+        });
+
+        fileInput.addEventListener('change',()=>{
+            const files=Array.from(fileInput.files);
+            files.forEach(file=>{
+                filesArray.push(file);
+                displayFileItem(file);
+            });
+            fileClearBtn.style.display=filesArray.length>0?'block':'none';
+        });
+
+        function displayFileItem(file){
+                        const fileItem=document.createElement('div');
+            fileItem.className='file-item';
+            fileItem.innerHTML=`
+                <div class="file-item-name">${sanitizeInput(file.name)}</div>
+                <div class="file-item-details">${(file.size/1024/1024).toFixed(2)} MB</div>
+            `;
+            fileItem.addEventListener('click',()=>previewFile(file));
+            fileList.appendChild(fileItem);
+        }
+
+        function previewFile(file){
+            filePreviewModal.classList.add('open');
+            filePreviewContent.innerHTML='';
+            if(file.type.startsWith('image/')){
+                const img=document.createElement('img');
+                img.src=URL.createObjectURL(file);
+                img.alt=sanitizeInput(file.name);
+                filePreviewContent.appendChild(img);
+            }else if(file.type.startsWith('video/')){
+                const video=document.createElement('video');
+                video.src=URL.createObjectURL(file);
+                video.controls=true;
+                filePreviewContent.appendChild(video);
+            }else{
+                readFileContent(file).then(content=>{
+                    const pre=document.createElement('pre');
+                    pre.textContent=content;
+                    filePreviewContent.appendChild(pre);
+                });
+            }
+        }
+
+        filePreviewClose.addEventListener('click',()=>{
+            filePreviewModal.classList.remove('open');
+            filePreviewContent.innerHTML='';
+        });
+
+        fileClearBtn.addEventListener('click',()=>{
+            filesArray=[];
+            fileList.innerHTML='';
+            fileClearBtn.style.display='none';
+            showNotification('Files cleared—ready for more!');
+        });
+
+        sendBtn.addEventListener('click',()=>{
+            if(!userInput.value.trim()&&filesArray.length===0)return;
+            if(!hasPermission){
+                requestPermissions();
+                return;
+            }
+            const messageId=Date.now().toString();
+            messageQueue.set(messageId,{isContinuation:false});
+            processMessageQueue();
+        });
+
+        userInput.addEventListener('keypress',e=>{
+            if(e.key==='Enter'&&!e.shiftKey){
+                e.preventDefault();
+                sendBtn.click();
+            }
+        });
+
+        clearChatBtn.addEventListener('click',()=>{
+            chatHistory.innerHTML='';
+            conversationHistory=[{role:'assistant',content:aiModels[selectedAiModel].personality}];
+            const welcomeMessage=document.createElement('div');
+            welcomeMessage.className='chat-message ai';
+            welcomeMessage.innerHTML=`<div class="chat-message-content">${aiModels[selectedAiModel].personality}</div><div class="chat-message-meta">Just now</div>`;
+            chatHistory.appendChild(welcomeMessage);
+            chatArea.scrollTop=chatArea.scrollHeight;
+            showNotification('Chat cleared—fresh start!');
+        });
+
+        copyCodeBtn.addEventListener('click',()=>{
+            if(latestCodeBlocks.length>0){
+                const allCode=latestCodeBlocks.join('\n\n');
+                navigator.clipboard.writeText(allCode).then(()=>{
+                    showNotification('All code copied—nice!');
+                }).catch(()=>{
+                    showNotification('Copy failed—oops!','error');
+                });
+            }else{
+                showNotification('No code to copy—write some first!','error');
+            }
+        });
+
+        codeSidebarClose.addEventListener('click',()=>{
+            codeSidebar.classList.remove('open');
+        });
+
+        keepGeneratingBtn.addEventListener('click',()=>{
+            keepGeneratingBtn.classList.remove('show');
+            const messageId=Date.now().toString();
+            messageQueue.set(messageId,{isContinuation:true});
+            processMessageQueue();
+        });
+
+        schoolHelpDropdown.addEventListener('change',()=>{
+            selectedSchoolMode=schoolHelpDropdown.value;
+            showNotification(`School mode set to: ${selectedSchoolMode||'None'}`);
+        });
+
+        aiModelDropdown.addEventListener('change',()=>{
+            selectedAiModel=aiModelDropdown.value;
+            showNotification(`AI model switched to: ${aiModels[selectedAiModel].name}`);
+            clearChatBtn.click();
+        });
+
+        rephraseBtn.addEventListener('click',()=>{
+            if(latestAiResponse){
+                const rephraseMessage=`Rephrase this to sound more natural and less AI-generated: "${latestAiResponse}"`;
+                userInput.value=rephraseMessage;
+                sendBtn.click();
+            }else{
+                showNotification('Nothing to rephrase—send a message first!','error');
+            }
+        });
+
+        stopGeneratingBtn.addEventListener('click',()=>{
+            if(isGenerating){
+                abortController.abort();
+                isGenerating=false;
+                typingIndicator.style.display='none';
+                sendBtn.disabled=false;
+                stopGeneratingBtn.style.display='none';
+                keepGeneratingBtn.classList.remove('show');
+                showNotification('Generation stopped.');
+            }
+        });
+
+        chatHistory.addEventListener('click',e=>{
+            if(e.target.tagName==='IMG'||e.target.tagName==='VIDEO'){
+                filePreviewModal.classList.add('open');
+                filePreviewContent.innerHTML='';
+                const clone=e.target.cloneNode();
+                if(e.target.tagName==='VIDEO')clone.controls=true;
+                filePreviewContent.appendChild(clone);
+            }
+        });
+
+        const observer=new MutationObserver(()=>{
+            chatArea.scrollTop=chatArea.scrollHeight;
+        });
+        observer.observe(chatHistory,{childList:true});
+
+        window.addEventListener('resize',()=>{
+            userInput.style.height='auto';
+            userInput.style.height=`${Math.min(userInput.scrollHeight,160)}px`;
+        });
 
         loadTheme();
         requestPermissions();
