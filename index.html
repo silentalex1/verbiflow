@@ -30,6 +30,10 @@
         .sidebar{position:fixed;top:0;left:-300px;width:300px;height:100%;background:#ffffff;border-right:1px solid #e2e8f0;padding:32px 24px;transition:left .3s ease;z-index:200;display:flex;flex-direction:column;gap:12px;}
         .dark-mode .sidebar{background:#1e293b;border-right:1px solid #334155;}
         .sidebar.open{left:0;}
+        .sidebar-close{background:#ef4444;color:#ffffff;border:none;padding:10px 16px;border-radius:12px;cursor:pointer;font-size:15px;font-weight:600;text-align:left;transition:all .24s ease;margin-bottom:16px;}
+        .dark-mode .sidebar-close{background:#dc2626;}
+        .sidebar-close:hover{background:#f87171;transform:scale(1.02);}
+        .dark-mode .sidebar-close:hover{background:#ef4444;}
         .sidebar-btn{background:#f1f5f9;color:#1e40af;border:none;padding:14px;border-radius:12px;cursor:pointer;font-size:15px;font-weight:600;text-align:left;transition:all .24s ease;}
         .dark-mode .sidebar-btn{background:#334155;color:#93c5fd;}
         .sidebar-btn:hover{background:#e2e8f0;transform:scale(1.02);}
@@ -77,14 +81,9 @@
         .dark-mode .copy-btn{background:#1e3a8a;}
         .copy-btn:hover{background:#3b82f6;transform:scale(1.05);box-shadow:0 4px 16px rgba(0,0,0,.2);}
         .dark-mode .copy-btn:hover{background:#2563eb;}
-        .file-upload-container{padding:8px;border-top:1px solid #e2e8f0;background:#ffffff;border-bottom:1px solid #e2e8f0;transition:max-height .3s ease;overflow:hidden;}
+        .file-upload-container{padding:8px;border-top:1px solid #e2e8f0;background:#ffffff;border-bottom:1px solid #e2e8f0;transition:transform .3s ease, opacity .3s ease;overflow:hidden;}
         .dark-mode .file-upload-container{background:#1e293b;border-top:1px solid #334155;border-bottom:1px solid #334155;}
-        .file-upload-container.collapsed{max-height:40px;}
-        .toggle-actions-btn{background:#6b7280;color:#ffffff;border:none;padding:8px;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;margin:0 auto 8px;transition:transform .3s ease;}
-        .dark-mode .toggle-actions-btn{background:#4b5563;}
-        .toggle-actions-btn:hover{background:#9ca3af;}
-        .dark-mode .toggle-actions-btn:hover{background:#6b7280;}
-        .toggle-actions-btn.collapsed{transform:rotate(180deg);}
+        .file-upload-container.collapsed{transform:translateY(100%);opacity:0;height:0;padding:0;}
         .file-actions{display:flex;gap:10px;align-items:center;padding:10px 0;justify-content:space-between;border-radius:12px;background:#f8fafc;box-shadow:0 2px 10px rgba(0,0,0,.05);flex-wrap:wrap;}
         .dark-mode .file-actions{background:#111827;}
         .file-input-label{background:#1e40af;color:#ffffff;padding:14px 24px;border-radius:12px;cursor:pointer;font-size:15px;font-weight:600;min-height:48px;transition:all .24s ease;}
@@ -136,8 +135,14 @@
         .file-preview-close{background:#ef4444;color:#ffffff;border:none;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;position:absolute;top:28px;right:28px;transition:all .24s ease;}
         .file-preview-close:hover{transform:scale(1.15);background:#dc2626;}
         .file-preview-close svg{width:24px;height:24px;fill:#ffffff;}
-        .input-container{display:flex;align-items:flex-end;padding:20px;border-top:1px solid #e2e8f0;background:#ffffff;gap:12px;position:sticky;bottom:0;z-index:50;}
+        .input-container{display:flex;align-items:flex-end;padding:20px;border-top:1px solid #e2e8f0;background:#ffffff;gap:12px;position:sticky;bottom:0;z-index:50;transition:transform .3s ease, box-shadow .3s ease;}
         .dark-mode .input-container{background:#1e293b;border-top:1px solid #334155;}
+        .input-container.collapsed{transform:translateY(100%);box-shadow:none;}
+        .toggle-input-btn{background:#6b7280;color:#ffffff;border:none;padding:8px;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;margin:0 auto 8px;transition:transform .3s ease;position:absolute;bottom:10px;left:50%;transform:translateX(-50%);z-index:51;}
+        .dark-mode .toggle-input-btn{background:#4b5563;}
+        .toggle-input-btn:hover{background:#9ca3af;}
+        .dark-mode .toggle-input-btn:hover{background:#6b7280;}
+        .toggle-input-btn.collapsed{transform:translateX(-50%) rotate(180deg);}
         .user-input{flex:1;padding:14px;border:1px solid #e2e8f0;border-radius:12px;font-size:16px;outline:none;resize:none;min-height:48px;max-height:220px;background:#ffffff;color:#0f172a;transition:all .24s ease;}
         .dark-mode .user-input{background:#334155;border:1px solid #4b5563;color:#e2e8f0;}
         .user-input:focus{border-color:#1e40af;box-shadow:0 0 0 6px rgba(37,99,235,.35);}
@@ -208,6 +213,7 @@
         <div class="nav-bar">
             <button class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i> Menu</button>
             <div class="sidebar" id="sidebar">
+                <button class="sidebar-close" id="sidebarClose">Close</button>
                 <button class="sidebar-btn" id="clearChatBtn">Clear Chat</button>
                 <button class="sidebar-btn" id="verbiflowUpdatesBtn">Updates</button>
                 <button class="sidebar-btn" id="premiumPriceBtn">Premium Price</button>
@@ -237,7 +243,6 @@
             </div>
         </div>
         <div class="file-upload-container" id="fileUploadContainer">
-            <button class="toggle-actions-btn" id="toggleActionsBtn">^</button>
             <div class="file-actions">
                 <label class="file-input-label" for="fileInput">Upload File</label>
                 <input type="file" class="file-input" id="fileInput" multiple accept="image/*,video/*,text/*,application/json,application/xml">
@@ -273,7 +278,8 @@
             </div>
             <div class="file-list" id="fileList"></div>
         </div>
-        <div class="input-container">
+        <button class="toggle-input-btn" id="toggleInputBtn">^</button>
+        <div class="input-container" id="inputContainer">
             <textarea class="user-input" id="userInput" placeholder="Ask anything, generate images/videos, or request games or slides..." rows="1"></textarea>
             <button class="send-btn" id="sendBtn">Send</button>
         </div>
@@ -326,6 +332,7 @@
         const chatArea=document.getElementById('chatArea');
         const menuBtn=document.getElementById('menuBtn');
         const sidebar=document.getElementById('sidebar');
+        const sidebarClose=document.getElementById('sidebarClose');
         const clearChatBtn=document.getElementById('clearChatBtn');
         const copyCodeBtn=document.getElementById('copyCodeBtn');
         const discordBtn=document.getElementById('discordBtn');
@@ -336,7 +343,8 @@
         const themeBtn=document.getElementById('themeBtn');
         const openInAppBtn=document.getElementById('openInAppBtn');
         const notification=document.getElementById('notification');
-        const toggleActionsBtn=document.getElementById('toggleActionsBtn');
+        const toggleInputBtn=document.getElementById('toggleInputBtn');
+        const inputContainer=document.getElementById('inputContainer');
         const generateMediaBtn=document.getElementById('generateMediaBtn');
         const schoolHelpDropdown=document.getElementById('schoolHelpDropdown');
         const aiModelDropdown=document.getElementById('aiModelDropdown');
@@ -1057,9 +1065,14 @@
             window.open(APP_URL,'_blank');
         });
 
-        toggleActionsBtn.addEventListener('click',()=>{
+        sidebarClose.addEventListener('click',()=>{
+            sidebar.classList.remove('open');
+        });
+
+        toggleInputBtn.addEventListener('click',()=>{
+            inputContainer.classList.toggle('collapsed');
             fileUploadContainer.classList.toggle('collapsed');
-            toggleActionsBtn.classList.toggle('collapsed');
+            toggleInputBtn.classList.toggle('collapsed');
         });
 
         menuBtn.addEventListener('click',()=>{
