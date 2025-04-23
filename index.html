@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob: https://*.pixabay.com https://*.openai.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.cloudflare.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; connect-src 'self' https://api.openai.com wss://api.openai.com https://api.searchengine.com https://api.x.ai; frame-src 'none'; media-src 'self' data: blob: https://*.pixabay.com https://*.openai.com;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob: https://*.pixabay.com https://*.openai.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.cloudflare.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; connect-src 'self' https://api.openai.com wss://api.openai.com https://api.searchengine.com; frame-src 'none'; media-src 'self' data: blob: https://*.pixabay.com https://*.openai.com;">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta name="robots" content="noindex, nofollow">
@@ -55,12 +55,14 @@
         .dark-mode .chat-area{background:#111827;}
         .chat-content{flex:1;display:flex;flex-direction:column;}
         .chat-history{display:flex;flex-direction:column;gap:16px;}
-        .chat-message{display:flex;flex-direction:column;gap:8px;padding:12px;border-radius:20px;max-width:85%;animation:slideIn .3s ease;box-shadow:0 4px 12px rgba(0,0,0,.1);transition:background .3s ease;}
+        .chat-message{display:flex;flex-direction:column;gap:8px;padding:16px;border-radius:20px;max-width:85%;animation:slideIn .3s ease;box-shadow:0 4px 12px rgba(0,0,0,.1);transition:background .3s ease;margin-bottom:16px;}
         .chat-message.user{align-self:flex-end;background:#1e40af;color:#ffffff;}
         .dark-mode .chat-message.user{background:#1e3a8a;}
         .chat-message.ai{align-self:flex-start;background:#e2e8f0;color:#0f172a;}
         .dark-mode .chat-message.ai{background:#334155;color:#e2e8f0;}
-        .chat-message-content{padding:12px;border-radius:20px;font-size:15px;line-height:1.6;word-break:break-word;}
+        .chat-message-content-wrapper{position:relative;padding:16px;border-radius:16px;background:#f8fafc;box-shadow:0 2px 8px rgba(0,0,0,.05);margin-bottom:8px;}
+        .dark-mode .chat-message-content-wrapper{background:#2d3748;}
+        .chat-message-content{padding:0;font-size:15px;line-height:1.6;word-break:break-word;user-select:text;}
         .chat-message-content strong{font-weight:700;}
         .chat-message-content em{font-style:italic;}
         .chat-message-content code{background:#f1f5f9;padding:2px 4px;border-radius:4px;font-family:'JetBrains Mono',monospace;}
@@ -74,13 +76,16 @@
         .dark-mode .chat-message-meta{color:#94a3b8;}
         .chat-message img,.chat-message video{max-width:100%;border-radius:12px;margin-top:10px;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease;}
         .chat-message img:hover,.chat-message video:hover{transform:scale(1.03);box-shadow:0 8px 20px rgba(0,0,0,.25);}
-        .code-block{position:relative;margin:10px 0;border-radius:12px;overflow:hidden;}
-        .code-block pre{background:#0f172a;color:#e2e8f0;padding:14px;border-radius:12px;overflow-x:auto;font-family:'JetBrains Mono',monospace;font-size:14px;line-height:1.6;}
-        .dark-mode .code-block pre{background:#1e293b;}
-        .copy-btn{background:#1e40af;color:#ffffff;border:none;padding:8px 12px;border-radius:10px;cursor:pointer;font-size:13px;font-weight:600;transition:all .2s ease;position:absolute;top:8px;right:8px;touch-action:manipulation;}
-        .dark-mode .copy-btn{background:#1e3a8a;}
-        .copy-btn:hover{background:#3b82f6;transform:scale(1.05);box-shadow:0 4px 16px rgba(0,0,0,.2);}
-        .dark-mode .copy-btn:hover{background:#2563eb;}
+        .code-block{position:relative;margin:10px 0;border-radius:12px;overflow:hidden;background:#0f172a;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+        .dark-mode .code-block{background:#1e293b;}
+        .code-block pre{background:transparent;color:#e2e8f0;padding:0;border-radius:0;overflow-x:auto;font-family:'JetBrains Mono',monospace;font-size:14px;line-height:1.6;}
+        .code-block-header{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:#1e40af;color:#ffffff;border-radius:10px 10px 0 0;}
+        .dark-mode .code-block-header{background:#1e3a8a;}
+        .code-block-label{font-size:13px;font-weight:600;}
+        .copy-btn{background:#ffffff;color:#1e40af;border:none;padding:6px 12px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;transition:all .2s ease;touch-action:manipulation;}
+        .dark-mode .copy-btn{background:#334155;color:#93c5fd;}
+        .copy-btn:hover{background:#f1f5f9;transform:scale(1.05);box-shadow:0 4px 16px rgba(0,0,0,.2);}
+        .dark-mode .copy-btn:hover{background:#475569;}
         .file-actions-container{position:sticky;bottom:60px;padding:6px;border-top:1px solid #e2e8f0;background:#ffffff;border-bottom:1px solid #e2e8f0;transition:transform .3s ease,opacity .3s ease;overflow:hidden;z-index:40;}
         .dark-mode .file-actions-container{background:#1e293b;border-top:1px solid #334155;border-bottom:1px solid #334155;}
         .file-actions-container.collapsed{transform:translateY(100%);opacity:0;height:0;padding:0;}
@@ -346,7 +351,9 @@
             <div class="chat-content">
                 <div class="chat-history" id="chatHistory">
                     <div class="chat-message ai">
-                        <div class="chat-message-content">Hey there, I’m VerbiFlow—your ultimate AI companion for creativity and problem-solving! I’m here to make things fast, fun, and insightful. What’s on your mind?</div>
+                        <div class="chat-message-content-wrapper">
+                            <div class="chat-message-content">Hey there, I’m VerbiFlow—your ultimate AI companion for creativity and problem-solving! I’m here to make things fast, fun, and insightful. What’s on your mind?</div>
+                        </div>
                         <div class="chat-message-meta">Just now</div>
                     </div>
                 </div>
@@ -419,7 +426,6 @@
     <script defer>
         const API_KEY="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";
         const API_URL="https://api.openai.com/v1/chat/completions";
-        const GROK_API_URL="https://api.x.ai/v1/grok-3-beta/completions";
         const DALLE_API_URL="https://api.openai.com/v1/images/generations";
         const SORA_API_URL="https://api.openai.com/v1/video/generations";
         const VIDEO_PROCESSING_API="https://api.openai.com/v1/video/analyze";
@@ -427,8 +433,8 @@
         const DISCORD_INVITE="https://discord.gg/rCTRQvD4TP";
         const APP_URL="https://verbiflow.app/download";
         const BATCH_SIZE=300;
-        const RATE_LIMIT_REQUESTS=2500;
-        const RATE_LIMIT_WINDOW=30*1000;
+        const RATE_LIMIT_REQUESTS=10;
+        const RATE_LIMIT_WINDOW=60*1000;
         const MAX_CACHE_SIZE=10*1024*1024;
 
         const chatHistory=document.getElementById('chatHistory');
@@ -475,7 +481,6 @@
         let isDarkMode=false;
         let isGenerating=false;
         let generationLock=false;
-        let generationTimeout=null;
         let selectedSchoolMode='';
         let selectedAiModel='default';
         let messageQueue=new Map();
@@ -486,8 +491,6 @@
         let abortController=null;
         let batchQueue=[];
         let hasPermission=false;
-        let requestTimestamps=[];
-        let userRequestCounts=new Map();
         let backgroundAudio=null;
         let isAdminVerified=false;
         let pastedImageHashes=new Set();
@@ -496,6 +499,10 @@
         let ws=null;
         let db=null;
         let cacheSize=0;
+        const userId=localStorage.getItem('userId')||Math.random().toString(36).substring(2);
+        localStorage.setItem('userId',userId);
+        const requestTimestamps=new Map();
+        const unsafeExtensions=['.exe','.bat','.cmd','.sh','.dll','.scr','.pif','.com'];
 
         const aiModels={
             default:{name:"VerbiFlow",temperature:0.5,maxTokens:16170,personality:"Hey there, I’m VerbiFlow—your ultimate AI companion for creativity and problem-solving! I’m here to make things fast, fun, and insightful. What’s on your mind?"},
@@ -504,17 +511,6 @@
             visualGeniusAI:{name:"VisualGeniusAI",temperature:0.6,maxTokens:15593,personality:"Hi, I’m VisualGeniusAI—an AI with a flair for visuals and creativity! Whether it’s generating images, videos, or designing UI, I’ve got you covered. What do you want to create?"},
             betterGrok:{name:"Better Grok",temperature:0.3,maxTokens:22000,personality:"I’m Better Grok—a faster, smarter version of Grok with all features unlocked for free! I’m here to deliver quick, insightful answers with enhanced capabilities. Let’s get started!"}
         };
-
-        function rateLimitCheck(){
-            const now=Date.now();
-            requestTimestamps=requestTimestamps.filter(t=>now-t<RATE_LIMIT_WINDOW);
-            if(requestTimestamps.length>=RATE_LIMIT_REQUESTS){
-                showNotification('Rate limit reached—please wait.','error');
-                return false;
-            }
-            requestTimestamps.push(now);
-            return true;
-        }
 
         function showNotification(message,type='success'){
             notification.textContent=message;
@@ -600,7 +596,7 @@
             if(message.toLowerCase().includes('take me to admin console')){
                 const aiMessage=document.createElement('div');
                 aiMessage.className='chat-message ai';
-                aiMessage.innerHTML=`<div class="chat-message-content">Please verify you’re an admin.</div><div class="chat-message-meta">Just now</div>`;
+                aiMessage.innerHTML=`<div class="chat-message-content-wrapper"><div class="chat-message-content">Please verify you’re an admin.</div></div><div class="chat-message-meta">Just now</div>`;
                 chatHistory.appendChild(aiMessage);
                 chatArea.scrollTop=chatArea.scrollHeight;
                 conversationHistory.push({role:"assistant",content:"Please verify you’re an admin."});
@@ -608,7 +604,7 @@
                 isAdminVerified=true;
                 const aiMessage=document.createElement('div');
                 aiMessage.className='chat-message ai';
-                aiMessage.innerHTML=`<div class="chat-message-content">Access granted!</div><div class="chat-message-meta">Just now</div>`;
+                aiMessage.innerHTML=`<div class="chat-message-content-wrapper"><div class="chat-message-content">Access granted!</div></div><div class="chat-message-meta">Just now</div>`;
                 chatHistory.appendChild(aiMessage);
                 chatArea.scrollTop=chatArea.scrollHeight;
                 conversationHistory.push({role:"assistant",content:"Access granted!"});
@@ -715,55 +711,25 @@
             }
         }
 
-        class DDoSProtection{
-            static async analyzeRequest(userId,options={}){
-                const now=Date.now();
-                const window=60*1000;
-                const maxRequests=250;
-                const userData=userRequestCounts.get(userId)||{count:0,firstRequest:now};
-                if(now-userData.firstRequest>window){
-                    userData.count=0;
-                    userData.firstRequest=now;
+        async function analyzeExternalContent(url){
+            try{
+                const response=await fetch(url);
+                if(!response.ok){
+                    throw new Error('Failed to fetch content');
                 }
-                userData.count++;
-                userRequestCounts.set(userId,userData);
-                if(userData.count>maxRequests){
-                    showNotification('Too many requests.','error');
-                    return false;
-                }
-                if(options.csrfToken&&options.csrfToken!==sha256(userId+API_KEY)){
-                    showNotification('CSRF token mismatch.','error');
-                    return false;
-                }
-                return true;
+                const content=await response.text();
+                const truncatedContent=content.slice(0,1000);
+                const analysisPrompt=`Analyze the following content: ${truncatedContent}`;
+                const analysisResponse=await fetchResponse(analysisPrompt,false,API_URL);
+                const aiMessage=document.createElement('div');
+                aiMessage.className='chat-message ai';
+                aiMessage.innerHTML=`<div class="chat-message-content-wrapper"><div class="chat-message-content">${formatAiResponse(analysisResponse)}</div></div><div class="chat-message-meta">Just now</div>`;
+                chatHistory.appendChild(aiMessage);
+                chatArea.scrollTop=chatArea.scrollHeight;
+                conversationHistory.push({role:'assistant',content:analysisResponse});
+            }catch(error){
+                showNotification('Error analyzing external content.','error');
             }
-        }
-
-        function initializeWebSocket(){
-            ws=new WebSocket('wss://api.openai.com/v1/stream');
-            ws.onopen=()=>{
-                ws.send(JSON.stringify({auth:API_KEY}));
-            };
-            ws.onmessage=async(event)=>{
-                const message=JSON.parse(event.data);
-                if(wsMessageCache.has(message.id))return;
-                wsMessageCache.set(message.id,true);
-                if(message.type==='responseChunk'){
-                    const aiMessage=chatHistory.lastElementChild;
-                    if(!aiMessage|| !aiMessage.classList.contains('ai'))return;
-                    const contentDiv=aiMessage.querySelector('.chat-message-content');
-                    contentDiv.textContent+=message.chunk;
-                    latestAiResponse+=message.chunk;
-                    chatArea.scrollTop=chatArea.scrollHeight;
-                }
-            };
-            ws.onerror=()=>{
-                showNotification('WebSocket error.','error');
-                setTimeout(initializeWebSocket,300);
-            };
-            ws.onclose=()=>{
-                setTimeout(initializeWebSocket,300);
-            };
         }
 
         async function readImage(file){
@@ -827,7 +793,7 @@
                                 'Content-Type':'application/json'
                             },
                             body:JSON.stringify({
-                                model:apiUrl.includes('x.ai')?'grok-3-beta':'gpt-4o',
+                                model:'gpt-4o',
                                 messages:[{role:'user',content:prompt}],
                                 max_tokens:${aiModels[selectedAiModel].maxTokens},
                                 temperature:${aiModels[selectedAiModel].temperature}
@@ -855,11 +821,18 @@
             isProcessing=true;
             const batch=batchQueue.splice(0,BATCH_SIZE);
             const promises=batch.map(async({message,userId,apiUrl,resolve})=>{
-                const isAllowed=await DDoSProtection.analyzeRequest(userId,{csrfToken:sha256(userId+API_KEY)});
-                if(!isAllowed){
-                    resolve("Request blocked.");
+                const now=Date.now();
+                if(!requestTimestamps.has(userId)){
+                    requestTimestamps.set(userId,[]);
+                }
+                let userRequests=requestTimestamps.get(userId);
+                userRequests=userRequests.filter(timestamp=>now-timestamp<RATE_LIMIT_WINDOW);
+                if(userRequests.length>=RATE_LIMIT_REQUESTS){
+                    resolve("Too many requests.");
                     return;
                 }
+                userRequests.push(now);
+                requestTimestamps.set(userId,userRequests);
                 const response=await processWithWorker(message,apiUrl);
                 resolve(response);
             });
@@ -872,16 +845,6 @@
             if(generationLock)return;
             generationLock=true;
             try{
-                if(stream&&ws&&ws.readyState===WebSocket.OPEN){
-                    ws.send(JSON.stringify({
-                        type:'request',
-                        prompt,
-                        model:apiUrl.includes('x.ai')?'grok-3-beta':'gpt-4o',
-                        max_tokens:aiModels[selectedAiModel].maxTokens,
-                        temperature:aiModels[selectedAiModel].temperature
-                    }));
-                    return '';
-                }
                 const response=await fetch(apiUrl,{
                     method:'POST',
                     headers:{
@@ -889,7 +852,7 @@
                         'Content-Type':'application/json'
                     },
                     body:JSON.stringify({
-                        model:apiUrl.includes('x.ai')?'grok-3-beta':'gpt-4o',
+                        model:'gpt-4o',
                         messages:conversationHistory.concat([{role:'user',content:prompt}]),
                         max_tokens:aiModels[selectedAiModel].maxTokens,
                         temperature:aiModels[selectedAiModel].temperature,
@@ -938,8 +901,7 @@
             for(const keyword of keywords){
                 if(prefetchQueue.has(keyword))continue;
                 prefetchQueue.set(keyword,true);
-                const apiUrl=selectedAiModel==='betterGrok'?GROK_API_URL:API_URL;
-                const response=await fetchResponse(`Tell me about ${keyword}`,false,apiUrl);
+                const response=await fetchResponse(`Tell me about ${keyword}`,false,API_URL);
                 responseCache.set(keyword,response);
             }
         }
@@ -964,10 +926,67 @@
             return content;
         }
 
+        function rephraseResponse(content){
+            let rephrased=content;
+            const replacements={
+                "additionally":"also",
+                "furthermore":"what's more",
+                "therefore":"so",
+                "however":"but",
+                "for instance":"like",
+                "in conclusion":"to wrap up",
+                "utilize":"use",
+                "commence":"start",
+                "terminate":"end",
+                "elucidate":"explain",
+                "facilitate":"help",
+                "endeavor":"try",
+                "subsequently":"then",
+                "consequently":"so",
+                "nevertheless":"still",
+                "moreover":"also",
+                "hence":"so",
+                "thus":"so",
+                "accordingly":"so",
+                "indeed":"really",
+                "notwithstanding":"but"
+            };
+            for(const [key,value] of Object.entries(replacements)){
+                const regex=new RegExp(`\\b${key}\\b`,'gi');
+                rephrased=rephrased.replace(regex,value);
+            }
+            const sentences=rephrased.split(/(?<=[.!?])\s+/);
+            const fillerPhrases=["Well, ","So, ","You know, ","I mean, ","Like, "];
+            sentences.forEach((sentence,i)=>{
+                if(Math.random()>0.7){
+                    const filler=fillerPhrases[Math.floor(Math.random()*fillerPhrases.length)];
+                    sentences[i]=filler+sentence.charAt(0).toLowerCase()+sentence.slice(1);
+                }
+            });
+            rephrased=sentences.join(' ');
+            return rephrased;
+        }
+
         async function handleUserInput(){
             const message=userInput.value.trim();
             if(!message&&!filesArray.length)return;
+            if(message.startsWith('analyze:')){
+                const url=message.split('analyze:')[1].trim();
+                analyzeExternalContent(url);
+                return;
+            }
             const now=Date.now();
+            if(!requestTimestamps.has(userId)){
+                requestTimestamps.set(userId,[]);
+            }
+            let userRequests=requestTimestamps.get(userId);
+            userRequests=userRequests.filter(timestamp=>now-timestamp<RATE_LIMIT_WINDOW);
+            if(userRequests.length>=RATE_LIMIT_REQUESTS){
+                showNotification('Too many requests. Please wait a minute.','error');
+                return;
+            }
+            userRequests.push(now);
+            requestTimestamps.set(userId,userRequests);
             const messageHash=sha256(message+now);
             if(messageQueue.has(messageHash)){
                 showNotification('Duplicate message.','error');
@@ -975,11 +994,6 @@
             }
             messageQueue.set(messageHash,true);
             setTimeout(()=>{messageQueue.delete(messageHash);},8000);
-            const userId=sha256(navigator.userAgent+Date.now().toString());
-            if(!await DDoSProtection.analyzeRequest(userId,{csrfToken:sha256(userId+API_KEY)})){
-                showNotification('Request blocked.','error');
-                return;
-            }
             if(verifyAdminAccess(message))return;
             if(message.toLowerCase().includes('play a music')||message.toLowerCase().includes('background music')){
                 await playBackgroundMusic(message);
@@ -1000,8 +1014,7 @@
             abortController=new AbortController();
             let fullResponse;
             try{
-                const apiUrl=selectedAiModel==='betterGrok'?GROK_API_URL:API_URL;
-                fullResponse=await fetchResponse(message,true,apiUrl);
+                fullResponse=await fetchResponse(message,true,API_URL);
             }catch(error){
                 if(error.name==='AbortError'){
                     showNotification('Generation stopped.');
@@ -1020,7 +1033,7 @@
             }
             const formattedResponse=formatAiResponse(fullResponse);
             const aiMessage=document.createElement('div');
-          aiMessage.className='chat-message ai';
+            aiMessage.className='chat-message ai';
             aiMessage.innerHTML=`<div class="chat-message-content">${formattedResponse}</div><div class="chat-message-meta">Just now</div>`;
             chatHistory.appendChild(aiMessage);
             chatArea.scrollTop=chatArea.scrollHeight;
@@ -1057,6 +1070,10 @@
             filesArray=[...e.target.files];
             fileList.innerHTML='';
             for(const file of filesArray){
+                const extension=file.name.split('.').pop().toLowerCase();
+                if(unsafeExtensions.includes(`.${extension}`)){
+                    showNotification(`Warning: File ${file.name} has a potentially unsafe extension.`,'error');
+                }
                 const fileItem=document.createElement('div');
                 fileItem.className='file-item';
                 fileItem.innerHTML=`<div class="file-item-name">${file.name}</div><div class="file-item-details">${(file.size/1024/1024).toFixed(2)}MB</div>`;
@@ -1135,12 +1152,7 @@
         });
 
         premiumPriceBtn.addEventListener('click',()=>{
-            const aiMessage=document.createElement('div');
-            aiMessage.className='chat-message ai';
-            aiMessage.innerHTML=`<div class="chat-message-content">For pricing details, please visit our official website.</div><div class="chat-message-meta">Just now</div>`;
-            chatHistory.appendChild(aiMessage);
-            chatArea.scrollTop=chatArea.scrollHeight;
-            conversationHistory.push({role:'assistant',content:'For pricing details, please visit our official website.'});
+            window.open('/planprice','_blank');
             sidebar.classList.remove('open');
         });
 
@@ -1255,8 +1267,7 @@
             stopGeneratingBtn.style.display='block';
             abortController=new AbortController();
             try{
-                const apiUrl=selectedAiModel==='betterGrok'?GROK_API_URL:API_URL;
-                const response=await fetchResponse(prompts[selectedSchoolMode],true,apiUrl);
+                const response=await fetchResponse(prompts[selectedSchoolMode],true,API_URL);
                 const formattedResponse=formatAiResponse(response);
                 const aiMessage=document.createElement('div');
                 aiMessage.className='chat-message ai';
@@ -1285,33 +1296,13 @@
                 showNotification('No AI response to rephrase.','error');
                 return;
             }
-            const rephrasePrompt=`Rephrase this: ${latestAiResponse}`;
-            const userMessage=document.createElement('div');
-            userMessage.className='chat-message user';
-            userMessage.innerHTML=`<div class="chat-message-content">${rephrasePrompt}</div><div class="chat-message-meta">Just now</div>`;
-            chatHistory.appendChild(userMessage);
-            chatArea.scrollTop=chatArea.scrollHeight;
-            sendBtn.disabled=true;
-            loadingSpinner.style.display='block';
-            typingIndicator.style.display='block';
-            isGenerating=true;
-            stopGeneratingBtn.style.display='block';
-            abortController=new AbortController();
-            const apiUrl=selectedAiModel==='betterGrok'?GROK_API_URL:API_URL;
-            const rephrased=await fetchResponse(rephrasePrompt,true,apiUrl);
-            const formattedRephrased=formatAiResponse(rephrased);
+            const rephrased=rephraseResponse(latestAiResponse);
             const aiMessage=document.createElement('div');
             aiMessage.className='chat-message ai';
-            aiMessage.innerHTML=`<div class="chat-message-content">${formattedRephrased}</div><div class="chat-message-meta">Just now</div>`;
+            aiMessage.innerHTML=`<div class="chat-message-content">${formatAiResponse(rephrased)}</div><div class="chat-message-meta">Just now</div>`;
             chatHistory.appendChild(aiMessage);
             chatArea.scrollTop=chatArea.scrollHeight;
-            sendBtn.disabled=false;
-            loadingSpinner.style.display='none';
-            typingIndicator.style.display='none';
-            isGenerating=false;
-            stopGeneratingBtn.style.display='none';
             conversationHistory.push({role:'assistant',content:rephrased});
-            cacheResponse(rephrasePrompt,rephrased);
         });
 
         stopGeneratingBtn.addEventListener('click',()=>{
@@ -1356,7 +1347,6 @@
         loadTheme();
         initializeDB();
         initializeWorkerPool();
-        initializeWebSocket();
         setInterval(prefetchResponses,800);
         setInterval(batchProcessRequests,150);
     </script>
