@@ -85,7 +85,6 @@ function addMessageToChat(role, content) {
 }
 
 function simulateAIResponse(userMessage) {
-    // Simulate AI response since API calls won't work on GitHub Pages
     return new Promise((resolve) => {
         setTimeout(() => {
             const response = `This is a simulated response to: "${userMessage}". (API calls are disabled on GitHub Pages. To enable full functionality, host this site with a backend server.)`;
@@ -162,7 +161,6 @@ function toggleFileActions() {
     toggleActionsBtn.classList.toggle('collapsed');
 }
 
-// Event Listeners
 sendBtn.addEventListener('click', handleSendMessage);
 userInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -177,3 +175,16 @@ menuBtn.addEventListener('click', toggleSidebar);
 sidebarClose.addEventListener('click', toggleSidebar);
 clearChatBtn.addEventListener('click', () => {
     chatHistory.innerHTML = '';
+    conversationHistory = [{ role: "assistant", content: "Hey there, I’m VerbiFlow—your ultra-fast AI companion for creativity, coding, analytics, and more! What’s on your mind?" }];
+    addMessageToChat('ai', conversationHistory[0].content);
+});
+copyCodeBtn.addEventListener('click', () => {
+    if (latestCodeBlocks.length) {
+        navigator.clipboard.writeText(latestCodeBlocks.join('\n'));
+        showNotification('Code copied to clipboard!');
+    } else {
+        showNotification('No code to copy!', 'error');
+    }
+});
+discordBtn.addEventListener('click', () => window.open(DISCORD_INVITE, '_blank'));
+verbiflowUpdatesBtn.addEventListener('click', () => showNotification('Updates: VerbiFlow now supports simulated responses
