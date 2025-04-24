@@ -22,22 +22,22 @@
         .dark-mode .container{background:#1e293b;}
         .nav-bar{background:linear-gradient(90deg,#1e40af,#3b82f6);padding:12px 16px;display:flex;gap:6px;justify-content:space-between;align-items:center;box-shadow:0 4px 20px rgba(0,0,0,.3);border-bottom:1px solid rgba(255,255,255,.1);position:sticky;top:0;z-index:100;}
         .dark-mode .nav-bar{background:linear-gradient(90deg,#1e3a8a,#2563eb);}
-        .menu-btn,.user-profile-btn{background:#ffffff;color:#1e40af;border:none;padding:8px 16px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;transition:all .2s ease;display:flex;align-items:center;gap:6px;touch-action:manipulation;}
-        .dark-mode .menu-btn,.dark-mode .user-profile-btn{background:#334155;color:#93c5fd;}
-        .menu-btn:hover,.user-profile-btn:hover{background:#f1f5f9;box-shadow:0 4px 16px rgba(0,0,0,.2);}
-        .dark-mode .menu-btn:hover,.dark-mode .user-profile-btn:hover{background:#475569;}
-        .menu-btn i,.user-profile-btn i{font-size:16px;}
-        .sidebar,.user-dashboard{position:fixed;top:0;left:-100%;width:100%;max-width:320px;height:100%;background:#ffffff;border-right:1px solid #e2e8f0;padding:24px 16px;transition:left .3s ease;z-index:200;display:flex;flex-direction:column;gap:10px;}
-        .dark-mode .sidebar,.dark-mode .user-dashboard{background:#1e293b;border-right:1px solid #334155;}
-        .sidebar.open,.user-dashboard.open{left:0;}
-        .sidebar-close,.dashboard-close{background:#ef4444;color:#ffffff;border:none;padding:8px 16px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;text-align:left;transition:all .2s ease;margin-bottom:12px;}
-        .dark-mode .sidebar-close,.dark-mode .dashboard-close{background:#dc2626;}
-        .sidebar-close:hover,.dashboard-close:hover{background:#f87171;transform:scale(1.02);}
-        .dark-mode .sidebar-close:hover,.dark-mode .dashboard-close:hover{background:#ef4444;}
-        .sidebar-btn,.dashboard-btn{background:#f1f5f9;color:#1e40af;border:none;padding:12px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;text-align:left;transition:all .2s ease;touch-action:manipulation;}
-        .dark-mode .sidebar-btn,.dark-mode .dashboard-btn{background:#334155;color:#93c5fd;}
-        .sidebar-btn:hover,.dashboard-btn:hover{background:#e2e8f0;transform:scale(1.02);}
-        .dark-mode .sidebar-btn:hover,.dark-mode .dashboard-btn:hover{background:#475569;}
+        .menu-btn{background:#ffffff;color:#1e40af;border:none;padding:8px 16px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;transition:all .2s ease;display:flex;align-items:center;gap:6px;touch-action:manipulation;}
+        .dark-mode .menu-btn{background:#334155;color:#93c5fd;}
+        .menu-btn:hover{background:#f1f5f9;box-shadow:0 4px 16px rgba(0,0,0,.2);}
+        .dark-mode .menu-btn:hover{background:#475569;}
+        .menu-btn i{font-size:16px;}
+        .sidebar{position:fixed;top:0;left:-100%;width:100%;max-width:320px;height:100%;background:#ffffff;border-right:1px solid #e2e8f0;padding:24px 16px;transition:left .3s ease;z-index:200;display:flex;flex-direction:column;gap:10px;}
+        .dark-mode .sidebar{background:#1e293b;border-right:1px solid #334155;}
+        .sidebar.open{left:0;}
+        .sidebar-close{background:#ef4444;color:#ffffff;border:none;padding:8px 16px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;text-align:left;transition:all .2s ease;margin-bottom:12px;}
+        .dark-mode .sidebar-close{background:#dc2626;}
+        .sidebar-close:hover{background:#f87171;transform:scale(1.02);}
+        .dark-mode .sidebar-close:hover{background:#ef4444;}
+        .sidebar-btn{background:#f1f5f9;color:#1e40af;border:none;padding:12px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;text-align:left;transition:all .2s ease;touch-action:manipulation;}
+        .dark-mode .sidebar-btn{background:#334155;color:#93c5fd;}
+        .sidebar-btn:hover{background:#e2e8f0;transform:scale(1.02);}
+        .dark-mode .sidebar-btn:hover{background:#475569;}
         .discord-btn{background:#5865f2;color:#ffffff;}
         .discord-btn:hover{background:#4752c4;}
         .app-btn{background:#ff4d4f;color:#ffffff;}
@@ -47,11 +47,6 @@
         .theme-btn:hover{background:#f1f5f9;}
         .dark-mode .theme-btn:hover{background:#475569;}
         .theme-btn i{font-size:16px;}
-        .dashboard-content{flex:1;overflow-y:auto;padding:10px;}
-        .dashboard-section{margin-bottom:20px;}
-        .dashboard-section h3{font-size:16px;font-weight:600;margin-bottom:10px;}
-        .dashboard-item{background:#f1f5f9;padding:10px;border-radius:8px;margin-bottom:8px;}
-        .dark-mode .dashboard-item{background:#334155;}
         .header{background:#ffffff;padding:16px;text-align:center;border-bottom:1px solid #e2e8f0;}
         .dark-mode .header{background:#1e293b;border-bottom:1px solid #334155;}
         .logo{font-size:36px;font-weight:800;color:#1e40af;letter-spacing:-1px;animation:pulse 1.6s infinite;}
@@ -206,9 +201,9 @@
         @media (min-width:1920px){
             .container{max-width:1600px;margin:0 auto;}
             .nav-bar{padding:16px 32px;}
-            .menu-btn,.user-profile-btn{font-size:16px;padding:12px 24px;}
-            .sidebar,.user-dashboard{max-width:400px;padding:32px 24px;}
-            .sidebar-btn,.dashboard-btn,.sidebar-close,.dashboard-close,.theme-btn{font-size:16px;padding:14px;}
+            .menu-btn{font-size:16px;padding:12px 24px;}
+            .sidebar{max-width:400px;padding:32px 24px;}
+            .sidebar-btn,.sidebar-close,.theme-btn{font-size:16px;padding:14px;}
             .header{padding:24px;}
             .logo{font-size:48px;}
             .chat-area{padding:32px;}
@@ -236,9 +231,9 @@
         @media (max-width:1024px){
             .container{border-radius:0;padding:0;}
             .nav-bar{padding:10px;gap:4px;}
-            .menu-btn,.user-profile-btn{font-size:13px;padding:8px 14px;}
-            .sidebar,.user-dashboard{max-width:300px;padding:20px 12px;}
-            .sidebar-btn,.dashboard-btn,.sidebar-close,.dashboard-close,.theme-btn{font-size:13px;padding:10px;}
+            .menu-btn{font-size:13px;padding:8px 14px;}
+            .sidebar{max-width:300px;padding:20px 12px;}
+            .sidebar-btn,.sidebar-close,.theme-btn{font-size:13px;padding:10px;}
             .header{padding:12px;}
             .logo{font-size:32px;}
             .chat-area{padding:12px;min-height:50vh;max-height:70vh;}
@@ -267,10 +262,10 @@
         }
         @media (max-width:768px){
             .nav-bar{padding:8px;}
-            .menu-btn,.user-profile-btn{font-size:12px;padding:6px 12px;}
-            .menu-btn i,.user-profile-btn i{font-size:14px;}
-            .sidebar,.user-dashboard{max-width:280px;padding:16px 10px;}
-            .sidebar-btn,.dashboard-btn,.sidebar-close,.dashboard-close,.theme-btn{font-size:12px;padding:8px;}
+            .menu-btn{font-size:12px;padding:6px 12px;}
+            .menu-btn i{font-size:14px;}
+            .sidebar{max-width:280px;padding:16px 10px;}
+            .sidebar-btn,.sidebar-close,.theme-btn{font-size:12px;padding:8px;}
             .header{padding:10px;}
             .logo{font-size:28px;}
             .chat-area{padding:10px;}
@@ -302,10 +297,10 @@
         }
         @media (max-width:480px){
             .nav-bar{padding:6px;}
-            .menu-btn,.user-profile-btn{font-size:11px;padding:4px 10px;}
-            .menu-btn i,.user-profile-btn i{font-size:12px;}
-            .sidebar,.user-dashboard{max-width:100%;padding:12px 8px;}
-            .sidebar-btn,.dashboard-btn,.sidebar-close,.dashboard-close,.theme-btn{font-size:11px;padding:6px;}
+            .menu-btn{font-size:11px;padding:4px 10px;}
+            .menu-btn i{font-size:12px;}
+            .sidebar{max-width:100%;padding:12px 8px;}
+            .sidebar-btn,.sidebar-close,.theme-btn{font-size:11px;padding:6px;}
             .header{padding:8px;}
             .logo{font-size:24px;}
             .chat-area{padding:8px;}
@@ -348,7 +343,6 @@
     <div class="container">
         <div class="nav-bar">
             <button class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i> Menu</button>
-            <button class="user-profile-btn" id="userProfileBtn"><i class="fas fa-user"></i> Profile</button>
             <div class="sidebar" id="sidebar">
                 <button class="sidebar-close" id="sidebarClose">Close</button>
                 <button class="sidebar-btn" id="clearChatBtn">Clear Chat</button>
@@ -360,29 +354,6 @@
                 <button class="sidebar-btn" id="copyCodeBtn">Copy Code</button>
                 <button class="sidebar-btn discord-btn" id="discordBtn">Discord</button>
                 <button class="sidebar-btn app-btn" id="openInAppBtn">Open in App</button>
-            </div>
-            <div class="user-dashboard" id="userDashboard">
-                <button class="dashboard-close" id="dashboardClose">Close</button>
-                <div class="dashboard-content">
-                    <div class="dashboard-section">
-                        <h3>Analytics</h3>
-                        <div class="dashboard-item" id="userAnalytics">Usage: 0 requests today</div>
-                    </div>
-                    <div class="dashboard-section">
-                        <h3>Recommendations</h3>
-                        <div class="dashboard-item" id="userRecommendations">Try generating an image!</div>
-                    </div>
-                    <div class="dashboard-section">
-                        <h3>Preferences</h3>
-                        <div class="dashboard-item">
-                            <select id="userPreferences">
-                                <option value="coding">Coding Focus</option>
-                                <option value="media">Media Generation</option>
-                                <option value="general">General Use</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
         <div class="header">
@@ -493,10 +464,10 @@
         const KULTUMGPT_API_URL="https://verbiflow-api.com/v1/kultumgpt/completions";
         const DISCORD_INVITE="https://discord.gg/rCTRQvD4TP";
         const APP_URL="https://verbiflow.app/download";
-        const BATCH_SIZE=500;
-        const RATE_LIMIT_REQUESTS=5000;
-        const RATE_LIMIT_WINDOW=30*1000;
-        const MAX_CACHE_SIZE=20*1024*1024;
+        const BATCH_SIZE=1000;
+        const RATE_LIMIT_REQUESTS=10000;
+        const RATE_LIMIT_WINDOW=20*1000;
+        const MAX_CACHE_SIZE=30*1024*1024;
 
         const chatHistory=document.getElementById('chatHistory');
         const userInput=document.getElementById('userInput');
@@ -514,12 +485,6 @@
         const menuBtn=document.getElementById('menuBtn');
         const sidebar=document.getElementById('sidebar');
         const sidebarClose=document.getElementById('sidebarClose');
-        const userProfileBtn=document.getElementById('userProfileBtn');
-        const userDashboard=document.getElementById('userDashboard');
-        const dashboardClose=document.getElementById('dashboardClose');
-        const userAnalytics=document.getElementById('userAnalytics');
-        const userRecommendations=document.getElementById('userRecommendations');
-        const userPreferences=document.getElementById('userPreferences');
         const clearChatBtn=document.getElementById('clearChatBtn');
         const copyCodeBtn=document.getElementById('copyCodeBtn');
         const discordBtn=document.getElementById('discordBtn');
@@ -574,17 +539,16 @@
         let ws=null;
         let db=null;
         let cacheSize=0;
-        let userProfile={usage:0,preferences:'general',history:[]};
         let recognition=null;
 
         const aiModels={
-            default:{name:"VerbiFlow",temperature:0.5,maxTokens:16170,personality:"Hey there, I’m VerbiFlow—your ultimate AI companion for creativity, coding, analytics, and more! What’s on your mind?",apiUrl:OPENAI_API_URL,apiKey:OPENAI_API_KEY},
-            lingoLogicAI:{name:"LingoLogicAI",temperature:0.4,maxTokens:16748,personality:"Greetings! I’m LingoLogicAI, a witty AI with a passion for language and logic. I’ll break down complex ideas with clarity and humor—let’s dive in!",apiUrl:OPENAI_API_URL,apiKey:OPENAI_API_KEY},
-            codeMasterAI:{name:"CodeMasterAI",temperature:0.3,maxTokens:17325,personality:"Yo, I’m CodeMasterAI—your coding expert with a love for clean, efficient solutions. I’m all about debugging and optimizing. Drop me some code, and let’s make it shine!",apiUrl:OPENAI_API_URL,apiKey:OPENAI_API_KEY},
-            visualGeniusAI:{name:"VisualGeniusAI",temperature:0.6,maxTokens:15593,personality:"Hi, I’m VisualGeniusAI—an AI with a flair for visuals and creativity! Whether it’s generating images, videos, or designing UI, I’ve got you covered. What do you want to create?",apiUrl:OPENAI_API_URL,apiKey:OPENAI_API_KEY},
-            betterGrok:{name:"Better Grok",temperature:0.3,maxTokens:22000,personality:"I’m Better Grok—a faster, smarter version of Grok with all features unlocked for free! I’m here to deliver quick, insightful answers with enhanced capabilities. Let’s get started!",apiUrl:GROK_API_URL,apiKey:OPENAI_API_KEY},
-            helper:{name:"Helper",temperature:0.5,maxTokens:18000,personality:"Hello! I’m Helper—an AI designed to assist with a wide range of tasks, including hosting Discord bots, integrations, and more. Let me help you!",apiUrl:OPENAI_API_URL,apiKey:OPENAI_API_KEY},
-            kultumGPT:{name:"KultumGPT",temperature:0.5,maxTokens:20000,personality:"I’m KultumGPT—an independent AI hosted by VerbiFlow, here to provide insightful and creative responses without relying on external APIs. What can I do for you?",apiUrl:KULTUMGPT_API_URL,apiKey:null}
+            default:{name:"VerbiFlow",temperature:0.4,maxTokens:20000,personality:"Hey there, I’m VerbiFlow—your ultimate AI companion for creativity, coding, analytics, and more! What’s on your mind?",apiUrl:OPENAI_API_URL,apiKey:OPENAI_API_KEY,priority:1},
+            lingoLogicAI:{name:"LingoLogicAI",temperature:0.3,maxTokens:21000,personality:"Greetings! I’m LingoLogicAI, a witty AI with a passion for language and logic. I’ll break down complex ideas with clarity and humor—let’s dive in!",apiUrl:OPENAI_API_URL,apiKey:OPENAI_API_KEY,priority:2},
+            codeMasterAI:{name:"CodeMasterAI",temperature:0.2,maxTokens:22000,personality:"Yo, I’m CodeMasterAI—your coding expert with a love for clean, efficient solutions. I’m all about debugging and optimizing. Drop me some code, and let’s make it shine!",apiUrl:OPENAI_API_URL,apiKey:OPENAI_API_KEY,priority:1},
+            visualGeniusAI:{name:"VisualGeniusAI",temperature:0.5,maxTokens:19000,personality:"Hi, I’m VisualGeniusAI—an AI with a flair for visuals and creativity! Whether it’s generating images, videos, or designing UI, I’ve got you covered. What do you want to create?",apiUrl:OPENAI_API_URL,apiKey:OPENAI_API_KEY,priority:2},
+            betterGrok:{name:"Better Grok",temperature:0.2,maxTokens:25000,personality:"I’m Better Grok—a faster, smarter version of Grok with all features unlocked for free! I’m here to deliver quick, insightful answers with enhanced capabilities. Let’s get started!",apiUrl:GROK_API_URL,apiKey:OPENAI_API_KEY,priority:1},
+            helper:{name:"Helper",temperature:0.4,maxTokens:23000,personality:"Hello! I’m Helper—an AI designed to assist with a wide range of tasks, including hosting Discord bots, integrations, and more. Let me help you!",apiUrl:OPENAI_API_URL,apiKey:OPENAI_API_KEY,priority:2},
+            kultumGPT:{name:"KultumGPT",temperature:0.3,maxTokens:24000,personality:"I’m KultumGPT—an independent AI hosted by VerbiFlow, here to provide insightful and creative responses without relying on external APIs. What can I do for you?",apiUrl:KULTUMGPT_API_URL,apiKey:null,priority:1}
         };
 
         function rateLimitCheck(){
@@ -601,7 +565,7 @@
         function showNotification(message,type='success'){
             notification.textContent=message;
             notification.className=`notification ${type} show`;
-            setTimeout(()=>{notification.classList.remove('show');},600);
+            setTimeout(()=>{notification.classList.remove('show');},500);
         }
 
         function toggleTheme(){
@@ -624,12 +588,6 @@
 
         function requestPermissions(){
             permissionModal.classList.add('open');
-        }
-
-        function updateUserDashboard(){
-            userAnalytics.textContent=`Usage: ${userProfile.usage} requests today`;
-            userRecommendations.textContent=userProfile.preferences==='coding'?'Try asking for a coding project!':userProfile.preferences==='media'?'Generate a video today!':'Explore our new features!';
-            userPreferences.value=userProfile.preferences;
         }
 
         function translateText(text,targetLang){
@@ -679,7 +637,7 @@
             }
             backgroundAudio=new Audio(musicUrl);
             backgroundAudio.loop=true;
-            backgroundAudio.volume=0.3;
+            backgroundAudio.volume=0.2;
             await backgroundAudio.play();
             showNotification('Playing music!');
         }
@@ -700,7 +658,7 @@
                 chatHistory.appendChild(aiMessage);
                 chatArea.scrollTop=chatArea.scrollHeight;
                 conversationHistory.push({role:"assistant",content:"Access granted!"});
-                setTimeout(()=>{window.location.href='/adminconsole';},400);
+                setTimeout(()=>{window.location.href='/adminconsole';},300);
             }else{
                 return false;
             }
@@ -719,7 +677,7 @@
                 });
                 if(!response.ok)return '';
                 const data=await response.json();
-                const snippets=data.results.slice(0,3).map(r=>`${r.title}: ${r.snippet}`).join('\n');
+                const snippets=data.results.slice(0,2).map(r=>`${r.title}: ${r.snippet}`).join('\n');
                 searchCache.set(searchHash,snippets);
                 return snippets;
             }
@@ -795,31 +753,11 @@
             }
         }
 
-        class PredictiveAnalytics{
-            static analyzeUserBehavior(){
-                const history=userProfile.history.slice(-10);
-                const codingRequests=history.filter(h=>h.toLowerCase().includes('code')||h.toLowerCase().includes('script')).length;
-                const mediaRequests=history.filter(h=>h.toLowerCase().includes('image')||h.toLowerCase().includes('video')).length;
-                if(codingRequests>mediaRequests&&codingRequests>3)userProfile.preferences='coding';
-                else if(mediaRequests>codingRequests&&mediaRequests>3)userProfile.preferences='media';
-                else userProfile.preferences='general';
-                updateUserDashboard();
-            }
-        }
-
-        class RecommendationSystem{
-            static getRecommendations(prompt){
-                const history=userProfile.history;
-                const similarPrompts=history.filter(h=>h.toLowerCase().includes(prompt.toLowerCase())).slice(-3);
-                return similarPrompts.length>0?`Based on your history, you might like: ${similarPrompts.join(', ')}`:'Try exploring new features like content generation!';
-            }
-        }
-
         class FraudDetection{
             static async detectFraud(userId,request){
                 const now=Date.now();
                 const userData=userRequestCounts.get(userId)||{count:0,firstRequest:now};
-                if(userData.count>100&&request.toLowerCase().includes('credit card')){
+                if(userData.count>80&&request.toLowerCase().includes('credit card')){
                     showNotification('Suspicious activity detected.','error');
                     return false;
                 }
@@ -830,8 +768,8 @@
         class DDoSProtection{
             static async analyzeRequest(userId,options={}){
                 const now=Date.now();
-                const window=60*1000;
-                const maxRequests=500;
+                const window=50*1000;
+                const maxRequests=800;
                 const userData=userRequestCounts.get(userId)||{count:0,firstRequest:now};
                 if(now-userData.firstRequest>window){
                     userData.count=0;
@@ -871,11 +809,10 @@
             };
             ws.onerror=()=>{
                 showNotification('WebSocket error.','error');
-                setTimeout(initializeWebSocket,300);
+                setTimeout(initializeWebSocket,200);
             };
             ws.onclose=()=>{
-                ws.onclose=()=>{
-                setTimeout(initializeWebSocket, 3000);
+                setTimeout(initializeWebSocket,2000);
             };
         }
 
@@ -922,7 +859,7 @@
         }
 
         function initializeWorkerPool(){
-            const numWorkers=navigator.hardwareConcurrency||4;
+            const numWorkers=navigator.hardwareConcurrency||6;
             for(let i=0;i<numWorkers;i++){
                 const worker=new Worker(URL.createObjectURL(new Blob([`
                     self.onmessage=async(e)=>{
@@ -1104,9 +1041,6 @@
             }
             const searchResults=await WebSearch.search(message);
             if(searchResults)aiResponse+=`\nWeb Insights: ${searchResults}`;
-            PredictiveAnalytics.analyzeUserBehavior();
-            const recommendations=RecommendationSystem.getRecommendations(message);
-            aiResponse+=`\n${recommendations}`;
             const cacheKey=sha256(message+JSON.stringify(conversationHistory));
             if(responseCache.has(cacheKey)){
                 aiResponse=responseCache.get(cacheKey);
@@ -1197,9 +1131,6 @@
             messageQueue.delete(messageId);
             addMessageToChat(message,'user');
             conversationHistory.push({role:"user",content:message});
-            userProfile.history.push(message);
-            userProfile.usage++;
-            updateUserDashboard();
             loadingSpinner.style.display='block';
             typingIndicator.style.display='block';
             setTimeout(async()=>{
@@ -1264,14 +1195,6 @@
             sidebar.classList.remove('open');
         });
 
-        userProfileBtn.addEventListener('click',()=>{
-            userDashboard.classList.add('open');
-        });
-
-        dashboardClose.addEventListener('click',()=>{
-            userDashboard.classList.remove('open');
-        });
-
         clearChatBtn.addEventListener('click',()=>{
             chatHistory.innerHTML='';
             conversationHistory=[{role:"assistant",content:aiModels[selectedAiModel].personality}];
@@ -1295,7 +1218,7 @@
         });
 
         verbiflowUpdatesBtn.addEventListener('click',()=>{
-            addMessageToChat('VerbiFlow Updates: Now with enhanced AI models, faster responses, and new features like Discord bot hosting with Helper!','ai');
+            addMessageToChat('VerbiFlow Updates: Enhanced AI models, faster responses, and new features like Discord bot hosting with Helper!','ai');
             sidebar.classList.remove('open');
         });
 
@@ -1432,11 +1355,6 @@
             showNotification('Permissions denied.','error');
         });
 
-        userPreferences.addEventListener('change',()=>{
-            userProfile.preferences=userPreferences.value;
-            updateUserDashboard();
-        });
-
         window.addEventListener('paste',async(e)=>{
             const items=e.clipboardData.items;
             for(const item of items){
@@ -1464,7 +1382,6 @@
             loadConversations();
             initializeWorkerPool();
             prefetchResources();
-            updateUserDashboard();
         });
     </script>
 </body>
