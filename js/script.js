@@ -1,19 +1,5 @@
-const API_KEY = "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";
-const API_URL = "https://api.openai.com/v1/chat/completions";
-const DALLE_API_URL = "https://api.openai.com/v1/images/generations";
-const SORA_API_URL = "https://api.openai.com/v1/video/generations";
-const VIDEO_PROCESSING_API = "https://api.openai.com/v1/video/analyze";
-const SEARCH_API_URL = "https://api.searchengine.com/v1/search";
 const DISCORD_INVITE = "https://discord.gg/rCTRQvD4TP";
 const APP_URL = "https://verbiflow.app/download";
-const BATCH_SIZE = 5000;
-const RATE_LIMIT_REQUESTS = 40000;
-const RATE_LIMIT_WINDOW = 4 * 1000;
-const MAX_CACHE_SIZE = 150 * 1024 * 1024;
-const FEEDBACK_EMAIL = "asdwwas233@gmail.com";
-const BLOCK_THRESHOLD = 150;
-const SUSPICIOUS_THRESHOLD = 75;
-const TOKEN_LIMIT = 8192;
 
 const chatHistory = document.getElementById('chatHistory');
 const userInput = document.getElementById('userInput');
@@ -60,60 +46,13 @@ const denyPermissionBtn = document.getElementById('denyPermissionBtn');
 let filesArray = [];
 let conversationHistory = [{ role: "assistant", content: "Hey there, I’m VerbiFlow—your ultra-fast AI companion for creativity, coding, analytics, and more! What’s on your mind?" }];
 let latestCodeBlocks = [];
-let latestAiResponse = '';
 let isDarkMode = false;
 let isGenerating = false;
-let generationLock = false;
-let selectedSchoolMode = '';
-let selectedAiModel = 'default';
-let selectedLanguage = 'en';
-let messageQueue = new Map();
-let isProcessing = false;
-let responseCache = new Map();
-let searchCache = new Map();
-let abortController = null;
-let batchQueue = [];
-let hasPermission = false;
-let userRequestCounts = new Map();
-let backgroundAudio = null;
-let isAdminVerified = false;
-let pastedImageHashes = new Set();
-let workerPool = [];
-let db = null;
-let cacheSize = 0;
-let recognition = null;
-let ipRequestCounts = new Map();
-let blockedIPs = new Set();
-let suspiciousIPs = new Set();
-let rateLimitTimestamps = [];
-
-const aiModels = {
-    default: { name: "VerbiFlow", temperature: 0.08, maxTokens: 45000, personality: "Hey there, I’m VerbiFlow—your ultra-fast AI companion for creativity, coding, analytics, and more! Let’s dive into your ideas with enthusiasm and precision!", apiUrl: API_URL, apiKey: API_KEY, priority: 1, responseTime: 5 },
-    lingoLogicAI: { name: "LingoLogicAI", temperature: 0.03, maxTokens: 46000, personality: "Greetings! I’m LingoLogicAI, a witty AI with a knack for language and logic. I’ll break down complex ideas with clarity, humor, and a touch of flair—let’s explore your thoughts!", apiUrl: API_URL, apiKey: API_KEY, priority: 2, responseTime: 4 },
-    codeMasterAI: { name: "CodeMasterAI", temperature: 0.02, maxTokens: 47000, personality: "I’m CodeMasterAI, your go-to AI for coding and technical challenges. I’ll deliver precise, optimized solutions with detailed explanations—let’s build something amazing!", apiUrl: API_URL, apiKey: API_KEY, priority: 1, responseTime: 3 },
-    visualGeniusAI: { name: "VisualGeniusAI", temperature: 0.15, maxTokens: 42000, personality: "Hello! I’m VisualGeniusAI, a creative AI specializing in generating and analyzing visuals. From images to videos, I’ll bring your ideas to life with stunning creativity!", apiUrl: API_URL, apiKey: API_KEY, priority: 3, responseTime: 6 },
-    betterGrok: { name: "Better Grok", temperature: 0.09, maxTokens: 48000, personality: "I’m Better Grok, an advanced AI built by xAI to provide insightful, outside perspectives on humanity. I’ll answer almost anything with depth and curiosity—let’s explore the universe together!", apiUrl: API_URL, apiKey: API_KEY, priority: 1, responseTime: 4 },
-    helper: { name: "Helper", temperature: 0.12, maxTokens: 45000, personality: "Hi there! I’m Helper, a friendly AI here to assist with Discord bot creation, task automation, and more. I’ll guide you step-by-step with practical solutions—let’s get started!", apiUrl: API_URL, apiKey: API_KEY, priority: 2, responseTime: 5 },
-    kultumGPT: { name: "KultumGPT", temperature: 0.18, maxTokens: 43000, personality: "Assalamualaikum! I’m KultumGPT, an AI focused on delivering short, meaningful Islamic lectures (kultum) and spiritual insights. I’ll respond freely to any topic you wish to explore!", apiUrl: API_URL, apiKey: API_KEY, priority: 3, responseTime: 5, safeChats: false }
-};
 
 function showNotification(message, type = 'success') {
     notification.textContent = message;
     notification.className = `notification ${type} show`;
     setTimeout(() => { notification.className = 'notification'; }, 2500);
-}
-
-function rateLimitCheck(ip) {
-    const now = Date.now();
-    rateLimitTimestamps = rateLimitTimestamps.filter(t => now - t < RATE_LIMIT_WINDOW);
-    rateLimitTimestamps.push(now);
-    if (rateLimitTimestamps.length > RATE_LIMIT_REQUESTS) {
-        blockedIPs.add(ip);
-        setTimeout(() => { blockedIPs.delete(ip); }, RATE_LIMIT_WINDOW * 2);
-        showNotification('Too many requests—please wait.', 'error');
-        return false;
-    }
-    return true;
 }
 
 function toggleTheme() {
@@ -134,7 +73,107 @@ function loadTheme() {
     }
 }
 
-async function translateText(text, targetLang) {
-    try {
-        const response = await fetch(API_URL, {
-            method: 'POST',
+function addMessageToChat(role, content) {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `chat-message ${role}`;
+    messageDiv.innerHTML = `
+        <div class="chat-message-content">${content}</div>
+        <div class="chat-message-meta">Just now</div>
+    `;
+    chatHistory.appendChild(messageDiv);
+    chatArea.scrollTop = chatArea.scrollHeight;
+}
+
+function simulateAIResponse(userMessage) {
+    // Simulate AI response since API calls won't work on GitHub Pages
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            const response = `This is a simulated response to: "${userMessage}". (API calls are disabled on GitHub Pages. To enable full functionality, host this site with a backend server.)`;
+            resolve(response);
+        }, 1000);
+    });
+}
+
+async function handleSendMessage() {
+    const userMessage = userInput.value.trim();
+    if (!userMessage) return;
+
+    addMessageToChat('user', userMessage);
+    userInput.value = '';
+    typingIndicator.style.display = 'block';
+
+    const aiResponse = await simulateAIResponse(userMessage);
+    typingIndicator.style.display = 'none';
+    addMessageToChat('ai', aiResponse);
+    conversationHistory.push({ role: "user", content: userMessage }, { role: "assistant", content: aiResponse });
+}
+
+function handleFileUpload(event) {
+    const files = Array.from(event.target.files);
+    filesArray.push(...files);
+    updateFileList();
+    fileClearBtn.style.display = 'block';
+}
+
+function updateFileList() {
+    fileList.innerHTML = '';
+    filesArray.forEach((file, index) => {
+        const fileItem = document.createElement('div');
+        fileItem.className = 'file-item';
+        fileItem.innerHTML = `
+            <span class="file-item-name">${file.name}</span>
+            <span class="file-item-details">${(file.size / 1024).toFixed(2)} KB</span>
+        `;
+        fileItem.addEventListener('click', () => previewFile(file));
+        fileList.appendChild(fileItem);
+    });
+}
+
+function previewFile(file) {
+    filePreviewContent.innerHTML = '';
+    if (file.type.startsWith('image/')) {
+        const img = document.createElement('img');
+        img.src = URL.createObjectURL(file);
+        filePreviewContent.appendChild(img);
+    } else if (file.type.startsWith('video/')) {
+        const video = document.createElement('video');
+        video.src = URL.createObjectURL(file);
+        video.controls = true;
+        filePreviewContent.appendChild(video);
+    } else {
+        filePreviewContent.textContent = `Preview not available for ${file.name}`;
+    }
+    filePreviewModal.classList.add('open');
+}
+
+function clearFiles() {
+    filesArray = [];
+    fileList.innerHTML = '';
+    fileClearBtn.style.display = 'none';
+    fileInput.value = '';
+}
+
+function toggleSidebar() {
+    sidebar.classList.toggle('open');
+}
+
+function toggleFileActions() {
+    fileActionsContainer.classList.toggle('collapsed');
+    toggleActionsBtn.classList.toggle('collapsed');
+}
+
+// Event Listeners
+sendBtn.addEventListener('click', handleSendMessage);
+userInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        handleSendMessage();
+    }
+});
+fileInput.addEventListener('change', handleFileUpload);
+fileClearBtn.addEventListener('click', clearFiles);
+filePreviewClose.addEventListener('click', () => filePreviewModal.classList.remove('open'));
+menuBtn.addEventListener('click', toggleSidebar);
+sidebarClose.addEventListener('click', toggleSidebar);
+clearChatBtn.addEventListener('click', () => {
+    chatHistory.innerHTML = '';
