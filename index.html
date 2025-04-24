@@ -79,6 +79,7 @@
             height: 100%;
             background: var(--bg-color);
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             z-index: 9999;
@@ -102,6 +103,18 @@
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            margin-top: 20px;
+            font-size: 16px;
+            color: var(--text-color);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-text.visible {
+            opacity: 1;
         }
 
         .nav-bar {
@@ -752,27 +765,112 @@
             display: block;
         }
 
+        /* Device-Specific Styles */
         @media (max-width: 768px) {
-            .sidebar {
-                width: 100%;
-                left: -100%;
+            body.mobile {
+                .container {
+                    padding: 10px;
+                }
+
+                .menu-btn {
+                    padding: 12px 24px;
+                    font-size: 18px;
+                }
+
+                .sidebar {
+                    width: 100%;
+                    left: -100%;
+                }
+
+                .chat-message-content {
+                    max-width: 90%;
+                    font-size: 14px;
+                }
+
+                .chat-area {
+                    max-height: 50vh;
+                    padding: 10px;
+                }
+
+                .file-actions {
+                    flex-direction: column;
+                }
+
+                .chat-controls {
+                    flex-direction: column;
+                    gap: 10px;
+                }
+
+                .search-input {
+                    width: 100%;
+                }
+
+                .input-container {
+                    flex-direction: column;
+                }
+
+                .user-input {
+                    font-size: 16px;
+                    padding: 15px;
+                }
+
+                .send-btn {
+                    padding: 15px;
+                    font-size: 16px;
+                    width: 100%;
+                }
+
+                .toggle-actions-btn {
+                    padding: 12px;
+                }
+            }
+        }
+
+        @media (min-width: 769px) {
+            body.desktop, body.chromebook {
+                .container {
+                    padding: 30px;
+                }
+
+                .sidebar {
+                    left: 0;
+                    width: 250px;
+                }
+
+                .menu-btn {
+                    display: none;
+                }
+
+                .chat-area {
+                    margin-left: 270px;
+                    max-height: 70vh;
+                }
+
+                .chat-message-content {
+                    font-size: 16px;
+                }
+
+                .input-container {
+                    margin-left: 270px;
+                }
+
+                .file-actions-container {
+                    margin-left: 270px;
+                }
             }
 
-            .chat-message-content {
-                max-width: 90%;
-            }
+            body.chromebook {
+                .chat-area {
+                    padding: 25px;
+                }
 
-            .file-actions {
-                flex-direction: column;
-            }
+                .sidebar {
+                    width: 200px;
+                }
 
-            .chat-controls {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .search-input {
-                width: 100%;
+                .chat-message-content {
+                    max-width: 80%;
+                }
             }
         }
     </style>
@@ -780,6 +878,7 @@
 <body>
     <div class="preloader" id="preloader">
         <div class="spinner"></div>
+        <div class="loading-text" id="loadingText"></div>
     </div>
     <div class="container">
         <div class="nav-bar">
@@ -984,6 +1083,7 @@
 
         const elements = {
             preloader: document.getElementById('preloader'),
+            loadingText: document.getElementById('loadingText'),
             chatHistory: document.getElementById('chatHistory'),
             userInput: document.getElementById('userInput'),
             sendBtn: document.getElementById('sendBtn'),
@@ -1077,7 +1177,8 @@
             rateLimit: { interval: 1000 },
             notificationQueue: [],
             messageDrafts: {},
-            pinnedMessages: new Set()
+            pinnedMessages: new Set(),
+            deviceType: 'unknown'
         };
 
         const reducer = (state, action) => {
@@ -1410,8 +1511,8 @@
 
         const mockAIResponse = userMessage => new Promise(resolve => {
             setTimeout(() => {
-                resolve(`Mock AI response to: "${userMessage}". (OpenAI API requires a backend for real responses.)`);
-            }, 300);
+                resolve(`Mock ChatGPT response to: "${userMessage}". (OpenAI API requires a backend for real responses.)`);
+            }, 100); // Reduced delay for faster response
         });
 
         const debounce = (func, wait) => {
@@ -1626,6 +1727,46 @@
             elements.chatHistory.style.gap = layout === 'compact' ? '5px' : layout === 'spacious' ? '20px' : '10px';
         };
 
+        const detectDevice = () => {
+            const ua = navigator.userAgent.toLowerCase();
+            if (/mobile|android|iphone|ipad|tablet/i.test(ua)) {
+                return 'mobile';
+            } else if (/cros/i.test(ua)) {
+                return 'chromebook';
+            } else {
+                return 'desktop';
+            }
+        };
+
+        const showLoadingMessages = () => {
+            const messages = [
+                "Detecting the user device..",
+                "Detecting if the user is on Chromebook..",
+                "Detected!",
+                `User is on ${store.state.deviceType}`,
+                "VerbiFlow supports the device, enjoy using VerbiFlow."
+            ];
+            let index = 0;
+
+            const showNextMessage = () => {
+                if (index < messages.length) {
+                    elements.loadingText.textContent = messages[index];
+                    elements.loadingText.classList.remove('visible');
+                    setTimeout(() => {
+                        elements.loadingText.classList.add('visible');
+                        index++;
+                        setTimeout(showNextMessage, 1000);
+                    }, 50);
+                } else {
+                    setTimeout(() => {
+                        elements.preloader.classList.add('hidden');
+                    }, 500);
+                }
+            };
+
+            showNextMessage();
+        };
+
         elements.chatHistory.addEventListener('click', e => {
             const target = e.target.closest('button');
             if (!target) return;
@@ -1642,243 +1783,267 @@
                 elements.editMessageInput.value = message.content;
                 elements.editMessageModal.dataset.messageId = messageId;
                 elements.editMessageModal.classList.add('open');
-            } else if (target.classList.contains('react-message-btn')) {
-                if (!checkRateLimit()) return;
-                const emoji = prompt('Enter an emoji to react with:');
-                if (emoji) {
+                            } else if (target.classList.contains('react-message-btn')) {
+                    if (!checkRateLimit()) return;
+                    const emoji = '❤️';
                     message.reactions.push(emoji);
                     store.dispatch({ type: 'UPDATE_MESSAGE', payload: message });
                     virtualRenderMessages();
-                }
-            } else if (target.classList.contains('pin-message-btn')) {
-                if (!checkRateLimit()) return;
-                if (store.state.pinnedMessages.has(messageId)) {
-                    store.dispatch({ type: 'UNPIN_MESSAGE', payload: messageId });
-                    showNotification('Message unpinned.');
-                } else {
-                    store.dispatch({ type: 'PIN_MESSAGE', payload: messageId });
-                    showNotification('Message pinned.');
-                }
-                virtualRenderMessages();
-            }
-        });
-
-        elements.fileList.addEventListener('click', e => {
-            const target = e.target.closest('.file-item');
-            if (!target) return;
-            const index = Array.from(elements.fileList.children).indexOf(target);
-            previewFile(store.state.filesArray[index]);
-        });
-
-        elements.sendBtn.addEventListener('click', debouncedSendMessage);
-        elements.userInput.addEventListener('keypress', e => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                debouncedSendMessage();
-            }
-        });
-        elements.userInput.addEventListener('input', () => {
-            store.dispatch({ type: 'SET_DRAFT', payload: { userInput: elements.userInput.value } });
-        });
-        elements.fileInput.addEventListener('change', handleFileUpload);
-        elements.fileClearBtn.addEventListener('click', clearFiles);
-        elements.filePreviewClose.addEventListener('click', () => elements.filePreviewModal.classList.remove('open'));
-        elements.menuBtn.addEventListener('click', toggleSidebar);
-        elements.sidebarClose.addEventListener('click', toggleSidebar);
-        elements.clearChatBtn.addEventListener('click', () => elements.confirmClearModal.classList.add('open'));
-        elements.confirmClearBtn.addEventListener('click', () => {
-            if (!checkRateLimit()) return;
-            store.dispatch({
-                type: 'SET_STATE',
-                payload: {
-                    conversationHistory: [{ id: Date.now(), role: "assistant", content: "Hey there, I’m VerbiFlow—your ultra-fast AI companion for creativity, coding, analytics, and more! What’s on your mind?", reactions: [], threadId: null, timestamp: Date.now() }],
-                    threads: {},
-                    messageCount: 1,
-                    pinnedMessages: new Set()
+                    showNotification('Reaction added!');
+                } else if (target.classList.contains('pin-message-btn')) {
+                    if (!checkRateLimit()) return;
+                    if (store.state.pinnedMessages.has(messageId)) {
+                        store.dispatch({ type: 'UNPIN_MESSAGE', payload: messageId });
+                        showNotification('Message unpinned!');
+                    } else {
+                        store.dispatch({ type: 'PIN_MESSAGE', payload: messageId });
+                        showNotification('Message pinned!');
+                    }
+                    virtualRenderMessages();
                 }
             });
-            elements.chatHistory.innerHTML = '';
-            loadConversationHistory();
-            elements.confirmClearModal.classList.remove('open');
-        });
-        elements.cancelClearBtn.addEventListener('click', () => elements.confirmClearModal.classList.remove('open'));
-        elements.copyCodeBtn.addEventListener('click', () => {
-            if (!checkRateLimit()) return;
-            if (store.state.latestCodeBlocks.length) {
-                                navigator.clipboard.writeText(store.state.latestCodeBlocks.join('\n'));
-                showNotification('Code copied to clipboard!');
-            } else {
-                showNotification('No code blocks to copy.', 'error');
-            }
-        });
 
-        elements.discordBtn.addEventListener('click', () => {
-            if (!checkRateLimit()) return;
-            window.open(DISCORD_INVITE, '_blank');
-            showNotification('Join our Discord community!');
-        });
+            elements.fileList.addEventListener('click', e => {
+                const fileItem = e.target.closest('.file-item');
+                if (!fileItem) return;
+                const index = Array.from(elements.fileList.children).indexOf(fileItem);
+                const file = store.state.filesArray[index];
+                previewFile(file);
+            });
 
-        elements.verbiflowUpdatesBtn.addEventListener('click', handleUpdatesClick);
-        elements.premiumPriceBtn.addEventListener('click', handlePremiumPriceClick);
-        elements.shareChatBtn.addEventListener('click', () => {
-            if (!checkRateLimit()) return;
-            const shareData = { title: 'VerbiFlow Chat', text: 'Check out my chat on VerbiFlow!', url: window.location.href };
-            navigator.share(shareData).then(() => showNotification('Chat shared successfully!')).catch(() => showNotification('Sharing not supported on this device.', 'error'));
-        });
+            elements.fileInput.addEventListener('change', handleFileUpload);
+            elements.fileClearBtn.addEventListener('click', () => {
+                if (!checkRateLimit()) return;
+                clearFiles();
+                showNotification('Files cleared!');
+            });
 
-        elements.shareWebsiteBtn.addEventListener('click', () => {
-            if (!checkRateLimit()) return;
-            const shareData = { title: 'VerbiFlow', text: 'Check out VerbiFlow - an ultra-fast AI companion!', url: 'https://verbiflow.app' };
-            navigator.share(shareData).then(() => showNotification('Website shared successfully!')).catch(() => showNotification('Sharing not supported on this device.', 'error'));
-        });
+            elements.filePreviewClose.addEventListener('click', () => {
+                elements.filePreviewModal.classList.remove('open');
+                elements.filePreviewContent.innerHTML = '';
+                elements.zoomControls.style.display = 'none';
+            });
 
-        elements.themeBtn.addEventListener('click', toggleTheme);
-        elements.openInAppBtn.addEventListener('click', () => {
-            if (!checkRateLimit()) return;
-            window.location.href = APP_URL;
-        });
+            elements.sendBtn.addEventListener('click', debouncedSendMessage);
+            elements.userInput.addEventListener('keypress', e => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    debouncedSendMessage();
+                }
+            });
 
-        elements.userProfileBtn.addEventListener('click', () => {
-            if (!checkRateLimit()) return;
-            elements.usernameInput.value = store.state.userProfile.username;
-            elements.chatLayoutSelect.value = store.state.userProfile.chatLayout;
-            elements.userProfileModal.classList.add('open');
-        });
+            elements.userInput.addEventListener('input', () => {
+                store.dispatch({ type: 'SET_DRAFT', payload: { userInput: elements.userInput.value } });
+                elements.userInput.style.height = 'auto';
+                elements.userInput.style.height = `${elements.userInput.scrollHeight}px`;
+            });
 
-        elements.userProfileClose.addEventListener('click', () => elements.userProfileModal.classList.remove('open'));
-        elements.usernameInput.addEventListener('change', saveUserProfile);
-        elements.chatLayoutSelect.addEventListener('change', saveUserProfile);
+            elements.menuBtn.addEventListener('click', toggleSidebar);
+            elements.sidebarClose.addEventListener('click', toggleSidebar);
 
-        elements.toggleActionsBtn.addEventListener('click', toggleFileActions);
-        elements.generateMediaBtn.addEventListener('click', () => {
-            if (!checkRateLimit()) return;
-            showNotification('Media generation is a premium feature. Please upgrade!');
-        });
+            elements.clearChatBtn.addEventListener('click', () => {
+                if (!checkRateLimit()) return;
+                elements.confirmClearModal.classList.add('open');
+            });
 
-        elements.voiceSearchBtn.addEventListener('click', () => {
-            if (!checkRateLimit()) return;
-            elements.permissionModal.classList.add('open');
-        });
-
-        elements.grantPermissionBtn.addEventListener('click', () => {
-            elements.permissionModal.classList.remove('open');
-            showNotification('Permissions granted! Voice search enabled.');
-        });
-
-        elements.denyPermissionBtn.addEventListener('click', () => {
-            elements.permissionModal.classList.remove('open');
-            showNotification('Permissions denied.', 'error');
-        });
-
-        elements.rephraseBtn.addEventListener('click', () => {
-            if (!checkRateLimit()) return;
-            const lastUserMessage = store.state.conversationHistory.filter(msg => msg.role === 'user').slice(-1)[0];
-            if (!lastUserMessage) {
-                showNotification('No user message to rephrase.', 'error');
-                return;
-            }
-            const rephrased = `Rephrased: "${lastUserMessage.content}" (Mock rephrasing)`;
-            const aiMessage = { id: Date.now(), role: 'ai', content: rephrased, reactions: [], threadId: null, timestamp: Date.now() };
-            store.dispatch({ type: 'ADD_MESSAGE', payload: aiMessage });
-            virtualRenderMessages();
-        });
-
-        elements.stopGeneratingBtn.addEventListener('click', () => {
-            if (!checkRateLimit()) return;
-            store.dispatch({ type: 'SET_STATE', payload: { isGenerating: false } });
-            elements.stopGeneratingBtn.style.display = 'none';
-            showNotification('Generation stopped.');
-        });
-
-        elements.feedbackBtn.addEventListener('click', () => {
-            if (!checkRateLimit()) return;
-            elements.feedbackModal.classList.add('open');
-        });
-
-        elements.feedbackSubmitBtn.addEventListener('click', () => {
-            if (!checkRateLimit()) return;
-            const feedback = elements.feedbackInput.value.trim();
-            if (!feedback) {
-                showNotification('Please enter feedback.', 'error');
-                return;
-            }
-            const mailtoLink = `mailto:${FEEDBACK_EMAIL}?subject=VerbiFlow Feedback&body=${encodeURIComponent(feedback)}`;
-            window.location.href = mailtoLink;
-            elements.feedbackModal.classList.remove('open');
-            elements.feedbackInput.value = '';
-            showNotification('Thank you for your feedback!');
-        });
-
-        elements.backToTopBtn.addEventListener('click', scrollToTop);
-        elements.chatArea.addEventListener('scroll', handleScroll);
-
-        elements.prevPageBtn.addEventListener('click', () => {
-            if (!checkRateLimit()) return;
-            if (store.state.currentPage > 1) {
-                store.dispatch({ type: 'SET_PAGE', payload: store.state.currentPage - 1 });
+            elements.confirmClearBtn.addEventListener('click', () => {
+                if (!checkRateLimit()) return;
+                store.dispatch({ type: 'SET_STATE', payload: { conversationHistory: [], messageCount: 0, pinnedMessages: new Set() } });
+                const welcomeMessage = { id: Date.now(), role: 'ai', content: "Hey there, I’m VerbiFlow—your ultra-fast AI companion for creativity, coding, analytics, and more! What’s on your mind?", reactions: [], threadId: null, timestamp: Date.now() };
+                store.dispatch({ type: 'ADD_MESSAGE', payload: welcomeMessage });
                 virtualRenderMessages();
-            }
-        });
+                elements.confirmClearModal.classList.remove('open');
+                showNotification('Conversation cleared!');
+                toggleSidebar();
+            });
 
-        elements.nextPageBtn.addEventListener('click', () => {
-            if (!checkRateLimit()) return;
-            if (store.state.currentPage * store.state.messagesPerPage < store.state.conversationHistory.length) {
-                store.dispatch({ type: 'SET_PAGE', payload: store.state.currentPage + 1 });
+            elements.cancelClearBtn.addEventListener('click', () => {
+                elements.confirmClearModal.classList.remove('open');
+            });
+
+            elements.copyCodeBtn.addEventListener('click', () => {
+                if (!checkRateLimit()) return;
+                if (store.state.latestCodeBlocks.length) {
+                    navigator.clipboard.writeText(store.state.latestCodeBlocks.join('\n'));
+                    showNotification('Code copied to clipboard!');
+                } else {
+                    showNotification('No code blocks to copy.', 'error');
+                }
+            });
+
+            elements.discordBtn.addEventListener('click', () => {
+                if (!checkRateLimit()) return;
+                window.open(DISCORD_INVITE, '_blank');
+                showNotification('Join our Discord community!');
+            });
+
+            elements.verbiflowUpdatesBtn.addEventListener('click', handleUpdatesClick);
+            elements.premiumPriceBtn.addEventListener('click', handlePremiumPriceClick);
+
+            elements.shareChatBtn.addEventListener('click', () => {
+                if (!checkRateLimit()) return;
+                const shareData = { title: 'VerbiFlow Chat', text: 'Check out my chat on VerbiFlow!', url: window.location.href };
+                navigator.share(shareData).then(() => showNotification('Chat shared successfully!')).catch(() => showNotification('Sharing not supported on this device.', 'error'));
+            });
+
+            elements.shareWebsiteBtn.addEventListener('click', () => {
+                if (!checkRateLimit()) return;
+                const shareData = { title: 'VerbiFlow', text: 'Check out VerbiFlow - an ultra-fast AI companion!', url: 'https://verbiflow.app' };
+                navigator.share(shareData).then(() => showNotification('Website shared successfully!')).catch(() => showNotification('Sharing not supported on this device.', 'error'));
+            });
+
+            elements.themeBtn.addEventListener('click', toggleTheme);
+
+            elements.openInAppBtn.addEventListener('click', () => {
+                if (!checkRateLimit()) return;
+                window.location.href = APP_URL;
+            });
+
+            elements.userProfileBtn.addEventListener('click', () => {
+                if (!checkRateLimit()) return;
+                elements.usernameInput.value = store.state.userProfile.username;
+                elements.chatLayoutSelect.value = store.state.userProfile.chatLayout;
+                elements.userProfileModal.classList.add('open');
+            });
+
+            elements.userProfileClose.addEventListener('click', () => elements.userProfileModal.classList.remove('open'));
+            elements.usernameInput.addEventListener('change', saveUserProfile);
+            elements.chatLayoutSelect.addEventListener('change', saveUserProfile);
+
+            elements.toggleActionsBtn.addEventListener('click', toggleFileActions);
+
+            elements.generateMediaBtn.addEventListener('click', () => {
+                if (!checkRateLimit()) return;
+                showNotification('Media generation is a premium feature. Please upgrade!');
+            });
+
+            elements.voiceSearchBtn.addEventListener('click', () => {
+                if (!checkRateLimit()) return;
+                elements.permissionModal.classList.add('open');
+            });
+
+            elements.grantPermissionBtn.addEventListener('click', () => {
+                elements.permissionModal.classList.remove('open');
+                showNotification('Permissions granted! Voice search enabled.');
+            });
+
+            elements.denyPermissionBtn.addEventListener('click', () => {
+                elements.permissionModal.classList.remove('open');
+                showNotification('Permissions denied.', 'error');
+            });
+
+            elements.rephraseBtn.addEventListener('click', () => {
+                if (!checkRateLimit()) return;
+                const lastUserMessage = store.state.conversationHistory.filter(msg => msg.role === 'user').slice(-1)[0];
+                if (!lastUserMessage) {
+                    showNotification('No user message to rephrase.', 'error');
+                    return;
+                }
+                const rephrased = `Rephrased: "${lastUserMessage.content}" (Mock rephrasing)`;
+                const aiMessage = { id: Date.now(), role: 'ai', content: rephrased, reactions: [], threadId: null, timestamp: Date.now() };
+                store.dispatch({ type: 'ADD_MESSAGE', payload: aiMessage });
                 virtualRenderMessages();
-            }
-        });
+            });
 
-        elements.searchBtn.addEventListener('click', () => {
-            if (!checkRateLimit()) return;
-            elements.searchModal.classList.add('open');
-        });
+            elements.stopGeneratingBtn.addEventListener('click', () => {
+                if (!checkRateLimit()) return;
+                store.dispatch({ type: 'SET_STATE', payload: { isGenerating: false } });
+                elements.stopGeneratingBtn.style.display = 'none';
+                showNotification('Generation stopped.');
+            });
 
-        elements.searchModalClose.addEventListener('click', () => elements.searchModal.classList.remove('open'));
-        elements.searchModalInput.addEventListener('input', debounce(searchMessages, 300));
+            elements.feedbackBtn.addEventListener('click', () => {
+                if (!checkRateLimit()) return;
+                elements.feedbackModal.classList.add('open');
+            });
 
-        elements.exportChatBtn.addEventListener('click', exportChat);
+            elements.feedbackSubmitBtn.addEventListener('click', () => {
+                if (!checkRateLimit()) return;
+                const feedback = elements.feedbackInput.value.trim();
+                if (!feedback) {
+                    showNotification('Please enter feedback.', 'error');
+                    return;
+                }
+                const mailtoLink = `mailto:${FEEDBACK_EMAIL}?subject=VerbiFlow Feedback&body=${encodeURIComponent(feedback)}`;
+                window.location.href = mailtoLink;
+                elements.feedbackModal.classList.remove('open');
+                elements.feedbackInput.value = '';
+                showNotification('Thank you for your feedback!');
+            });
 
-        elements.editMessageClose.addEventListener('click', () => elements.editMessageModal.classList.remove('open'));
-        elements.saveEditBtn.addEventListener('click', () => {
-            if (!checkRateLimit()) return;
-            const messageId = parseInt(elements.editMessageModal.dataset.messageId);
-            const updatedContent = sanitizeInput(elements.editMessageInput.value.trim());
-            if (!updatedContent) {
-                showNotification('Message cannot be empty.', 'error');
-                return;
-            }
-            const message = store.state.conversationHistory.find(msg => msg.id === messageId);
-            if (message) {
-                message.content = updatedContent;
-                message.timestamp = Date.now();
-                store.dispatch({ type: 'UPDATE_MESSAGE', payload: message });
-                virtualRenderMessages();
-                elements.editMessageModal.classList.remove('open');
-                showNotification('Message updated!');
-            }
-        });
+            elements.backToTopBtn.addEventListener('click', scrollToTop);
+            elements.chatArea.addEventListener('scroll', handleScroll);
 
-        elements.primaryColor.addEventListener('input', applyCustomTheme);
-        elements.secondaryColor.addEventListener('input', applyCustomTheme);
-        elements.textColor.addEventListener('input', applyCustomTheme);
-        elements.bgColor.addEventListener('input', applyCustomTheme);
-        elements.aiBgColor.addEventListener('input', applyCustomTheme);
-        elements.userBgColor.addEventListener('input', applyCustomTheme);
-        elements.gradientColor.addEventListener('input', applyCustomTheme);
+            elements.prevPageBtn.addEventListener('click', () => {
+                if (!checkRateLimit()) return;
+                if (store.state.currentPage > 1) {
+                    store.dispatch({ type: 'SET_PAGE', payload: store.state.currentPage - 1 });
+                    virtualRenderMessages();
+                }
+            });
 
-        const init = async () => {
-            await store.loadState();
-            loadTheme();
-            applyChatLayout();
-            loadConversationHistory();
-            if (store.state.messageDrafts.userInput) {
-                elements.userInput.value = store.state.messageDrafts.userInput;
-            }
-            elements.preloader.classList.add('hidden');
-            requestAnimationFrame(updateTimestamps);
-        };
+            elements.nextPageBtn.addEventListener('click', () => {
+                if (!checkRateLimit()) return;
+                if (store.state.currentPage * store.state.messagesPerPage < store.state.conversationHistory.length) {
+                    store.dispatch({ type: 'SET_PAGE', payload: store.state.currentPage + 1 });
+                    virtualRenderMessages();
+                }
+            });
 
-        init();
-    </script>
-</body>
+            elements.searchBtn.addEventListener('click', () => {
+                if (!checkRateLimit()) return;
+                elements.searchModal.classList.add('open');
+            });
+
+            elements.searchModalClose.addEventListener('click', () => elements.searchModal.classList.remove('open'));
+            elements.searchModalInput.addEventListener('input', debounce(searchMessages, 300));
+
+            elements.exportChatBtn.addEventListener('click', exportChat);
+
+            elements.editMessageClose.addEventListener('click', () => elements.editMessageModal.classList.remove('open'));
+            elements.saveEditBtn.addEventListener('click', () => {
+                if (!checkRateLimit()) return;
+                const messageId = parseInt(elements.editMessageModal.dataset.messageId);
+                const updatedContent = sanitizeInput(elements.editMessageInput.value.trim());
+                if (!updatedContent) {
+                    showNotification('Message cannot be empty.', 'error');
+                    return;
+                }
+                const message = store.state.conversationHistory.find(msg => msg.id === messageId);
+                if (message) {
+                    message.content = updatedContent;
+                    message.timestamp = Date.now();
+                    store.dispatch({ type: 'UPDATE_MESSAGE', payload: message });
+                    virtualRenderMessages();
+                    elements.editMessageModal.classList.remove('open');
+                    showNotification('Message updated!');
+                }
+            });
+
+            elements.primaryColor.addEventListener('input', applyCustomTheme);
+            elements.secondaryColor.addEventListener('input', applyCustomTheme);
+            elements.textColor.addEventListener('input', applyCustomTheme);
+            elements.bgColor.addEventListener('input', applyCustomTheme);
+            elements.aiBgColor.addEventListener('input', applyCustomTheme);
+            elements.userBgColor.addEventListener('input', applyCustomTheme);
+            elements.gradientColor.addEventListener('input', applyCustomTheme);
+
+            const init = async () => {
+                store.state.deviceType = detectDevice();
+                document.body.classList.add(store.state.deviceType);
+                showLoadingMessages();
+                await store.loadState();
+                loadTheme();
+                applyChatLayout();
+                loadConversationHistory();
+                if (store.state.messageDrafts.userInput) {
+                    elements.userInput.value = store.state.messageDrafts.userInput;
+                    elements.userInput.style.height = `${elements.userInput.scrollHeight}px`;
+                }
+                requestAnimationFrame(updateTimestamps);
+            };
+
+            init();
+        </script>
+    </body>
 </html>
