@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob: https://*.pixabay.com https://*.openai.com https://*.googleapis.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.cloudflare.com https://cdnjs.cloudflare.com https://smtpjs.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; connect-src 'self' https://api.openai.com https://api.searchengine.com https://api.smtp2go.com; frame-src 'none'; media-src 'self' data: blob: https://*.pixabay.com https://*.openai.com; worker-src blob:;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob: https://*.pixabay.com https://*.googleapis.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; connect-src 'self'; frame-src 'none'; media-src 'self' data: blob: https://*.pixabay.com; worker-src blob:;">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta name="robots" content="noindex, nofollow">
@@ -19,24 +19,24 @@
 <body>
     <div class="container">
         <div class="nav-bar">
-            <button class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i> Menu</button>
+            <button class="menu-btn" id="menuBtn" aria-label="Open menu"><i class="fas fa-bars"></i> Menu</button>
             <div class="sidebar" id="sidebar">
-                <button class="sidebar-close" id="sidebarClose"><i class="fas fa-times"></i> Close</button>
-                <button class="sidebar-btn" id="clearChatBtn"><i class="fas fa-trash-alt"></i> Clear Chat</button>
-                <button class="sidebar-btn" id="verbiflowUpdatesBtn"><i class="fas fa-bell"></i> Updates</button>
-                <button class="sidebar-btn" id="premiumPriceBtn"><i class="fas fa-star"></i> Premium Price</button>
-                <button class="sidebar-btn" id="shareChatBtn"><i class="fas fa-share-alt"></i> Share Chat</button>
-                <button class="sidebar-btn" id="shareWebsiteBtn"><i class="fas fa-link"></i> Share Website</button>
-                <button class="sidebar-btn theme-btn" id="themeBtn"><i class="fas fa-moon"></i> Dark Mode</button>
-                <button class="sidebar-btn" id="copyCodeBtn"><i class="fas fa-code"></i> Copy Code</button>
-                <button class="sidebar-btn discord-btn" id="discordBtn"><i class="fab fa-discord"></i> Discord</button>
-                <button class="sidebar-btn app-btn" id="openInAppBtn"><i class="fas fa-mobile-alt"></i> Open in App</button>
+                <button class="sidebar-close" id="sidebarClose" aria-label="Close menu"><i class="fas fa-times"></i> Close</button>
+                <button class="sidebar-btn" id="clearChatBtn" aria-label="Clear chat"><i class="fas fa-trash-alt"></i> Clear Chat</button>
+                <button class="sidebar-btn" id="verbiflowUpdatesBtn" aria-label="View updates"><i class="fas fa-bell"></i> Updates</button>
+                <button class="sidebar-btn" id="premiumPriceBtn" aria-label="Premium price"><i class="fas fa-star"></i> Premium Price</button>
+                <button class="sidebar-btn" id="shareChatBtn" aria-label="Share chat"><i class="fas fa-share-alt"></i> Share Chat</button>
+                <button class="sidebar-btn" id="shareWebsiteBtn" aria-label="Share website"><i class="fas fa-link"></i> Share Website</button>
+                <button class="sidebar-btn theme-btn" id="themeBtn" aria-label="Toggle dark mode"><i class="fas fa-moon"></i> Dark Mode</button>
+                <button class="sidebar-btn" id="copyCodeBtn" aria-label="Copy code"><i class="fas fa-code"></i> Copy Code</button>
+                <button class="sidebar-btn discord-btn" id="discordBtn" aria-label="Join Discord"><i class="fab fa-discord"></i> Discord</button>
+                <button class="sidebar-btn app-btn" id="openInAppBtn" aria-label="Open in app"><i class="fas fa-mobile-alt"></i> Open in App</button>
             </div>
         </div>
-        <div class="header">
-            <div class="logo">VerbiFlow</div>
-        </div>
-        <div class="chat-area" id="chatArea">
+        <header class="header">
+            <div class="logo" role="img" aria-label="VerbiFlow Logo">VerbiFlow</div>
+        </header>
+        <main class="chat-area" id="chatArea">
             <div class="chat-content">
                 <div class="chat-history" id="chatHistory">
                     <div class="chat-message ai">
@@ -44,22 +44,22 @@
                         <div class="chat-message-meta">Just now</div>
                     </div>
                 </div>
-                <div class="loading-spinner" id="loadingSpinner"></div>
+                <div class="loading-spinner" id="loadingSpinner" aria-label="Loading"></div>
                 <div class="typing-indicator" id="typingIndicator">
                     VerbiFlow is thinking<span>.</span><span>.</span><span>.</span>
                 </div>
             </div>
-        </div>
+        </main>
         <div class="file-actions-container" id="fileActionsContainer">
             <div class="file-actions">
-                <label class="file-input-label" for="fileInput">Upload File</label>
+                <label class="file-input-label" for="fileInput" aria-label="Upload file">Upload File</label>
                 <input type="file" class="file-input" id="fileInput" multiple accept="image/*,video/*,text/*,application/json,application/xml">
-                <button class="file-clear-btn" id="fileClearBtn" style="display:none;">Clear</button>
-                <button class="generate-media-btn" id="generateMediaBtn">Generate Media</button>
-                <button class="voice-search-btn" id="voiceSearchBtn">Voice Search</button>
-                <button class="keep-generating-btn" id="keepGeneratingBtn">Continue Generating</button>
+                <button class="file-clear-btn" id="fileClearBtn" style="display:none;" aria-label="Clear files">Clear</button>
+                <button class="generate-media-btn" id="generateMediaBtn" aria-label="Generate media">Generate Media</button>
+                <button class="voice-search-btn" id="voiceSearchBtn" aria-label="Voice search">Voice Search</button>
+                <button class="keep-generating-btn" id="keepGeneratingBtn" aria-label="Continue generating">Continue Generating</button>
                 <div class="school-help-container">
-                    <select class="school-help-dropdown" id="schoolHelpDropdown">
+                    <select class="school-help-dropdown" id="schoolHelpDropdown" aria-label="Select task">
                         <option value="">Select Task</option>
                         <option value="algebra">Algebra Help</option>
                         <option value="science">Science Help</option>
@@ -76,7 +76,7 @@
                         <option value="contentGeneration">Content Generation</option>
                         <option value="discordBot">Discord Bot (Helper)</option>
                     </select>
-                    <select class="ai-model-dropdown" id="aiModelDropdown">
+                    <select class="ai-model-dropdown" id="aiModelDropdown" aria-label="Select AI model">
                         <option value="default">VerbiFlow (Default)</option>
                         <option value="lingoLogicAI">LingoLogicAI</option>
                         <option value="codeMasterAI">CodeMasterAI</option>
@@ -85,52 +85,51 @@
                         <option value="helper">Helper</option>
                         <option value="kultumGPT">KultumGPT</option>
                     </select>
-                    <select class="language-dropdown" id="languageDropdown">
+                    <select class="language-dropdown" id="languageDropdown" aria-label="Select language">
                         <option value="en">English</option>
                         <option value="es">Spanish</option>
                         <option value="fr">French</option>
                         <option value="de">German</option>
                         <option value="zh">Chinese</option>
                     </select>
-                    <button class="rephrase-btn" id="rephraseBtn">Rephrase</button>
-                    <button class="stop-generating-btn" id="stopGeneratingBtn" style="display:none;">Stop Generating</button>
-                    <button class="feedback-btn" id="feedbackBtn">Feedback</button>
+                    <button class="rephrase-btn" id="rephraseBtn" aria-label="Rephrase">Rephrase</button>
+                    <button class="stop-generating-btn" id="stopGeneratingBtn" style="display:none;" aria-label="Stop generating">Stop Generating</button>
+                    <button class="feedback-btn" id="feedbackBtn" aria-label="Provide feedback">Feedback</button>
                 </div>
             </div>
             <div class="file-list" id="fileList"></div>
         </div>
-        <button class="toggle-actions-btn" id="toggleActionsBtn">^</button>
+        <button class="toggle-actions-btn" id="toggleActionsBtn" aria-label="Toggle file actions">^</button>
         <div class="input-container" id="inputContainer">
-            <textarea class="user-input" id="userInput" placeholder="Ask anything, generate content, or use voice commands..." rows="1"></textarea>
-            <button class="send-btn" id="sendBtn">Send</button>
+            <textarea class="user-input" id="userInput" placeholder="Ask anything, generate content, or use voice commands..." rows="1" aria-label="User input"></textarea>
+            <button class="send-btn" id="sendBtn" aria-label="Send message">Send</button>
         </div>
         <div class="file-preview-modal" id="filePreviewModal">
-            <button class="file-preview-close" id="filePreviewClose">
+            <button class="file-preview-close" id="filePreviewClose" aria-label="Close preview">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
                 </svg>
             </button>
             <div class="file-preview-content" id="filePreviewContent"></div>
         </div>
-        <div class="notification" id="notification"></div>
+        <div class="notification" id="notification" role="alert"></div>
         <div class="permission-modal" id="permissionModal">
             <div class="permission-content">
                 <h2>Request Permissions</h2>
                 <p>VerbiFlow needs access to enable features like voice commands, media analysis, and more. Do you grant permission?</p>
-                <button class="permission-btn" id="grantPermissionBtn">Grant</button>
-                <button class="permission-btn deny" id="denyPermissionBtn">Deny</button>
+                <button class="permission-btn" id="grantPermissionBtn" aria-label="Grant permission">Grant</button>
+                <button class="permission-btn deny" id="denyPermissionBtn" aria-label="Deny permission">Deny</button>
             </div>
         </div>
         <div class="feedback-modal" id="feedbackModal">
             <div class="feedback-content">
                 <h2>Provide Feedback</h2>
-                <textarea id="feedbackInput" placeholder="Share your feedback to improve VerbiFlow..."></textarea>
-                <button class="feedback-submit-btn" id="feedbackSubmitBtn">Submit</button>
+                <textarea id="feedbackInput" placeholder="Share your feedback to improve VerbiFlow..." aria-label="Feedback input"></textarea>
+                <button class="feedback-submit-btn" id="feedbackSubmitBtn" aria-label="Submit feedback">Submit</button>
             </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/js-sha256@0.9.0/src/sha256.min.js"></script>
-    <script src="https://smtpjs.com/v3/smtp.js"></script>
     <script src="js/script.js" defer></script>
 </body>
 </html>
