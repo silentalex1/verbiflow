@@ -67,7 +67,7 @@ body {
     color: #1e40af;
     border: none;
     padding: 8px 14px;
-    border-radius: 10px;
+    border-radius: 12px;
     cursor: pointer;
     font-size: 14px;
     font-weight: 600;
@@ -138,7 +138,7 @@ body {
     color: #ffffff;
     border: none;
     padding: 8px 14px;
-    border-radius: 10px;
+    border-radius: 12px;
     cursor: pointer;
     font-size: 14px;
     font-weight: 600;
@@ -167,7 +167,7 @@ body {
     color: #1e40af;
     border: none;
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 12px;
     cursor: pointer;
     font-size: 14px;
     font-weight: 600;
@@ -222,7 +222,7 @@ body {
     color: #1e40af;
     border: 2px solid #1e40af;
     padding: 8px;
-    border-radius: 10px;
+    border-radius: 12px;
     font-size: 14px;
     font-weight: 600;
     display: flex;
@@ -454,7 +454,7 @@ body {
     color: #ffffff;
     border: none;
     padding: 6px 12px;
-    border-radius: 10px;
+    border-radius: 12px;
     cursor: pointer;
     font-size: 12px;
     font-weight: 600;
@@ -511,7 +511,7 @@ body {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 8px;
     padding: 8px 0;
-    border-radius: 10px;
+    border-radius: 12px;
     background: #f9fafb;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
     align-items: center;
@@ -525,14 +525,17 @@ body {
     background: #1e40af;
     color: #ffffff;
     padding: 8px 16px;
-    border-radius: 10px;
+    border-radius: 12px;
     cursor: pointer;
     font-size: 14px;
     font-weight: 600;
-    min-height: 42px;
+    min-height: 44px;
     transition: all 0.2s ease;
     touch-action: manipulation;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .dark-mode .file-input-label {
@@ -557,12 +560,12 @@ body {
     background: #ef4444;
     color: #ffffff;
     padding: 8px 16px;
-    border-radius: 10px;
+    border-radius: 12px;
     cursor: pointer;
     font-size: 14px;
     font-weight: 600;
     border: none;
-    min-height: 42px;
+    min-height: 44px;
     transition: all 0.2s ease;
     touch-action: manipulation;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
@@ -578,12 +581,12 @@ body {
     background: #10b981;
     color: #ffffff;
     padding: 8px 16px;
-    border-radius: 10px;
+    border-radius: 12px;
     cursor: pointer;
     font-size: 14px;
     font-weight: 600;
     border: none;
-    min-height: 42px;
+    min-height: 44px;
     transition: all 0.2s ease;
     touch-action: manipulation;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
@@ -607,12 +610,12 @@ body {
     background: #8b5cf6;
     color: #ffffff;
     padding: 8px 16px;
-    border-radius: 10px;
+    border-radius: 12px;
     cursor: pointer;
     font-size: 14px;
     font-weight: 600;
     border: none;
-    min-height: 42px;
+    min-height: 44px;
     transition: all 0.2s ease;
     touch-action: manipulation;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
@@ -636,12 +639,12 @@ body {
     background: #10b981;
     color: #ffffff;
     padding: 8px 16px;
-    border-radius: 10px;
+    border-radius: 12px;
     cursor: pointer;
     font-size: 14px;
     font-weight: 600;
     border: none;
-    min-height: 42px;
+    min-height: 44px;
     transition: all 0.3s ease;
     opacity: 0;
     transform: translateY(12px);
@@ -682,11 +685,11 @@ body {
     background: #6b7280;
     color: #ffffff;
     padding: 8px 16px;
-    border-radius: 10px;
+    border-radius: 12px;
     border: none;
     font-size: 14px;
     font-weight: 600;
-    min-height: 42px;
+    min-height: 44px;
     cursor: pointer;
     transition: all 0.2s ease;
     touch-action: manipulation;
@@ -734,12 +737,12 @@ body {
     background: #f59e0b;
     color: #ffffff;
     padding: 8px 16px;
-    border-radius: 10px;
+    border-radius: 12px;
     cursor: pointer;
     font-size: 14px;
     font-weight: 600;
     border: none;
-    min-height: 42px;
+    min-height: 44px;
     transition: all 0.2s ease;
     touch-action: manipulation;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
@@ -989,11 +992,11 @@ body {
     flex: 1;
     padding: 10px;
     border: 1px solid #e5e7eb;
-    border-radius: 10px;
+    border-radius: 12px;
     font-size: 14px;
     outline: none;
     resize: none;
-    min-height: 42px;
+    min-height: 44px;
     max-height: 180px;
     background: #ffffff;
     color: #0a122a;
@@ -1022,13 +1025,13 @@ body {
 .send-btn {
     background: #1e40af;
     border: none;
-    border-radius: 10px;
+    border-radius: 12px;
     padding: 8px 20px;
     cursor: pointer;
     color: #ffffff;
     font-size: 14px;
     font-weight: 600;
-    min-height: 42px;
+    min-height: 44px;
     transition: all 0.2s ease;
     touch-action: manipulation;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
@@ -1259,7 +1262,7 @@ body {
     width: 100%;
     padding: 10px;
     border: 1px solid #e5e7eb;
-    border-radius: 10px;
+    border-radius: 12px;
     font-size: 14px;
     outline: none;
     resize: none;
@@ -1278,7 +1281,7 @@ body {
 
 .feedback-content textarea:focus {
     border-color: #1e40af;
-    box-shadow: 0 0 0 4px rgba(30, 64, 175, 0.3;
+    box-shadow: 0 0 0 4px rgba(30, 64, 175, 0.3);
     background: #fafafa;
 }
 
@@ -1846,7 +1849,7 @@ body {
         gap: 4px;
     }
     .user-input {
-        FONT-SIZE: 11PX;
+        font-size: 11px;
         min-height: 36px;
         padding: 5px;
     }
