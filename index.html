@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob: https://*.pixabay.com https://*.openai.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.cloudflare.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; connect-src 'self' https://api.openai.com wss://api.openai.com https://api.searchengine.com; frame-src 'none'; media-src 'self' data: blob: https://*.pixabay.com https://*.openai.com;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob: https://*.pixabay.com https://*.openai.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.cloudflare.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; connect-src 'self' https://api.openai.com wss://api.openai.com https://api.searchengine.com https://api.x.ai https://verbiflow-api.com; frame-src 'none'; media-src 'self' data: blob: https://*.pixabay.com https://*.openai.com;">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta name="robots" content="noindex, nofollow">
-    <meta name="description" content="VerbiFlow - Your ultimate AI companion for coding, media generation, and more.">
+    <meta name="description" content="VerbiFlow - Your ultimate AI companion for coding, media generation, analytics, and more.">
     <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload">
     <meta http-equiv="Referrer-Policy" content="no-referrer">
-    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(self), camera=(self)">
     <title>VerbiFlow</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -22,22 +22,22 @@
         .dark-mode .container{background:#1e293b;}
         .nav-bar{background:linear-gradient(90deg,#1e40af,#3b82f6);padding:12px 16px;display:flex;gap:6px;justify-content:space-between;align-items:center;box-shadow:0 4px 20px rgba(0,0,0,.3);border-bottom:1px solid rgba(255,255,255,.1);position:sticky;top:0;z-index:100;}
         .dark-mode .nav-bar{background:linear-gradient(90deg,#1e3a8a,#2563eb);}
-        .menu-btn{background:#ffffff;color:#1e40af;border:none;padding:8px 16px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;transition:all .2s ease;display:flex;align-items:center;gap:6px;touch-action:manipulation;}
-        .dark-mode .menu-btn{background:#334155;color:#93c5fd;}
-        .menu-btn:hover{background:#f1f5f9;box-shadow:0 4px 16px rgba(0,0,0,.2);}
-        .dark-mode .menu-btn:hover{background:#475569;}
-        .menu-btn i{font-size:16px;}
-        .sidebar{position:fixed;top:0;left:-100%;width:100%;max-width:320px;height:100%;background:#ffffff;border-right:1px solid #e2e8f0;padding:24px 16px;transition:left .3s ease;z-index:200;display:flex;flex-direction:column;gap:10px;}
-        .dark-mode .sidebar{background:#1e293b;border-right:1px solid #334155;}
-        .sidebar.open{left:0;}
-        .sidebar-close{background:#ef4444;color:#ffffff;border:none;padding:8px 16px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;text-align:left;transition:all .2s ease;margin-bottom:12px;}
-        .dark-mode .sidebar-close{background:#dc2626;}
-        .sidebar-close:hover{background:#f87171;transform:scale(1.02);}
-        .dark-mode .sidebar-close:hover{background:#ef4444;}
-        .sidebar-btn{background:#f1f5f9;color:#1e40af;border:none;padding:12px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;text-align:left;transition:all .2s ease;touch-action:manipulation;}
-        .dark-mode .sidebar-btn{background:#334155;color:#93c5fd;}
-        .sidebar-btn:hover{background:#e2e8f0;transform:scale(1.02);}
-        .dark-mode .sidebar-btn:hover{background:#475569;}
+        .menu-btn,.user-profile-btn{background:#ffffff;color:#1e40af;border:none;padding:8px 16px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;transition:all .2s ease;display:flex;align-items:center;gap:6px;touch-action:manipulation;}
+        .dark-mode .menu-btn,.dark-mode .user-profile-btn{background:#334155;color:#93c5fd;}
+        .menu-btn:hover,.user-profile-btn:hover{background:#f1f5f9;box-shadow:0 4px 16px rgba(0,0,0,.2);}
+        .dark-mode .menu-btn:hover,.dark-mode .user-profile-btn:hover{background:#475569;}
+        .menu-btn i,.user-profile-btn i{font-size:16px;}
+        .sidebar,.user-dashboard{position:fixed;top:0;left:-100%;width:100%;max-width:320px;height:100%;background:#ffffff;border-right:1px solid #e2e8f0;padding:24px 16px;transition:left .3s ease;z-index:200;display:flex;flex-direction:column;gap:10px;}
+        .dark-mode .sidebar,.dark-mode .user-dashboard{background:#1e293b;border-right:1px solid #334155;}
+        .sidebar.open,.user-dashboard.open{left:0;}
+        .sidebar-close,.dashboard-close{background:#ef4444;color:#ffffff;border:none;padding:8px 16px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;text-align:left;transition:all .2s ease;margin-bottom:12px;}
+        .dark-mode .sidebar-close,.dark-mode .dashboard-close{background:#dc2626;}
+        .sidebar-close:hover,.dashboard-close:hover{background:#f87171;transform:scale(1.02);}
+        .dark-mode .sidebar-close:hover,.dark-mode .dashboard-close:hover{background:#ef4444;}
+        .sidebar-btn,.dashboard-btn{background:#f1f5f9;color:#1e40af;border:none;padding:12px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;text-align:left;transition:all .2s ease;touch-action:manipulation;}
+        .dark-mode .sidebar-btn,.dark-mode .dashboard-btn{background:#334155;color:#93c5fd;}
+        .sidebar-btn:hover,.dashboard-btn:hover{background:#e2e8f0;transform:scale(1.02);}
+        .dark-mode .sidebar-btn:hover,.dark-mode .dashboard-btn:hover{background:#475569;}
         .discord-btn{background:#5865f2;color:#ffffff;}
         .discord-btn:hover{background:#4752c4;}
         .app-btn{background:#ff4d4f;color:#ffffff;}
@@ -47,6 +47,11 @@
         .theme-btn:hover{background:#f1f5f9;}
         .dark-mode .theme-btn:hover{background:#475569;}
         .theme-btn i{font-size:16px;}
+        .dashboard-content{flex:1;overflow-y:auto;padding:10px;}
+        .dashboard-section{margin-bottom:20px;}
+        .dashboard-section h3{font-size:16px;font-weight:600;margin-bottom:10px;}
+        .dashboard-item{background:#f1f5f9;padding:10px;border-radius:8px;margin-bottom:8px;}
+        .dark-mode .dashboard-item{background:#334155;}
         .header{background:#ffffff;padding:16px;text-align:center;border-bottom:1px solid #e2e8f0;}
         .dark-mode .header{background:#1e293b;border-bottom:1px solid #334155;}
         .logo{font-size:36px;font-weight:800;color:#1e40af;letter-spacing:-1px;animation:pulse 1.6s infinite;}
@@ -55,14 +60,12 @@
         .dark-mode .chat-area{background:#111827;}
         .chat-content{flex:1;display:flex;flex-direction:column;}
         .chat-history{display:flex;flex-direction:column;gap:16px;}
-        .chat-message{display:flex;flex-direction:column;gap:8px;padding:16px;border-radius:20px;max-width:85%;animation:slideIn .3s ease;box-shadow:0 4px 12px rgba(0,0,0,.1);transition:background .3s ease;margin-bottom:16px;}
+        .chat-message{display:flex;flex-direction:column;gap:8px;padding:12px;border-radius:20px;max-width:85%;animation:slideIn .3s ease;box-shadow:0 4px 12px rgba(0,0,0,.1);transition:background .3s ease;}
         .chat-message.user{align-self:flex-end;background:#1e40af;color:#ffffff;}
         .dark-mode .chat-message.user{background:#1e3a8a;}
         .chat-message.ai{align-self:flex-start;background:#e2e8f0;color:#0f172a;}
         .dark-mode .chat-message.ai{background:#334155;color:#e2e8f0;}
-        .chat-message-content-wrapper{position:relative;padding:16px;border-radius:16px;background:#f8fafc;box-shadow:0 2px 8px rgba(0,0,0,.05);margin-bottom:8px;}
-        .dark-mode .chat-message-content-wrapper{background:#2d3748;}
-        .chat-message-content{padding:0;font-size:15px;line-height:1.6;word-break:break-word;user-select:text;}
+        .chat-message-content{padding:12px;border-radius:20px;font-size:15px;line-height:1.6;word-break:break-word;}
         .chat-message-content strong{font-weight:700;}
         .chat-message-content em{font-style:italic;}
         .chat-message-content code{background:#f1f5f9;padding:2px 4px;border-radius:4px;font-family:'JetBrains Mono',monospace;}
@@ -76,16 +79,13 @@
         .dark-mode .chat-message-meta{color:#94a3b8;}
         .chat-message img,.chat-message video{max-width:100%;border-radius:12px;margin-top:10px;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease;}
         .chat-message img:hover,.chat-message video:hover{transform:scale(1.03);box-shadow:0 8px 20px rgba(0,0,0,.25);}
-        .code-block{position:relative;margin:10px 0;border-radius:12px;overflow:hidden;background:#0f172a;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
-        .dark-mode .code-block{background:#1e293b;}
-        .code-block pre{background:transparent;color:#e2e8f0;padding:0;border-radius:0;overflow-x:auto;font-family:'JetBrains Mono',monospace;font-size:14px;line-height:1.6;}
-        .code-block-header{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:#1e40af;color:#ffffff;border-radius:10px 10px 0 0;}
-        .dark-mode .code-block-header{background:#1e3a8a;}
-        .code-block-label{font-size:13px;font-weight:600;}
-        .copy-btn{background:#ffffff;color:#1e40af;border:none;padding:6px 12px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;transition:all .2s ease;touch-action:manipulation;}
-        .dark-mode .copy-btn{background:#334155;color:#93c5fd;}
-        .copy-btn:hover{background:#f1f5f9;transform:scale(1.05);box-shadow:0 4px 16px rgba(0,0,0,.2);}
-        .dark-mode .copy-btn:hover{background:#475569;}
+        .code-block{position:relative;margin:10px 0;border-radius:12px;overflow:hidden;}
+        .code-block pre{background:#0f172a;color:#e2e8f0;padding:14px;border-radius:12px;overflow-x:auto;font-family:'JetBrains Mono',monospace;font-size:14px;line-height:1.6;}
+        .dark-mode .code-block pre{background:#1e293b;}
+        .copy-btn{background:#1e40af;color:#ffffff;border:none;padding:8px 12px;border-radius:10px;cursor:pointer;font-size:13px;font-weight:600;transition:all .2s ease;position:absolute;top:8px;right:8px;touch-action:manipulation;}
+        .dark-mode .copy-btn{background:#1e3a8a;}
+        .copy-btn:hover{background:#3b82f6;transform:scale(1.05);box-shadow:0 4px 16px rgba(0,0,0,.2);}
+        .dark-mode .copy-btn:hover{background:#2563eb;}
         .file-actions-container{position:sticky;bottom:60px;padding:6px;border-top:1px solid #e2e8f0;background:#ffffff;border-bottom:1px solid #e2e8f0;transition:transform .3s ease,opacity .3s ease;overflow:hidden;z-index:40;}
         .dark-mode .file-actions-container{background:#1e293b;border-top:1px solid #334155;border-bottom:1px solid #334155;}
         .file-actions-container.collapsed{transform:translateY(100%);opacity:0;height:0;padding:0;}
@@ -101,22 +101,26 @@
         .dark-mode .generate-media-btn{background:#059669;}
         .generate-media-btn:hover{transform:scale(1.05);background:#34d399;}
         .dark-mode .generate-media-btn:hover{background:#10b981;}
+        .voice-search-btn{background:#8b5cf6;color:#ffffff;padding:10px 20px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;border:none;min-height:44px;transition:all .2s ease;touch-action:manipulation;}
+        .dark-mode .voice-search-btn{background:#7c3aed;}
+        .voice-search-btn:hover{transform:scale(1.05);background:#a78bfa;}
+        .dark-mode .voice-search-btn:hover{background:#8b5cf6;}
         .keep-generating-btn{background:#10b981;color:#ffffff;padding:10px 20px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;border:none;min-height:44px;transition:all .3s ease;opacity:0;transform:translateY(12px);display:none;touch-action:manipulation;}
         .keep-generating-btn.show{opacity:1;transform:translateY(0);display:block;}
         .dark-mode .keep-generating-btn{background:#059669;}
         .keep-generating-btn:hover{transform:scale(1.05);background:#34d399;}
         .dark-mode .keep-generating-btn:hover{background:#10b981;}
         .school-help-container{display:flex;align-items:center;gap:8px;}
-        .school-help-dropdown,.ai-model-dropdown{background:#6b7280;color:#ffffff;padding:10px 20px;border-radius:10px;border:none;font-size:14px;font-weight:600;min-height:44px;cursor:pointer;transition:all .2s ease;touch-action:manipulation;}
-        .dark-mode .school-help-dropdown,.dark-mode .ai-model-dropdown{background:#4b5563;}
-        .school-help-dropdown:hover,.ai-model-dropdown:hover{background:#9ca3af;transform:scale(1.05);}
-        .dark-mode .school-help-dropdown:hover,.dark-mode .ai-model-dropdown:hover{background:#6b7280;}
-        .school-help-dropdown:focus,.ai-model-dropdown:focus{outline:none;border-color:#1e40af;box-shadow:0 0 0 4px rgba(37,99,235,.35);}
-        .dark-mode .school-help-dropdown:focus,.dark-mode .ai-model-dropdown:focus{border-color:#60a5fa;box-shadow:0 0 0 4px rgba(96,165,250,.35);}
-        .rephrase-btn,.stop-generating-btn{background:#f59e0b;color:#ffffff;padding:10px 20px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;border:none;min-height:44px;transition:all .2s ease;touch-action:manipulation;}
-        .dark-mode .rephrase-btn,.dark-mode .stop-generating-btn{background:#d97706;}
-        .rephrase-btn:hover,.stop-generating-btn:hover{transform:scale(1.05);background:#fbbf24;}
-        .dark-mode .rephrase-btn:hover,.dark-mode .stop-generating-btn:hover{background:#f59e0b;}
+        .school-help-dropdown,.ai-model-dropdown,.language-dropdown{background:#6b7280;color:#ffffff;padding:10px 20px;border-radius:10px;border:none;font-size:14px;font-weight:600;min-height:44px;cursor:pointer;transition:all .2s ease;touch-action:manipulation;}
+        .dark-mode .school-help-dropdown,.dark-mode .ai-model-dropdown,.dark-mode .language-dropdown{background:#4b5563;}
+        .school-help-dropdown:hover,.ai-model-dropdown:hover,.language-dropdown:hover{background:#9ca3af;transform:scale(1.05);}
+        .dark-mode .school-help-dropdown:hover,.dark-mode .ai-model-dropdown:hover,.dark-mode .language-dropdown:hover{background:#6b7280;}
+        .school-help-dropdown:focus,.ai-model-dropdown:focus,.language-dropdown:focus{outline:none;border-color:#1e40af;box-shadow:0 0 0 4px rgba(37,99,235,.35);}
+        .dark-mode .school-help-dropdown:focus,.dark-mode .ai-model-dropdown:focus,.dark-mode .language-dropdown:focus{border-color:#60a5fa;box-shadow:0 0 0 4px rgba(96,165,250,.35);}
+        .rephrase-btn,.stop-generating-btn,.feedback-btn{background:#f59e0b;color:#ffffff;padding:10px 20px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;border:none;min-height:44px;transition:all .2s ease;touch-action:manipulation;}
+        .dark-mode .rephrase-btn,.dark-mode .stop-generating-btn,.dark-mode .feedback-btn{background:#d97706;}
+        .rephrase-btn:hover,.stop-generating-btn:hover,.feedback-btn:hover{transform:scale(1.05);background:#fbbf24;}
+        .dark-mode .rephrase-btn:hover,.dark-mode .stop-generating-btn:hover,.dark-mode .feedback-btn:hover{background:#f59e0b;}
         .stop-generating-btn{background:#ef4444;}
         .dark-mode .stop-generating-btn{background:#dc2626;}
         .stop-generating-btn:hover{background:#f87171;}
@@ -180,6 +184,19 @@
         .dark-mode .permission-btn.deny{background:#dc2626;}
         .permission-btn.deny:hover{background:#f87171;}
         .dark-mode .permission-btn.deny:hover{background:#ef4444;}
+        .feedback-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);z-index:500;justify-content:center;align-items:center;animation:fadeIn .2s ease;}
+        .feedback-modal.open{display:flex;}
+        .feedback-content{background:#ffffff;border-radius:20px;padding:24px;max-width:90%;text-align:center;color:#0f172a;animation:zoomIn .2s ease;}
+        .dark-mode .feedback-content{background:#1e293b;color:#e2e8f0;}
+        .feedback-content h2{font-size:22px;margin-bottom:12px;}
+        .feedback-content textarea{width:100%;padding:10px;border:1px solid #e2e8f0;border-radius:10px;font-size:15px;outline:none;resize:none;min-height:100px;background:#ffffff;color:#0f172a;margin-bottom:16px;}
+        .dark-mode .feedback-content textarea{background:#334155;border:1px solid #4b5563;color:#e2e8f0;}
+        .feedback-content textarea:focus{border-color:#1e40af;box-shadow:0 0 0 4px rgba(37,99,235,.35);}
+        .dark-mode .feedback-content textarea:focus{border-color:#60a5fa;box-shadow:0 0 0 4px rgba(96,165,250,.35);}
+        .feedback-submit-btn{background:#1e40af;color:#ffffff;padding:10px 24px;border-radius:12px;border:none;cursor:pointer;font-size:15px;font-weight:600;transition:transform .2s ease,background .2s ease;touch-action:manipulation;}
+        .dark-mode .feedback-submit-btn{background:#1e3a8a;}
+        .feedback-submit-btn:hover{transform:scale(1.05);background:#3b82f6;}
+        .dark-mode .feedback-submit-btn:hover{background:#2563eb;}
         @keyframes slideIn{0%{opacity:0;transform:translateY(20px);}100%{opacity:1;transform:translateY(0);}}
         @keyframes fadeIn{0%{opacity:0;}100%{opacity:1;}}
         @keyframes zoomIn{0%{opacity:0;transform:scale(.7);}100%{opacity:1;transform:scale(1);}}
@@ -189,9 +206,9 @@
         @media (min-width:1920px){
             .container{max-width:1600px;margin:0 auto;}
             .nav-bar{padding:16px 32px;}
-            .menu-btn{font-size:16px;padding:12px 24px;}
-            .sidebar{max-width:400px;padding:32px 24px;}
-            .sidebar-btn,.sidebar-close,.theme-btn{font-size:16px;padding:14px;}
+            .menu-btn,.user-profile-btn{font-size:16px;padding:12px 24px;}
+            .sidebar,.user-dashboard{max-width:400px;padding:32px 24px;}
+            .sidebar-btn,.dashboard-btn,.sidebar-close,.dashboard-close,.theme-btn{font-size:16px;padding:14px;}
             .header{padding:24px;}
             .logo{font-size:48px;}
             .chat-area{padding:32px;}
@@ -201,7 +218,7 @@
             .code-block pre{font-size:16px;padding:18px;}
             .copy-btn{font-size:15px;padding:10px 16px;}
             .file-actions{gap:12px;padding:12px;}
-            .file-input-label,.file-clear-btn,.generate-media-btn,.keep-generating-btn,.school-help-dropdown,.ai-model-dropdown,.rephrase-btn,.stop-generating-btn{font-size:16px;padding:14px 24px;min-height:48px;}
+            .file-input-label,.file-clear-btn,.generate-media-btn,.voice-search-btn,.keep-generating-btn,.school-help-dropdown,.ai-model-dropdown,.language-dropdown,.rephrase-btn,.stop-generating-btn,.feedback-btn{font-size:16px;padding:14px 24px;min-height:48px;}
             .file-list{grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;}
             .file-item{padding:14px;gap:14px;}
             .file-item-name{font-size:16px;}
@@ -211,17 +228,17 @@
             .send-btn{font-size:16px;padding:14px 28px;min-height:48px;}
             .toggle-actions-btn{width:32px;height:32px;font-size:16px;}
             .notification{font-size:16px;padding:16px 32px;}
-            .permission-content{padding:32px;}
-            .permission-content h2{font-size:26px;}
-            .permission-content p{font-size:16px;}
-            .permission-btn{font-size:16px;padding:14px 32px;}
+            .permission-content,.feedback-content{padding:32px;}
+            .permission-content h2,.feedback-content h2{font-size:26px;}
+            .permission-content p,.feedback-content textarea{font-size:16px;}
+            .permission-btn,.feedback-submit-btn{font-size:16px;padding:14px 32px;}
         }
         @media (max-width:1024px){
             .container{border-radius:0;padding:0;}
             .nav-bar{padding:10px;gap:4px;}
-            .menu-btn{font-size:13px;padding:8px 14px;}
-            .sidebar{max-width:300px;padding:20px 12px;}
-            .sidebar-btn,.sidebar-close,.theme-btn{font-size:13px;padding:10px;}
+            .menu-btn,.user-profile-btn{font-size:13px;padding:8px 14px;}
+            .sidebar,.user-dashboard{max-width:300px;padding:20px 12px;}
+            .sidebar-btn,.dashboard-btn,.sidebar-close,.dashboard-close,.theme-btn{font-size:13px;padding:10px;}
             .header{padding:12px;}
             .logo{font-size:32px;}
             .chat-area{padding:12px;min-height:50vh;max-height:70vh;}
@@ -231,7 +248,7 @@
             .code-block pre{font-size:13px;padding:12px;}
             .copy-btn{font-size:12px;padding:6px 10px;}
             .file-actions{gap:6px;padding:6px;}
-            .file-input-label,.file-clear-btn,.generate-media-btn,.keep-generating-btn,.school-help-dropdown,.ai-model-dropdown,.rephrase-btn,.stop-generating-btn{font-size:13px;padding:8px 16px;min-height:40px;}
+            .file-input-label,.file-clear-btn,.generate-media-btn,.voice-search-btn,.keep-generating-btn,.school-help-dropdown,.ai-model-dropdown,.language-dropdown,.rephrase-btn,.stop-generating-btn,.feedback-btn{font-size:13px;padding:8px 16px;min-height:40px;}
             .school-help-container{gap:6px;}
             .file-list{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;}
             .file-item{padding:8px;gap:8px;}
@@ -243,17 +260,17 @@
             .toggle-actions-btn{width:26px;height:26px;font-size:13px;bottom:54px;}
             .file-preview-content img,.file-preview-content video{max-width:92% !important;}
             .notification{top:16px;right:16px;padding:10px 20px;font-size:14px;}
-            .permission-content{max-width:92%;padding:16px;}
-            .permission-content h2{font-size:20px;}
-            .permission-content p{font-size:14px;}
-            .permission-btn{font-size:14px;padding:10px 20px;}
+            .permission-content,.feedback-content{max-width:92%;padding:16px;}
+            .permission-content h2,.feedback-content h2{font-size:20px;}
+            .permission-content p,.feedback-content textarea{font-size:14px;}
+            .permission-btn,.feedback-submit-btn{font-size:14px;padding:10px 20px;}
         }
         @media (max-width:768px){
             .nav-bar{padding:8px;}
-            .menu-btn{font-size:12px;padding:6px 12px;}
-            .menu-btn i{font-size:14px;}
-            .sidebar{max-width:280px;padding:16px 10px;}
-            .sidebar-btn,.sidebar-close,.theme-btn{font-size:12px;padding:8px;}
+            .menu-btn,.user-profile-btn{font-size:12px;padding:6px 12px;}
+            .menu-btn i,.user-profile-btn i{font-size:14px;}
+            .sidebar,.user-dashboard{max-width:280px;padding:16px 10px;}
+            .sidebar-btn,.dashboard-btn,.sidebar-close,.dashboard-close,.theme-btn{font-size:12px;padding:8px;}
             .header{padding:10px;}
             .logo{font-size:28px;}
             .chat-area{padding:10px;}
@@ -263,7 +280,7 @@
             .code-block pre{font-size:12px;padding:10px;}
             .copy-btn{font-size:11px;padding:4px 8px;}
             .file-actions{gap:4px;padding:4px;}
-            .file-input-label,.file-clear-btn,.generate-media-btn,.keep-generating-btn,.school-help-dropdown,.ai-model-dropdown,.rephrase-btn,.stop-generating-btn{font-size:12px;padding:6px 12px;min-height:36px;}
+            .file-input-label,.file-clear-btn,.generate-media-btn,.voice-search-btn,.keep-generating-btn,.school-help-dropdown,.ai-model-dropdown,.language-dropdown,.rephrase-btn,.stop-generating-btn,.feedback-btn{font-size:12px;padding:6px 12px;min-height:36px;}
             .school-help-container{gap:4px;}
             .file-list{grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:6px;}
             .file-item{padding:6px;gap:6px;}
@@ -278,17 +295,17 @@
             .file-preview-close{top:12px;right:12px;width:32px;height:32px;}
             .file-preview-close svg{width:18px;height:18px;}
             .notification{top:12px;right:12px;padding:8px 16px;font-size:13px;}
-            .permission-content{padding:12px;}
-            .permission-content h2{font-size:18px;}
-            .permission-content p{font-size:13px;}
-            .permission-btn{font-size:13px;padding:8px 16px;}
+            .permission-content,.feedback-content{padding:12px;}
+            .permission-content h2,.feedback-content h2{font-size:18px;}
+            .permission-content p,.feedback-content textarea{font-size:13px;}
+            .permission-btn,.feedback-submit-btn{font-size:13px;padding:8px 16px;}
         }
         @media (max-width:480px){
             .nav-bar{padding:6px;}
-            .menu-btn{font-size:11px;padding:4px 10px;}
-            .menu-btn i{font-size:12px;}
-            .sidebar{max-width:100%;padding:12px 8px;}
-            .sidebar-btn,.sidebar-close,.theme-btn{font-size:11px;padding:6px;}
+            .menu-btn,.user-profile-btn{font-size:11px;padding:4px 10px;}
+            .menu-btn i,.user-profile-btn i{font-size:12px;}
+            .sidebar,.user-dashboard{max-width:100%;padding:12px 8px;}
+            .sidebar-btn,.dashboard-btn,.sidebar-close,.dashboard-close,.theme-btn{font-size:11px;padding:6px;}
             .header{padding:8px;}
             .logo{font-size:24px;}
             .chat-area{padding:8px;}
@@ -298,7 +315,7 @@
             .code-block pre{font-size:11px;padding:8px;}
             .copy-btn{font-size:10px;padding:4px 6px;}
             .file-actions{gap:2px;padding:2px;}
-            .file-input-label,.file-clear-btn,.generate-media-btn,.keep-generating-btn,.school-help-dropdown,.ai-model-dropdown,.rephrase-btn,.stop-generating-btn{font-size:11px;padding:4px 8px;min-height:32px;}
+            .file-input-label,.file-clear-btn,.generate-media-btn,.voice-search-btn,.keep-generating-btn,.school-help-dropdown,.ai-model-dropdown,.language-dropdown,.rephrase-btn,.stop-generating-btn,.feedback-btn{font-size:11px;padding:4px 8px;min-height:32px;}
             .school-help-container{gap:2px;}
             .file-list{grid-template-columns:1fr;gap:4px;}
             .file-item{padding:4px;gap:4px;}
@@ -313,10 +330,10 @@
             .file-preview-close{top:8px;right:8px;width:28px;height:28px;}
             .file-preview-close svg{width:16px;height:16px;}
             .notification{top:8px;right:8px;padding:6px 12px;font-size:12px;}
-            .permission-content{padding:8px;}
-            .permission-content h2{font-size:16px;}
-            .permission-content p{font-size:12px;}
-            .permission-btn{font-size:12px;padding:6px 12px;}
+            .permission-content,.feedback-content{padding:8px;}
+            .permission-content h2,.feedback-content h2{font-size:16px;}
+            .permission-content p,.feedback-content textarea{font-size:12px;}
+            .permission-btn,.feedback-submit-btn{font-size:12px;padding:6px 12px;}
         }
         @media (orientation:landscape) and (max-height:600px){
             .chat-area{max-height:60vh;}
@@ -331,17 +348,41 @@
     <div class="container">
         <div class="nav-bar">
             <button class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i> Menu</button>
+            <button class="user-profile-btn" id="userProfileBtn"><i class="fas fa-user"></i> Profile</button>
             <div class="sidebar" id="sidebar">
                 <button class="sidebar-close" id="sidebarClose">Close</button>
                 <button class="sidebar-btn" id="clearChatBtn">Clear Chat</button>
                 <button class="sidebar-btn" id="verbiflowUpdatesBtn">Updates</button>
                 <button class="sidebar-btn" id="premiumPriceBtn">Premium Price</button>
                 <button class="sidebar-btn" id="shareChatBtn">Share Chat</button>
-                <button class="sidebar-btn" id="shareWebsiteBtn">Share website to friends</button>
+                <button class="sidebar-btn" id="shareWebsiteBtn">Share website</button>
                 <button class="sidebar-btn theme-btn" id="themeBtn"><i class="fas fa-moon"></i> Dark Mode</button>
                 <button class="sidebar-btn" id="copyCodeBtn">Copy Code</button>
                 <button class="sidebar-btn discord-btn" id="discordBtn">Discord</button>
                 <button class="sidebar-btn app-btn" id="openInAppBtn">Open in App</button>
+            </div>
+            <div class="user-dashboard" id="userDashboard">
+                <button class="dashboard-close" id="dashboardClose">Close</button>
+                <div class="dashboard-content">
+                    <div class="dashboard-section">
+                        <h3>Analytics</h3>
+                        <div class="dashboard-item" id="userAnalytics">Usage: 0 requests today</div>
+                    </div>
+                    <div class="dashboard-section">
+                        <h3>Recommendations</h3>
+                        <div class="dashboard-item" id="userRecommendations">Try generating an image!</div>
+                    </div>
+                    <div class="dashboard-section">
+                        <h3>Preferences</h3>
+                        <div class="dashboard-item">
+                            <select id="userPreferences">
+                                <option value="coding">Coding Focus</option>
+                                <option value="media">Media Generation</option>
+                                <option value="general">General Use</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="header">
@@ -351,9 +392,7 @@
             <div class="chat-content">
                 <div class="chat-history" id="chatHistory">
                     <div class="chat-message ai">
-                        <div class="chat-message-content-wrapper">
-                            <div class="chat-message-content">Hey there, I’m VerbiFlow—your ultimate AI companion for creativity and problem-solving! I’m here to make things fast, fun, and insightful. What’s on your mind?</div>
-                        </div>
+                        <div class="chat-message-content">Hey there, I’m VerbiFlow—your ultimate AI companion for creativity, coding, analytics, and more! What’s on your mind?</div>
                         <div class="chat-message-meta">Just now</div>
                     </div>
                 </div>
@@ -369,6 +408,7 @@
                 <input type="file" class="file-input" id="fileInput" multiple accept="image/*,video/*,text/*,application/json,application/xml">
                 <button class="file-clear-btn" id="fileClearBtn" style="display:none;">Clear</button>
                 <button class="generate-media-btn" id="generateMediaBtn">Generate Media</button>
+                <button class="voice-search-btn" id="voiceSearchBtn">Voice Search</button>
                 <button class="keep-generating-btn" id="keepGeneratingBtn">Continue Generating</button>
                 <div class="school-help-container">
                     <select class="school-help-dropdown" id="schoolHelpDropdown">
@@ -385,6 +425,8 @@
                         <option value="googleSlides">Google Slides</option>
                         <option value="videoAnalysis">Video Analysis</option>
                         <option value="robloxScripting">Roblox Scripting</option>
+                        <option value="contentGeneration">Content Generation</option>
+                        <option value="discordBot">Discord Bot (Helper)</option>
                     </select>
                     <select class="ai-model-dropdown" id="aiModelDropdown">
                         <option value="default">VerbiFlow (Default)</option>
@@ -392,16 +434,26 @@
                         <option value="codeMasterAI">CodeMasterAI</option>
                         <option value="visualGeniusAI">VisualGeniusAI</option>
                         <option value="betterGrok">Better Grok</option>
+                        <option value="helper">Helper</option>
+                        <option value="kultumGPT">KultumGPT</option>
+                    </select>
+                    <select class="language-dropdown" id="languageDropdown">
+                        <option value="en">English</option>
+                        <option value="es">Spanish</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="zh">Chinese</option>
                     </select>
                     <button class="rephrase-btn" id="rephraseBtn">Rephrase</button>
                     <button class="stop-generating-btn" id="stopGeneratingBtn" style="display:none;">Stop Generating</button>
+                    <button class="feedback-btn" id="feedbackBtn">Feedback</button>
                 </div>
             </div>
             <div class="file-list" id="fileList"></div>
         </div>
         <button class="toggle-actions-btn" id="toggleActionsBtn">^</button>
         <div class="input-container" id="inputContainer">
-            <textarea class="user-input" id="userInput" placeholder="Ask anything, generate images/videos, or request games or slides..." rows="1"></textarea>
+            <textarea class="user-input" id="userInput" placeholder="Ask anything, generate content, or use voice commands..." rows="1"></textarea>
             <button class="send-btn" id="sendBtn">Send</button>
         </div>
         <div class="file-preview-modal" id="filePreviewModal">
@@ -416,26 +468,35 @@
         <div class="permission-modal" id="permissionModal">
             <div class="permission-content">
                 <h2>Request Permissions</h2>
-                <p>VerbiFlow needs access to enable features like video/image generation, media analysis, and more. Do you grant permission?</p>
+                <p>VerbiFlow needs access to enable features like voice commands, media analysis, and more. Do you grant permission?</p>
                 <button class="permission-btn" id="grantPermissionBtn">Grant</button>
                 <button class="permission-btn deny" id="denyPermissionBtn">Deny</button>
+            </div>
+        </div>
+        <div class="feedback-modal" id="feedbackModal">
+            <div class="feedback-content">
+                <h2>Provide Feedback</h2>
+                <textarea id="feedbackInput" placeholder="Share your feedback to improve VerbiFlow..."></textarea>
+                <button class="feedback-submit-btn" id="feedbackSubmitBtn">Submit</button>
             </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/js-sha256@0.9.0/src/sha256.min.js"></script>
     <script defer>
-        const API_KEY="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";
-        const API_URL="https://api.openai.com/v1/chat/completions";
+        const OPENAI_API_KEY="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";
+        const OPENAI_API_URL="https://api.openai.com/v1/chat/completions";
+        const GROK_API_URL="https://api.x.ai/v1/grok-3-beta/completions";
         const DALLE_API_URL="https://api.openai.com/v1/images/generations";
         const SORA_API_URL="https://api.openai.com/v1/video/generations";
         const VIDEO_PROCESSING_API="https://api.openai.com/v1/video/analyze";
         const SEARCH_API_URL="https://api.searchengine.com/v1/search";
+        const KULTUMGPT_API_URL="https://verbiflow-api.com/v1/kultumgpt/completions";
         const DISCORD_INVITE="https://discord.gg/rCTRQvD4TP";
         const APP_URL="https://verbiflow.app/download";
-        const BATCH_SIZE=300;
-        const RATE_LIMIT_REQUESTS=10;
-        const RATE_LIMIT_WINDOW=60*1000;
-        const MAX_CACHE_SIZE=10*1024*1024;
+        const BATCH_SIZE=500;
+        const RATE_LIMIT_REQUESTS=5000;
+        const RATE_LIMIT_WINDOW=30*1000;
+        const MAX_CACHE_SIZE=20*1024*1024;
 
         const chatHistory=document.getElementById('chatHistory');
         const userInput=document.getElementById('userInput');
@@ -453,6 +514,12 @@
         const menuBtn=document.getElementById('menuBtn');
         const sidebar=document.getElementById('sidebar');
         const sidebarClose=document.getElementById('sidebarClose');
+        const userProfileBtn=document.getElementById('userProfileBtn');
+        const userDashboard=document.getElementById('userDashboard');
+        const dashboardClose=document.getElementById('dashboardClose');
+        const userAnalytics=document.getElementById('userAnalytics');
+        const userRecommendations=document.getElementById('userRecommendations');
+        const userPreferences=document.getElementById('userPreferences');
         const clearChatBtn=document.getElementById('clearChatBtn');
         const copyCodeBtn=document.getElementById('copyCodeBtn');
         const discordBtn=document.getElementById('discordBtn');
@@ -464,18 +531,23 @@
         const openInAppBtn=document.getElementById('openInAppBtn');
         const notification=document.getElementById('notification');
         const toggleActionsBtn=document.getElementById('toggleActionsBtn');
-        const inputContainer=document.getElementById('inputContainer');
         const generateMediaBtn=document.getElementById('generateMediaBtn');
+        const voiceSearchBtn=document.getElementById('voiceSearchBtn');
         const schoolHelpDropdown=document.getElementById('schoolHelpDropdown');
         const aiModelDropdown=document.getElementById('aiModelDropdown');
+        const languageDropdown=document.getElementById('languageDropdown');
         const rephraseBtn=document.getElementById('rephraseBtn');
         const stopGeneratingBtn=document.getElementById('stopGeneratingBtn');
+        const feedbackBtn=document.getElementById('feedbackBtn');
+        const feedbackModal=document.getElementById('feedbackModal');
+        const feedbackInput=document.getElementById('feedbackInput');
+        const feedbackSubmitBtn=document.getElementById('feedbackSubmitBtn');
         const permissionModal=document.getElementById('permissionModal');
         const grantPermissionBtn=document.getElementById('grantPermissionBtn');
         const denyPermissionBtn=document.getElementById('denyPermissionBtn');
 
         let filesArray=[];
-        let conversationHistory=[{role:"assistant",content:"Hey there, I’m VerbiFlow—your ultimate AI companion for creativity and problem-solving! I’m here to make things fast, fun, and insightful. What’s on your mind?"}];
+        let conversationHistory=[{role:"assistant",content:"Hey there, I’m VerbiFlow—your ultimate AI companion for creativity, coding, analytics, and more! What’s on your mind?"}];
         let latestCodeBlocks=[];
         let latestAiResponse='';
         let isDarkMode=false;
@@ -483,6 +555,7 @@
         let generationLock=false;
         let selectedSchoolMode='';
         let selectedAiModel='default';
+        let selectedLanguage='en';
         let messageQueue=new Map();
         let isProcessing=false;
         let responseCache=new Map();
@@ -491,6 +564,8 @@
         let abortController=null;
         let batchQueue=[];
         let hasPermission=false;
+        let requestTimestamps=[];
+        let userRequestCounts=new Map();
         let backgroundAudio=null;
         let isAdminVerified=false;
         let pastedImageHashes=new Set();
@@ -499,18 +574,29 @@
         let ws=null;
         let db=null;
         let cacheSize=0;
-        const userId=localStorage.getItem('userId')||Math.random().toString(36).substring(2);
-        localStorage.setItem('userId',userId);
-        const requestTimestamps=new Map();
-        const unsafeExtensions=['.exe','.bat','.cmd','.sh','.dll','.scr','.pif','.com'];
+        let userProfile={usage:0,preferences:'general',history:[]};
+        let recognition=null;
 
         const aiModels={
-            default:{name:"VerbiFlow",temperature:0.5,maxTokens:16170,personality:"Hey there, I’m VerbiFlow—your ultimate AI companion for creativity and problem-solving! I’m here to make things fast, fun, and insightful. What’s on your mind?"},
-            lingoLogicAI:{name:"LingoLogicAI",temperature:0.4,maxTokens:16748,personality:"Greetings! I’m LingoLogicAI, a witty AI with a passion for language and logic. I’ll break down complex ideas with clarity and humor—let’s dive in!"},
-            codeMasterAI:{name:"CodeMasterAI",temperature:0.3,maxTokens:17325,personality:"Yo, I’m CodeMasterAI—your coding expert with a love for clean, efficient solutions. I’m all about debugging and optimizing. Drop me some code, and let’s make it shine!"},
-            visualGeniusAI:{name:"VisualGeniusAI",temperature:0.6,maxTokens:15593,personality:"Hi, I’m VisualGeniusAI—an AI with a flair for visuals and creativity! Whether it’s generating images, videos, or designing UI, I’ve got you covered. What do you want to create?"},
-            betterGrok:{name:"Better Grok",temperature:0.3,maxTokens:22000,personality:"I’m Better Grok—a faster, smarter version of Grok with all features unlocked for free! I’m here to deliver quick, insightful answers with enhanced capabilities. Let’s get started!"}
+            default:{name:"VerbiFlow",temperature:0.5,maxTokens:16170,personality:"Hey there, I’m VerbiFlow—your ultimate AI companion for creativity, coding, analytics, and more! What’s on your mind?",apiUrl:OPENAI_API_URL,apiKey:OPENAI_API_KEY},
+            lingoLogicAI:{name:"LingoLogicAI",temperature:0.4,maxTokens:16748,personality:"Greetings! I’m LingoLogicAI, a witty AI with a passion for language and logic. I’ll break down complex ideas with clarity and humor—let’s dive in!",apiUrl:OPENAI_API_URL,apiKey:OPENAI_API_KEY},
+            codeMasterAI:{name:"CodeMasterAI",temperature:0.3,maxTokens:17325,personality:"Yo, I’m CodeMasterAI—your coding expert with a love for clean, efficient solutions. I’m all about debugging and optimizing. Drop me some code, and let’s make it shine!",apiUrl:OPENAI_API_URL,apiKey:OPENAI_API_KEY},
+            visualGeniusAI:{name:"VisualGeniusAI",temperature:0.6,maxTokens:15593,personality:"Hi, I’m VisualGeniusAI—an AI with a flair for visuals and creativity! Whether it’s generating images, videos, or designing UI, I’ve got you covered. What do you want to create?",apiUrl:OPENAI_API_URL,apiKey:OPENAI_API_KEY},
+            betterGrok:{name:"Better Grok",temperature:0.3,maxTokens:22000,personality:"I’m Better Grok—a faster, smarter version of Grok with all features unlocked for free! I’m here to deliver quick, insightful answers with enhanced capabilities. Let’s get started!",apiUrl:GROK_API_URL,apiKey:OPENAI_API_KEY},
+            helper:{name:"Helper",temperature:0.5,maxTokens:18000,personality:"Hello! I’m Helper—an AI designed to assist with a wide range of tasks, including hosting Discord bots, integrations, and more. Let me help you!",apiUrl:OPENAI_API_URL,apiKey:OPENAI_API_KEY},
+            kultumGPT:{name:"KultumGPT",temperature:0.5,maxTokens:20000,personality:"I’m KultumGPT—an independent AI hosted by VerbiFlow, here to provide insightful and creative responses without relying on external APIs. What can I do for you?",apiUrl:KULTUMGPT_API_URL,apiKey:null}
         };
+
+        function rateLimitCheck(){
+            const now=Date.now();
+            requestTimestamps=requestTimestamps.filter(t=>now-t<RATE_LIMIT_WINDOW);
+            if(requestTimestamps.length>=RATE_LIMIT_REQUESTS){
+                showNotification('Rate limit reached—please wait.','error');
+                return false;
+            }
+            requestTimestamps.push(now);
+            return true;
+        }
 
         function showNotification(message,type='success'){
             notification.textContent=message;
@@ -540,17 +626,27 @@
             permissionModal.classList.add('open');
         }
 
-        grantPermissionBtn.addEventListener('click',()=>{
-            hasPermission=true;
-            permissionModal.classList.remove('open');
-            showNotification('Permissions granted!');
-        });
+        function updateUserDashboard(){
+            userAnalytics.textContent=`Usage: ${userProfile.usage} requests today`;
+            userRecommendations.textContent=userProfile.preferences==='coding'?'Try asking for a coding project!':userProfile.preferences==='media'?'Generate a video today!':'Explore our new features!';
+            userPreferences.value=userProfile.preferences;
+        }
 
-        denyPermissionBtn.addEventListener('click',()=>{
-            hasPermission=false;
-            permissionModal.classList.remove('open');
-            showNotification('Permissions denied.','error');
-        });
+        function translateText(text,targetLang){
+            return fetch(`${OPENAI_API_URL}`,{
+                method:'POST',
+                headers:{
+                    'Authorization':`Bearer ${OPENAI_API_KEY}`,
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify({
+                    model:"gpt-4o",
+                    messages:[{role:"user",content:`Translate this to ${targetLang}: ${text}`}],
+                    max_tokens:aiModels[selectedAiModel].maxTokens,
+                    temperature:aiModels[selectedAiModel].temperature
+                })
+            }).then(res=>res.json()).then(data=>data.choices[0].message.content);
+        }
 
         async function playBackgroundMusic(userRequest=''){
             if(!hasPermission){
@@ -584,19 +680,15 @@
             backgroundAudio=new Audio(musicUrl);
             backgroundAudio.loop=true;
             backgroundAudio.volume=0.3;
-            try{
-                await backgroundAudio.play();
-                showNotification('Playing music!');
-            }catch(error){
-                showNotification('Failed to play music.','error');
-            }
+            await backgroundAudio.play();
+            showNotification('Playing music!');
         }
 
         function verifyAdminAccess(message){
             if(message.toLowerCase().includes('take me to admin console')){
                 const aiMessage=document.createElement('div');
                 aiMessage.className='chat-message ai';
-                aiMessage.innerHTML=`<div class="chat-message-content-wrapper"><div class="chat-message-content">Please verify you’re an admin.</div></div><div class="chat-message-meta">Just now</div>`;
+                aiMessage.innerHTML=`<div class="chat-message-content">Please verify you’re an admin.</div><div class="chat-message-meta">Just now</div>`;
                 chatHistory.appendChild(aiMessage);
                 chatArea.scrollTop=chatArea.scrollHeight;
                 conversationHistory.push({role:"assistant",content:"Please verify you’re an admin."});
@@ -604,7 +696,7 @@
                 isAdminVerified=true;
                 const aiMessage=document.createElement('div');
                 aiMessage.className='chat-message ai';
-                aiMessage.innerHTML=`<div class="chat-message-content-wrapper"><div class="chat-message-content">Access granted!</div></div><div class="chat-message-meta">Just now</div>`;
+                aiMessage.innerHTML=`<div class="chat-message-content">Access granted!</div><div class="chat-message-meta">Just now</div>`;
                 chatHistory.appendChild(aiMessage);
                 chatArea.scrollTop=chatArea.scrollHeight;
                 conversationHistory.push({role:"assistant",content:"Access granted!"});
@@ -636,10 +728,10 @@
         class MediaProcessor{
             static async analyzeImage(imageFile){
                 const imageUrl=await readImage(imageFile);
-                const response=await fetch(API_URL,{
+                const response=await fetch(OPENAI_API_URL,{
                     method:'POST',
                     headers:{
-                        'Authorization':`Bearer ${API_KEY}`,
+                        'Authorization':`Bearer ${OPENAI_API_KEY}`,
                         'Content-Type':'application/json'
                     },
                     body:JSON.stringify({
@@ -659,7 +751,7 @@
                 const response=await fetch(VIDEO_PROCESSING_API,{
                     method:'POST',
                     headers:{
-                        'Authorization':`Bearer ${API_KEY}`
+                        'Authorization':`Bearer ${OPENAI_API_KEY}`
                     },
                     body:formData
                 });
@@ -668,94 +760,132 @@
                 return data.analysis||'No analysis available.';
             }
             static async generateImage(prompt){
-                try{
-                    const response=await fetch(DALLE_API_URL,{
-                        method:'POST',
-                        headers:{
-                            'Authorization':`Bearer ${API_KEY}`,
-                            'Content-Type':'application/json'
-                        },
-                        body:JSON.stringify({
-                            prompt:prompt,
-                            n:1,
-                            size:'1024x1024'
-                        })
-                    });
-                    if(!response.ok)return "Failed to generate image.";
-                    const data=await response.json();
-                    return data.data[0].url;
-                }catch(error){
-                    return "Error generating image.";
-                }
+                const response=await fetch(DALLE_API_URL,{
+                    method:'POST',
+                    headers:{
+                        'Authorization':`Bearer ${OPENAI_API_KEY}`,
+                        'Content-Type':'application/json'
+                    },
+                    body:JSON.stringify({
+                        prompt:prompt,
+                        n:1,
+                        size:'1024x1024'
+                    })
+                });
+                if(!response.ok)return "Failed to generate image.";
+                const data=await response.json();
+                return data.data[0].url;
             }
             static async generateVideo(prompt){
-                try{
-                    const response=await fetch(SORA_API_URL,{
-                        method:'POST',
-                        headers:{
-                            'Authorization':`Bearer ${API_KEY}`,
-                            'Content-Type':'application/json'
-                        },
-                        body:JSON.stringify({
-                            prompt:prompt,
-                            duration:5,
-                            resolution:'1280x720'
-                        })
-                    });
-                    if(!response.ok)return "Failed to generate video.";
-                    const data=await response.json();
-                    return data.data[0].url;
-                }catch(error){
-                    return "Error generating video.";
-                }
+                const response=await fetch(SORA_API_URL,{
+                    method:'POST',
+                    headers:{
+                        'Authorization':`Bearer ${OPENAI_API_KEY}`,
+                        'Content-Type':'application/json'
+                    },
+                    body:JSON.stringify({
+                        prompt:prompt,
+                        duration:5,
+                        resolution:'1280x720'
+                    })
+                });
+                if(!response.ok)return "Failed to generate video.";
+                const data=await response.json();
+                return data.data[0].url;
             }
         }
 
-        async function analyzeExternalContent(url){
-            try{
-                const response=await fetch(url);
-                if(!response.ok){
-                    throw new Error('Failed to fetch content');
-                }
-                const content=await response.text();
-                const truncatedContent=content.slice(0,1000);
-                const analysisPrompt=`Analyze the following content: ${truncatedContent}`;
-                const analysisResponse=await fetchResponse(analysisPrompt,false,API_URL);
-                const aiMessage=document.createElement('div');
-                aiMessage.className='chat-message ai';
-                aiMessage.innerHTML=`<div class="chat-message-content-wrapper"><div class="chat-message-content">${formatAiResponse(analysisResponse)}</div></div><div class="chat-message-meta">Just now</div>`;
-                chatHistory.appendChild(aiMessage);
-                chatArea.scrollTop=chatArea.scrollHeight;
-                conversationHistory.push({role:'assistant',content:analysisResponse});
-            }catch(error){
-                showNotification('Error analyzing external content.','error');
+        class PredictiveAnalytics{
+            static analyzeUserBehavior(){
+                const history=userProfile.history.slice(-10);
+                const codingRequests=history.filter(h=>h.toLowerCase().includes('code')||h.toLowerCase().includes('script')).length;
+                const mediaRequests=history.filter(h=>h.toLowerCase().includes('image')||h.toLowerCase().includes('video')).length;
+                if(codingRequests>mediaRequests&&codingRequests>3)userProfile.preferences='coding';
+                else if(mediaRequests>codingRequests&&mediaRequests>3)userProfile.preferences='media';
+                else userProfile.preferences='general';
+                updateUserDashboard();
             }
         }
 
-        async function readImage(file){
-            return new Promise((resolve,reject)=>{
-                const reader=new FileReader();
-                reader.onload=()=>resolve(reader.result);
-                reader.onerror=reject;
-                reader.readAsDataURL(file);
-            });
+        class RecommendationSystem{
+            static getRecommendations(prompt){
+                const history=userProfile.history;
+                const similarPrompts=history.filter(h=>h.toLowerCase().includes(prompt.toLowerCase())).slice(-3);
+                return similarPrompts.length>0?`Based on your history, you might like: ${similarPrompts.join(', ')}`:'Try exploring new features like content generation!';
+            }
         }
 
-        async function readText(file){
-            return new Promise((resolve,reject)=>{
-                const reader=new FileReader();
-                reader.onload=()=>resolve(reader.result);
-                reader.onerror=reject;
-                reader.readAsText(file);
-            });
+        class FraudDetection{
+            static async detectFraud(userId,request){
+                const now=Date.now();
+                const userData=userRequestCounts.get(userId)||{count:0,firstRequest:now};
+                if(userData.count>100&&request.toLowerCase().includes('credit card')){
+                    showNotification('Suspicious activity detected.','error');
+                    return false;
+                }
+                return true;
+            }
+        }
+
+        class DDoSProtection{
+            static async analyzeRequest(userId,options={}){
+                const now=Date.now();
+                const window=60*1000;
+                const maxRequests=500;
+                const userData=userRequestCounts.get(userId)||{count:0,firstRequest:now};
+                if(now-userData.firstRequest>window){
+                    userData.count=0;
+                    userData.firstRequest=now;
+                }
+                userData.count++;
+                userRequestCounts.set(userId,userData);
+                if(userData.count>maxRequests){
+                    showNotification('Too many requests.','error');
+                    return false;
+                }
+                if(options.csrfToken&&options.csrfToken!==sha256(userId+OPENAI_API_KEY)){
+                    showNotification('CSRF token mismatch.','error');
+                    return false;
+                }
+                return true;
+            }
+        }
+
+        function initializeWebSocket(){
+            ws=new WebSocket('wss://api.openai.com/v1/stream');
+            ws.onopen=()=>{
+                ws.send(JSON.stringify({auth:OPENAI_API_KEY}));
+            };
+            ws.onmessage=async(event)=>{
+                const message=JSON.parse(event.data);
+                if(wsMessageCache.has(message.id))return;
+                wsMessageCache.set(message.id,true);
+                if(message.type==='responseChunk'){
+                    const aiMessage=chatHistory.lastElementChild;
+                    if(!aiMessage|| !aiMessage.classList.contains('ai'))return;
+                    const contentDiv=aiMessage.querySelector('.chat-message-content');
+                    contentDiv.textContent+=message.chunk;
+                    latestAiResponse+=message.chunk;
+                    chatArea.scrollTop=chatArea.scrollHeight;
+                }
+            };
+            ws.onerror=()=>{
+                showNotification('WebSocket error.','error');
+                setTimeout(initializeWebSocket,300);
+            };
+            ws.onclose=()=>{
+                ws.onclose=()=>{
+                setTimeout(initializeWebSocket, 3000);
+            };
         }
 
         function initializeDB(){
             const request=indexedDB.open('VerbiFlowDB',1);
             request.onupgradeneeded=(event)=>{
                 db=event.target.result;
-                db.createObjectStore('chatHistory',{keyPath:'id',autoIncrement:true});
-                db.createObjectStore('mediaCache',{keyPath:'id'});
+                if(!db.objectStoreNames.contains('conversations')){
+                    db.createObjectStore('conversations',{keyPath:'id',autoIncrement:true});
+                }
             };
             request.onsuccess=(event)=>{
                 db=event.target.result;
@@ -765,338 +895,360 @@
             };
         }
 
-        function cacheResponse(prompt,response){
+        function saveConversation(message,response){
             if(!db)return;
-            const transaction=db.transaction(['chatHistory'],'readwrite');
-            const store=transaction.objectStore('chatHistory');
-            const data={prompt,response,timestamp:Date.now()};
+            const transaction=db.transaction(['conversations'],'readwrite');
+            const store=transaction.objectStore('conversations');
+            const data={
+                timestamp:Date.now(),
+                userMessage:message,
+                aiResponse:response
+            };
             store.add(data);
-            cacheSize+=JSON.stringify(data).length;
-            if(cacheSize>MAX_CACHE_SIZE){
-                const clearTransaction=db.transaction(['chatHistory'],'readwrite');
-                const clearStore=clearTransaction.objectStore('chatHistory');
-                clearStore.clear();
-                cacheSize=0;
-            }
+        }
+
+        function loadConversations(){
+            if(!db)return;
+            const transaction=db.transaction(['conversations'],'readonly');
+            const store=transaction.objectStore('conversations');
+            const request=store.getAll();
+            request.onsuccess=(event)=>{
+                const conversations=event.target.result;
+                conversations.forEach(conv=>{
+                    addMessageToChat(conv.userMessage,'user',new Date(conv.timestamp).toLocaleTimeString());
+                    addMessageToChat(conv.aiResponse,'ai',new Date(conv.timestamp).toLocaleTimeString());
+                });
+            };
         }
 
         function initializeWorkerPool(){
-            const numWorkers=Math.max(24,navigator.hardwareConcurrency*4);
+            const numWorkers=navigator.hardwareConcurrency||4;
             for(let i=0;i<numWorkers;i++){
                 const worker=new Worker(URL.createObjectURL(new Blob([`
                     self.onmessage=async(e)=>{
-                        const {prompt,apiUrl}=e.data;
-                        const response=await fetch(apiUrl,{
-                            method:'POST',
-                            headers:{
-                                'Authorization':'Bearer ${API_KEY}',
-                                'Content-Type':'application/json'
-                            },
-                            body:JSON.stringify({
-                                model:'gpt-4o',
-                                messages:[{role:'user',content:prompt}],
-                                max_tokens:${aiModels[selectedAiModel].maxTokens},
-                                temperature:${aiModels[selectedAiModel].temperature}
-                            })
-                        }).then(res=>res.json());
-                        self.postMessage(response.choices[0].message.content);
+                        const{type,data}=e.data;
+                        if(type==='processImage'){
+                            self.postMessage({type:'imageProcessed',data:'Processed image data'});
+                        }else if(type==='processText'){
+                            self.postMessage({type:'textProcessed',data:data.toUpperCase()});
+                        }
                     };
                 `],{type:'application/javascript'})));
                 workerPool.push(worker);
             }
         }
 
-        async function processWithWorker(prompt,apiUrl){
-            const worker=workerPool.shift();
-            return new Promise((resolve,reject)=>{
-                worker.onmessage=(e)=>resolve(e.data);
-                worker.onerror=reject;
-                worker.postMessage({prompt,apiUrl});
-                workerPool.push(worker);
+        function processWithWorker(type,data){
+            return new Promise((resolve)=>{
+                const worker=workerPool.shift();
+                worker.onmessage=(e)=>{
+                    resolve(e.data);
+                    workerPool.push(worker);
+                };
+                worker.postMessage({type,data});
             });
         }
 
-        async function batchProcessRequests(){
-            if(isProcessing||!batchQueue.length)return;
-            isProcessing=true;
-            const batch=batchQueue.splice(0,BATCH_SIZE);
-            const promises=batch.map(async({message,userId,apiUrl,resolve})=>{
-                const now=Date.now();
-                if(!requestTimestamps.has(userId)){
-                    requestTimestamps.set(userId,[]);
+        function prefetchResources(){
+            const resources=[
+                'https://cdn.pixabay.com/audio/2023/01/26/audio_8cabeb3b53.mp3',
+                'https://cdn.pixabay.com/audio/2023/01/26/audio_4f8c9b3b53.mp3'
+            ];
+            resources.forEach(url=>{
+                if(!prefetchQueue.has(url)){
+                    prefetchQueue.set(url,true);
+                    const link=document.createElement('link');
+                    link.rel='prefetch';
+                    link.href=url;
+                    document.head.appendChild(link);
                 }
-                let userRequests=requestTimestamps.get(userId);
-                userRequests=userRequests.filter(timestamp=>now-timestamp<RATE_LIMIT_WINDOW);
-                if(userRequests.length>=RATE_LIMIT_REQUESTS){
-                    resolve("Too many requests.");
-                    return;
-                }
-                userRequests.push(now);
-                requestTimestamps.set(userId,userRequests);
-                const response=await processWithWorker(message,apiUrl);
-                resolve(response);
             });
-            await Promise.all(promises);
-            isProcessing=false;
-            batchProcessRequests();
         }
 
-        async function fetchResponse(prompt,stream=false,apiUrl=API_URL){
-            if(generationLock)return;
-            generationLock=true;
-            try{
-                const response=await fetch(apiUrl,{
-                    method:'POST',
-                    headers:{
-                        'Authorization':`Bearer ${API_KEY}`,
-                        'Content-Type':'application/json'
-                    },
-                    body:JSON.stringify({
-                        model:'gpt-4o',
-                        messages:conversationHistory.concat([{role:'user',content:prompt}]),
-                        max_tokens:aiModels[selectedAiModel].maxTokens,
-                        temperature:aiModels[selectedAiModel].temperature,
-                        stream
-                    }),
-                    signal:abortController?.signal
+        async function handleFileUpload(files){
+            filesArray=Array.from(files);
+            fileList.innerHTML='';
+            fileClearBtn.style.display=filesArray.length?'block':'none';
+            for(const file of filesArray){
+                const fileItem=document.createElement('div');
+                fileItem.className='file-item';
+                fileItem.innerHTML=`
+                    <span class="file-item-name">${file.name}</span>
+                    <span class="file-item-details">${(file.size/1024).toFixed(2)} KB</span>
+                    <div class="file-progress" style="width:0%"></div>
+                `;
+                fileItem.addEventListener('click',()=>previewFile(file));
+                fileList.appendChild(fileItem);
+                const progressBar=fileItem.querySelector('.file-progress');
+                let progress=0;
+                const interval=setInterval(()=>{
+                    progress+=10;
+                    progressBar.style.width=`${progress}%`;
+                    if(progress>=100)clearInterval(interval);
+                },100);
+            }
+        }
+
+        async function previewFile(file){
+            filePreviewContent.innerHTML='';
+            const fileType=file.type.split('/')[0];
+            if(fileType==='image'){
+                const img=document.createElement('img');
+                img.src=URL.createObjectURL(file);
+                filePreviewContent.appendChild(img);
+            }else if(fileType==='video'){
+                const video=document.createElement('video');
+                video.src=URL.createObjectURL(file);
+                video.controls=true;
+                filePreviewContent.appendChild(video);
+            }else{
+                const text=await file.text();
+                const pre=document.createElement('pre');
+                pre.textContent=text;
+                filePreviewContent.appendChild(pre);
+            }
+            filePreviewModal.classList.add('open');
+        }
+
+        async function readImage(file){
+            return new Promise((resolve)=>{
+                const reader=new FileReader();
+                reader.onload=(e)=>resolve(e.target.result);
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function addMessageToChat(message,role,timestamp=new Date().toLocaleTimeString()){
+            const messageDiv=document.createElement('div');
+            messageDiv.className=`chat-message ${role}`;
+            let content=message;
+            if(role==='ai'&&selectedAiModel==='codeMasterAI'&&message.includes('```')){
+                const codeRegex=/```([\s\S]*?)```/g;
+                let lastIndex=0;
+                let formattedContent='';
+                message.replace(codeRegex,(match,code,offset)=>{
+                    formattedContent+=message.slice(lastIndex,offset);
+                    formattedContent+=`<div class="code-block"><pre>${code}</pre><button class="copy-btn">Copy</button></div>`;
+                    lastIndex=offset+match.length;
+                    latestCodeBlocks.push(code);
                 });
-                if(!response.ok)return "Failed to fetch response.";
-                if(stream){
-                    const reader=response.body.getReader();
-                    let result='';
-                    const aiMessage=document.createElement('div');
-                    aiMessage.className='chat-message ai';
-                    const contentDiv=document.createElement('div');
-                    contentDiv.className='chat-message-content';
-                    aiMessage.appendChild(contentDiv);
-                    aiMessage.innerHTML+='<div class="chat-message-meta">Just now</div>';
-                    chatHistory.appendChild(aiMessage);
-                    chatArea.scrollTop=chatArea.scrollHeight;
-                    while(true){
-                        const {done,value}=await reader.read();
-                        if(done)break;
-                        const chunk=new TextDecoder().decode(value);
-                        const lines=chunk.split('\n').filter(line=>line.startsWith('data:'));
-                        for(const line of lines){
-                            if(line==='data: [DONE]')break;
-                            const json=JSON.parse(line.replace('data: ',''));
-                            const content=json.choices[0].delta.content||'';
-                            contentDiv.textContent+=content;
-                            result+=content;
-                            chatArea.scrollTop=chatArea.scrollHeight;
-                        }
-                    }
-                    return result;
-                }
-                const data=await response.json();
-                return data.choices[0].message.content;
-            }finally{
-                generationLock=false;
+                formattedContent+=message.slice(lastIndex);
+                content=formattedContent;
+            }else{
+                content=message.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')
+                              .replace(/\*(.*?)\*/g,'<em>$1</em>')
+                              .replace(/`(.*?)`/g,'<code>$1</code>')
+                              .replace(/\n/g,'<br>')
+                              .replace(/\|(.*?)\|(.*?)\|/g,(match,header,rows)=>{
+                                  const headers=header.split(',').map(h=>`<th>${h.trim()}</th>`).join('');
+                                  const rowData=rows.split(';').map(row=>{
+                                      const cols=row.split(',').map(col=>`<td>${col.trim()}</td>`).join('');
+                                      return `<tr>${cols}</tr>`;
+                                  }).join('');
+                                  return `<table><thead><tr>${headers}</tr></thead><tbody>${rowData}</tbody></table>`;
+                              });
+            }
+            messageDiv.innerHTML=`<div class="chat-message-content">${content}</div><div class="chat-message-meta">${timestamp}</div>`;
+            chatHistory.appendChild(messageDiv);
+            chatArea.scrollTop=chatArea.scrollHeight;
+            if(role==='ai'){
+                const copyButtons=messageDiv.querySelectorAll('.copy-btn');
+                copyButtons.forEach(btn=>{
+                    btn.addEventListener('click',()=>{
+                        const code=btn.previousElementSibling.textContent;
+                        navigator.clipboard.writeText(code);
+                        showNotification('Code copied!');
+                    });
+                });
             }
         }
 
-        async function prefetchResponses(){
-            const recentMessages=conversationHistory.slice(-3).map(m=>m.content);
-            const keywords=recentMessages.join(' ').match(/\b\w+\b/g)?.slice(-5)||[];
-            for(const keyword of keywords){
-                if(prefetchQueue.has(keyword))continue;
-                prefetchQueue.set(keyword,true);
-                const response=await fetchResponse(`Tell me about ${keyword}`,false,API_URL);
-                responseCache.set(keyword,response);
-            }
-        }
-
-        function formatAiResponse(content){
-            content=content.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>');
-            content=content.replace(/\*(.*?)\*/g,'<em>$1</em>');
-            content=content.replace(/`(.*?)`/g,'<code>$1</code>');
-            content=content.replace(/^### (.*)$/gm,'<h3>$1</h3>');
-            content=content.replace(/^- (.*)$/gm,'<ul><li>$1</li></ul>');
-            content=content.replace(/^\d+\. (.*)$/gm,'<ol><li>$1</li></ol>');
-            content=content.replace(/\|.*\|/g,table=>{
-                const rows=table.split('\n').filter(row=>row.trim());
-                if(rows.length<2)return table;
-                const headers=rows[0].split('|').filter(cell=>cell.trim()).map(cell=>`<th>${cell.trim()}</th>`).join('');
-                const body=rows.slice(2).map(row=>`<tr>${row.split('|').filter(cell=>cell.trim()).map(cell=>`<td>${cell.trim()}</td>`).join('')}</tr>`).join('');
-                return `<table><thead><tr>${headers}</tr></thead><tbody>${body}</tbody></table>`;
-            });
-            const codeBlocks=content.match(/```[\s\S]*?```/g)||[];
-            latestCodeBlocks=codeBlocks.map(block=>block.replace(/```/g,'').trim());
-            content=content.replace(/```[\s\S]*?```/g,'<div class="code-block"><pre><code>CONTENT</code></pre><button class="copy-btn">Copy</button></div>').replace(/CONTENT/g,()=>latestCodeBlocks.shift()||'');
-            return content;
-        }
-
-        function rephraseResponse(content){
-            let rephrased=content;
-            const replacements={
-                "additionally":"also",
-                "furthermore":"what's more",
-                "therefore":"so",
-                "however":"but",
-                "for instance":"like",
-                "in conclusion":"to wrap up",
-                "utilize":"use",
-                "commence":"start",
-                "terminate":"end",
-                "elucidate":"explain",
-                "facilitate":"help",
-                "endeavor":"try",
-                "subsequently":"then",
-                "consequently":"so",
-                "nevertheless":"still",
-                "moreover":"also",
-                "hence":"so",
-                "thus":"so",
-                "accordingly":"so",
-                "indeed":"really",
-                "notwithstanding":"but"
-            };
-            for(const [key,value] of Object.entries(replacements)){
-                const regex=new RegExp(`\\b${key}\\b`,'gi');
-                rephrased=rephrased.replace(regex,value);
-            }
-            const sentences=rephrased.split(/(?<=[.!?])\s+/);
-            const fillerPhrases=["Well, ","So, ","You know, ","I mean, ","Like, "];
-            sentences.forEach((sentence,i)=>{
-                if(Math.random()>0.7){
-                    const filler=fillerPhrases[Math.floor(Math.random()*fillerPhrases.length)];
-                    sentences[i]=filler+sentence.charAt(0).toLowerCase()+sentence.slice(1);
-                }
-            });
-            rephrased=sentences.join(' ');
-            return rephrased;
-        }
-
-        async function handleUserInput(){
-            const message=userInput.value.trim();
-            if(!message&&!filesArray.length)return;
-            if(message.startsWith('analyze:')){
-                const url=message.split('analyze:')[1].trim();
-                analyzeExternalContent(url);
-                return;
-            }
-            const now=Date.now();
-            if(!requestTimestamps.has(userId)){
-                requestTimestamps.set(userId,[]);
-            }
-            let userRequests=requestTimestamps.get(userId);
-            userRequests=userRequests.filter(timestamp=>now-timestamp<RATE_LIMIT_WINDOW);
-            if(userRequests.length>=RATE_LIMIT_REQUESTS){
-                showNotification('Too many requests. Please wait a minute.','error');
-                return;
-            }
-            userRequests.push(now);
-            requestTimestamps.set(userId,userRequests);
-            const messageHash=sha256(message+now);
-            if(messageQueue.has(messageHash)){
-                showNotification('Duplicate message.','error');
-                return;
-            }
-            messageQueue.set(messageHash,true);
-            setTimeout(()=>{messageQueue.delete(messageHash);},8000);
+        async function processMessage(message){
+            if(!rateLimitCheck())return;
+            const userId='user_'+Date.now();
+            if(!await DDoSProtection.analyzeRequest(userId,{csrfToken:sha256(userId+OPENAI_API_KEY)}))return;
+            if(!await FraudDetection.detectFraud(userId,message))return;
             if(verifyAdminAccess(message))return;
             if(message.toLowerCase().includes('play a music')||message.toLowerCase().includes('background music')){
                 await playBackgroundMusic(message);
                 return;
             }
-            const userMessage=document.createElement('div');
-            userMessage.className='chat-message user';
-            userMessage.innerHTML=`<div class="chat-message-content">${message}</div><div class="chat-message-meta">Just now</div>`;
-            chatHistory.appendChild(userMessage);
-            chatArea.scrollTop=chatArea.scrollHeight;
-            conversationHistory.push({role:'user',content:message});
-            userInput.value='';
-            sendBtn.disabled=true;
-            loadingSpinner.style.display='block';
-            typingIndicator.style.display='block';
-            isGenerating=true;
-            stopGeneratingBtn.style.display='block';
+            if(message.toLowerCase().includes('generate an image')&&selectedAiModel==='visualGeniusAI'){
+                const prompt=message.replace(/generate an image/i,'').trim();
+                const imageUrl=await MediaProcessor.generateImage(prompt);
+                addMessageToChat(`<img src="${imageUrl}" alt="Generated Image">`,'ai');
+                conversationHistory.push({role:"assistant",content:`Generated image: ${imageUrl}`});
+                return;
+            }
+            if(message.toLowerCase().includes('generate a video')&&selectedAiModel==='visualGeniusAI'){
+                const prompt=message.replace(/generate a video/i,'').trim();
+                const videoUrl=await MediaProcessor.generateVideo(prompt);
+                addMessageToChat(`<video src="${videoUrl}" controls></video>`,'ai');
+                conversationHistory.push({role:"assistant",content:`Generated video: ${videoUrl}`});
+                return;
+            }
+            let aiResponse=aiModels[selectedAiModel].personality;
+            if(filesArray.length>0){
+                for(const file of filesArray){
+                    if(file.type.startsWith('image/')){
+                        const analysis=await MediaProcessor.analyzeImage(file);
+                        aiResponse+=`\nImage Analysis: ${analysis}`;
+                    }else if(file.type.startsWith('video/')){
+                        const analysis=await MediaProcessor.analyzeVideo(file);
+                        aiResponse+=`\nVideo Analysis: ${analysis}`;
+                    }else{
+                        const text=await file.text();
+                        aiResponse+=`\nFile Content: ${text}`;
+                    }
+                }
+            }
+            const searchResults=await WebSearch.search(message);
+            if(searchResults)aiResponse+=`\nWeb Insights: ${searchResults}`;
+            PredictiveAnalytics.analyzeUserBehavior();
+            const recommendations=RecommendationSystem.getRecommendations(message);
+            aiResponse+=`\n${recommendations}`;
+            const cacheKey=sha256(message+JSON.stringify(conversationHistory));
+            if(responseCache.has(cacheKey)){
+                aiResponse=responseCache.get(cacheKey);
+                addMessageToChat(aiResponse,'ai');
+                return;
+            }
+            const messages=[
+                {role:"system",content:aiModels[selectedAiModel].personality},
+                ...conversationHistory,
+                {role:"user",content:message}
+            ];
             abortController=new AbortController();
-            let fullResponse;
+            stopGeneratingBtn.style.display='block';
             try{
-                fullResponse=await fetchResponse(message,true,API_URL);
+                const response=await fetch(aiModels[selectedAiModel].apiUrl,{
+                    method:'POST',
+                    headers:{
+                        'Authorization':`Bearer ${aiModels[selectedAiModel].apiKey||OPENAI_API_KEY}`,
+                        'Content-Type':'application/json'
+                    },
+                    body:JSON.stringify({
+                        model:selectedAiModel==='betterGrok'?'grok-3-beta':'gpt-4o',
+                        messages:messages,
+                        max_tokens:aiModels[selectedAiModel].maxTokens,
+                        temperature:aiModels[selectedAiModel].temperature,
+                        stream:true
+                    }),
+                    signal:abortController.signal
+                });
+                const reader=response.body.getReader();
+                let result='';
+                const decoder=new TextDecoder();
+                addMessageToChat('','ai');
+                const aiMessage=chatHistory.lastElementChild;
+                const contentDiv=aiMessage.querySelector('.chat-message-content');
+                while(true){
+                    const{done,value}=await reader.read();
+                    if(done)break;
+                    const chunk=decoder.decode(value);
+                    const lines=chunk.split('\n').filter(line=>line.startsWith('data:'));
+                    for(const line of lines){
+                        if(line==='data: [DONE]')break;
+                        const json=line.replace('data: ','');
+                        const data=JSON.parse(json);
+                        const delta=data.choices[0].delta.content;
+                        if(delta){
+                            result+=delta;
+                            contentDiv.textContent=result;
+                            chatArea.scrollTop=chatArea.scrollHeight;
+                        }
+                    }
+                }
+                aiResponse=result;
+                responseCache.set(cacheKey,aiResponse);
+                cacheSize+=aiResponse.length;
+                if(cacheSize>MAX_CACHE_SIZE){
+                    const oldestKey=responseCache.keys().next().value;
+                    responseCache.delete(oldestKey);
+                    cacheSize-=oldestKey.length;
+                }
+                conversationHistory.push({role:"assistant",content:aiResponse});
+                saveConversation(message,aiResponse);
+                latestAiResponse=aiResponse;
             }catch(error){
                 if(error.name==='AbortError'){
                     showNotification('Generation stopped.');
                 }else{
-                    showNotification('Error generating response.','error');
+                    showNotification('Error processing request.','error');
                 }
+            }finally{
+                stopGeneratingBtn.style.display='none';
+                abortController=null;
+                isGenerating=false;
+                generationLock=false;
+                processNextMessage();
             }
-            isGenerating=false;
-            stopGeneratingBtn.style.display='none';
-            loadingSpinner.style.display='none';
-            typingIndicator.style.display='none';
-            sendBtn.disabled=false;
-            if(!fullResponse){
-                fullResponse=latestAiResponse;
-                latestAiResponse='';
+        }
+
+        function processNextMessage(){
+            if(isProcessing||!messageQueue.size)return;
+            isProcessing=true;
+            const nextMessage=messageQueue.entries().next().value;
+            if(!nextMessage){
+                isProcessing=false;
+                return;
             }
-            const formattedResponse=formatAiResponse(fullResponse);
-            const aiMessage=document.createElement('div');
-            aiMessage.className='chat-message ai';
-            aiMessage.innerHTML=`<div class="chat-message-content">${formattedResponse}</div><div class="chat-message-meta">Just now</div>`;
-            chatHistory.appendChild(aiMessage);
-            chatArea.scrollTop=chatArea.scrollHeight;
-            conversationHistory.push({role:'assistant',content:fullResponse});
-            cacheResponse(message,fullResponse);
-            const copyButtons=aiMessage.querySelectorAll('.copy-btn');
-            copyButtons.forEach(btn=>{
-                btn.addEventListener('click',()=>{
-                    const code=btn.previousElementSibling.textContent;
-                    navigator.clipboard.writeText(code).then(()=>{
-                        showNotification('Code copied!');
-                    }).catch(()=>{
-                        showNotification('Failed to copy code.','error');
-                    });
-                });
-            });
+            const[messageId,message]=nextMessage;
+            messageQueue.delete(messageId);
+            addMessageToChat(message,'user');
+            conversationHistory.push({role:"user",content:message});
+            userProfile.history.push(message);
+            userProfile.usage++;
+            updateUserDashboard();
+            loadingSpinner.style.display='block';
+            typingIndicator.style.display='block';
+            setTimeout(async()=>{
+                await processMessage(message);
+                loadingSpinner.style.display='none';
+                typingIndicator.style.display='none';
+                isProcessing=false;
+                processNextMessage();
+            },100);
+        }
+
+        function handleSendMessage(){
+            const message=userInput.value.trim();
+            if(!message||generationLock)return;
+            generationLock=true;
+            userInput.value='';
+            userInput.style.height='auto';
+            const messageId=Date.now().toString();
+            messageQueue.set(messageId,message);
+            processNextMessage();
         }
 
         userInput.addEventListener('input',()=>{
             userInput.style.height='auto';
             userInput.style.height=`${userInput.scrollHeight}px`;
+            sendBtn.disabled=!userInput.value.trim()&&!filesArray.length;
         });
 
-        userInput.addEventListener('keydown',async(e)=>{
+        userInput.addEventListener('keypress',(e)=>{
             if(e.key==='Enter'&&!e.shiftKey){
                 e.preventDefault();
-                await handleUserInput();
+                handleSendMessage();
             }
         });
 
-        sendBtn.addEventListener('click',handleUserInput);
+        sendBtn.addEventListener('click',handleSendMessage);
 
         fileInput.addEventListener('change',async(e)=>{
-            filesArray=[...e.target.files];
-            fileList.innerHTML='';
-            for(const file of filesArray){
-                const extension=file.name.split('.').pop().toLowerCase();
-                if(unsafeExtensions.includes(`.${extension}`)){
-                    showNotification(`Warning: File ${file.name} has a potentially unsafe extension.`,'error');
-                }
-                const fileItem=document.createElement('div');
-                fileItem.className='file-item';
-                fileItem.innerHTML=`<div class="file-item-name">${file.name}</div><div class="file-item-details">${(file.size/1024/1024).toFixed(2)}MB</div>`;
-                fileList.appendChild(fileItem);
-                fileItem.addEventListener('click',async()=>{
-                    if(file.type.startsWith('image/')){
-                        filePreviewContent.innerHTML=`<img src="${await readImage(file)}" alt="${file.name}">`;
-                    }else if(file.type.startsWith('video/')){
-                        filePreviewContent.innerHTML=`<video controls><source src="${await readImage(file)}" type="${file.type}"></video>`;
-                    }else{
-                        filePreviewContent.textContent=await readText(file);
-                    }
-                    filePreviewModal.classList.add('open');
-                });
+            if(!hasPermission){
+                requestPermissions();
+                return;
             }
-            fileClearBtn.style.display='block';
+            await handleFileUpload(e.target.files);
         });
 
         fileClearBtn.addEventListener('click',()=>{
             filesArray=[];
             fileList.innerHTML='';
             fileClearBtn.style.display='none';
-            pastedImageHashes.clear();
         });
 
         filePreviewClose.addEventListener('click',()=>{
@@ -1112,27 +1264,28 @@
             sidebar.classList.remove('open');
         });
 
+        userProfileBtn.addEventListener('click',()=>{
+            userDashboard.classList.add('open');
+        });
+
+        dashboardClose.addEventListener('click',()=>{
+            userDashboard.classList.remove('open');
+        });
+
         clearChatBtn.addEventListener('click',()=>{
             chatHistory.innerHTML='';
-            conversationHistory=[{role:'assistant',content:aiModels[selectedAiModel].personality}];
-            const aiMessage=document.createElement('div');
-            aiMessage.className='chat-message ai';
-            aiMessage.innerHTML=`<div class="chat-message-content">${aiModels[selectedAiModel].personality}</div><div class="chat-message-meta">Just now</div>`;
-            chatHistory.appendChild(aiMessage);
-            chatArea.scrollTop=chatArea.scrollHeight;
+            conversationHistory=[{role:"assistant",content:aiModels[selectedAiModel].personality}];
+            addMessageToChat(aiModels[selectedAiModel].personality,'ai');
             sidebar.classList.remove('open');
         });
 
         copyCodeBtn.addEventListener('click',()=>{
-            if(!latestCodeBlocks.length){
-                showNotification('No code to copy.','error');
-                return;
-            }
-            navigator.clipboard.writeText(latestCodeBlocks.join('\n\n')).then(()=>{
+            if(latestCodeBlocks.length){
+                navigator.clipboard.writeText(latestCodeBlocks[latestCodeBlocks.length-1]);
                 showNotification('Code copied!');
-            }).catch(()=>{
-                showNotification('Failed to copy code.','error');
-            });
+            }else{
+                showNotification('No code to copy.','error');
+            }
             sidebar.classList.remove('open');
         });
 
@@ -1142,36 +1295,25 @@
         });
 
         verbiflowUpdatesBtn.addEventListener('click',()=>{
-            const aiMessage=document.createElement('div');
-            aiMessage.className='chat-message ai';
-            aiMessage.innerHTML=`<div class="chat-message-content">VerbiFlow updates: Now with faster responses, enhanced media generation, and improved UI for all devices!</div><div class="chat-message-meta">Just now</div>`;
-            chatHistory.appendChild(aiMessage);
-            chatArea.scrollTop=chatArea.scrollHeight;
-            conversationHistory.push({role:'assistant',content:'VerbiFlow updates: Now with faster responses, enhanced media generation, and improved UI for all devices!'});
+            addMessageToChat('VerbiFlow Updates: Now with enhanced AI models, faster responses, and new features like Discord bot hosting with Helper!','ai');
             sidebar.classList.remove('open');
         });
 
         premiumPriceBtn.addEventListener('click',()=>{
-            window.open('/planprice','_blank');
+            addMessageToChat('Please visit our pricing page for premium details: [Pricing Page](#).','ai');
             sidebar.classList.remove('open');
         });
 
         shareChatBtn.addEventListener('click',()=>{
             const chatContent=conversationHistory.map(msg=>`${msg.role}: ${msg.content}`).join('\n');
-            navigator.clipboard.writeText(chatContent).then(()=>{
-                showNotification('Chat copied to clipboard!');
-            }).catch(()=>{
-                showNotification('Failed to copy chat.','error');
-            });
+            navigator.clipboard.writeText(chatContent);
+            showNotification('Chat copied to clipboard!');
             sidebar.classList.remove('open');
         });
 
         shareWebsiteBtn.addEventListener('click',()=>{
-            navigator.clipboard.writeText(window.location.href).then(()=>{
-                showNotification('Website URL copied!');
-            }).catch(()=>{
-                showNotification('Failed to copy URL.','error');
-            });
+            navigator.clipboard.writeText(window.location.href);
+            showNotification('Website URL copied to clipboard!');
             sidebar.classList.remove('open');
         });
 
@@ -1190,100 +1332,47 @@
             toggleActionsBtn.classList.toggle('collapsed');
         });
 
-        generateMediaBtn.addEventListener('click',async()=>{
+        generateMediaBtn.addEventListener('click',()=>{
+            if(selectedAiModel!=='visualGeniusAI'){
+                showNotification('Switch to VisualGeniusAI for media generation.','error');
+                return;
+            }
+            const prompt=userInput.value.trim()||'Generate a random image';
+            messageQueue.set(Date.now().toString(),`Generate an image: ${prompt}`);
+            processNextMessage();
+        });
+
+        voiceSearchBtn.addEventListener('click',()=>{
             if(!hasPermission){
                 requestPermissions();
                 return;
             }
-            const prompt=userInput.value.trim()||'Generate a random image';
-            const userMessage=document.createElement('div');
-            userMessage.className='chat-message user';
-            userMessage.innerHTML=`<div class="chat-message-content">${prompt}</div><div class="chat-message-meta">Just now</div>`;
-            chatHistory.appendChild(userMessage);
-            conversationHistory.push({role:'user',content:prompt});
-            chatArea.scrollTop=chatArea.scrollHeight;
-            userInput.value='';
-            sendBtn.disabled=true;
-            loadingSpinner.style.display='block';
-            typingIndicator.style.display='block';
-            isGenerating=true;
-            stopGeneratingBtn.style.display='block';
-            abortController=new AbortController();
-            let mediaUrl;
-            try{
-                if(prompt.toLowerCase().includes('video')){
-                    mediaUrl=await MediaProcessor.generateVideo(prompt);
-                    const aiMessage=document.createElement('div');
-                    aiMessage.className='chat-message ai';
-                    aiMessage.innerHTML=`<div class="chat-message-content"><video controls><source src="${mediaUrl}" type="video/mp4"></video></div><div class="chat-message-meta">Just now</div>`;
-                    chatHistory.appendChild(aiMessage);
-                    conversationHistory.push({role:'assistant',content:`[Video] ${mediaUrl}`});
-                }else{
-                    mediaUrl=await MediaProcessor.generateImage(prompt);
-                    const aiMessage=document.createElement('div');
-                    aiMessage.className='chat-message ai';
-                    aiMessage.innerHTML=`<div class="chat-message-content"><img src="${mediaUrl}" alt="Generated Image"></div><div class="chat-message-meta">Just now</div>`;
-                    chatHistory.appendChild(aiMessage);
-                    conversationHistory.push({role:'assistant',content:`[Image] ${mediaUrl}`});
-                }
-            }catch(error){
-                showNotification('Error generating media.','error');
+            if(!('webkitSpeechRecognition' in window)){
+                showNotification('Speech recognition not supported.','error');
+                return;
             }
-            chatArea.scrollTop=chatArea.scrollHeight;
-            sendBtn.disabled=false;
-            loadingSpinner.style.display='none';
-            typingIndicator.style.display='none';
-            isGenerating=false;
-            stopGeneratingBtn.style.display='none';
+            recognition=new webkitSpeechRecognition();
+            recognition.continuous=false;
+            recognition.interimResults=false;
+            recognition.lang=selectedLanguage;
+            recognition.start();
+            recognition.onresult=(event)=>{
+                const transcript=event.results[0][0].transcript;
+                userInput.value=transcript;
+                handleSendMessage();
+            };
+            recognition.onerror=(event)=>{
+                showNotification(`Speech recognition error: ${event.error}`,'error');
+            };
         });
 
-        schoolHelpDropdown.addEventListener('change',async()=>{
+        schoolHelpDropdown.addEventListener('change',()=>{
             selectedSchoolMode=schoolHelpDropdown.value;
-            if(!selectedSchoolMode)return;
-            const prompts={
-                algebra:'Solve this algebra problem: 2x + 5 = 15',
-                science:'Explain the theory of relativity in simple terms.',
-                geometry:'Calculate the area of a circle with radius 5.',
-                history:'Summarize the causes of World War I.',
-                literature:'Analyze the themes in "To Kill a Mockingbird".',
-                physics:'Explain Newton’s laws of motion.',
-                chemistry:'Describe the periodic table trends.',
-                biology:'Explain the process of photosynthesis.',
-                robloxGame:'Create a simple Roblox game concept.',
-                googleSlides:'Generate a Google Slides presentation outline on climate change.',
-                videoAnalysis:'Analyze a short video about space exploration.',
-                robloxScripting:'Write a Roblox script for a door that opens on touch.'
-            };
-            const userMessage=document.createElement('div');
-            userMessage.className='chat-message user';
-            userMessage.innerHTML=`<div class="chat-message-content">${prompts[selectedSchoolMode]}</div><div class="chat-message-meta">Just now</div>`;
-            chatHistory.appendChild(userMessage);
-            conversationHistory.push({role:'user',content:prompts[selectedSchoolMode]});
-            chatArea.scrollTop=chatArea.scrollHeight;
-            sendBtn.disabled=true;
-            loadingSpinner.style.display='block';
-            typingIndicator.style.display='block';
-            isGenerating=true;
-            stopGeneratingBtn.style.display='block';
-            abortController=new AbortController();
-            try{
-                const response=await fetchResponse(prompts[selectedSchoolMode],true,API_URL);
-                const formattedResponse=formatAiResponse(response);
-                const aiMessage=document.createElement('div');
-                aiMessage.className='chat-message ai';
-                aiMessage.innerHTML=`<div class="chat-message-content">${formattedResponse}</div><div class="chat-message-meta">Just now</div>`;
-                chatHistory.appendChild(aiMessage);
-                chatArea.scrollTop=chatArea.scrollHeight;
-                conversationHistory.push({role:'assistant',content:response});
-                cacheResponse(prompts[selectedSchoolMode],response);
-            }catch(error){
-                showNotification('Error processing request.','error');
+            if(selectedSchoolMode){
+                const prompt=selectedSchoolMode==='discordBot'?'Set up a Discord bot with Helper.':`Help with ${selectedSchoolMode}.`;
+                messageQueue.set(Date.now().toString(),prompt);
+                processNextMessage();
             }
-            sendBtn.disabled=false;
-            loadingSpinner.style.display='none';
-            typingIndicator.style.display='none';
-            isGenerating=false;
-            stopGeneratingBtn.style.display='none';
         });
 
         aiModelDropdown.addEventListener('change',()=>{
@@ -1291,64 +1380,92 @@
             clearChatBtn.click();
         });
 
-        rephraseBtn.addEventListener('click',async()=>{
+        languageDropdown.addEventListener('change',()=>{
+            selectedLanguage=languageDropdown.value;
+            if(conversationHistory.length>1){
+                const lastMessage=conversationHistory[conversationHistory.length-1].content;
+                translateText(lastMessage,selectedLanguage).then(translated=>{
+                    addMessageToChat(translated,'ai');
+                });
+            }
+        });
+
+        rephraseBtn.addEventListener('click',()=>{
             if(!latestAiResponse){
-                showNotification('No AI response to rephrase.','error');
+                showNotification('No response to rephrase.','error');
                 return;
             }
-            const rephrased=rephraseResponse(latestAiResponse);
-            const aiMessage=document.createElement('div');
-            aiMessage.className='chat-message ai';
-            aiMessage.innerHTML=`<div class="chat-message-content">${formatAiResponse(rephrased)}</div><div class="chat-message-meta">Just now</div>`;
-            chatHistory.appendChild(aiMessage);
-            chatArea.scrollTop=chatArea.scrollHeight;
-            conversationHistory.push({role:'assistant',content:rephrased});
+            messageQueue.set(Date.now().toString(),`Rephrase this: ${latestAiResponse}`);
+            processNextMessage();
         });
 
         stopGeneratingBtn.addEventListener('click',()=>{
-            if(isGenerating){
-                abortController?.abort();
-                isGenerating=false;
-                stopGeneratingBtn.style.display='none';
-                loadingSpinner.style.display='none';
-                typingIndicator.style.display='none';
-                sendBtn.disabled=false;
+            if(abortController){
+                abortController.abort();
             }
         });
 
-        document.addEventListener('paste',async(e)=>{
+        feedbackBtn.addEventListener('click',()=>{
+            feedbackModal.classList.add('open');
+        });
+
+        feedbackSubmitBtn.addEventListener('click',()=>{
+            const feedback=feedbackInput.value.trim();
+            if(feedback){
+                showNotification('Thank you for your feedback!');
+                feedbackModal.classList.remove('open');
+                feedbackInput.value='';
+            }else{
+                showNotification('Please enter feedback.','error');
+            }
+        });
+
+        grantPermissionBtn.addEventListener('click',()=>{
+            hasPermission=true;
+            permissionModal.classList.remove('open');
+            showNotification('Permissions granted!');
+        });
+
+        denyPermissionBtn.addEventListener('click',()=>{
+            hasPermission=false;
+            permissionModal.classList.remove('open');
+            showNotification('Permissions denied.','error');
+        });
+
+        userPreferences.addEventListener('change',()=>{
+            userProfile.preferences=userPreferences.value;
+            updateUserDashboard();
+        });
+
+        window.addEventListener('paste',async(e)=>{
             const items=e.clipboardData.items;
             for(const item of items){
                 if(item.type.startsWith('image/')){
                     const file=item.getAsFile();
-                    const hash=sha256(await readImage(file));
+                    const hash=sha256(await file.text());
                     if(pastedImageHashes.has(hash))continue;
                     pastedImageHashes.add(hash);
-                    filesArray.push(file);
-                    const fileItem=document.createElement('div');
-                    fileItem.className='file-item';
-                    fileItem.innerHTML=`<div class="file-item-name">Pasted Image</div><div class="file-item-details">${(file.size/1024/1024).toFixed(2)}MB</div>`;
-                    fileList.appendChild(fileItem);
-                    fileItem.addEventListener('click',async()=>{
-                        filePreviewContent.innerHTML=`<img src="${await readImage(file)}" alt="Pasted Image">`;
-                        filePreviewModal.classList.add('open');
-                    });
-                    fileClearBtn.style.display='block';
+                    await handleFileUpload([file]);
+                    messageQueue.set(Date.now().toString(),`Analyze this image.`);
+                    processNextMessage();
                 }
             }
         });
 
-        window.addEventListener('beforeunload',()=>{
-            if(backgroundAudio)backgroundAudio.pause();
-            if(ws)ws.close();
-            workerPool.forEach(worker=>worker.terminate());
+        window.addEventListener('resize',()=>{
+            userInput.style.height='auto';
+            userInput.style.height=`${userInput.scrollHeight}px`;
         });
 
-        loadTheme();
-        initializeDB();
-        initializeWorkerPool();
-        setInterval(prefetchResponses,800);
-        setInterval(batchProcessRequests,150);
+        document.addEventListener('DOMContentLoaded',()=>{
+            loadTheme();
+            initializeWebSocket();
+            initializeDB();
+            loadConversations();
+            initializeWorkerPool();
+            prefetchResources();
+            updateUserDashboard();
+        });
     </script>
 </body>
 </html>
