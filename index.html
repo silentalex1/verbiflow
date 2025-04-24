@@ -13,34 +13,34 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
         body {
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-            color: #1e293b;
-            line-height: 1.6;
+            background: linear-gradient(145deg, #f9fbfd 0%, #e5ecf5 100%);
+            color: #1a2535;
+            line-height: 1.7;
             overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.5s cubic-bezier(0.33, 1, 0.68, 1);
         }
         body.dark-mode {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            color: #e2e8f0;
+            background: linear-gradient(145deg, #1a2535 0%, #0d1421 100%);
+            color: #e5ecf5;
         }
         body.custom-theme {
-            background: var(--custom-bg, #f8fafc) !important;
+            background: var(--custom-bg, #f9fbfd) !important;
         }
         body.custom-theme .chat-message.ai {
-            background: var(--custom-ai-bg, #e0f2fe) !important;
+            background: var(--custom-ai-bg, #e6f3ff) !important;
         }
         body.custom-theme .chat-message.user {
-            background: var(--custom-user-bg, #ecfdf5) !important;
+            background: var(--custom-user-bg, #e9fff3) !important;
         }
         body.custom-theme .sidebar, body.custom-theme .modal {
             background: var(--custom-secondary, #ffffff) !important;
         }
         body.custom-theme .btn, body.custom-theme .modal button {
-            background: var(--custom-primary, #3b82f6) !important;
+            background: var(--custom-primary, #4a90e2) !important;
             color: var(--custom-text, #ffffff) !important;
         }
         body.custom-theme .chat-area, body.custom-theme .chat-input-area {
-            background: var(--custom-gradient, #e2e8f0) !important;
+            background: var(--custom-gradient, #e5ecf5) !important;
         }
         .container {
             display: flex;
@@ -50,16 +50,16 @@
             overflow: hidden;
         }
         .sidebar {
-            width: 280px;
+            width: 300px;
             background: #ffffff;
-            padding: 20px;
+            padding: 24px;
             position: fixed;
             top: 0;
-            left: -280px;
+            left: -300px;
             height: 100%;
-            transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: left 0.5s cubic-bezier(0.33, 1, 0.68, 1);
             z-index: 1000;
-            box-shadow: 3px 0 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.04);
         }
         .sidebar.open {
             left: 0;
@@ -68,135 +68,135 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
         .sidebar h2 {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 600;
-            color: #3b82f6;
+            color: #4a90e2;
         }
         .sidebar-close {
             background: none;
             border: none;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             cursor: pointer;
-            color: #ef4444;
+            color: #ff4d4f;
             transition: color 0.3s ease;
         }
         .sidebar-close:hover {
-            color: #dc2626;
+            color: #e63946;
         }
         .sidebar-content {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            max-height: calc(100vh - 80px);
+            gap: 14px;
+            max-height: calc(100vh - 90px);
             overflow-y: auto;
             scrollbar-width: thin;
-            scrollbar-color: #94a3b8 #e2e8f0;
+            scrollbar-color: #a0aec0 #e5ecf5;
         }
         .sidebar-content::-webkit-scrollbar {
-            width: 6px;
+            width: 5px;
         }
         .sidebar-content::-webkit-scrollbar-track {
-            background: #e2e8f0;
-            border-radius: 3px;
+            background: #e5ecf5;
+            border-radius: 4px;
         }
         .sidebar-content::-webkit-scrollbar-thumb {
-            background: #94a3b8;
-            border-radius: 3px;
+            background: #a0aec0;
+            border-radius: 4px;
         }
         .sidebar-content select, .sidebar-content button {
-            padding: 10px 12px;
+            padding: 12px 14px;
             font-size: 0.95rem;
-            border-radius: 6px;
-            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            border: 1px solid #e5ecf5;
             width: 100%;
             cursor: pointer;
             transition: all 0.3s ease;
         }
         .sidebar-content select {
-            background: #f8fafc;
-            color: #1e293b;
+            background: #f9fbfd;
+            color: #1a2535;
         }
         .sidebar-content button {
-            background: #3b82f6;
+            background: #4a90e2;
             color: white;
             border: none;
             font-weight: 500;
         }
         .sidebar-content button:hover {
-            background: #2563eb;
+            background: #3b82f6;
             transform: translateY(-1px);
-            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
+            box-shadow: 0 3px 10px rgba(74, 144, 226, 0.15);
         }
         .main-content {
             flex: 1;
             display: flex;
             flex-direction: column;
             margin-left: 0;
-            transition: margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: margin-left 0.5s cubic-bezier(0.33, 1, 0.68, 1);
         }
         .chat-header {
             background: #ffffff;
-            padding: 12px 20px;
+            padding: 14px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
         }
         .menu-btn, .theme-btn, .user-profile-btn {
-            background: #3b82f6;
+            background: #4a90e2;
             color: white;
             border: none;
-            padding: 8px 14px;
-            border-radius: 6px;
+            padding: 9px 16px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 0.95rem;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             transition: all 0.3s ease;
         }
         .menu-btn:hover, .theme-btn:hover, .user-profile-btn:hover {
-            background: #2563eb;
+            background: #3b82f6;
             transform: translateY(-1px);
-            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
+            box-shadow: 0 3px 10px rgba(74, 144, 226, 0.15);
         }
         .chat-area {
             flex: 1;
             overflow-y: auto;
-            padding: 20px;
-            background: #f8fafc;
+            padding: 24px;
+            background: #f9fbfd;
             position: relative;
             scrollbar-width: thin;
-            scrollbar-color: #94a3b8 #f8fafc;
+            scrollbar-color: #a0aec0 #f9fbfd;
         }
         .chat-area::-webkit-scrollbar {
-            width: 6px;
+            width: 5px;
         }
         .chat-area::-webkit-scrollbar-track {
-            background: #f8fafc;
-            border-radius: 3px;
+            background: #f9fbfd;
+            border-radius: 4px;
         }
         .chat-area::-webkit-scrollbar-thumb {
-            background: #94a3b8;
-            border-radius: 3px;
+            background: #a0aec0;
+            border-radius: 4px;
         }
         .chat-history {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 14px;
         }
         .chat-message {
             display: flex;
             flex-direction: column;
-            max-width: 80%;
-            padding: 10px;
-            border-radius: 10px;
+            max-width: 78%;
+            padding: 12px;
+            border-radius: 12px;
             opacity: 0;
-            transform: translateY(15px) scale(0.98);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(20px) scale(0.97);
+            transition: all 0.6s cubic-bezier(0.33, 1, 0.68, 1);
         }
         .chat-message.visible {
             opacity: 1;
@@ -204,65 +204,65 @@
         }
         .chat-message.user {
             align-self: flex-end;
-            background: #ecfdf5;
+            background: #e9fff3;
         }
         .chat-message.ai {
             align-self: flex-start;
-            background: #e0f2fe;
+            background: #e6f3ff;
         }
         .chat-message.threaded-message {
-            margin-left: 40px;
-            border-left: 2px solid #3b82f6;
-            padding-left: 10px;
+            margin-left: 48px;
+            border-left: 2px solid #4a90e2;
+            padding-left: 12px;
         }
         .chat-message.pinned {
-            border: 2px solid #fef08a;
+            border: 2px solid #fef9c3;
             background: #fefce8;
         }
         .chat-message-content {
-            padding: 12px 16px;
-            font-size: 15px;
-            line-height: 1.5;
+            padding: 14px 18px;
+            font-size: 15.5px;
+            line-height: 1.6;
             word-wrap: break-word;
-            border-radius: 8px;
+            border-radius: 10px;
         }
         .chat-message-meta {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.75rem;
-            color: #64748b;
-            margin-top: 6px;
+            font-size: 0.8rem;
+            color: #6b7280;
+            margin-top: 8px;
         }
         .chat-message-actions {
             display: flex;
-            gap: 6px;
+            gap: 8px;
             align-items: center;
         }
         .chat-message-actions button {
             background: none;
             border: none;
             cursor: pointer;
-            color: #3b82f6;
-            font-size: 0.75rem;
+            color: #4a90e2;
+            font-size: 0.8rem;
             transition: color 0.3s ease;
         }
         .chat-message-actions button:hover {
-            color: #2563eb;
+            color: #3b82f6;
         }
         .reaction-emoji {
-            font-size: 0.9rem;
-            margin-right: 4px;
+            font-size: 0.95rem;
+            margin-right: 5px;
         }
         .typing-indicator {
             display: none;
-            font-size: 0.85rem;
-            color: #64748b;
-            margin: 12px 0;
+            font-size: 0.9rem;
+            color: #6b7280;
+            margin: 14px 0;
         }
         .typing-indicator::after {
             content: '...';
-            animation: dots 1.2s infinite;
+            animation: dots 1.4s infinite;
         }
         @keyframes dots {
             0%, 20% { content: '.'; }
@@ -271,13 +271,13 @@
         }
         .response-spinner {
             display: none;
-            width: 18px;
-            height: 18px;
-            border: 2px solid #3b82f6;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #4a90e2;
             border-top: 2px solid transparent;
             border-radius: 50%;
-            animation: spin 0.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-            margin: 12px 0;
+            animation: spin 0.9s cubic-bezier(0.33, 1, 0.68, 1) infinite;
+            margin: 14px 0;
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }
@@ -286,17 +286,17 @@
         .chat-input-area {
             display: flex;
             flex-direction: column;
-            padding: 12px;
+            padding: 14px;
             background: #ffffff;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 -3px 12px rgba(0, 0, 0, 0.04);
         }
         .file-actions-container {
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            margin-bottom: 12px;
-            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
-            max-height: 200px;
+            gap: 10px;
+            margin-bottom: 14px;
+            transition: max-height 0.5s cubic-bezier(0.33, 1, 0.68, 1), opacity 0.5s ease;
+            max-height: 220px;
             opacity: 1;
             overflow: hidden;
         }
@@ -306,83 +306,83 @@
         }
         .file-input-wrapper {
             display: flex;
-            gap: 8px;
+            gap: 10px;
             align-items: center;
         }
         .file-input {
             display: none;
         }
         .file-input-label, .file-clear-btn {
-            padding: 8px 12px;
-            background: #3b82f6;
+            padding: 9px 14px;
+            background: #4a90e2;
             color: white;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 0.9rem;
             transition: all 0.3s ease;
         }
         .file-clear-btn {
             display: none;
-            background: #ef4444;
+            background: #ff4d4f;
         }
         .file-input-label:hover, .file-clear-btn:hover {
             transform: translateY(-1px);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
         }
         .file-list {
             display: flex;
             flex-direction: column;
-            gap: 6px;
-            max-height: 100px;
+            gap: 8px;
+            max-height: 110px;
             overflow-y: auto;
             scrollbar-width: thin;
-            scrollbar-color: #94a3b8 #f8fafc;
+            scrollbar-color: #a0aec0 #f9fbfd;
         }
         .file-list::-webkit-scrollbar {
-            width: 6px;
+            width: 5px;
         }
         .file-list::-webkit-scrollbar-track {
-            background: #f8fafc;
-            border-radius: 3px;
+            background: #f9fbfd;
+            border-radius: 4px;
         }
         .file-list::-webkit-scrollbar-thumb {
-            background: #94a3b8;
-            border-radius: 3px;
+            background: #a0aec0;
+            border-radius: 4px;
         }
         .file-item {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 6px 8px;
-            background: #f1f5f9;
-            border-radius: 6px;
+            gap: 10px;
+            padding: 8px 10px;
+            background: #f3f7fb;
+            border-radius: 8px;
             cursor: pointer;
             transition: background 0.3s ease;
         }
         .file-item:hover {
-            background: #e2e8f0;
+            background: #e5ecf5;
         }
         .file-item-name {
             flex: 1;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
         }
         .file-item-details {
-            font-size: 0.75rem;
-            color: #64748b;
+            font-size: 0.8rem;
+            color: #6b7280;
         }
         .toggle-actions-btn {
             align-self: flex-end;
-            background: #3b82f6;
+            background: #4a90e2;
             color: white;
             border: none;
-            padding: 6px 10px;
-            border-radius: 6px;
+            padding: 7px 12px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             transition: all 0.3s ease;
         }
         .toggle-actions-btn:hover {
-            background: #2563eb;
+            background: #3b82f6;
         }
         .toggle-actions-btn.collapsed::after {
             content: 'Show File Actions';
@@ -392,45 +392,45 @@
         }
         .input-wrapper {
             display: flex;
-            gap: 8px;
+            gap: 10px;
             align-items: center;
         }
         .user-input {
             flex: 1;
-            padding: 10px;
-            border: 1px solid #e2e8f0;
-            border-radius: 6px;
+            padding: 12px;
+            border: 1px solid #e5ecf5;
+            border-radius: 8px;
             resize: none;
             font-size: 0.95rem;
-            min-height: 40px;
-            max-height: 120px;
+            min-height: 44px;
+            max-height: 130px;
             overflow-y: auto;
-            background: #f8fafc;
+            background: #f9fbfd;
             transition: all 0.3s ease;
         }
         .user-input:focus {
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            border-color: #4a90e2;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
             background: #ffffff;
         }
         .send-btn, .rephrase-btn, .stop-generating-btn {
-            padding: 8px 14px;
-            background: #3b82f6;
+            padding: 9px 16px;
+            background: #4a90e2;
             color: white;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 0.95rem;
             transition: all 0.3s ease;
         }
         .send-btn:hover, .rephrase-btn:hover, .stop-generating-btn:hover {
-            background: #2563eb;
+            background: #3b82f6;
             transform: translateY(-1px);
-            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
+            box-shadow: 0 3px 10px rgba(74, 144, 226, 0.15);
         }
         .stop-generating-btn {
             display: none;
-            background: #ef4444;
+            background: #ff4d4f;
         }
         .modal {
             position: fixed;
@@ -438,14 +438,14 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.65);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 1000;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.5s cubic-bezier(0.33, 1, 0.68, 1);
         }
         .modal.open {
             opacity: 1;
@@ -453,83 +453,83 @@
         }
         .modal-content {
             background: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
+            padding: 24px;
+            border-radius: 12px;
             width: 90%;
-            max-width: 500px;
-            max-height: 80vh;
+            max-width: 520px;
+            max-height: 82vh;
             overflow-y: auto;
             position: relative;
-            transform: scale(0.95);
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: scale(0.94);
+            transition: transform 0.5s cubic-bezier(0.33, 1, 0.68, 1);
         }
         .modal.open .modal-content {
             transform: scale(1);
         }
         .modal-content h3 {
-            margin-bottom: 15px;
-            font-size: 1.25rem;
+            margin-bottom: 18px;
+            font-size: 1.3rem;
             font-weight: 600;
         }
         .modal-content input, .modal-content textarea, .modal-content select {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 12px;
-            border: 1px solid #e2e8f0;
-            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 14px;
+            border: 1px solid #e5ecf5;
+            border-radius: 8px;
             font-size: 0.95rem;
             transition: all 0.3s ease;
         }
         .modal-content input:focus, .modal-content textarea:focus, .modal-content select:focus {
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            border-color: #4a90e2;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
         }
         .modal-content textarea {
             resize: vertical;
-            min-height: 100px;
+            min-height: 110px;
         }
         .modal-content button {
-            padding: 8px 14px;
-            background: #3b82f6;
+            padding: 9px 16px;
+            background: #4a90e2;
             color: white;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
-            margin-right: 8px;
+            margin-right: 10px;
             transition: all 0.3s ease;
         }
         .modal-content button:hover {
-            background: #2563eb;
+            background: #3b82f6;
             transform: translateY(-1px);
         }
         .modal-content button.cancel {
-            background: #ef4444;
+            background: #ff4d4f;
         }
         .modal-content button.cancel:hover {
-            background: #dc2626;
+            background: #e63946;
         }
         .modal-close {
             position: absolute;
-            top: 12px;
-            right: 12px;
+            top: 14px;
+            right: 14px;
             background: none;
             border: none;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             cursor: pointer;
-            color: #ef4444;
+            color: #ff4d4f;
             transition: color 0.3s ease;
         }
         .modal-close:hover {
-            color: #dc2626;
+            color: #e63946;
         }
         .file-preview-modal .modal-content {
-            max-width: 700px;
+            max-width: 720px;
         }
         .file-preview-content {
             display: flex;
             justify-content: center;
             align-items: center;
-            max-height: 500px;
+            max-height: 520px;
             overflow: auto;
         }
         .file-preview-content img, .file-preview-content video {
@@ -539,44 +539,44 @@
         .zoom-controls {
             display: none;
             position: absolute;
-            bottom: 20px;
-            right: 20px;
-            gap: 8px;
+            bottom: 24px;
+            right: 24px;
+            gap: 10px;
         }
         .zoom-controls button {
-            padding: 8px;
-            font-size: 1.2rem;
-            background: #3b82f6;
+            padding: 9px;
+            font-size: 1.3rem;
+            background: #4a90e2;
             color: white;
-            border-radius: 6px;
+            border-radius: 8px;
             transition: all 0.3s ease;
         }
         .zoom-controls button:hover {
-            background: #2563eb;
+            background: #3b82f6;
         }
         .search-results {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
         }
         .search-result-item {
-            padding: 10px;
-            background: #f1f5f9;
-            border-radius: 6px;
+            padding: 12px;
+            background: #f3f7fb;
+            border-radius: 8px;
             cursor: pointer;
             transition: background 0.3s ease;
         }
         .search-result-item:hover {
-            background: #e2e8f0;
+            background: #e5ecf5;
         }
         .highlight {
-            background: #fef08a;
+            background: #fef9c3;
             font-weight: 500;
         }
         .theme-customizer {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 14px;
         }
         .theme-customizer div {
             flex: 1 1 45%;
@@ -584,66 +584,66 @@
             flex-direction: column;
         }
         .theme-customizer label {
-            font-size: 0.85rem;
-            margin-bottom: 4px;
-            color: #64748b;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            color: #6b7280;
         }
         .theme-customizer input[type="color"] {
             padding: 0;
-            height: 40px;
+            height: 42px;
             cursor: pointer;
             border: none;
         }
         .theme-preview {
             width: 100%;
-            height: 50px;
-            margin-top: 12px;
-            border-radius: 6px;
-            border: 1px solid #e2e8f0;
+            height: 55px;
+            margin-top: 14px;
+            border-radius: 8px;
+            border: 1px solid #e5ecf5;
         }
         .notification {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 10px 20px;
-            background: #22c55e;
+            top: 24px;
+            right: 24px;
+            padding: 12px 24px;
+            background: #34d399;
             color: white;
-            border-radius: 6px;
+            border-radius: 8px;
             opacity: 0;
-            transform: translateY(-10px);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(-12px);
+            transition: all 0.5s cubic-bezier(0.33, 1, 0.68, 1);
             z-index: 1001;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
         }
         .notification.show {
             opacity: 1;
             transform: translateY(0);
         }
         .notification.error {
-            background: #ef4444;
+            background: #ff4d4f;
         }
         .back-to-top-btn {
             position: fixed;
-            bottom: 80px;
-            right: 20px;
-            background: #3b82f6;
+            bottom: 90px;
+            right: 24px;
+            background: #4a90e2;
             color: white;
             border: none;
-            padding: 10px;
+            padding: 12px;
             border-radius: 50%;
             cursor: pointer;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.5s cubic-bezier(0.33, 1, 0.68, 1);
         }
         .back-to-top-btn.visible {
             opacity: 1;
             visibility: visible;
         }
         .message-counter {
-            font-size: 0.85rem;
-            color: #64748b;
-            margin-left: 12px;
+            font-size: 0.9rem;
+            color: #6b7280;
+            margin-left: 14px;
         }
         .preloader {
             position: fixed;
@@ -656,17 +656,17 @@
             justify-content: center;
             align-items: center;
             z-index: 1002;
-            transition: opacity 0.6s ease;
+            transition: opacity 0.7s ease;
         }
         .preloader.hidden {
             opacity: 0;
             pointer-events: none;
         }
         .loading-text {
-            font-size: 1.1rem;
-            color: #3b82f6;
+            font-size: 1.2rem;
+            color: #4a90e2;
             opacity: 0;
-            transition: opacity 0.4s ease;
+            transition: opacity 0.5s ease;
         }
         .loading-text.visible {
             opacity: 1;
@@ -674,24 +674,24 @@
         .api-key-container {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            max-width: 400px;
+            gap: 14px;
+            max-width: 420px;
             opacity: 0;
-            transition: opacity 0.6s ease;
+            transition: opacity 0.7s ease;
         }
         .api-key-container.visible {
             opacity: 1;
         }
         .api-key-container input {
-            padding: 10px;
-            border: 1px solid #e2e8f0;
-            border-radius: 6px;
+            padding: 12px;
+            border: 1px solid #e5ecf5;
+            border-radius: 8px;
             font-size: 0.95rem;
             transition: all 0.3s ease;
         }
         .api-key-container input:focus {
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            border-color: #4a90e2;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
         }
         body.mobile .sidebar {
             width: 100%;
@@ -701,17 +701,17 @@
             left: 0;
         }
         body.mobile .chat-message {
-            max-width: 90%;
+            max-width: 92%;
         }
         body.mobile .modal-content {
-            width: 95%;
+            width: 96%;
         }
         body.chromebook .chat-area {
             font-size: 0.9rem;
         }
         .typing-animation::after {
             content: '|';
-            animation: blink 0.8s infinite;
+            animation: blink 0.9s infinite;
         }
         @keyframes blink {
             0%, 100% { opacity: 1; }
@@ -738,6 +738,7 @@
                     <option value="default">Default Model</option>
                     <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
                     <option value="gpt-4">GPT-4</option>
+                    <option value="chatgpt-5">ChatGPT-5 (Free)</option>
                 </select>
                 <select id="languageDropdown">
                     <option value="en">English</option>
@@ -836,7 +837,7 @@
             <div class="theme-customizer">
                 <div>
                     <label>Primary Color</label>
-                    <input type="color" id="primaryColor" value="#3b82f6">
+                    <input type="color" id="primaryColor" value="#4a90e2">
                 </div>
                 <div>
                     <label>Secondary Color</label>
@@ -848,19 +849,19 @@
                 </div>
                 <div>
                     <label>Background</label>
-                    <input type="color" id="bgColor" value="#f8fafc">
+                    <input type="color" id="bgColor" value="#f9fbfd">
                 </div>
                 <div>
                     <label>AI Message BG</label>
-                    <input type="color" id="aiBgColor" value="#e0f2fe">
+                    <input type="color" id="aiBgColor" value="#e6f3ff">
                 </div>
                 <div>
                     <label>User Message BG</label>
-                    <input type="color" id="userBgColor" value="#ecfdf5">
+                    <input type="color" id="userBgColor" value="#e9fff3">
                 </div>
                 <div>
                     <label>Gradient Color</label>
-                    <input type="color" id="gradientColor" value="#e2e8f0">
+                    <input type="color" id="gradientColor" value="#e5ecf5">
                 </div>
             </div>
             <div class="theme-preview" id="themePreview"></div>
@@ -1004,16 +1005,18 @@
                 userStats: { messagesSent: 0, reactionsAdded: 0, threadsCreated: 0 },
                 searches: [],
                 notificationQueue: [],
-                rateLimit: { interval: 400, lastAction: 0 },
+                rateLimit: { interval: 350, lastAction: 0 },
                 currentPage: 1,
                 messagesPerPage: 50,
-                typingSpeed: 25,
+                typingSpeed: 20,
                 isGenerating: false,
                 apiKey: '',
                 isApiKeyValid: false,
                 deviceType: '',
                 conversationContext: [],
-                aiMemory: {}
+                aiMemory: {},
+                sentimentHistory: [],
+                userPreferences: { responseTone: 'neutral' }
             },
             dispatch(action) {
                 switch (action.type) {
@@ -1026,8 +1029,9 @@
                         this.state.messageCount++;
                         this.state.userStats.messagesSent++;
                         this.state.conversationContext.push({ role: action.payload.role, content: action.payload.content });
-                        if (this.state.conversationContext.length > 10) this.state.conversationContext.shift();
+                        if (this.state.conversationContext.length > 8) this.state.conversationContext.shift();
                         this.updateAIMemory(action.payload);
+                        this.analyzeSentiment(action.payload);
                         this.saveState();
                         break;
                     case 'ADD_THREAD_MESSAGE':
@@ -1039,8 +1043,9 @@
                         this.state.messageCount++;
                         this.state.userStats.messagesSent++;
                         this.state.conversationContext.push({ role: action.payload.role, content: action.payload.content });
-                        if (this.state.conversationContext.length > 10) this.state.conversationContext.shift();
+                        if (this.state.conversationContext.length > 8) this.state.conversationContext.shift();
                         this.updateAIMemory(action.payload);
+                        this.analyzeSentiment(action.payload);
                         this.saveState();
                         break;
                     case 'UPDATE_MESSAGE':
@@ -1099,6 +1104,11 @@
                         this.updateAIMemory(action.payload);
                         this.saveState();
                         break;
+                    case 'ADD_SENTIMENT':
+                        this.state.sentimentHistory.push(action.payload);
+                        if (this.state.sentimentHistory.length > 5) this.state.sentimentHistory.shift();
+                        this.saveState();
+                        break;
                 }
             },
             updateAIMemory(message) {
@@ -1107,8 +1117,21 @@
                     keywords.forEach(keyword => {
                         if (!this.state.aiMemory[keyword]) this.state.aiMemory[keyword] = [];
                         this.state.aiMemory[keyword].push({ id: message.id, content: message.content, timestamp: message.timestamp });
-                        if (this.state.aiMemory[keyword].length > 5) this.state.aiMemory[keyword].shift();
+                        if (this.state.aiMemory[keyword].length > 6) this.state.aiMemory[keyword].shift();
                     });
+                }
+            },
+            analyzeSentiment(message) {
+                if (message.role === 'user') {
+                    const content = message.content.toLowerCase();
+                    const positiveWords = ['great', 'good', 'awesome', 'happy', 'love'];
+                    const negativeWords = ['bad', 'terrible', 'hate', 'sad', 'angry'];
+                    let sentimentScore = 0;
+                    positiveWords.forEach(word => { if (content.includes(word)) sentimentScore += 1; });
+                    negativeWords.forEach(word => { if (content.includes(word)) sentimentScore -= 1; });
+                    const sentiment = sentimentScore > 0 ? 'positive' : sentimentScore < 0 ? 'negative' : 'neutral';
+                    this.dispatch({ type: 'ADD_SENTIMENT', payload: sentiment });
+                    this.state.userPreferences.responseTone = sentiment === 'positive' ? 'friendly' : sentiment === 'negative' ? 'empathetic' : 'neutral';
                 }
             },
             async loadState() {
@@ -1118,7 +1141,7 @@
                     if (savedState) {
                         this.state = { ...this.state, ...savedState, pinnedMessages: new Set(savedState.pinnedMessages || []) };
                     }
-                    const welcomeMessage = { id: Date.now(), role: 'ai', content: "Hey there, I’m VerbiFlow—your ultra-fast AI companion for creativity, coding, analytics, and more! What’s on your mind?", reactions: [], threadId: null, timestamp: Date.now() };
+                    const welcomeMessage = { id: Date.now(), role: 'ai', content: "Hello! I’m VerbiFlow, your advanced AI companion for creativity, coding, analytics, and more. What can I help you with today?", reactions: [], threadId: null, timestamp: Date.now() };
                     this.dispatch({ type: 'ADD_MESSAGE', payload: welcomeMessage });
                     this.dispatch({ type: 'SET_STATE', payload: { messageCount: 1 } });
                 } catch (error) {
@@ -1150,14 +1173,15 @@
                     return { success: false, message: 'Network error. Please check your connection.' };
                 }
             },
-            async getAIResponse(userMessage, apiKey, model, language, task, context, memory) {
+            async getAIResponse(userMessage, apiKey, model, language, task, context, memory, tone) {
                 try {
                     const taskPrompt = task ? `Task: ${task}. ` : '';
                     const langPrompt = language !== 'en' ? ` Respond in ${language}.` : '';
                     const contextPrompt = context.length ? `Previous conversation context: ${JSON.stringify(context)}. ` : '';
                     const memoryPrompt = Object.keys(memory).length ? `Relevant memory: ${JSON.stringify(memory)}. ` : '';
+                    const tonePrompt = tone !== 'neutral' ? `Respond in a ${tone} tone. ` : '';
                     const controller = new AbortController();
-                    const timeoutId = setTimeout(() => controller.abort(), 4000);
+                    const timeoutId = setTimeout(() => controller.abort(), 3000);
                     const response = await fetch('https://api.openai.com/v1/chat/completions', {
                         method: 'POST',
                         headers: {
@@ -1165,16 +1189,16 @@
                             'Authorization': `Bearer ${apiKey}`
                         },
                         body: JSON.stringify({
-                            model: model === 'default' ? 'gpt-3.5-turbo' : model,
+                            model: model === 'default' ? 'gpt-3.5-turbo' : model === 'chatgpt-5' ? 'chatgpt-5' : model,
                             messages: [
-                                { role: 'system', content: `${taskPrompt}${contextPrompt}${memoryPrompt}You are VerbiFlow, an advanced AI companion for creativity, coding, analytics, and more. Provide concise, insightful, and context-aware responses.${langPrompt}` },
+                                { role: 'system', content: `${taskPrompt}${contextPrompt}${memoryPrompt}${tonePrompt}You are VerbiFlow, an advanced AI companion for creativity, coding, analytics, and more. Provide concise, insightful, and context-aware responses.${langPrompt}` },
                                 { role: 'user', content: userMessage }
                             ],
-                            max_tokens: 80,
-                            temperature: 0.5,
-                            top_p: 0.9,
-                            presence_penalty: 0.1,
-                            frequency_penalty: 0.1,
+                            max_tokens: 60,
+                            temperature: 0.4,
+                            top_p: 0.85,
+                            presence_penalty: 0.05,
+                            frequency_penalty: 0.05,
                             stream: true
                         }),
                         signal: controller.signal
@@ -1209,11 +1233,11 @@
                 }
             },
             async saveUserData(data) {
-                await new Promise(resolve => setTimeout(resolve, 80));
+                await new Promise(resolve => setTimeout(resolve, 60));
                 return { success: true, message: 'User data saved!' };
             },
             async analyzeFile(file) {
-                await new Promise(resolve => setTimeout(resolve, 150));
+                await new Promise(resolve => setTimeout(resolve, 120));
                 return `Analysis of ${file.name}: This is a ${file.type} file of size ${(file.size / 1024).toFixed(2)} KB. (Mock analysis)`;
             }
         };
@@ -1260,7 +1284,7 @@
                 elements.notification.className = 'notification';
                 store.dispatch({ type: 'DEQUEUE_NOTIFICATION' });
                 processNotificationQueue();
-            }, 2000);
+            }, 1800);
         };
         const sanitizeInput = input => {
             const div = document.createElement('div');
@@ -1294,7 +1318,7 @@
             document.body.style.setProperty('--custom-ai-bg', elements.aiBgColor.value);
             document.body.style.setProperty('--custom-user-bg', elements.userBgColor.value);
             document.body.style.setProperty('--custom-gradient', elements.gradientColor.value);
-            elements.themePreview.style.background = `linear-gradient(135deg, ${elements.bgColor.value}, ${elements.gradientColor.value})`;
+            elements.themePreview.style.background = `linear-gradient(145deg, ${elements.bgColor.value}, ${elements.gradientColor.value})`;
             localStorage.setItem('customTheme', JSON.stringify({
                 primary: elements.primaryColor.value,
                 secondary: elements.secondaryColor.value,
@@ -1512,7 +1536,8 @@
                 store.state.selectedLanguage,
                 store.state.selectedTask,
                 store.state.conversationContext,
-                relevantMemory
+                relevantMemory,
+                store.state.userPreferences.responseTone
             );
             const aiMessage = { id: Date.now(), role: 'ai', content: aiResponse, reactions: [], threadId, timestamp: Date.now() };
             if (threadId) {
@@ -1524,7 +1549,7 @@
             elements.responseSpinner.style.display = 'none';
             virtualRenderMessages();
         };
-        const debouncedSendMessage = debounce(handleSendMessage, 40);
+        const debouncedSendMessage = debounce(handleSendMessage, 30);
         const handleFileUpload = async event => {
             if (!checkRateLimit()) return;
             const files = Array.from(event.target.files);
@@ -1635,7 +1660,7 @@
             elements.chatArea.scrollTo({ top: 0, behavior: 'smooth' });
         };
         const handleScroll = () => {
-            const isScrolled = elements.chatArea.scrollTop > 300;
+            const isScrolled = elements.chatArea.scrollTop > 350;
             elements.backToTopBtn.classList.toggle('visible', isScrolled);
         };
         const saveUserProfile = () => {
@@ -1657,17 +1682,17 @@
             const fontSize = store.state.userProfile.preferences.fontSize;
             document.querySelectorAll('.chat-message-content').forEach(content => {
                 if (layout === 'compact') {
-                    content.style.padding = '8px 12px';
+                    content.style.padding = '9px 14px';
                     content.style.fontSize = `${fontSize - 2}px`;
                     content.style.lineHeight = '1.4';
                 } else if (layout === 'spacious') {
-                    content.style.padding = '16px 20px';
+                    content.style.padding = '18px 22px';
                     content.style.fontSize = `${fontSize + 2}px`;
-                    content.style.lineHeight = '1.8';
+                    content.style.lineHeight = '1.9';
                 } else {
-                    content.style.padding = '12px 16px';
+                    content.style.padding = '14px 18px';
                     content.style.fontSize = `${fontSize}px`;
-                    content.style.lineHeight = '1.5';
+                    content.style.lineHeight = '1.6';
                 }
             });
         };
@@ -1692,472 +1717,509 @@
         const searchMessages = () => {
             const query = elements.searchModalInput.value.trim();
             if (!query) {
-                elements.searchResults.innerHTML = '<p>Enter a search query.</p>';
-                return;
-            }
-            store.dispatch({ type: 'ADD_SEARCH', payload: query });
-            let results;
-            try {
-                const regex = new RegExp(query, 'i');
-                results = store.state.conversationHistory.filter(msg => regex.test(msg.content));
-            } catch (e) {
-                results = store.state.conversationHistory.filter(msg => msg.content.toLowerCase().includes(query.toLowerCase()));
-            }
-            elements.searchResults.innerHTML = '';
-            if (results.length === 0) {
-                elements.searchResults.innerHTML = '<p>No results found.</p>';
-                return;
-            }
-            results.forEach(msg => {
-                const resultItem = document.createElement('div');
-                resultItem.className = 'search-result-item';
-                resultItem.dataset.messageId = msg.id;
-                const highlightedContent = msg.content.replace(
-                    new RegExp(query, 'gi'),
-                    match => `<span class="highlight">${match}</span>`
-                );
-                resultItem.innerHTML = `<strong>${msg.role.toUpperCase()}</strong>: ${highlightedContent} <br><small>${formatRelativeTime(msg.timestamp)}</small>`;
-                elements.searchResults.appendChild(resultItem);
-            });
+                            elements.searchResults.innerHTML = '<p>Enter a search query.</p>';
+            return;
+        }
+        const searchResults = store.state.conversationHistory.filter(msg => 
+            msg.content.toLowerCase().includes(query.toLowerCase())
+        );
+        store.dispatch({ type: 'ADD_SEARCH', payload: query });
+        if (searchResults.length === 0) {
+            elements.searchResults.innerHTML = '<p>No results found.</p>';
+            return;
+        }
+        elements.searchResults.innerHTML = '';
+        searchResults.forEach(msg => {
+            const resultItem = document.createElement('div');
+            resultItem.className = 'search-result-item';
+            resultItem.dataset.messageId = msg.id;
+            const content = msg.content.replace(
+                new RegExp(query, 'gi'), 
+                match => `<span class="highlight">${match}</span>`
+            );
+            resultItem.innerHTML = `<strong>${msg.role.toUpperCase()}:</strong> ${content}`;
+            elements.searchResults.appendChild(resultItem);
+        });
+    };
+
+    const handleUpdatesClick = () => {
+        if (!checkRateLimit()) return;
+        window.open('https://verbiflow.site/updates', '_blank');
+        showNotification('Check out the latest VerbiFlow updates!');
+    };
+
+    const handlePremiumPriceClick = () => {
+        if (!checkRateLimit()) return;
+        window.open('https://verbiflow.site/pricing', '_blank');
+        showNotification('Explore our premium plans!');
+    };
+
+    const shareWebsiteCrossDevice = () => {
+        if (!checkRateLimit()) return;
+        const shareData = {
+            title: 'VerbiFlow',
+            text: 'Discover VerbiFlow - your ultra-fast AI companion for creativity, coding, and more!',
+            url: WEBSITE_URL
         };
-        const handleUpdatesClick = () => {
-            if (!checkRateLimit()) return;
-            window.open('https://verbiflow.site/updates', '_blank');
-            showNotification('Check out the latest updates!');
-        };
-        const handlePremiumPriceClick = () => {
-            if (!checkRateLimit()) return;
-            window.open('https://verbiflow.site/premium', '_blank');
-            showNotification('Explore our premium plans!');
-        };
-        const loadConversationHistory = () => {
+        if (navigator.share) {
+            navigator.share(shareData)
+                .then(() => showNotification('Website shared successfully!'))
+                .catch(() => {
+                    navigator.clipboard.writeText(`${shareData.title}: ${shareData.url}`)
+                        .then(() => showNotification('Link copied to clipboard!'))
+                        .catch(() => showNotification('Failed to share. Please copy the URL manually.', 'error'));
+                });
+        } else {
+            navigator.clipboard.writeText(`${shareData.title}: ${shareData.url}`)
+                .then(() => showNotification('Link copied to clipboard!'))
+                .catch(() => showNotification('Failed to share. Please copy the URL manually.', 'error'));
+        }
+    };
+
+    const loadConversationHistory = () => {
+        virtualRenderMessages();
+        if (store.state.filesArray.length) {
+            renderFileList();
+            elements.fileClearBtn.style.display = 'block';
+        }
+        elements.chatArea.scrollTo({ top: elements.chatArea.scrollHeight, behavior: 'smooth' });
+    };
+
+    const detectDevice = () => {
+        const ua = navigator.userAgent;
+        const isMobile = /Mobile|Android|iPhone|iPad/i.test(ua);
+        const isChromebook = /CrOS/i.test(ua);
+        const isTablet = /iPad|Android(?!.*Mobile)/i.test(ua);
+        const osMatch = ua.match(/(Windows|Macintosh|Linux|Android|iOS)/i);
+        const browserMatch = ua.match(/(Chrome|Safari|Firefox|Edge)/i);
+        store.dispatch({ type: 'SET_STATE', payload: { 
+            deviceType: isMobile ? 'mobile' : isChromebook ? 'chromebook' : isTablet ? 'tablet' : 'desktop',
+            deviceInfo: {
+                os: osMatch ? osMatch[0] : 'Unknown',
+                browser: browserMatch ? browserMatch[0] : 'Unknown'
+            }
+        } });
+        document.body.classList.add(isMobile ? 'mobile' : isChromebook ? 'chromebook' : isTablet ? 'tablet' : 'desktop');
+        return { isMobile, isChromebook, isTablet };
+    };
+
+    const showLoadingMessages = async () => {
+        const messages = [
+            `Detecting device... ${store.state.deviceInfo.os} on ${store.state.deviceInfo.browser}`,
+            'Optimizing UI for your device...',
+            'Loading advanced AI models...',
+            'Ready to assist!'
+        ];
+        for (let i = 0; i < messages.length; i++) {
+            elements.loadingText.textContent = messages[i];
+            elements.loadingText.classList.add('visible');
+            await new Promise(resolve => setTimeout(resolve, 650));
+            elements.loadingText.classList.remove('visible');
+            await new Promise(resolve => setTimeout(resolve, 150));
+        }
+    };
+
+    const handleApiKeySubmission = async () => {
+        const apiKey = elements.apiKeyInput.value.trim();
+        if (!apiKey) {
+            showNotification('Please enter an API key.', 'error');
+            return;
+        }
+        elements.apiKeySubmit.disabled = true;
+        elements.apiKeyInput.disabled = true;
+        const validation = await mockBackend.validateApiKey(apiKey);
+        if (validation.success) {
+            store.dispatch({ type: 'SET_STATE', payload: { apiKey, isApiKeyValid: true } });
+            showNotification(validation.message);
+            elements.preloader.classList.add('hidden');
+            setTimeout(() => {
+                elements.preloader.style.display = 'none';
+                loadConversationHistory();
+            }, 250);
+        } else {
+            showNotification(validation.message, 'error');
+            elements.apiKeySubmit.disabled = false;
+            elements.apiKeyInput.disabled = false;
+        }
+    };
+
+    elements.userInput.addEventListener('input', () => {
+        elements.userInput.style.height = '44px';
+        elements.userInput.style.height = `${elements.userInput.scrollHeight}px`;
+        store.dispatch({ type: 'SET_DRAFT', payload: { userInput: elements.userInput.value } });
+    });
+
+    elements.userInput.addEventListener('keypress', e => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            debouncedSendMessage();
+        }
+    });
+
+    elements.sendBtn.addEventListener('click', () => debouncedSendMessage());
+
+    elements.fileInput.addEventListener('change', handleFileUpload);
+
+    elements.fileClearBtn.addEventListener('click', clearFiles);
+
+    elements.fileList.addEventListener('click', e => {
+        const fileItem = e.target.closest('.file-item');
+        if (!fileItem) return;
+        const fileId = parseFloat(fileItem.dataset.fileId);
+        const fileObj = store.state.filesArray.find(f => f.id === fileId);
+        if (fileObj) previewFile(fileObj);
+    });
+
+    elements.filePreviewClose.addEventListener('click', () => elements.filePreviewModal.classList.remove('open'));
+
+    elements.zoomIn.addEventListener('click', zoomIn);
+
+    elements.zoomOut.addEventListener('click', zoomOut);
+
+    elements.menuBtn.addEventListener('click', toggleSidebar);
+
+    elements.sidebarClose.addEventListener('click', toggleSidebar);
+
+    elements.clearChatBtn.addEventListener('click', () => {
+        if (!checkRateLimit()) return;
+        elements.confirmClearModal.classList.add('open');
+    });
+
+    elements.confirmClearModalClose.addEventListener('click', () => elements.confirmClearModal.classList.remove('open'));
+
+    elements.confirmClearBtn.addEventListener('click', () => {
+        if (!checkRateLimit()) return;
+        store.dispatch({ type: 'SET_STATE', payload: { 
+            conversationHistory: [], 
+            messageCount: 0, 
+            pinnedMessages: new Set(), 
+            threads: {},
+            userStats: { ...store.state.userStats, messagesSent: 0, reactionsAdded: 0, threadsCreated: 0 },
+            conversationContext: [],
+            aiMemory: {},
+            sentimentHistory: [],
+            userPreferences: { responseTone: 'neutral' }
+        } });
+        const welcomeMessage = { id: Date.now(), role: 'ai', content: "Hello! I’m VerbiFlow, your advanced AI companion for creativity, coding, analytics, and more. What can I help you with today?", reactions: [], threadId: null, timestamp: Date.now() };
+        store.dispatch({ type: 'ADD_MESSAGE', payload: welcomeMessage });
+        store.dispatch({ type: 'SET_STATE', payload: { messageCount: 1 } });
+        virtualRenderMessages();
+        elements.confirmClearModal.classList.remove('open');
+        showNotification('Conversation cleared!');
+        toggleSidebar();
+    });
+
+    elements.cancelClearBtn.addEventListener('click', () => {
+        elements.confirmClearModal.classList.remove('open');
+    });
+
+    elements.copyCodeBtn.addEventListener('click', () => {
+        if (!checkRateLimit()) return;
+        if (store.state.latestCodeBlocks.length) {
+            navigator.clipboard.writeText(store.state.latestCodeBlocks.join('\n'));
+            showNotification('Code copied to clipboard!');
+        } else {
+            showNotification('No code blocks to copy.', 'error');
+        }
+    });
+
+    elements.discordBtn.addEventListener('click', () => {
+        if (!checkRateLimit()) return;
+        window.open(DISCORD_INVITE, '_blank');
+        showNotification('Join our Discord community!');
+    });
+
+    elements.verbiflowUpdatesBtn.addEventListener('click', handleUpdatesClick);
+
+    elements.premiumPriceBtn.addEventListener('click', handlePremiumPriceClick);
+
+    elements.shareChatBtn.addEventListener('click', () => {
+        if (!checkRateLimit()) return;
+        const shareData = { title: 'VerbiFlow Chat', text: 'Check out my chat on VerbiFlow!', url: window.location.href };
+        if (navigator.share) {
+            navigator.share(shareData)
+                .then(() => showNotification('Chat shared successfully!'))
+                .catch(() => showNotification('Sharing not supported on this device.', 'error'));
+        } else {
+            navigator.clipboard.writeText(`${shareData.title}: ${shareData.url}`)
+                .then(() => showNotification('Chat link copied to clipboard!'))
+                .catch(() => showNotification('Failed to share chat.', 'error'));
+        }
+    });
+
+    elements.shareWebsiteBtn.addEventListener('click', shareWebsiteCrossDevice);
+
+    elements.themeBtn.addEventListener('click', toggleTheme);
+
+    elements.userProfileBtn.addEventListener('click', () => {
+        if (!checkRateLimit()) return;
+        elements.usernameInput.value = store.state.userProfile.username;
+        elements.chatLayoutSelect.value = store.state.userProfile.chatLayout;
+        elements.fontSizeInput.value = store.state.userProfile.preferences.fontSize;
+        elements.autoScrollToggle.checked = store.state.userProfile.preferences.autoScroll;
+        elements.userProfileModal.classList.add('open');
+    });
+
+    elements.userProfileClose.addEventListener('click', () => elements.userProfileModal.classList.remove('open'));
+
+    elements.usernameInput.addEventListener('change', saveUserProfile);
+
+    elements.chatLayoutSelect.addEventListener('change', saveUserProfile);
+
+    elements.fontSizeInput.addEventListener('change', saveUserProfile);
+
+    elements.autoScrollToggle.addEventListener('change', saveUserProfile);
+
+    elements.toggleActionsBtn.addEventListener('click', toggleFileActions);
+
+    elements.generateMediaBtn.addEventListener('click', () => {
+        if (!checkRateLimit()) return;
+        showNotification('Media generation is a premium feature. Please upgrade!');
+    });
+
+    elements.voiceSearchBtn.addEventListener('click', () => {
+        if (!checkRateLimit()) return;
+        elements.permissionModal.classList.add('open');
+    });
+
+    elements.grantPermissionBtn.addEventListener('click', () => {
+        elements.permissionModal.classList.remove('open');
+        showNotification('Permissions granted! Voice search enabled.');
+    });
+
+    elements.denyPermissionBtn.addEventListener('click', () => {
+        elements.permissionModal.classList.remove('open');
+        showNotification('Permissions denied.', 'error');
+    });
+
+    elements.schoolHelpDropdown.addEventListener('change', () => {
+        store.dispatch({ type: 'SET_STATE', payload: { selectedTask: elements.schoolHelpDropdown.value } });
+    });
+
+    elements.aiModelDropdown.addEventListener('change', () => {
+        store.dispatch({ type: 'SET_STATE', payload: { selectedModel: elements.aiModelDropdown.value } });
+    });
+
+    elements.languageDropdown.addEventListener('change', () => {
+        store.dispatch({ type: 'SET_STATE', payload: { selectedLanguage: elements.languageDropdown.value } });
+    });
+
+    elements.rephraseBtn.addEventListener('click', async () => {
+        if (!checkRateLimit()) return;
+        const lastUserMessage = store.state.conversationHistory.filter(msg => msg.role === 'user').slice(-1)[0];
+        if (!lastUserMessage) {
+            showNotification('No user message to rephrase.', 'error');
+            return;
+        }
+        const keywords = lastUserMessage.content.toLowerCase().split(/\W+/).filter(word => word.length > 3);
+        const relevantMemory = {};
+        keywords.forEach(keyword => {
+            if (store.state.aiMemory[keyword]) relevantMemory[keyword] = store.state.aiMemory[keyword];
+        });
+        const rephrased = await mockBackend.getAIResponse(
+            `Rephrase: "${lastUserMessage.content}"`,
+            store.state.apiKey,
+            store.state.selectedModel,
+            store.state.selectedLanguage,
+            store.state.selectedTask,
+            store.state.conversationContext,
+            relevantMemory,
+            store.state.userPreferences.responseTone
+        );
+        const aiMessage = { id: Date.now(), role: 'ai', content: rephrased, reactions: [], threadId: null, timestamp: Date.now() };
+        store.dispatch({ type: 'ADD_MESSAGE', payload: aiMessage });
+        virtualRenderMessages();
+    });
+
+    elements.stopGeneratingBtn.addEventListener('click', () => {
+        if (!checkRateLimit()) return;
+        store.dispatch({ type: 'SET_STATE', payload: { isGenerating: false } });
+        elements.stopGeneratingBtn.style.display = 'none';
+        showNotification('Generation stopped.');
+    });
+
+    elements.feedbackBtn.addEventListener('click', () => {
+        if (!checkRateLimit()) return;
+        elements.feedbackModal.classList.add('open');
+    });
+
+    elements.feedbackSubmitBtn.addEventListener('click', () => {
+        if (!checkRateLimit()) return;
+        const feedback = elements.feedbackInput.value.trim();
+        if (!feedback) {
+            showNotification('Please enter feedback.', 'error');
+            return;
+        }
+        const mailtoLink = `mailto:${FEEDBACK_EMAIL}?subject=VerbiFlow Feedback&body=${encodeURIComponent(feedback)}`;
+        window.location.href = mailtoLink;
+        elements.feedbackModal.classList.remove('open');
+        elements.feedbackInput.value = '';
+        showNotification('Thank you for your feedback!');
+    });
+
+    elements.feedbackModalClose.addEventListener('click', () => elements.feedbackModal.classList.remove('open'));
+
+    elements.backToTopBtn.addEventListener('click', scrollToTop);
+
+    elements.chatArea.addEventListener('scroll', handleScroll);
+
+    elements.searchBtn.addEventListener('click', () => {
+        if (!checkRateLimit()) return;
+        elements.searchModal.classList.add('open');
+    });
+
+    elements.searchModalClose.addEventListener('click', () => elements.searchModal.classList.remove('open'));
+
+    elements.searchModalInput.addEventListener('input', debounce(searchMessages, 120));
+
+    elements.searchResults.addEventListener('click', e => {
+        const resultItem = e.target.closest('.search-result-item');
+        if (!resultItem) return;
+        const messageId = parseInt(resultItem.dataset.messageId);
+        const message = store.state.conversationHistory.find(msg => msg.id === messageId);
+        if (!message) return;
+        const messageDiv = elements.chatHistory.querySelector(`[data-message-id="${messageId}"]`);
+        if (messageDiv) {
+            messageDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            messageDiv.style.background = 'rgba(254, 249, 195, 0.3)';
+            setTimeout(() => (messageDiv.style.background = ''), 900);
+        }
+        elements.searchModal.classList.remove('open');
+    });
+
+    elements.exportChatBtn.addEventListener('click', exportChat);
+
+    elements.editMessageClose.addEventListener('click', () => elements.editMessageModal.classList.remove('open'));
+
+    elements.saveEditBtn.addEventListener('click', () => {
+        if (!checkRateLimit()) return;
+        const messageId = parseInt(elements.editMessageModal.dataset.messageId);
+        const threadId = elements.editMessageModal.dataset.threadId ? parseInt(elements.editMessageModal.dataset.threadId) : null;
+        const updatedContent = sanitizeInput(elements.editMessageInput.value.trim());
+        if (!updatedContent) {
+            showNotification('Message cannot be empty.', 'error');
+            return;
+        }
+        let message;
+        if (threadId) {
+            const threadMessages = store.state.threads[threadId] || [];
+            message = threadMessages.find(msg => msg.id === messageId);
+            if (message) {
+                message.content = updatedContent;
+                message.timestamp = Date.now();
+                store.dispatch({ type: 'UPDATE_MESSAGE', payload: message });
+            }
+        } else {
+            message = store.state.conversationHistory.find(msg => msg.id === messageId);
+            if (message) {
+                message.content = updatedContent;
+                message.timestamp = Date.now();
+                store.dispatch({ type: 'UPDATE_MESSAGE', payload: message });
+            }
+        }
+        virtualRenderMessages();
+        elements.editMessageModal.classList.remove('open');
+        showNotification('Message updated!');
+    });
+
+    elements.chatHistory.addEventListener('click', async e => {
+        const target = e.target.closest('button');
+        if (!target) return;
+        if (!checkRateLimit()) return;
+        const messageDiv = target.closest('.chat-message');
+        const messageId = parseInt(messageDiv.dataset.messageId);
+        const threadId = messageDiv.dataset.threadId ? parseInt(messageDiv.dataset.threadId) : null;
+        let message = store.state.conversationHistory.find(msg => msg.id === messageId);
+        if (!message && threadId) {
+            message = store.state.threads[threadId]?.find(msg => msg.id === messageId);
+        }
+        if (!message) return;
+        if (target.classList.contains('copy-message-btn')) {
+            navigator.clipboard.writeText(message.content);
+            showNotification('Message copied!');
+        } else if (target.classList.contains('edit-message-btn')) {
+            elements.editMessageModal.dataset.messageId = messageId;
+            if (threadId) elements.editMessageModal.dataset.threadId = threadId;
+            elements.editMessageInput.value = message.content;
+            elements.editMessageModal.classList.add('open');
+        } else if (target.classList.contains('react-message-btn')) {
+            message.reactions.push('❤️');
+            store.dispatch({ type: 'ADD_REACTION' });
+            store.dispatch({ type: 'UPDATE_MESSAGE', payload: message });
             virtualRenderMessages();
-            if (store.state.filesArray.length) {
-                renderFileList();
-                elements.fileClearBtn.style.display =             'block';
-            }
-            elements.chatArea.scrollTo({ top: elements.chatArea.scrollHeight, behavior: 'smooth' });
-        };
-
-        const detectDevice = () => {
-            const ua = navigator.userAgent;
-            const isMobile = /Mobile|Android|iPhone|iPad/i.test(ua);
-            const isChromebook = /CrOS/i.test(ua);
-            const isTablet = /iPad|Android(?!.*Mobile)/i.test(ua);
-            const osMatch = ua.match(/(Windows|Macintosh|Linux|Android|iOS)/i);
-            const browserMatch = ua.match(/(Chrome|Safari|Firefox|Edge)/i);
-            store.dispatch({ type: 'SET_STATE', payload: { 
-                deviceType: isMobile ? 'mobile' : isChromebook ? 'chromebook' : isTablet ? 'tablet' : 'desktop',
-                deviceInfo: {
-                    os: osMatch ? osMatch[0] : 'Unknown',
-                    browser: browserMatch ? browserMatch[0] : 'Unknown'
-                }
-            } });
-            document.body.classList.add(isMobile ? 'mobile' : isChromebook ? 'chromebook' : isTablet ? 'tablet' : 'desktop');
-            return { isMobile, isChromebook, isTablet };
-        };
-
-        const showLoadingMessages = async () => {
-            const messages = [
-                `Detecting device... ${store.state.deviceInfo.os} on ${store.state.deviceInfo.browser}`,
-                'Optimizing UI for your device...',
-                'Loading AI models...',
-                'Ready to assist!'
-            ];
-            for (let i = 0; i < messages.length; i++) {
-                elements.loadingText.textContent = messages[i];
-                elements.loadingText.classList.add('visible');
-                await new Promise(resolve => setTimeout(resolve, 600));
-                elements.loadingText.classList.remove('visible');
-                await new Promise(resolve => setTimeout(resolve, 150));
-            }
-        };
-
-        const handleApiKeySubmission = async () => {
-            const apiKey = elements.apiKeyInput.value.trim();
-            if (!apiKey) {
-                showNotification('Please enter an API key.', 'error');
-                return;
-            }
-            elements.apiKeySubmit.disabled = true;
-            elements.apiKeyInput.disabled = true;
-            const validation = await mockBackend.validateApiKey(apiKey);
-            if (validation.success) {
-                store.dispatch({ type: 'SET_STATE', payload: { apiKey, isApiKeyValid: true } });
-                showNotification(validation.message);
-                elements.preloader.classList.add('hidden');
-                setTimeout(() => {
-                    elements.preloader.style.display = 'none';
-                    loadConversationHistory();
-                }, 250);
+        } else if (target.classList.contains('pin-message-btn')) {
+            if (store.state.pinnedMessages.has(messageId)) {
+                store.dispatch({ type: 'UNPIN_MESSAGE', payload: messageId });
+                showNotification('Message unpinned!');
             } else {
-                showNotification(validation.message, 'error');
-                elements.apiKeySubmit.disabled = false;
-                elements.apiKeyInput.disabled = false;
+                store.dispatch({ type: 'PIN_MESSAGE', payload: messageId });
+                showNotification('Message pinned!');
             }
-        };
-
-        elements.userInput.addEventListener('input', () => {
-            elements.userInput.style.height = '40px';
-            elements.userInput.style.height = `${elements.userInput.scrollHeight}px`;
-            store.dispatch({ type: 'SET_DRAFT', payload: { userInput: elements.userInput.value } });
-        });
-
-        elements.userInput.addEventListener('keypress', e => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                debouncedSendMessage();
-            }
-        });
-
-        elements.sendBtn.addEventListener('click', () => debouncedSendMessage());
-
-        elements.fileInput.addEventListener('change', handleFileUpload);
-
-        elements.fileClearBtn.addEventListener('click', clearFiles);
-
-        elements.fileList.addEventListener('click', e => {
-            const fileItem = e.target.closest('.file-item');
-            if (!fileItem) return;
-            const fileId = parseFloat(fileItem.dataset.fileId);
-            const fileObj = store.state.filesArray.find(f => f.id === fileId);
-            if (fileObj) previewFile(fileObj);
-        });
-
-        elements.filePreviewClose.addEventListener('click', () => elements.filePreviewModal.classList.remove('open'));
-
-        elements.zoomIn.addEventListener('click', zoomIn);
-
-        elements.zoomOut.addEventListener('click', zoomOut);
-
-        elements.menuBtn.addEventListener('click', toggleSidebar);
-
-        elements.sidebarClose.addEventListener('click', toggleSidebar);
-
-        elements.clearChatBtn.addEventListener('click', () => {
-            if (!checkRateLimit()) return;
-            elements.confirmClearModal.classList.add('open');
-        });
-
-        elements.confirmClearModalClose.addEventListener('click', () => elements.confirmClearModal.classList.remove('open'));
-
-        elements.confirmClearBtn.addEventListener('click', () => {
-            if (!checkRateLimit()) return;
-            store.dispatch({ type: 'SET_STATE', payload: { 
-                conversationHistory: [], 
-                messageCount: 0, 
-                pinnedMessages: new Set(), 
-                threads: {},
-                userStats: { ...store.state.userStats, messagesSent: 0, reactionsAdded: 0, threadsCreated: 0 },
-                conversationContext: [],
-                aiMemory: {}
-            } });
-            const welcomeMessage = { id: Date.now(), role: 'ai', content: "Hey there, I’m VerbiFlow—your ultra-fast AI companion for creativity, coding, analytics, and more! What’s on your mind?", reactions: [], threadId: null, timestamp: Date.now() };
-            store.dispatch({ type: 'ADD_MESSAGE', payload: welcomeMessage });
-            store.dispatch({ type: 'SET_STATE', payload: { messageCount: 1 } });
             virtualRenderMessages();
-            elements.confirmClearModal.classList.remove('open');
-            showNotification('Conversation cleared!');
-            toggleSidebar();
-        });
-
-        elements.cancelClearBtn.addEventListener('click', () => {
-            elements.confirmClearModal.classList.remove('open');
-        });
-
-        elements.copyCodeBtn.addEventListener('click', () => {
-            if (!checkRateLimit()) return;
-            if (store.state.latestCodeBlocks.length) {
-                navigator.clipboard.writeText(store.state.latestCodeBlocks.join('\n'));
-                showNotification('Code copied to clipboard!');
-            } else {
-                showNotification('No code blocks to copy.', 'error');
-            }
-        });
-
-        elements.discordBtn.addEventListener('click', () => {
-            if (!checkRateLimit()) return;
-            window.open(DISCORD_INVITE, '_blank');
-            showNotification('Join our Discord community!');
-        });
-
-        elements.verbiflowUpdatesBtn.addEventListener('click', handleUpdatesClick);
-
-        elements.premiumPriceBtn.addEventListener('click', handlePremiumPriceClick);
-
-        elements.shareChatBtn.addEventListener('click', () => {
-            if (!checkRateLimit()) return;
-            const shareData = { title: 'VerbiFlow Chat', text: 'Check out my chat on VerbiFlow!', url: window.location.href };
-            navigator.share(shareData).then(() => showNotification('Chat shared successfully!')).catch(() => showNotification('Sharing not supported on this device.', 'error'));
-        });
-
-        elements.shareWebsiteBtn.addEventListener('click', () => {
-            if (!checkRateLimit()) return;
-            const shareData = { title: 'VerbiFlow', text: 'Check out VerbiFlow - an ultra-fast AI companion!', url: WEBSITE_URL };
-            navigator.share(shareData).then(() => showNotification('Website shared successfully!')).catch(() => showNotification('Sharing not supported on this device.', 'error'));
-        });
-
-        elements.themeBtn.addEventListener('click', toggleTheme);
-
-        elements.userProfileBtn.addEventListener('click', () => {
-            if (!checkRateLimit()) return;
-            elements.usernameInput.value = store.state.userProfile.username;
-            elements.chatLayoutSelect.value = store.state.userProfile.chatLayout;
-            elements.fontSizeInput.value = store.state.userProfile.preferences.fontSize;
-            elements.autoScrollToggle.checked = store.state.userProfile.preferences.autoScroll;
-            elements.userProfileModal.classList.add('open');
-        });
-
-        elements.userProfileClose.addEventListener('click', () => elements.userProfileModal.classList.remove('open'));
-
-        elements.usernameInput.addEventListener('change', saveUserProfile);
-
-        elements.chatLayoutSelect.addEventListener('change', saveUserProfile);
-
-        elements.fontSizeInput.addEventListener('change', saveUserProfile);
-
-        elements.autoScrollToggle.addEventListener('change', saveUserProfile);
-
-        elements.toggleActionsBtn.addEventListener('click', toggleFileActions);
-
-        elements.generateMediaBtn.addEventListener('click', () => {
-            if (!checkRateLimit()) return;
-            showNotification('Media generation is a premium feature. Please upgrade!');
-        });
-
-        elements.voiceSearchBtn.addEventListener('click', () => {
-            if (!checkRateLimit()) return;
-            elements.permissionModal.classList.add('open');
-        });
-
-        elements.grantPermissionBtn.addEventListener('click', () => {
-            elements.permissionModal.classList.remove('open');
-            showNotification('Permissions granted! Voice search enabled.');
-        });
-
-        elements.denyPermissionBtn.addEventListener('click', () => {
-            elements.permissionModal.classList.remove('open');
-            showNotification('Permissions denied.', 'error');
-        });
-
-        elements.schoolHelpDropdown.addEventListener('change', () => {
-            store.dispatch({ type: 'SET_STATE', payload: { selectedTask: elements.schoolHelpDropdown.value } });
-        });
-
-        elements.aiModelDropdown.addEventListener('change', () => {
-            store.dispatch({ type: 'SET_STATE', payload: { selectedModel: elements.aiModelDropdown.value } });
-        });
-
-        elements.languageDropdown.addEventListener('change', () => {
-            store.dispatch({ type: 'SET_STATE', payload: { selectedLanguage: elements.languageDropdown.value } });
-        });
-
-        elements.rephraseBtn.addEventListener('click', async () => {
-            if (!checkRateLimit()) return;
-            const lastUserMessage = store.state.conversationHistory.filter(msg => msg.role === 'user').slice(-1)[0];
-            if (!lastUserMessage) {
-                showNotification('No user message to rephrase.', 'error');
-                return;
-            }
-            const keywords = lastUserMessage.content.toLowerCase().split(/\W+/).filter(word => word.length > 3);
+        } else if (target.classList.contains('thread-message-btn')) {
+            const userMessage = { id: Date.now(), role: 'user', content: 'Continue this thread...', reactions: [], threadId: messageId, timestamp: Date.now() };
+            store.dispatch({ type: 'ADD_THREAD_MESSAGE', payload: userMessage });
+            const keywords = userMessage.content.toLowerCase().split(/\W+/).filter(word => word.length > 3);
             const relevantMemory = {};
             keywords.forEach(keyword => {
                 if (store.state.aiMemory[keyword]) relevantMemory[keyword] = store.state.aiMemory[keyword];
             });
-            const rephrased = await mockBackend.getAIResponse(
-                `Rephrase: "${lastUserMessage.content}"`,
+            const aiResponse = await mockBackend.getAIResponse(
+                userMessage.content,
                 store.state.apiKey,
                 store.state.selectedModel,
                 store.state.selectedLanguage,
                 store.state.selectedTask,
                 store.state.conversationContext,
-                relevantMemory
+                relevantMemory,
+                store.state.userPreferences.responseTone
             );
-            const aiMessage = { id: Date.now(), role: 'ai', content: rephrased, reactions: [], threadId: null, timestamp: Date.now() };
-            store.dispatch({ type: 'ADD_MESSAGE', payload: aiMessage });
+            const aiMessage = { id: Date.now(), role: 'ai', content: aiResponse, reactions: [], threadId: messageId, timestamp: Date.now() };
+            store.dispatch({ type: 'ADD_THREAD_MESSAGE', payload: aiMessage });
             virtualRenderMessages();
-        });
-
-        elements.stopGeneratingBtn.addEventListener('click', () => {
-            if (!checkRateLimit()) return;
-            store.dispatch({ type: 'SET_STATE', payload: { isGenerating: false } });
-            elements.stopGeneratingBtn.style.display = 'none';
-            showNotification('Generation stopped.');
-        });
-
-        elements.feedbackBtn.addEventListener('click', () => {
-            if (!checkRateLimit()) return;
-            elements.feedbackModal.classList.add('open');
-        });
-
-        elements.feedbackSubmitBtn.addEventListener('click', () => {
-            if (!checkRateLimit()) return;
-            const feedback = elements.feedbackInput.value.trim();
-            if (!feedback) {
-                showNotification('Please enter feedback.', 'error');
-                return;
-            }
-            const mailtoLink = `mailto:${FEEDBACK_EMAIL}?subject=VerbiFlow Feedback&body=${encodeURIComponent(feedback)}`;
-            window.location.href = mailtoLink;
-            elements.feedbackModal.classList.remove('open');
-            elements.feedbackInput.value = '';
-            showNotification('Thank you for your feedback!');
-        });
-
-        elements.feedbackModalClose.addEventListener('click', () => elements.feedbackModal.classList.remove('open'));
-
-        elements.backToTopBtn.addEventListener('click', scrollToTop);
-
-        elements.chatArea.addEventListener('scroll', handleScroll);
-
-        elements.searchBtn.addEventListener('click', () => {
-            if (!checkRateLimit()) return;
-            elements.searchModal.classList.add('open');
-        });
-
-        elements.searchModalClose.addEventListener('click', () => elements.searchModal.classList.remove('open'));
-
-        elements.searchModalInput.addEventListener('input', debounce(searchMessages, 150));
-
-        elements.searchResults.addEventListener('click', e => {
-            const resultItem = e.target.closest('.search-result-item');
-            if (!resultItem) return;
-            const messageId = parseInt(resultItem.dataset.messageId);
-            const message = store.state.conversationHistory.find(msg => msg.id === messageId);
-            if (!message) return;
-            const messageDiv = elements.chatHistory.querySelector(`[data-message-id="${messageId}"]`);
-            if (messageDiv) {
-                messageDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                messageDiv.style.background = 'rgba(255, 215, 0, 0.3)';
-                setTimeout(() => (messageDiv.style.background = ''), 1000);
-            }
-            elements.searchModal.classList.remove('open');
-        });
-
-        elements.exportChatBtn.addEventListener('click', exportChat);
-
-        elements.editMessageClose.addEventListener('click', () => elements.editMessageModal.classList.remove('open'));
-
-        elements.saveEditBtn.addEventListener('click', () => {
-            if (!checkRateLimit()) return;
-            const messageId = parseInt(elements.editMessageModal.dataset.messageId);
-            const threadId = elements.editMessageModal.dataset.threadId ? parseInt(elements.editMessageModal.dataset.threadId) : null;
-            const updatedContent = sanitizeInput(elements.editMessageInput.value.trim());
-            if (!updatedContent) {
-                showNotification('Message cannot be empty.', 'error');
-                return;
-            }
-            let message;
-            if (threadId) {
-                const threadMessages = store.state.threads[threadId] || [];
-                message = threadMessages.find(msg => msg.id === messageId);
-                if (message) {
-                    message.content = updatedContent;
-                    message.timestamp = Date.now();
-                    store.dispatch({ type: 'UPDATE_MESSAGE', payload: message });
-                }
+        } else if (target.classList.contains('share-message-btn')) {
+            const shareData = { title: 'VerbiFlow Message', text: message.content, url: window.location.href };
+            if (navigator.share) {
+                navigator.share(shareData)
+                    .then(() => showNotification('Message shared successfully!'))
+                    .catch(() => showNotification('Sharing not supported on this device.', 'error'));
             } else {
-                message = store.state.conversationHistory.find(msg => msg.id === messageId);
-                if (message) {
-                    message.content = updatedContent;
-                    message.timestamp = Date.now();
-                    store.dispatch({ type: 'UPDATE_MESSAGE', payload: message });
-                }
+                navigator.clipboard.writeText(`${shareData.title}: ${shareData.text} (${shareData.url})`)
+                    .then(() => showNotification('Message link copied to clipboard!'))
+                    .catch(() => showNotification('Failed to share message.', 'error'));
             }
-            virtualRenderMessages();
-            elements.editMessageModal.classList.remove('open');
-            showNotification('Message updated!');
-        });
+        }
+    });
 
-        elements.chatHistory.addEventListener('click', async e => {
-            const target = e.target.closest('button');
-            if (!target) return;
-            if (!checkRateLimit()) return;
-            const messageDiv = target.closest('.chat-message');
-            const messageId = parseInt(messageDiv.dataset.messageId);
-            const threadId = messageDiv.dataset.threadId ? parseInt(messageDiv.dataset.threadId) : null;
-            let message = store.state.conversationHistory.find(msg => msg.id === messageId);
-            if (!message && threadId) {
-                message = store.state.threads[threadId]?.find(msg => msg.id === messageId);
-            }
-            if (!message) return;
-            if (target.classList.contains('copy-message-btn')) {
-                navigator.clipboard.writeText(message.content);
-                showNotification('Message copied!');
-            } else if (target.classList.contains('edit-message-btn')) {
-                elements.editMessageModal.dataset.messageId = messageId;
-                if (threadId) elements.editMessageModal.dataset.threadId = threadId;
-                elements.editMessageInput.value = message.content;
-                elements.editMessageModal.classList.add('open');
-            } else if (target.classList.contains('react-message-btn')) {
-                message.reactions.push('❤️');
-                store.dispatch({ type: 'ADD_REACTION' });
-                store.dispatch({ type: 'UPDATE_MESSAGE', payload: message });
-                virtualRenderMessages();
-            } else if (target.classList.contains('pin-message-btn')) {
-                if (store.state.pinnedMessages.has(messageId)) {
-                    store.dispatch({ type: 'UNPIN_MESSAGE', payload: messageId });
-                    showNotification('Message unpinned!');
-                } else {
-                    store.dispatch({ type: 'PIN_MESSAGE', payload: messageId });
-                    showNotification('Message pinned!');
-                }
-                virtualRenderMessages();
-            } else if (target.classList.contains('thread-message-btn')) {
-                const userMessage = { id: Date.now(), role: 'user', content: 'Continue this thread...', reactions: [], threadId: messageId, timestamp: Date.now() };
-                store.dispatch({ type: 'ADD_THREAD_MESSAGE', payload: userMessage });
-                const keywords = userMessage.content.toLowerCase().split(/\W+/).filter(word => word.length > 3);
-                const relevantMemory = {};
-                keywords.forEach(keyword => {
-                    if (store.state.aiMemory[keyword]) relevantMemory[keyword] = store.state.aiMemory[keyword];
-                });
-                const aiResponse = await mockBackend.getAIResponse(
-                    userMessage.content,
-                    store.state.apiKey,
-                    store.state.selectedModel,
-                    store.state.selectedLanguage,
-                    store.state.selectedTask,
-                    store.state.conversationContext,
-                    relevantMemory
-                );
-                const aiMessage = { id: Date.now(), role: 'ai', content: aiResponse, reactions: [], threadId: messageId, timestamp: Date.now() };
-                store.dispatch({ type: 'ADD_THREAD_MESSAGE', payload: aiMessage });
-                virtualRenderMessages();
-            } else if (target.classList.contains('share-message-btn')) {
-                const shareData = { title: 'VerbiFlow Message', text: message.content, url: window.location.href };
-                navigator.share(shareData).then(() => showNotification('Message shared successfully!')).catch(() => showNotification('Sharing not supported on this device.', 'error'));
-            }
-        });
+    elements.primaryColor.addEventListener('input', applyCustomTheme);
+    elements.secondaryColor.addEventListener('input', applyCustomTheme);
+    elements.textColor.addEventListener('input', applyCustomTheme);
+    elements.bgColor.addEventListener('input', applyCustomTheme);
+    elements.aiBgColor.addEventListener('input', applyCustomTheme);
+    elements.userBgColor.addEventListener('input', applyCustomTheme);
+    elements.gradientColor.addEventListener('input', applyCustomTheme);
 
-        elements.primaryColor.addEventListener('input', applyCustomTheme);
-        elements.secondaryColor.addEventListener('input', applyCustomTheme);
-        elements.textColor.addEventListener('input', applyCustomTheme);
-        elements.bgColor.addEventListener('input', applyCustomTheme);
-        elements.aiBgColor.addEventListener('input', applyCustomTheme);
-        elements.userBgColor.addEventListener('input', applyCustomTheme);
-        elements.gradientColor.addEventListener('input', applyCustomTheme);
+    elements.apiKeySubmit.addEventListener('click', handleApiKeySubmission);
 
-        elements.apiKeySubmit.addEventListener('click', handleApiKeySubmission);
+    elements.apiKeyInput.addEventListener('keypress', e => {
+        if (e.key === 'Enter') handleApiKeySubmission();
+    });
 
-        elements.apiKeyInput.addEventListener('keypress', e => {
-            if (e.key === 'Enter') handleApiKeySubmission();
-        });
+    const init = async () => {
+        detectDevice();
+        await showLoadingMessages();
+        elements.apiKeyContainer.classList.add('visible');
+        await store.loadState();
+        loadTheme();
+        applyChatLayout();
+        if (store.state.messageDrafts.userInput) {
+            elements.userInput.value = store.state.messageDrafts.userInput;
+            elements.userInput.style.height = `${elements.userInput.scrollHeight}px`;
+        }
+        requestAnimationFrame(updateTimestamps);
+    };
 
-        const init = async () => {
-            detectDevice();
-            await showLoadingMessages();
-            elements.apiKeyContainer.classList.add('visible');
-            await store.loadState();
-            loadTheme();
-            applyChatLayout();
-            if (store.state.messageDrafts.userInput) {
-                elements.userInput.value = store.state.messageDrafts.userInput;
-                elements.userInput.style.height = `${elements.userInput.scrollHeight}px`;
-            }
-            requestAnimationFrame(updateTimestamps);
-        };
-
-        init();
-    </script>
+    init();
+</script>
 </body>
 </html>
