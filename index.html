@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Interact with Prysmis AI on GitHub - your ultimate AI assistant">
-    <meta name="keywords" content="prysmis, ai, chat, github, assistant">
+    <meta name="description" content="Interact with Prysmis AI - your ultimate AI assistant">
+    <meta name="keywords" content="prysmis, ai, chat, assistant">
     <meta name="author" content="realalexdev">
     <title>Prysmis AI</title>
     <base href="https://silentalex1.github.io/script-gate-/">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.min.js"></script>
@@ -19,70 +19,70 @@
 <body>
     <div class="preloader" id="preloader">
         <div class="loading-spinner"></div>
-        <div class="loading-text mt-4 text-xl text-blue-600 opacity-0 transition-opacity duration-500" id="loadingText"></div>
-        <div class="typing-indicator mt-4 text-blue-600" id="preloaderTypingIndicator">Prysmis AI is preparing...</div>
-        <div class="api-key-container mt-6 flex flex-col gap-4 max-w-md opacity-0 transition-opacity duration-600" id="apiKeyContainer">
-            <input type="text" id="apiKeyInput" class="p-3 border rounded-xl focus:ring-2 focus:ring-blue-500 outline-none glass-effect text-white" placeholder="Enter your OpenAI API key">
-            <button id="apiKeySubmit" class="bg-blue-600 text-white p-3 rounded-xl hover:bg-blue-800">Submit</button>
+        <div class="loading-text" id="loadingText"></div>
+        <div class="typing-indicator" id="preloaderTypingIndicator">Prysmis AI is preparing...</div>
+        <div class="api-key-container" id="apiKeyContainer">
+            <input type="text" id="apiKeyInput" class="glass-effect text-white" placeholder="Enter your OpenAI API key">
+            <button id="apiKeySubmit" class="bg-gradient-to-r from-blue-500 to-blue-700 text-white">Submit</button>
         </div>
     </div>
     <div class="container">
         <div class="sidebar" id="sidebar">
             <div class="sidebar-content">
-                <button class="sidebar-close bg-red-500 text-white px-4 py-2 rounded-xl hover:bg-red-700" id="sidebarClose"><i class="fas fa-times"></i> Close</button>
-                <button class="clear-chat-btn bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-800" id="clearChatBtn"><i class="fas fa-trash"></i> Clear Chat</button>
-                <button class="export-chat-btn bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-800" id="exportChatBtn"><i class="fas fa-download"></i> Export Chat</button>
-                <button class="share-website-btn bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-800" id="shareWebsiteBtn"><i class="fas fa-share"></i> Share Website</button>
-                <button class="feedback-btn bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-800" id="feedbackBtn"><i class="fas fa-comment"></i> Feedback</button>
-                <button class="prysmis-updates-btn bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-800" id="prysmisUpdatesBtn"><i class="fas fa-info-circle"></i> Updates</button>
-                <button class="discord-btn bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-800" id="discordBtn"><i class="fab fa-discord"></i> Discord</button>
-                <button class="premium-btn bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-800" id="premiumBtn"><i class="fas fa-crown"></i> Premium</button>
+                <button class="sidebar-close bg-gradient-to-r from-red-500 to-red-700 text-white" id="sidebarClose"><i class="fas fa-times"></i> Close</button>
+                <button class="clear-chat-btn bg-gradient-to-r from-blue-500 to-blue-700 text-white" id="clearChatBtn"><i class="fas fa-trash"></i> Clear Chat</button>
+                <button class="export-chat-btn bg-gradient-to-r from-blue-500 to-blue-700 text-white" id="exportChatBtn"><i class="fas fa-download"></i> Export Chat</button>
+                <button class="share-website-btn bg-gradient-to-r from-blue-500 to-blue-700 text-white" id="shareWebsiteBtn"><i class="fas fa-share"></i> Share Website</button>
+                <button class="feedback-btn bg-gradient-to-r from-blue-500 to-blue-700 text-white" id="feedbackBtn"><i class="fas fa-comment"></i> Feedback</button>
+                <button class="prysmis-updates-btn bg-gradient-to-r from-blue-500 to-blue-700 text-white" id="prysmisUpdatesBtn"><i class="fas fa-info-circle"></i> Updates</button>
+                <button class="discord-btn bg-gradient-to-r from-blue-500 to-blue-700 text-white" id="discordBtn"><i class="fab fa-discord"></i> Discord</button>
+                <button class="premium-btn bg-gradient-to-r from-blue-500 to-blue-700 text-white" id="premiumBtn"><i class="fas fa-crown"></i> Premium</button>
             </div>
         </div>
         <div class="chat-container">
             <div class="chat-header glass-effect">
-                <button class="menu-btn bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-800" id="menuBtn"><i class="fas fa-bars"></i> Menu</button>
-                <div class="flex gap-2">
-                    <button class="theme-btn bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-800" id="themeBtn"><i class="fas fa-moon"></i> Dark Mode</button>
-                    <button class="user-profile-btn bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-800" id="userProfileBtn"><i class="fas fa-user"></i> Profile</button>
-                    <span class="message-counter text-gray-200 font-semibold text-sm" id="messageCounter">Messages: 0</span>
+                <button class="menu-btn bg-gradient-to-r from-blue-500 to-blue-700 text-white" id="menuBtn"><i class="fas fa-bars"></i> Menu</button>
+                <div class="flex gap-2 items-center">
+                    <button class="theme-btn bg-gradient-to-r from-blue-500 to-blue-700 text-white" id="themeBtn"><i class="fas fa-moon"></i> Dark Mode</button>
+                    <button class="user-profile-btn bg-gradient-to-r from-blue-500 to-blue-700 text-white" id="userProfileBtn"><i class="fas fa-user"></i> Profile</button>
+                    <span class="message-counter text-white font-semibold text-sm" id="messageCounter">Messages: 0</span>
                 </div>
             </div>
             <div class="chat-area" id="chatArea">
-                <div class="chat-history flex flex-col gap-4" id="chatHistory"></div>
-                <div class="typing-indicator hidden text-gray-400 mt-4" id="typingIndicator">Prysmis AI is typing...</div>
+                <div class="chat-history" id="chatHistory"></div>
+                <div class="typing-indicator hidden text-gray-300" id="typingIndicator">Prysmis AI is typing...</div>
             </div>
             <div class="chat-input-area glass-effect">
-                <div class="file-actions-container mb-4 max-h-40 overflow-hidden transition-all duration-300 opacity-100" id="fileActionsContainer">
-                    <div class="file-input-wrapper flex gap-2 items-center">
-                        <label for="fileInput" class="file-input-label bg-blue-600 text-white px-4 py-2 rounded-xl cursor-pointer hover:bg-blue-800"><i class="fas fa-upload"></i> Upload File</label>
+                <div class="file-actions-container" id="fileActionsContainer">
+                    <div class="file-input-wrapper">
+                        <label for="fileInput" class="file-input-label bg-gradient-to-r from-blue-500 to-blue-700 text-white"><i class="fas fa-upload"></i> Upload File</label>
                         <input type="file" id="fileInput" class="file-input hidden" multiple>
-                        <button class="file-clear-btn hidden bg-red-500 text-white px-4 py-2 rounded-xl hover:bg-red-700" id="fileClearBtn"><i class="fas fa-trash"></i> Clear Files</button>
+                        <button class="file-clear-btn hidden bg-gradient-to-r from-red-500 to-red-700 text-white" id="fileClearBtn"><i class="fas fa-trash"></i> Clear Files</button>
                     </div>
-                    <div class="model-selector mt-2">
-                        <label for="aiModelSelect" class="text-sm text-gray-200 mr-2">AI Model:</label>
-                        <div class="select-wrapper inline-block">
-                            <select id="aiModelSelect" class="glass-effect">
+                    <div class="model-selector">
+                        <label for="aiModelSelect" class="text-sm text-white mr-2">AI Model:</label>
+                        <div class="select-wrapper">
+                            <select id="aiModelSelect" class="glass-effect text-white">
                                 <option value="prysmis">Prysmis AI</option>
                                 <option value="aria">Aria AI (Coming Soon)</option>
                             </select>
                         </div>
                     </div>
-                    <div class="file-list mt-2 flex flex-col gap-2 max-h-28 overflow-y-auto" id="fileList"></div>
-                    <div class="file-upload-progress mt-2" id="fileUploadProgress"><div style="width: 0%"></div></div>
+                    <div class="file-list" id="fileList"></div>
+                    <div class="file-upload-progress" id="fileUploadProgress"><div style="width: 0%"></div></div>
                 </div>
-                <button class="toggle-actions-btn bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-800 mb-2" id="toggleActionsBtn">Hide Extra Options</button>
-                <div class="input-wrapper flex gap-2 items-center">
-                    <textarea class="user-input flex-1 p-3 border rounded-xl resize-none min-h-12 max-h-32 bg-transparent focus:border-blue-600 focus:ring-2 focus:ring-blue-500 outline-none glass-effect text-white" id="userInput" placeholder="Type your message..."></textarea>
-                    <button class="send-btn bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-800" id="sendBtn"><i class="fas fa-paper-plane"></i> Send</button>
-                    <button class="rephrase-btn bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-800" id="rephraseBtn"><i class="fas fa-redo"></i> Rephrase</button>
-                    <button class="voice-input-btn bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-800" id="voiceInputBtn"><i class="fas fa-microphone"></i></button>
+                <button class="toggle-actions-btn bg-gradient-to-r from-blue-500 to-blue-700 text-white" id="toggleActionsBtn">Hide Extra Options</button>
+                <div class="input-wrapper">
+                    <textarea class="user-input glass-effect text-white" id="userInput" placeholder="Type your message..."></textarea>
+                    <button class="send-btn bg-gradient-to-r from-blue-500 to-blue-700 text-white" id="sendBtn"><i class="fas fa-paper-plane"></i> Send</button>
+                    <button class="rephrase-btn bg-gradient-to-r from-blue-500 to-blue-700 text-white" id="rephraseBtn"><i class="fas fa-redo"></i> Rephrase</button>
+                    <button class="voice-input-btn bg-gradient-to-r from-blue-500 to-blue-700 text-white" id="voiceInputBtn"><i class="fas fa-microphone"></i></button>
                 </div>
             </div>
         </div>
         <div class="right-sidebar" id="rightSidebar">
             <div class="right-sidebar-content">
-                <button class="right-sidebar-close bg-red-500 text-white px-4 py-2 rounded-xl hover:bg-red-700" id="rightSidebarClose"><i class="fas fa-times"></i> Close</button>
+                <button class="right-sidebar-close bg-gradient-to-r from-red-500 to-red-700 text-white" id="rightSidebarClose"><i class="fas fa-times"></i> Close</button>
                 <div class="grade-diagram hidden" id="gradeDiagram"></div>
                 <div class="game-vm hidden" id="gameVM"></div>
             </div>
@@ -91,52 +91,53 @@
     <div class="notification" id="notification"></div>
     <div class="modal" id="userProfileModal">
         <div class="modal-content glass-effect">
-            <button class="modal-close absolute top-2 right-2 text-red-500 hover:text-red-700" id="userProfileClose"><i class="fas fa-times fa-lg"></i></button>
+            <button class="modal-close text-red-500 hover:text-red-700" id="userProfileClose"><i class="fas fa-times fa-lg"></i></button>
             <h3 class="text-xl font-bold mb-4 text-white">User Profile</h3>
-            <input type="text" id="usernameInput" class="w-full p-3 border rounded-xl mb-4 focus:ring-2 focus:ring-blue-500 outline-none glass-effect text-white" placeholder="Enter your username">
-            <select id="chatLayoutSelect" class="w-full p-3 border rounded-xl mb-4 focus:ring-2 focus:ring-blue-500 outline-none glass-effect text-white">
+            <input type="text" id="usernameInput" class="glass-effect text-white" placeholder="Enter your username">
+            <select id="chatLayoutSelect" class="glass-effect text-white">
                 <option value="default">Default Layout</option>
                 <option value="compact">Compact</option>
                 <option value="spacious">Spacious</option>
             </select>
-            <label class="text-sm text-gray-200">Font Size (px):</label>
-            <input type="number" id="fontSizeInput" min="10" max="24" value="14" class="w-full p-3 border rounded-xl mb-4 focus:ring-2 focus:ring-blue-500 outline-none glass-effect text-white">
-            <label class="text-sm text-gray-200 flex items-center gap-2 mb-4">
+            <label class="text-sm text-white">Font Size (px):</label>
+            <input type="number" id="fontSizeInput" min="10" max="24" value="14" class="glass-effect text-white">
+            <label class="text-sm text-white flex items-center gap-2 mb-4">
                 <input type="checkbox" id="autoScrollToggle" checked>
                 Auto-Scroll
             </label>
+            <button class="save-profile-btn bg-gradient-to-r from-blue-500 to-blue-700 text-white" id="saveProfileBtn">Save</button>
         </div>
     </div>
     <div class="modal" id="permissionModal">
         <div class="modal-content glass-effect">
-            <button class="modal-close absolute top-2 right-2 text-red-500 hover:text-red-700" id="permissionModalClose"><i class="fas fa-times fa-lg"></i></button>
+            <button class="modal-close text-red-500 hover:text-red-700" id="permissionModalClose"><i class="fas fa-times fa-lg"></i></button>
             <h3 class="text-xl font-bold mb-4 text-white">Permission Required</h3>
-            <p class="text-gray-200 text-sm">Allow microphone access for voice commands?</p>
+            <p class="text-white text-sm">Allow microphone access for voice commands?</p>
             <div class="mt-4 flex gap-2">
-                <button id="grantPermissionBtn" class="bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-800">Grant</button>
-                <button id="denyPermissionBtn" class="bg-red-500 text-white px-4 py-2 rounded-xl hover:bg-red-700">Deny</button>
+                <button id="grantPermissionBtn" class="bg-gradient-to-r from-blue-500 to-blue-700 text-white">Grant</button>
+                <button id="denyPermissionBtn" class="bg-gradient-to-r from-red-500 to-red-700 text-white">Deny</button>
             </div>
         </div>
     </div>
     <div class="modal" id="confirmClearModal">
         <div class="modal-content glass-effect">
-            <button class="modal-close absolute top-2 right-2 text-red-500 hover:text-red-700" id="confirmClearModalClose"><i class="fas fa-times fa-lg"></i></button>
+            <button class="modal-close text-red-500 hover:text-red-700" id="confirmClearModalClose"><i class="fas fa-times fa-lg"></i></button>
             <h3 class="text-xl font-bold mb-4 text-white">Confirm Clear Chat</h3>
-            <p class="text-gray-200 text-sm">Are you sure you want to clear the chat? This action cannot be undone.</p>
+            <p class="text-white text-sm">Are you sure you want to clear the chat? This action cannot be undone.</p>
             <div class="mt-4 flex gap-2">
-                <button id="confirmClearBtn" class="bg-red-500 text-white px-4 py-2 rounded-xl hover:bg-red-700">Clear</button>
-                <button id="cancelClearBtn" class="bg-gray-500 text-white px-4 py-2 rounded-xl hover:bg-gray-700">Cancel</button>
+                <button id="confirmClearBtn" class="bg-gradient-to-r from-red-500 to-red-700 text-white">Clear</button>
+                <button id="cancelClearBtn" class="bg-gradient-to-r from-gray-500 to-gray-700 text-white">Cancel</button>
             </div>
         </div>
     </div>
     <div class="modal" id="feedbackModal">
         <div class="modal-content glass-effect">
-            <button class="modal-close absolute top-2 right-2 text-red-500 hover:text-red-700" id="feedbackModalClose"><i class="fas fa-times fa-lg"></i></button>
+            <button class="modal-close text-red-500 hover:text-red-700" id="feedbackModalClose"><i class="fas fa-times fa-lg"></i></button>
             <h3 class="text-xl font-bold mb-4 text-white">Feedback</h3>
-            <textarea id="feedbackInput" class="w-full p-3 border rounded-xl mb-4 focus:ring-2 focus:ring-blue-500 outline-none glass-effect text-white" placeholder="Enter your feedback..."></textarea>
-            <button id="feedbackSubmitBtn" class="bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-800">Submit</button>
+            <textarea id="feedbackInput" class="glass-effect text-white" placeholder="Enter your feedback..."></textarea>
+            <button id="feedbackSubmitBtn" class="bg-gradient-to-r from-blue-500 to-blue-700 text-white">Submit</button>
         </div>
     </div>
-    <script type="text/javascript" src="js/script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
