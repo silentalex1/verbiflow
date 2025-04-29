@@ -483,7 +483,7 @@ const toggleTheme = () => {
     document.body.classList.toggle('dark-mode');
     elements.themeBtn.innerHTML = `<i class="fas ${isDarkMode ? 'fa-sun' : 'fa-moon'}"></i> ${isDarkMode ? 'Light Mode' : 'Dark Mode'}`;
     localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-    gsap.to('body', { background: isDarkMode ? '#0f172a' : '#1e3a8a', duration: 0.4 });
+    gsap.to('body', { background: isDarkMode ? '#1a1a1a' : '#121212', duration: 0.4 });
 };
 
 const loadTheme = () => {
@@ -826,12 +826,12 @@ const rephraseMessage = async () => {
 const toggleSidebar = () => {
     if (!checkRateLimit()) return;
     const isOpen = elements.sidebar.classList.toggle('open');
-    gsap.to(elements.sidebar, { width: isOpen ? (store.state.deviceType === 'Mobile' ? 200 : 260) : 0, duration: 0.3, ease: 'power3.out' });
+    gsap.to(elements.sidebar, { width: isOpen ? (store.state.deviceType === 'Mobile' ? 200 : 280) : 0, duration: 0.3, ease: 'power3.out' });
 };
 
 const toggleRightSidebar = () => {
     const isOpen = elements.rightSidebar.classList.toggle('open');
-    gsap.to(elements.rightSidebar, { width: isOpen ? (store.state.deviceType === 'Mobile' ? 220 : 300) : 0, duration: 0.3, ease: 'power3.out' });
+    gsap.to(elements.rightSidebar, { width: isOpen ? (store.state.deviceType === 'Mobile' ? 240 : 320) : 0, duration: 0.3, ease: 'power3.out' });
 };
 
 const clearChat = () => {
@@ -979,6 +979,10 @@ elements.themeBtn.addEventListener('click', toggleTheme);
 elements.userProfileBtn.addEventListener('click', () => {
     elements.userProfileModal.classList.add('open');
     gsap.fromTo(elements.userProfileModal.querySelector('.modal-content'), { scale: 0.9, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3 });
+    elements.usernameInput.value = store.state.userProfile.username;
+    elements.chatLayoutSelect.value = store.state.userProfile.chatLayout;
+    elements.fontSizeInput.value = store.state.userProfile.preferences.fontSize;
+    elements.autoScrollToggle.checked = store.state.userProfile.preferences.autoScroll;
 });
 
 elements.userProfileClose.addEventListener('click', () => {
@@ -995,4 +999,35 @@ elements.toggleActionsBtn.addEventListener('click', toggleFileActions);
 
 elements.voiceInputBtn.addEventListener('click', handleVoiceInput);
 
-elements.permissionModalClose.addEventListener('
+elements.permissionModalClose.addEventListener('click', () => {
+    elements.permissionModal.classList.remove('open');
+});
+
+elements.menuBtn.addEventListener('click', toggleSidebar);
+
+elements.sidebarClose.addEventListener('click', toggleSidebar);
+
+elements.clearChatBtn.addEventListener('click', clearChat);
+
+elements.confirmClearModalClose.addEventListener('click', () => {
+    elements.confirmClearModal.classList.remove('open');
+});
+
+elements.confirmClearBtn.addEventListener('click', confirmClearChat);
+
+elements.cancelClearBtn.addEventListener('click', () => {
+    elements.confirmClearModal.classList.remove('open');
+});
+
+elements.exportChatBtn.addEventListener('click', exportChat);
+
+elements.shareWebsiteBtn.addEventListener('click', shareWebsite);
+
+elements.feedbackBtn.addEventListener('click', () => {
+    elements.feedbackModal.classList.add('open');
+    gsap.fromTo(elements.feedbackModal.querySelector('.modal-content'), { scale: 0.9, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3 });
+});
+
+elements.feedbackModalClose.addEventListener('click', () => {
+    elements.feedbackModal.classList.remove('open');
+});
