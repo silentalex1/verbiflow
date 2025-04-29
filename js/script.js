@@ -26,6 +26,7 @@ const elements = {
     chatLayoutSelect: document.getElementById('chatLayoutSelect'),
     fontSizeInput: document.getElementById('fontSizeInput'),
     autoScrollToggle: document.getElementById('autoScrollToggle'),
+    saveProfileBtn: document.getElementById('saveProfileBtn'),
     voiceInputBtn: document.getElementById('voiceInputBtn'),
     permissionModal: document.getElementById('permissionModal'),
     permissionModalClose: document.getElementById('permissionModalClose'),
@@ -482,7 +483,7 @@ const toggleTheme = () => {
     document.body.classList.toggle('dark-mode');
     elements.themeBtn.innerHTML = `<i class="fas ${isDarkMode ? 'fa-sun' : 'fa-moon'}"></i> ${isDarkMode ? 'Light Mode' : 'Dark Mode'}`;
     localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-    gsap.to('body', { background: isDarkMode ? '#0a1226' : '#e0e7ff', duration: 0.4 });
+    gsap.to('body', { background: isDarkMode ? '#0f172a' : '#1e3a8a', duration: 0.4 });
 };
 
 const loadTheme = () => {
@@ -662,7 +663,7 @@ const renderFileList = () => {
     elements.fileList.innerHTML = '';
     store.state.filesArray.forEach(file => {
         const fileItem = document.createElement('div');
-        fileItem.className = 'file-item p-2 bg-gray-100 rounded-xl flex justify-between items-center glass-effect';
+        fileItem.className = 'file-item';
         fileItem.dataset.fileId = file.id;
         fileItem.innerHTML = `
             <span class="text-sm text-white">${file.name} (${(file.size / 1024).toFixed(2)} KB)</span>
@@ -670,6 +671,16 @@ const renderFileList = () => {
         `;
         elements.fileList.appendChild(fileItem);
         gsap.from(fileItem, { opacity: 0, x: -20, duration: 0.5, ease: 'power3.out' });
+    });
+    elements.fileList.querySelectorAll('.remove-file-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+            const fileId = btn.parentElement.dataset.fileId;
+            const updatedFiles = store.state.filesArray.filter(file => file.id != fileId);
+            await store.dispatch({ type: 'SET_FILES', payload: updatedFiles });
+            renderFileList();
+            elements.fileClearBtn.classList.toggle('hidden', store.state.filesArray.length === 0);
+            showNotification('File removed.');
+        });
     });
 };
 
@@ -684,9 +695,6 @@ const clearFiles = async () => {
 const toggleFileActions = () => {
     const isHidden = elements.fileActionsContainer.classList.contains('max-h-0');
     elements.fileActionsContainer.classList.toggle('max-h-0', !isHidden);
-    elements.fileActionsContainer.classList.toggle('max-h-40', isHidden);
-    elements.fileActionsContainer.classList.toggle('opacity-0', !isHidden);
-    elements.fileActionsContainer.classList.toggle('opacity-100', isHidden);
     elements.toggleActionsBtn.textContent = isHidden ? 'Hide Extra Options' : 'Show Extra Options';
     gsap.to(elements.fileActionsContainer, { height: isHidden ? 'auto' : 0, duration: 0.4, ease: 'power3.out' });
 };
@@ -731,6 +739,7 @@ const saveUserProfile = async () => {
         return msg;
     });
     renderMessages();
+    elements.userProfileModal.classList.remove('open');
 };
 
 const requestPermissions = () => new Promise((resolve) => {
@@ -811,18 +820,18 @@ const rephraseMessage = async () => {
     await store.dispatch({ type: 'ADD_MESSAGE', payload: rephrasedMessage });
     elements.typingIndicator.style.display = 'none';
     renderMessages();
-    showNotification('Rephased!');
+    showNotification('Rephrased!');
 };
 
 const toggleSidebar = () => {
     if (!checkRateLimit()) return;
     const isOpen = elements.sidebar.classList.toggle('open');
-    gsap.to(elements.sidebar, { width: isOpen ? (store.state.deviceType === 'Mobile' ? 180 : 240) : 0, duration: 0.4, ease: 'power3.out' });
+    gsap.to(elements.sidebar, { width: isOpen ? (store.state.deviceType === 'Mobile' ? 200 : 260) : 0, duration: 0.3, ease: 'power3.out' });
 };
 
 const toggleRightSidebar = () => {
     const isOpen = elements.rightSidebar.classList.toggle('open');
-    gsap.to(elements.rightSidebar, { width: isOpen ? (store.state.deviceType === 'Mobile' ? 240 : 320) : 0, duration: 0.4, ease: 'power3.out' });
+    gsap.to(elements.rightSidebar, { width: isOpen ? (store.state.deviceType === 'Mobile' ? 220 : 300) : 0, duration: 0.3, ease: 'power3.out' });
 };
 
 const clearChat = () => {
@@ -919,6 +928,14 @@ const detectDeviceType = () => {
     return 'Unknown Device';
 };
 
+const initChat = async () => {
+    await store.loadState();
+    store.state.deviceType = detectDeviceType();
+    loadTheme();
+    renderMessages();
+    applyChatLayout();
+};
+
 elements.apiKeySubmit.addEventListener('click', async () => {
     const apiKey = elements.apiKeyInput.value.trim();
     if (!apiKey) {
@@ -947,4 +964,35 @@ elements.apiKeySubmit.addEventListener('click', async () => {
 elements.sendBtn.addEventListener('click', () => debouncedSendMessage());
 
 elements.userInput.addEventListener('keypress', e => {
-    if (e.key === 'Enter' && !e.shift
+    if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        debouncedSendMessage();
+    }
+});
+
+elements.userInput.addEventListener('paste', handlePaste);
+
+elements.rephraseBtn.addEventListener('click', rephraseMessage);
+
+elements.themeBtn.addEventListener('click', toggleTheme);
+
+elements.userProfileBtn.addEventListener('click', () => {
+    elements.userProfileModal.classList.add('open');
+    gsap.fromTo(elements.userProfileModal.querySelector('.modal-content'), { scale: 0.9, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3 });
+});
+
+elements.userProfileClose.addEventListener('click', () => {
+    elements.userProfileModal.classList.remove('open');
+});
+
+elements.saveProfileBtn.addEventListener('click', saveUserProfile);
+
+elements.fileInput.addEventListener('change', handleFileUpload);
+
+elements.fileClearBtn.addEventListener('click', clearFiles);
+
+elements.toggleActionsBtn.addEventListener('click', toggleFileActions);
+
+elements.voiceInputBtn.addEventListener('click', handleVoiceInput);
+
+elements.permissionModalClose.addEventListener('
