@@ -483,7 +483,7 @@ const toggleTheme = () => {
     document.body.classList.toggle('dark-mode');
     elements.themeBtn.innerHTML = `<i class="fas ${isDarkMode ? 'fa-sun' : 'fa-moon'}"></i> ${isDarkMode ? 'Light Mode' : 'Dark Mode'}`;
     localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-    gsap.to('body', { background: isDarkMode ? '#1a1a1a' : '#121212', duration: 0.4 });
+    gsap.to('body', { background: isDarkMode ? '#1a1a1a' : '#0f0f0f', duration: 0.4 });
 };
 
 const loadTheme = () => {
@@ -934,6 +934,7 @@ const initChat = async () => {
     loadTheme();
     renderMessages();
     applyChatLayout();
+    elements.apiKeyContainer.classList.add('visible');
 };
 
 elements.apiKeySubmit.addEventListener('click', async () => {
@@ -1025,9 +1026,4 @@ elements.shareWebsiteBtn.addEventListener('click', shareWebsite);
 
 elements.feedbackBtn.addEventListener('click', () => {
     elements.feedbackModal.classList.add('open');
-    gsap.fromTo(elements.feedbackModal.querySelector('.modal-content'), { scale: 0.9, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3 });
-});
-
-elements.feedbackModalClose.addEventListener('click', () => {
-    elements.feedbackModal.classList.remove('open');
-});
+    gsap.fromTo(elements.feedbackModal.querySelector('.modal-content'),
