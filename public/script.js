@@ -184,8 +184,8 @@ function deleteMessage(messageElement) {
 function clearChat() {
     chatArea.innerHTML = '';
     if (currentChatId && puter.auth.isSignedIn()) {
-        puter.fs.delete(`chat_${currentChatId}.json`);
-        puter.fs.delete(`chattitle_${currentChatId}.txt`);
+        puter.fs.delete(`/chat_${currentChatId}.json`);
+        puter.fs.delete(`/chattitle_${currentChatId}.txt`);
         loadChatHistory();
     }
     currentChatId = null;
@@ -198,9 +198,9 @@ function saveChat() {
         isUser: div.classList.contains('user-bubble'),
         messageId: div.dataset.messageId
     }));
-    puter.fs.write(`chat_${currentChatId}.json`, JSON.stringify(messages));
+    puter.fs.write(`/chat_${currentChatId}.json`, JSON.stringify(messages));
     const firstUserMessage = messages.find(m => m.isUser)?.content.replace(/<[^>]*>/g, '').substring(0, 40) || 'New Chat';
-    puter.fs.write(`chattitle_${currentChatId}.txt`, firstUserMessage);
+    puter.fs.write(`/chattitle_${currentChatId}.txt`, firstUserMessage);
     loadChatHistory();
 }
 
@@ -215,7 +215,7 @@ function loadChatHistory() {
             chatFiles.forEach(file => {
                 const chatId = file.name.replace('chat_', '').replace('.json', '');
                 let title = `Chat ${chatId}`;
-                puter.fs.read(`chattitle_${chatId}.txt`).then(titleBlob => {
+                puter.fs.read(`/chattitle_${chatId}.txt`).then(titleBlob => {
                     title = titleBlob.text();
                 }).catch(() => {});
                 const li = document.createElement('li');
@@ -224,7 +224,7 @@ function loadChatHistory() {
                 li.dataset.chatId = chatId;
                 li.addEventListener('click', () => {
                     currentChatId = li.dataset.chatId;
-                    puter.fs.read(`chat_${currentChatId}.json`).then(blob => {
+                    puter.fs.read(`/chat_${currentChatId}.json`).then(blob => {
                         const messages = JSON.parse(blob.text());
                         chatArea.innerHTML = '';
                         messages.forEach(msg => {
