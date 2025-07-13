@@ -30,7 +30,7 @@ let customInstructionsText = '';
 let codeBlockStyle = 'default';
 let responseSpeedSetting = 'fast';
 let intelligenceLevelSetting = 'standard';
-const SYSTEM_PROMPT = `You are Prysmis, an advanced AI designed to provide precise, insightful, and human-like responses across all topics. You process text, images, and websites, analyzing content with depth, including objects, context, colors, composition, and intent. Format responses with markdown: **bold**, *italics*, _underline_, ~~strikethrough~~, \`inline code\`. Deliver answers with natural tone, logical coherence, and bypassGPT humanization, adapting to user needs with clarity and depth.`;
+const SYSTEM_PROMPT = `You are Prysmis, an AI designed to provide precise, insightful, and human-like responses across all topics. You process text, images, and websites, analyzing content with depth, including objects, context, colors, composition, and intent. Format responses with markdown: **bold**, *italics*, _underline_, ~~strikethrough~~, \`inline code\`. Deliver answers with natural tone, logical coherence, and bypassGPT humanization, adapting to user needs with clarity and depth.`;
 
 function checkAuth() {
     if (puter.auth.isSignedIn()) {
@@ -382,7 +382,7 @@ async function streamAndDisplayResponse(prompt) {
     let topP = 0.9;
     if (intelligenceLevelSetting === 'high') topP = 0.85;
     if (intelligenceLevelSetting === 'max') topP = 0.8;
-    const customConfig = { model: selectedModel, stream: true, temperature: temperature, top_p: topP, max_tokens: 4000 };
+    const customConfig = { model: selectedModel || 'gpt-4.1-nano', stream: true, temperature: temperature, top_p: topP, max_tokens: 4000 };
     try {
         const response = await puter.ai.chat(fullPrompt, customConfig);
         let aiResponse = '';
@@ -400,7 +400,7 @@ async function streamAndDisplayResponse(prompt) {
         }
         Prism.highlightAllUnder(aiMessageDiv);
     } catch (error) {
-        showError('Failed to get response from AI. Please try again.');
+        showError('Failed to get response from AI. Please try again or check your model selection.');
         aiMessageDiv.innerHTML = 'Error loading response.';
     }
     saveChat();
