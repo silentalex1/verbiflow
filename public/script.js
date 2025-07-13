@@ -368,10 +368,12 @@ async function streamAndDisplayResponse(prompt) {
     const urls = prompt.match(urlRegex);
     let fullPrompt = prompt;
     if (urls) {
-        for (const url of urls) {
+        const linkPromises = urls.map(async (url) => {
             const linkData = await fetchLinkContent(url);
-            fullPrompt += `\n\nLink content from ${url}:\nTitle: ${linkData.title}\nDescription: ${linkData.description}\nContent preview: ${linkData.content}`;
-        }
+            return `\n\nLink content from ${url}:\nTitle: ${linkData.title}\nDescription: ${linkData.description}\nContent preview: ${linkData.content}`;
+        });
+        const linkContents = await Promise.all(linkPromises);
+        fullPrompt += linkContents.join('');
     }
     fullPrompt = `${SYSTEM_PROMPT}\n${customInstructionsText}\n\nUser: ${fullPrompt}`;
     let temperature = 0.3;
@@ -381,21 +383,26 @@ async function streamAndDisplayResponse(prompt) {
     if (intelligenceLevelSetting === 'high') topP = 0.85;
     if (intelligenceLevelSetting === 'max') topP = 0.8;
     const customConfig = { model: selectedModel, stream: true, temperature: temperature, top_p: topP, max_tokens: 4000 };
-    const response = await puter.ai.chat(fullPrompt, customConfig);
-    let aiResponse = '';
-    for await (const part of response) {
-        aiResponse += part?.text || '';
-        if (aiMessageDiv.contains(loadingIndicator)) {
-            aiMessageDiv.removeChild(loadingIndicator);
+    try {
+        const response = await puter.ai.chat(fullPrompt, customConfig);
+        let aiResponse = '';
+        for await (const part of response) {
+            aiResponse += part?.text || '';
+            if (aiMessageDiv.contains(loadingIndicator)) {
+                aiMessageDiv.removeChild(loadingIndicator);
+            }
+            aiMessageDiv.innerHTML = parseToHTML(aiResponse);
+            const actionsDiv = document.createElement('div');
+            actionsDiv.className = 'message-actions';
+            actionsDiv.innerHTML = '<button class="delete-btn">×</button>';
+            aiMessageDiv.appendChild(actionsDiv);
+            chatArea.scrollTop = chatArea.scrollHeight;
         }
-        aiMessageDiv.innerHTML = parseToHTML(aiResponse);
-        const actionsDiv = document.createElement('div');
-        actionsDiv.className = 'message-actions';
-        actionsDiv.innerHTML = '<button class="delete-btn">×</button>';
-        aiMessageDiv.appendChild(actionsDiv);
-        chatArea.scrollTop = chatArea.scrollHeight;
+        Prism.highlightAllUnder(aiMessageDiv);
+    } catch (error) {
+        showError('Failed to get response from AI. Please try again.');
+        aiMessageDiv.innerHTML = 'Error loading response.';
     }
-    Prism.highlightAllUnder(aiMessageDiv);
     saveChat();
 }
 
